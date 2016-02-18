@@ -1,0 +1,11 @@
+# ignore everything
+*
+
+# except these files:
+!*.gitignore
+!README.md
+!LICENSE
+!.bashrc
+!.zshrc
+!.zprezto/
+!.zprezto/**
