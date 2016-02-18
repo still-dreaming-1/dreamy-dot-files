@@ -1,0 +1,7 @@
+*.netrwhist
+.beforevimrc
+.aftervimrc
+.VimballRecord
+doc/tags
+mytags/
+plugged/
