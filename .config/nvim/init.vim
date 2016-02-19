@@ -28,8 +28,6 @@ source ~/.config/nvim/.beforeinit.vim
 
 "best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
-"update helptags for plugins
-helptags ~/.vim/doc
 "highlight the current line and column:
 hi CursorLine cterm=NONE ctermbg=black
 set cursorline
