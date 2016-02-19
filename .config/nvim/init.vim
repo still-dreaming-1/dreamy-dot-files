@@ -24,6 +24,7 @@ Plug 'rosenfeld/conque-term'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'joonty/vim-phpqa'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 "
@@ -31,7 +32,7 @@ call plug#end()
 "if the file does not exist however the lack of its existence will not cause any problems.
 "If you want the error message to go away, but do not wan to use this file, just create it and
 "leave it blank.
-source ~/.vim/.beforevimrc
+source ~/.config/nvim/.beforeinit.vim
 syntax on
 "best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
@@ -266,9 +267,9 @@ augroup mapping_group
 		autocmd FileType python,sql              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
 		" source the vimrc after saving it
-		autocmd bufwritepost .vimrc source $MYVIMRC
-		autocmd bufwritepost .beforevimrc source $MYVIMRC
-		autocmd bufwritepost .aftervimrc source $MYVIMRC
+		autocmd bufwritepost init.vim source $MYVIMRC
+		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
+		autocmd bufwritepost .afterinit.vim source $MYVIMRC
 		autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
 		"comment out visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
