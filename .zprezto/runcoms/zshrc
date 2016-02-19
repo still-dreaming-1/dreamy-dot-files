@@ -31,6 +31,6 @@ alias s='git status'
 alias c='cd'
 alias c.='cd ..'
 alias cacs='cd /home/jesse/hacking/acs'
-alias cvim='cd /home/jesse/.vim'
+alias cvim="${ZDOTDIR:-$HOME}/.config/nvim"
 
 source "${ZDOTDIR:-$HOME}/.afterzshrc"
