@@ -86,6 +86,11 @@ set timeoutlen=18000
 
 "use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
+"vim-fugitive mappings for git
+nnoremap <leader><leader>ga :Git add -A<enter>
+nnoremap <leader><leader>gs :Gstatus<enter>/modified<enter>
+nnoremap <leader><leader>gd :Gdiff<enter>
+nnoremap <leader><leader>gc :Gcommit<enter>
 "use to add a space
 nnoremap <leader>z i <esc>
 
