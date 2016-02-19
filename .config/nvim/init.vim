@@ -59,6 +59,8 @@ set shiftwidth=4
 
 "more accurate jump to
 nnoremap <C-]> g<C-]>
+" 'disable' the mouse
+set mouse=c
 "arrow keys are the devil
 nnoremap <up> <nop>
 nnoremap <down> <nop>
