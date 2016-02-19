@@ -43,7 +43,9 @@ let g:netrw_liststyle=3
 "let g:airline_theme='murmur'
 "let g:airline_theme='base16'
 "let g:airline_theme='base16_3024'
+
 let g:airline_theme='base16_ashes'
+
 "make searching easier:
 set ignorecase
 set smartcase
@@ -117,6 +119,8 @@ nnoremap - m`o<esc>``
 nnoremap _ m`O<esc>``
 "disable ^
 nnoremap ^ <nop>
+"go to smart start of line
+nnoremap <leader>h ^
 "go to start of line
 nnoremap <leader>H 0
 "disable 0
