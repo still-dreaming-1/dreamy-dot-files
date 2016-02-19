@@ -14,7 +14,7 @@ fi
 TERM=xterm-256color
 # this enables using other defined aliases with sudo
 alias sudo='sudo '
-alias v='vim'
+alias v='nvim'
 alias g='git'
 #alias for gitting latest versions in version sorted order
 alias gtag='git tag -n1 | sort -V | tail'
