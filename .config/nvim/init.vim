@@ -44,7 +44,9 @@ let g:netrw_liststyle=3
 "let g:airline_theme='base16'
 "let g:airline_theme='base16_3024'
 
-let g:airline_theme='base16_ashes'
+"let g:airline_theme='base16_ashes'
+
+let g:airline_theme='base16_solarized'
 
 "make searching easier:
 set ignorecase
@@ -257,7 +259,7 @@ augroup mapping_group
 		"removes all autocmd in group
 		autocmd!
 		"comment out current line
-		autocmd FileType python,sql              nnoremap <buffer> <leader>/ m`I#<esc>``l
+		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
 		" source the vimrc after saving it
 		autocmd bufwritepost init.vim source $MYVIMRC
