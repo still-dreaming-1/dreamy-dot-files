@@ -32,3 +32,5 @@ alias c='cd'
 alias c.='cd ..'
 alias cacs='cd /home/jesse/hacking/acs'
 alias cvim='cd /home/jesse/.vim'
+
+source "${ZDOTDIR:-$HOME}/.afterzshrc"
