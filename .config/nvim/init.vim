@@ -56,10 +56,6 @@ set incsearch
 set nobackup
 set noswapfile
 
-"set cindent "stricter rules for C programs
-set autoindent "copy the indentation from the previous line (supposedly, but I doubt it).
-"filetype plugin indent on
-"set smartindent
 set tabstop=4
 set shiftwidth=4
 set backspace=2
