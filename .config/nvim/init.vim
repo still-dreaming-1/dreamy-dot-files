@@ -49,8 +49,6 @@ let g:airline_theme='base16_ashes'
 "make searching easier:
 set ignorecase
 set smartcase
-set hlsearch
-set incsearch
 
 "warning: next two settings make recovery impossible
 set nobackup
