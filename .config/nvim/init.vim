@@ -226,8 +226,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-set laststatus=2
-
 "putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
 	"removes all autocmd in group
