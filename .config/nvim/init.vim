@@ -58,7 +58,6 @@ set noswapfile
 
 set tabstop=4
 set shiftwidth=4
-set backspace=2
 
 "more accurate jump to
 nnoremap <C-]> g<C-]>
