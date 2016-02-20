@@ -44,9 +44,7 @@ let g:netrw_liststyle=3
 "let g:airline_theme='base16'
 "let g:airline_theme='base16_3024'
 
-"let g:airline_theme='base16_ashes'
-
-let g:airline_theme='base16_solarized'
+let g:airline_theme='base16_ashes'
 
 "make searching easier:
 set ignorecase
