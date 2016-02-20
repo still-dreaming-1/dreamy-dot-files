@@ -17,6 +17,9 @@ Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'joonty/vim-phpqa'
 Plug 'tpope/vim-fugitive'
+" The only I have vimproc installed is vimshell depends on it
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimshell.vim'
 call plug#end()
 
 "

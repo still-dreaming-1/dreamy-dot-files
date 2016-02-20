@@ -27,6 +27,8 @@ Plug 'rosenfeld/conque-term'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'joonty/vim-phpqa'
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimshell.vim'
 call plug#end()
 
 "
