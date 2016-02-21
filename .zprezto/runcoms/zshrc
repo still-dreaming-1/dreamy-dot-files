@@ -35,3 +35,5 @@ alias cacs='cd /home/jesse/hacking/acs'
 alias cvim="${ZDOTDIR:-$HOME}/.config/nvim"
 
 source "${ZDOTDIR:-$HOME}/.afterzshrc"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -7,7 +7,7 @@ set nocompatible
 "PlugUpgrade Upgrade vim-plug itself
 "PlugStatus Check status of plugins
 call plug#begin()
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'tag': '0.11.3', 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kien/rainbow_parentheses.vim'
 if version > 703 || (version == 703 && has("patch584"))
     Plug 'Valloric/YouCompleteMe'
