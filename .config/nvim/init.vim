@@ -35,6 +35,7 @@ call plug#end()
 "exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 "just create it and leave it blank.
 source ~/.config/nvim/.beforeinit.vim
+syntax on
 
 "best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
