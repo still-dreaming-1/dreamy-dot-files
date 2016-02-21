@@ -53,6 +53,8 @@ endif
 "3: tree style listing
 let g:netrw_liststyle=3
 
+"vim-airline settings:
+"leaving some commented out themes that I liked while I am deciding on a theme
 "let g:airline_theme='murmur'
 "let g:airline_theme='base16'
 "let g:airline_theme='base16_3024'
