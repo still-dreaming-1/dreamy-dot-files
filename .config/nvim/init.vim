@@ -31,11 +31,9 @@ Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/vimshell.vim'
 call plug#end()
 
-"
-"this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
-"if the file does not exist however the lack of its existence will not cause any problems.
-"If you want the error message to go away, but do not wan to use this file, just create it and
-"leave it blank.
+"the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
+"exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
+"just create it and leave it blank.
 source ~/.config/nvim/.beforeinit.vim
 
 "best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
