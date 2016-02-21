@@ -49,6 +49,8 @@ if exists('+relativenumber')
 	set relativenumber
 endif
 
+"netwrw setting. netrw is a builtin file explorer similar to NERDTree
+"3: tree style listing
 let g:netrw_liststyle=3
 
 "let g:airline_theme='murmur'
