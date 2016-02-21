@@ -1,3 +1,5 @@
+" because vim is better than vi
+set nocompatible
 "vim-plug plugin manager:
 "commands:
 "PlugUpdate [name ...] - install or update plugins
