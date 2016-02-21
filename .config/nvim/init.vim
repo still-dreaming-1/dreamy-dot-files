@@ -75,6 +75,7 @@ set autoindent "copy the indentation from the previous line (supposedly, but doe
 
 set tabstop=4
 set shiftwidth=4
+set backspace=indent,eol,start
 
 "more accurate jump to
 nnoremap <C-]> g<C-]>
