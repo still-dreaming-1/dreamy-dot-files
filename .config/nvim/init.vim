@@ -95,7 +95,7 @@ inoremap kk <esc><esc>
 " use kk to return to normal mode from terminal buffer
 tnoremap kk <C-\><C-n>
 
-"disable escape
+"disable escape. This serves the purpose of training myself to use kk instead
 inoremap <esc> <nop>
 "pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
@@ -255,6 +255,8 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+set laststatus=2
 
 "putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
