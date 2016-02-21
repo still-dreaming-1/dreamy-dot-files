@@ -71,6 +71,8 @@ set incsearch
 set nobackup
 set noswapfile
 
+set autoindent "copy the indentation from the previous line (supposedly, but does not always work).
+
 set tabstop=4
 set shiftwidth=4
 
