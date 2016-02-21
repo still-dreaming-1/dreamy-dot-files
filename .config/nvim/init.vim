@@ -9,8 +9,15 @@ set nocompatible
 call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'Valloric/YouCompleteMe'
-Plug 'jlanzarotta/bufexplorer'
+if version > 703 || (version == 703 && has("patch584"))
+    Plug 'Valloric/YouCompleteMe'
+endif
+if version < 704
+    Plug 'crookedneighbor/bufexplorer'
+endif
+if version > 703
+    Plug 'jlanzarotta/bufexplorer'
+endif
 Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
