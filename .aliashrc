@@ -17,4 +17,4 @@ alias s='git status'
 alias c='cd'
 alias c.='cd ..'
 alias cacs='cd /home/jesse/hacking/acs'
-alias cvim="${ZDOTDIR:-$HOME}/.config/nvim"
+alias cvim="cd ${ZDOTDIR:-$HOME}/.config/nvim"
