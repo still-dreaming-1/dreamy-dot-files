@@ -298,8 +298,6 @@ augroup mapping_group
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
 		"auto source the config after saving Vim's .vimrc config file (helps when using Vim)
 		autocmd bufwritepost .vimrc source $MYVIMRC
-		autocmd bufwritepost .beforevimrc source $MYVIMRC
-		autocmd bufwritepost .aftervimrc source $MYVIMRC
 		"auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
