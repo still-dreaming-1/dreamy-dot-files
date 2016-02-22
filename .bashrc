@@ -1,6 +1,9 @@
+# trick to make sudo work with other aliases in bash
 alias sudo='sudo '
 # Source aliases. This allows the same aliases to be shared between bash and zsh
 source ~/.aliashrc
+# Source functions. This allows the same functions to be shared between bash and zsh
+source ~/.functionshrc
 
 # thse are find functions. So they start with f. They use the -F option to prefent the search term from being treated as a regular expression. The "standard"
 # version of these functions are also case insensitive. They all search recursively. They are basically used to find a search term across all files in a
@@ -16,11 +19,6 @@ fw() {
 # case sensitive version of fw
 exact_fw() {
 	grep -Fr --include=*.{php,cs,html,js,css} "$@" .
-}
-
-# find in php files
-fp() {
-	grep -Frin --include=*.php "$@" .
 }
 
 # case sensitive version of fp

@@ -15,7 +15,10 @@ TERM=xterm-256color
 
 # Source aliases. This allows the same aliases to be shared between bash and zsh
 source "${ZDOTDIR:-$HOME}/.aliashrc"
+# Source functions. This allows the same functions to be shared between bash and zsh
+source "${ZDOTDIR:-$HOME}/.functionshrc"
 
 source "${ZDOTDIR:-$HOME}/.afterzshrc"
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

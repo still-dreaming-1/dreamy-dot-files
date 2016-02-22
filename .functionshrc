@@ -1,0 +1,6 @@
+# This file contains functions shared between bash and zsh
+
+# find in php files
+fp() {
+	grep -Frin --include="*.php" "$@" .
+}
