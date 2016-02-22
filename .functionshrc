@@ -4,3 +4,8 @@
 fp() {
 	grep -Frin --include="*.php" "$@" .
 }
+
+# case sensitive version of fp
+exact_fp() {
+	grep -Fr --include="*.php" "$@" .
+}
