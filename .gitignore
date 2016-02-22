@@ -3,6 +3,7 @@
 
 # except these files:
 !*.gitignore
+!.vimrc
 !README.md
 !LICENSE
 !.bashrc
