@@ -275,10 +275,22 @@ augroup code_abbreviations
 	endif
 augroup END
 
+"this is part of a workaround to fix the way gf works inside a terminal buffer
+function! s:term_gf()
+    let procid = matchstr(bufname(""), '\(://.*/\)\@<=\(\d\+\)')
+    let proc_cwd = resolve('/proc/'.procid.'/cwd')
+    exe 'lcd '.proc_cwd
+    exe 'e <cfile>'
+endfunction
+
 augroup mapping_group
 	if has("autocmd")
 		"removes all autocmd in group
 		autocmd!
+		if has('nvim')
+			" fixes the gf when run from a terminal buffer
+			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<enter>
+		endif
 		"comment out current line
 		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
