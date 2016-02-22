@@ -1,5 +1,6 @@
 " because vim is better than vi
 set nocompatible
+
 "vim-plug plugin manager:
 "commands:
 "PlugUpdate [name ...] - install or update plugins
@@ -7,16 +8,17 @@ set nocompatible
 "PlugUpgrade Upgrade vim-plug itself
 "PlugStatus Check status of plugins
 call plug#begin()
-Plug 'junegunn/fzf', { 'tag': '0.11.3', 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'kien/rainbow_parentheses.vim'
 if version > 703 || (version == 703 && has("patch584"))
-    Plug 'Valloric/YouCompleteMe'
+	Plug 'Valloric/YouCompleteMe'
 endif
 if version < 704
-    Plug 'crookedneighbor/bufexplorer'
+	"Plug '2072/PHP-Indenting-for-VIm'
+	Plug 'crookedneighbor/bufexplorer'
 endif
 if version > 703
-    Plug 'jlanzarotta/bufexplorer'
+	Plug 'jlanzarotta/bufexplorer'
 endif
 Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
@@ -25,20 +27,21 @@ Plug 'rosenfeld/conque-term'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'joonty/vim-phpqa'
-Plug 'tpope/vim-fugitive'
-" The only I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/vimshell.vim'
 call plug#end()
 
-"the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
-"exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
-"just create it and leave it blank.
-source ~/.config/nvim/.beforeinit.vim
+"
+"this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
+"if the file does not exist however the lack of its existence will not cause any problems.
+"If you want the error message to go away, but do not wan to use this file, just create it and
+"leave it blank.
+source ~/.vim/.beforevimrc
 syntax on
-
 "best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
+"update helptags for plugins
+helptags ~/.vim/doc
 "highlight the current line and column:
 hi CursorLine cterm=NONE ctermbg=black
 set cursorline
@@ -49,18 +52,12 @@ if exists('+relativenumber')
 	set relativenumber
 endif
 
-"netwrw setting. netrw is a builtin file explorer similar to NERDTree
-"3: tree style listing
 let g:netrw_liststyle=3
 
-"vim-airline settings:
-"leaving some commented out themes that I liked while I am deciding on a theme
 "let g:airline_theme='murmur'
 "let g:airline_theme='base16'
 "let g:airline_theme='base16_3024'
-
 let g:airline_theme='base16_ashes'
-
 "make searching easier:
 set ignorecase
 set smartcase
@@ -71,16 +68,16 @@ set incsearch
 set nobackup
 set noswapfile
 
-set autoindent "copy the indentation from the previous line (supposedly, but does not always work).
-
+"set cindent "stricter rules for C programs
+set autoindent "copy the indentation from the previous line (supposedly, but I doubt it).
+"filetype plugin indent on
+"set smartindent
 set tabstop=4
 set shiftwidth=4
-set backspace=indent,eol,start
+set backspace=2
 
 "more accurate jump to
 nnoremap <C-]> g<C-]>
-" 'disable' the mouse
-set mouse=c
 "arrow keys are the devil
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -92,12 +89,7 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 "use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
 inoremap kk <esc><esc>
-if has('nvim')
-	" use kk to return to normal mode from terminal buffer
-	tnoremap kk <C-\><C-n>
-endif
-
-"disable escape. This serves the purpose of training myself to use kk instead
+"disable escape
 inoremap <esc> <nop>
 "pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
@@ -110,12 +102,6 @@ set timeoutlen=18000
 
 "use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
-"vim-fugitive mappings for git
-nnoremap <leader>ga :Git add -A<enter>
-nnoremap <leader>gs :Gstatus<enter>/modified<enter>
-nnoremap <leader>gd :Gdiff<enter>
-nnoremap <leader>gc :Gcommit<enter>
-nnoremap <leader>gl :Git! log --decorate --stat --graph<enter>
 "use to add a space
 nnoremap <leader>z i <esc>
 
@@ -141,8 +127,6 @@ nnoremap - m`o<esc>``
 nnoremap _ m`O<esc>``
 "disable ^
 nnoremap ^ <nop>
-"go to smart start of line
-nnoremap <leader>h ^
 "go to start of line
 nnoremap <leader>H 0
 "disable 0
@@ -174,8 +158,7 @@ nnoremap <leader>f :FZF<enter>
 "load NERDTree
 nnoremap <leader>t :T<enter>
 "edit .vimrc buffer
-nnoremap <leader>ev :e $HOME/.vimrc<enter>
-nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<enter>
+nnoremap <leader>ev :e $MYVIMRC<enter>
 "unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :bd<enter>
 "edit .zshrc
@@ -294,16 +277,12 @@ augroup mapping_group
 			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<enter>
 		endif
 		"comment out current line
-		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
+		autocmd FileType python,sql              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
-		"auto source the config after saving Vim's .vimrc config file (helps when using Vim)
+		" source the vimrc after saving it
 		autocmd bufwritepost .vimrc source $MYVIMRC
 		autocmd bufwritepost .beforevimrc source $MYVIMRC
 		autocmd bufwritepost .aftervimrc source $MYVIMRC
-		"auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
-		autocmd bufwritepost init.vim source $MYVIMRC
-		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
-		autocmd bufwritepost .afterinit.vim source $MYVIMRC
 		autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
 		"comment out visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
@@ -467,4 +446,4 @@ endif
 "if the file does not exist however the lack of its existence will not cause any problems.
 "If you want the error message to go away, but do not wan to use this file, just create it and
 "leave it blank.
-source ~/.config/nvim/.afterinit.vim
+source ~/.vim/.aftervimrc
