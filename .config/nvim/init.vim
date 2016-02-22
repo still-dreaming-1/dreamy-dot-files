@@ -173,15 +173,20 @@ nnoremap <leader>s :w<enter>
 nnoremap <leader>f :FZF<enter>
 "load NERDTree
 nnoremap <leader>t :T<enter>
-"edit .vimrc buffer
+"edit .vimrc
 nnoremap <leader>ev :e $HOME/.vimrc<enter>
+"edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<enter>
-"unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
-nnoremap <leader>d :bd<enter>
 "edit .zshrc
 nnoremap <leader>ez :e~/.zshrc<enter>
 "edit .bashrc
 nnoremap <leader>eb :e~/.bashrc<enter>
+"edit .aliashrc
+nnoremap <leader>ea :e~/.aliashrc<enter>
+"edit .functionshrc
+nnoremap <leader>ef :e~/.functionshrc<enter>
+"unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
+nnoremap <leader>d :bd<enter>
 "jump previous movement
 nnoremap <leader>o <C-o>
 "search for next function
