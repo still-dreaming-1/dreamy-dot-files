@@ -152,7 +152,7 @@ xnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 "surround visual selection with backticks
 xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 "save
-nnoremap <leader>w :w<enter>
+nnoremap <leader>s :w<enter>
 "use leader f to run FZF command (fuzzy file finder)
 nnoremap <leader>f :FZF<enter>
 "load NERDTree
@@ -214,25 +214,25 @@ command! Sendb :!mysql < %:p
 nnoremap <leader>mj :BOTTOM<enter>
 command! BOTTOM normal <C-w>J
 "go down one window
-nnoremap <leader>gj :Bottom<enter>
+nnoremap <leader>wj :Bottom<enter>
 command! Bottom normal <C-w>j
 "make current window top window
 nnoremap <leader>mk :TOP<enter>
 command! TOP normal <C-w>K
 "go up one window
-nnoremap <leader>gk :Top<enter>
+nnoremap <leader>wk :Top<enter>
 command! Top normal <C-w>k
 "make current window left window
 nnoremap <leader>mh :LEFT<enter>
 command! LEFT normal <C-w>H
 "go left one window
-nnoremap <leader>gh :Left<enter>
+nnoremap <leader>wh :Left<enter>
 command! Left normal <C-w>h
 "make current window right window
 nnoremap <leader>ml :RIGHT<enter>
 command! RIGHT normal <C-w>L
 "go right one window
-nnoremap <leader>gl :Right<enter>
+nnoremap <leader>wl :Right<enter>
 command! Right normal <C-w>l
 "go to next window
 command! NextWindow normal <C-w>w
@@ -303,7 +303,7 @@ augroup mapping_group
 		autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<enter>
 		"autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<enter><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
 		"creates a new slot (import and export DSL) named after the word under the cursor
-		autocmd FileType php		             nnoremap <buffer> <leader>s veyO$slot('');<esc>hhP==
+		autocmd FileType php		             nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
 		"run the PHP short tests
 		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<enter>
 	endif
