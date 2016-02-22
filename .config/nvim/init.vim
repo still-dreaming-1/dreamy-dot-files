@@ -173,7 +173,7 @@ nnoremap <leader>f :FZF<enter>
 nnoremap <leader>t :T<enter>
 "edit .vimrc buffer
 nnoremap <leader>ev :e $HOME/.vimrc<enter>
-nnoremap <leader>ei :e $MYVIMRC<enter>
+nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<enter>
 "unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :bd<enter>
 "edit .zshrc
