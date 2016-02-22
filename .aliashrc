@@ -1,3 +1,5 @@
+# this file contains aliases shared between bash and zsh
+
 # this enables using other defined aliases with sudo
 alias v='nvim'
 alias g='git'
