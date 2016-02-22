@@ -21,21 +21,6 @@ exact_fw() {
 	grep -Fr --include=*.{php,cs,html,js,css} "$@" .
 }
 
-# find in C# files (fc is already taken. the n in fn is for .NET)
-fn() {
-	grep -Fri --include=*.cs "$@" .
-}
- 
-# case sensitive version of fn
-exact_fn() {
-	grep -Fr --include=*.cs "$@" .
-}
-
-# find in all files
-f_all() {
-    grep -Fri "$@" .
-}
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # this allows the current git branch to be retrieved

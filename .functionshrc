@@ -9,3 +9,18 @@ fp() {
 exact_fp() {
 	grep -Fr --include="*.php" "$@" .
 }
+
+# find in C# files (fc is already taken. the n in fn is for .NET)
+fn() {
+	grep -Fri --include="*.cs" "$@" .
+}
+ 
+# case sensitive version of fn
+exact_fn() {
+	grep -Fr --include="*.cs" "$@" .
+}
+
+# find in all files
+f_all() {
+    grep -Fri "$@" .
+}
