@@ -10,8 +10,6 @@
 !.zshrc
 !.zprezto/
 !.zprezto/**
-!.vim/
-!.vim/**
 !.config/
 !.config/nvim/
 !.config/nvim/**
