@@ -1,5 +1,4 @@
 # this enables using other defined aliases with sudo
-alias sudo='sudo '
 alias v='nvim'
 alias g='git'
 # alias for gitting latest versions in version sorted order

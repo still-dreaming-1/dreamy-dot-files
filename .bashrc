@@ -1,3 +1,4 @@
+alias sudo='sudo '
 # Source aliases. This allows the same aliases to be shared between bash and zsh
 source ~/.aliashrc
 
