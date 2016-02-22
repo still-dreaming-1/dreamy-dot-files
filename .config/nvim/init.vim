@@ -298,6 +298,10 @@ augroup mapping_group
 			" fixes the gf when run from a terminal buffer
 			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<enter>
 		endif
+		"enable zsh syntax for .aliashrc file
+		autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
+		"enable zsh syntax for .functionshrc file
+		autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
 		"comment out current line
 		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
