@@ -1,0 +1,21 @@
+# this enables using other defined aliases with sudo
+alias sudo='sudo '
+alias v='nvim'
+alias g='git'
+# alias for gitting latest versions in version sorted order
+alias gtag='git tag -n1 | sort -V | tail'
+alias gbranch='git branch'
+alias gadd='git add -A'
+alias gdiff='git difftool'
+alias gcommit='git commit'
+alias gpush='git push'
+alias gpull='git pull'
+alias glog='git log --decorate --stat --graph'
+alias gdev='git checkout develop'
+alias gmaster='git checkout master'
+alias s='git status'
+
+alias c='cd'
+alias c.='cd ..'
+alias cacs='cd /home/jesse/hacking/acs'
+alias cvim="${ZDOTDIR:-$HOME}/.config/nvim"

@@ -1,23 +1,5 @@
-# this enables using other defined aliases with sudo
-alias sudo='sudo '
-alias v='vim'
-alias g='git'
-#alias for gitting latest versions in version sorted order
-alias gtag='git tag -n1 | sort -V | tail'
-alias gbranch='git branch'
-alias gadd='git add -A'
-alias gdiff='git difftool'
-alias gcommit='git commit'
-alias gpush='git push'
-alias gpull='git pull'
-alias glog='git log --decorate --stat --graph'
-alias gdev='git checkout develop'
-alias s='git status'
-
-alias c='cd'
-alias c.='cd ..'
-alias cacs='cd /home/jesse/hacking/acs'
-alias cvim='cd /home/jesse/.vim'
+# Source aliases. This allows the same aliases to be shared between bash and zsh
+source ~/.aliashrc
 
 # thse are find functions. So they start with f. They use the -F option to prefent the search term from being treated as a regular expression. The "standard"
 # version of these functions are also case insensitive. They all search recursively. They are basically used to find a search term across all files in a
