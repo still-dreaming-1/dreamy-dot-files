@@ -294,7 +294,11 @@ augroup mapping_group
 		"comment out current line
 		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
-		" source the vimrc after saving it
+		"auto source the config after saving Vim's .vimrc config file (helps when using Vim)
+		autocmd bufwritepost .vimrc source $MYVIMRC
+		autocmd bufwritepost .beforevimrc source $MYVIMRC
+		autocmd bufwritepost .aftervimrc source $MYVIMRC
+		"auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
 		autocmd bufwritepost .afterinit.vim source $MYVIMRC
