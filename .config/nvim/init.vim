@@ -220,7 +220,7 @@ let NERDTreeQuitOnOpen=1
 command! T NERDTreeToggle
 
 "configure VimShell
-" Use current directory as vimshell prompt.
+"Use current directory as vimshell prompt.
 let g:vimshell_prompt_expr =
 \ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
