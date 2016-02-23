@@ -26,8 +26,8 @@ Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'joonty/vim-phpqa'
 Plug 'tpope/vim-fugitive'
-" The only I have vimproc installed is vimshell depends on it
-Plug 'Shougo/vimproc.vim'
+" The only reason I have vimproc installed is vimshell depends on it
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
 call plug#end()
 
@@ -218,6 +218,9 @@ let NERDTreeWinSize=70
 let NERDTreeQuitOnOpen=1
 "add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
+
+"configure VimShell
+let g:vimshell_prompt = 'vimshell> '
 
 " do not automatically run PHP messdetector on save
 let g:phpqa_messdetector_autorun = 0
