@@ -174,7 +174,7 @@ nnoremap <leader>f :FZF<enter>
 "load NERDTree
 nnoremap <leader>t :T<enter>
 "edit .vimrc
-nnoremap <leader>ev :e $HOME/.vimrc<enter>
+nnoremap <leader>ev :e $HOME/.vimshrc<enter>
 "edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<enter>
 "edit .zshrc
