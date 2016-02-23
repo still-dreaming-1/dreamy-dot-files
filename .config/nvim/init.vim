@@ -220,7 +220,10 @@ let NERDTreeQuitOnOpen=1
 command! T NERDTreeToggle
 
 "configure VimShell
-let g:vimshell_prompt = 'vimshell> '
+" Use current directory as vimshell prompt.
+let g:vimshell_prompt_expr =
+\ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
+let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 
 " do not automatically run PHP messdetector on save
 let g:phpqa_messdetector_autorun = 0
