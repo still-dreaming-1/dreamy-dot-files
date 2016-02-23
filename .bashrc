@@ -1,6 +1,6 @@
 # trick to make sudo work with other aliases in bash
 alias sudo='sudo '
-# Source aliases. This allows the same aliases to be shared between bash and zsh
+# Source aliases. This allows the same aliases to be shared between bash, zsh, and vimshell
 source ~/.aliashrc
 # Source functions. This allows the same functions to be shared between bash and zsh
 source ~/.functionshrc

@@ -1,1 +1,2 @@
-alias g='git'
+# run aliases. This allows the same aliases to be shared between bash, zsh, and vimshell
+vimsh "$HOME/.aliashrc"

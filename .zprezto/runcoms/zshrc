@@ -13,7 +13,7 @@ fi
 # Customize to your needs...
 TERM=xterm-256color
 
-# Source aliases. This allows the same aliases to be shared between bash and zsh
+# Source aliases. This allows the same aliases to be shared between bash, zsh, and vimshell
 source "${ZDOTDIR:-$HOME}/.aliashrc"
 # Source functions. This allows the same functions to be shared between bash and zsh
 source "${ZDOTDIR:-$HOME}/.functionshrc"
