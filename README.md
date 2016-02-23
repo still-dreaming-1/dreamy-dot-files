@@ -19,4 +19,4 @@ Some people were interested in seeing my dot files when I was live streaming fro
 
 7) Run `git status` from your home. You should have a clean working directory.
 
-8) Delete the new clone, probably named dreamy-dot-files. You don't need it because your home directory is also a clone now.
+8) Delete the original clone directory, probably named dreamy-dot-files. You don't need it because your home directory is also a clone now.
