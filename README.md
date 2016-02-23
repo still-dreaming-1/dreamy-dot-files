@@ -7,13 +7,9 @@ Some people were interested in seeing my dot files when I was live streaming fro
 
 1) clone this repository to a new directory
 
-2) Compare the files and directories in the clone to the files in your home. Make backup copies of anything in your home that also exists in the clone.
+2) Copy the .git directory from the clone to your home
 
-3) Delete the files and directories in your home that also exist in the clone.
-
-4) Copy the .git directory from the clone to your home
-
-5) Run `git status` from your home. Anything showing up as modified is a file you failed to backup and delete in the previous steps. Do this now.
+3) Run `git status` from your home. Anything showing up as modified is a file you will be overwriting shortly. Make backup copies of these files. As a way of making sure you didn't miss anything. Delete each file after backing it up. Each time you delete one of these files, `git status` should show one less modified file. Once `git status` no longer shows any modified files, you are ready to move on to the next step.
 
 6) Run `git checkout .` from your home.
 
