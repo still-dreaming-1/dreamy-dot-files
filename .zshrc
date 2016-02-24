@@ -1,5 +1,5 @@
 # source the prezto zshrc config
-source "~/.zprezto/runcoms/zshrc"
+source "${ZDOTDIR:-$HOME}/.zprezto/runcoms/zshrc"
 
 # customize to your needs...
 TERM=xterm-256color
