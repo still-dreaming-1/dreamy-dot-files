@@ -115,6 +115,7 @@ nnoremap <leader>ga :Git add -A<enter>
 nnoremap <leader>gs :Gstatus<enter>/modified<enter>
 nnoremap <leader>gd :Gdiff<enter>
 nnoremap <leader>gc :Gcommit<enter>
+nnoremap <leader>gp :te<enter>git push<enter>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<enter>
 "use to add a space
 nnoremap <leader>z i <esc>
