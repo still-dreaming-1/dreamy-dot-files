@@ -256,7 +256,7 @@ command! Bottom normal <C-w>j
 nnoremap <leader>mk :TOP<enter>
 command! TOP normal <C-w>K
 "go up one window
-nnoremap <leader>wk :Top<enter>
+nnoremap <C-k> :Top<enter>
 command! Top normal <C-w>k
 "make current window left window
 nnoremap <leader>mh :LEFT<enter>
