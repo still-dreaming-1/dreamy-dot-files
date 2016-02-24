@@ -1,4 +1,4 @@
-" because vim is better than vi
+"because vim is better than vi
 set nocompatible
 "vim-plug plugin manager:
 "commands:
