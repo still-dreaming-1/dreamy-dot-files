@@ -316,6 +316,8 @@ augroup mapping_group
 		autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
 		"enable zsh syntax for .functionshrc file
 		autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
+		"enable vimshrc syntax for .aftervimshrc file
+		autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
 		"comment out current line
 		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
