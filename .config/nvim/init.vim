@@ -225,6 +225,9 @@ command! T NERDTreeToggle
 let g:vimshell_prompt_expr =
 \ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
+"The following mapping is not working. It is supposed to run the VimShell command
+"nnoremap <leader>v <Plug>(vimshell_switch)
+nnoremap <leader>v :VimShell<enter>
 
 " do not automatically run PHP messdetector on save
 let g:phpqa_messdetector_autorun = 0
@@ -344,8 +347,6 @@ augroup mapping_group
 		autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
 		autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<enter>}<esc>
 		autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<enter>}<esc>
-		autocmd FileType php                     nnoremap <buffer> <leader>v f$
-		autocmd FileType php                     nnoremap <buffer> <leader>V F$
 		"dump the current variable
 		autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<enter>
 		"autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<enter><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
