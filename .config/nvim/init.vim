@@ -10,7 +10,7 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'tag': '0.11.3', 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kien/rainbow_parentheses.vim'
 if version > 703 || (version == 703 && has("patch584"))
-    Plug 'Valloric/YouCompleteMe'
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 endif
 if version < 704
     Plug 'crookedneighbor/bufexplorer'
