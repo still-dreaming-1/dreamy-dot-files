@@ -268,7 +268,7 @@ command! Left normal <C-w>h
 nnoremap <leader>ml :RIGHT<enter>
 command! RIGHT normal <C-w>L
 "go right one window
-nnoremap <leader>wl :Right<enter>
+nnoremap <C-l> :Right<enter>
 command! Right normal <C-w>l
 "go to next window
 command! NextWindow normal <C-w>w
