@@ -13,3 +13,6 @@ source "${ZDOTDIR:-$HOME}/.afterzshrc"
 
 # fzf install script adds this line automatically to this file. Running the uninstall script will remove this line automatically
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export VISUAL=nvim
+export EDITOR="$VISUAL"

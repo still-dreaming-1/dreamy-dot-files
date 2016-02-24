@@ -250,7 +250,7 @@ command! Sendb :!mysql < %:p
 nnoremap <leader>mj :BOTTOM<enter>
 command! BOTTOM normal <C-w>J
 "go down one window
-nnoremap <leader>wj :Bottom<enter>
+nnoremap <C-j> :Bottom<enter>
 command! Bottom normal <C-w>j
 "make current window top window
 nnoremap <leader>mk :TOP<enter>
