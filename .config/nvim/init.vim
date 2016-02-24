@@ -262,7 +262,7 @@ command! Top normal <C-w>k
 nnoremap <leader>mh :LEFT<enter>
 command! LEFT normal <C-w>H
 "go left one window
-nnoremap <leader>wh :Left<enter>
+nnoremap <C-h> :Left<enter>
 command! Left normal <C-w>h
 "make current window right window
 nnoremap <leader>ml :RIGHT<enter>
