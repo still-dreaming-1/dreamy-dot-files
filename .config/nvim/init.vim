@@ -18,7 +18,6 @@ endif
 if version > 703
     Plug 'jlanzarotta/bufexplorer'
 endif
-Plug 'pangloss/vim-javascript'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rosenfeld/conque-term'
