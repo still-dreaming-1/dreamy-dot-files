@@ -1,4 +1,5 @@
 # this file contains aliases shared between bash and zsh
+alias ll='ls -la'
 
 # this enables using other defined aliases with sudo
 alias v='nvim'
