@@ -216,6 +216,8 @@ vmap V <Plug>(expand_region_shrink)
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=70
 let NERDTreeQuitOnOpen=1
+"When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
+let NERDTreeAutoDeleteBuffer=1
 "add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
 
