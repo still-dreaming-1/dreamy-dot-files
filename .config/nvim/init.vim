@@ -28,7 +28,12 @@ Plug 'tpope/vim-fugitive'
 " The only reason I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
+" Try these out later:
+"Plug 'ntpeters/vim-better-whitespace'
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'haya14busa/vim-operator-flashy'
 call plug#end()
+set tags=tags;/
 
 "the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 "exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
