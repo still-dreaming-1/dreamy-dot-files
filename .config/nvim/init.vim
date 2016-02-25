@@ -57,8 +57,14 @@ let g:netrw_liststyle=3
 "let g:airline_theme='murmur'
 "let g:airline_theme='base16'
 "let g:airline_theme='base16_3024'
+"let g:airline_theme='base16_ashes'
 
-let g:airline_theme='base16_ashes'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+"prevent showing INSERT at bottom of screen in insert mode
+set noshowmode
 
 "make searching easier:
 set ignorecase
