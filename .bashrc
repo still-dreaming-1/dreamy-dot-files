@@ -1,5 +1,7 @@
 # Source aliases. This allows the same aliases to be shared between bash, zsh, and vimshell
 source ~/.aliashrc
+# Source custom aliases not tracked by git. This allows the same aliases to be shared between bash, zsh, and vimshell
+source ~/.afteraliashrc
 # Source functions. This allows the same functions to be shared between bash and zsh
 source ~/.functionshrc
 

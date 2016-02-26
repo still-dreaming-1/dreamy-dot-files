@@ -6,6 +6,8 @@ TERM=xterm-256color
 
 # Source aliases. This allows the same aliases to be shared between bash, zsh, and vimshell
 source "${ZDOTDIR:-$HOME}/.aliashrc"
+# Source custom aliases not tracked by git. This allows the same aliases to be shared between bash, zsh, and vimshell
+source "${ZDOTDIR:-$HOME}/.afteraliashrc"
 # Source functions. This allows the same functions to be shared between bash and zsh
 source "${ZDOTDIR:-$HOME}/.functionshrc"
 # This is a good place to put settings that only apply to the current computer or user
