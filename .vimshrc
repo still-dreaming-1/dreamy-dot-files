@@ -3,4 +3,5 @@ vimsh "$HOME/.aliashrc"
 # run custom aliases not tracked by git. This allows the same aliases to be shared between bash, zsh, and vimshell
 vimsh "$HOME/.afteraliashrc"
 alias gcommit="echo 'stop it'"
+# run custom vimshell config not tracked by git
 vimsh "$HOME/.aftervimshrc"
