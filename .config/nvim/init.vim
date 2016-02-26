@@ -28,6 +28,13 @@ Plug 'tpope/vim-fugitive'
 " The only reason I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
+" Tried out this php plugin. Currently not working, so leaving commented out for now
+"if has('nvim')
+	"Plug 'phpvim/phpcd.vim'
+	"Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
+	" to enable phpcd plugin for completion
+	"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+"endif
 " Try these out later:
 "Plug 'ntpeters/vim-better-whitespace'
 "Plug 'terryma/vim-multiple-cursors'
@@ -66,7 +73,6 @@ let g:netrw_liststyle=3
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 "prevent showing INSERT at bottom of screen in insert mode
 set noshowmode
