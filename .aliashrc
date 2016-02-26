@@ -18,6 +18,7 @@ alias glog='git log --decorate --stat --graph'
 alias gdev='git checkout develop'
 alias gmaster='git checkout master'
 alias s='git status'
+alias clone='git clone'
 
 alias c='cd'
 alias c.='cd ..'
