@@ -4,7 +4,7 @@ alias sudo='sudo '
 alias ll='ls -la'
 
 # this enables using other defined aliases with sudo
-alias v='nvim'
+alias v='nvim' # can be overridden in .afteraliashrc on computers without neovim
 alias g='git'
 # alias for gitting latest versions in version sorted order
 alias gtag='git tag -n1 | sort -V | tail'
