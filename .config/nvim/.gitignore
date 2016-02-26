@@ -1,3 +1,4 @@
 .beforeinit.vim
 .afterinit.vim
+.netrwhist
 plugged/
