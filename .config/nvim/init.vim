@@ -23,7 +23,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'rosenfeld/conque-term'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
-Plug 'joonty/vim-phpqa'
+Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 " The only reason I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -246,10 +246,10 @@ let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 "The following mapping is not working. It is supposed to run the VimShell command
 nmap <leader>v <Plug>(vimshell_switch)
 
-" do not automatically run PHP messdetector on save
-let g:phpqa_messdetector_autorun = 0
-" Don't run codesniffer on save (default = 1)
-let g:phpqa_codesniffer_autorun = 0
+" syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
 
 command! Term ConqueTerm bash
 command! Ptest :call TestPHP()
