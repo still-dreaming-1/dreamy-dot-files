@@ -130,7 +130,7 @@ nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
 nnoremap <leader>ga :Git add -A<enter>
 nnoremap <leader>gs :Gstatus<enter>/modified<enter>
 nnoremap <leader>gd :Gdiff<enter>
-nnoremap <leader>gc :Gcommit<enter>
+nnoremap <leader>gc :Gcommit<enter>i
 nnoremap <leader>gp :Gpush<enter>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<enter>
 
