@@ -28,6 +28,7 @@ Plug 'tpope/vim-fugitive'
 " The only reason I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
+Plug 'szw/vim-tags'
 " Tried out this php plugin. Currently not working, so leaving commented out for now
 "if has('nvim')
 	"Plug 'phpvim/phpcd.vim'
@@ -40,7 +41,6 @@ Plug 'Shougo/vimshell.vim'
 "Plug 'terryma/vim-multiple-cursors'
 "Plug 'haya14busa/vim-operator-flashy'
 call plug#end()
-set tags=tags;/
 
 "the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 "exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
@@ -62,7 +62,7 @@ endif
 
 "netwrw setting. netrw is a builtin file explorer similar to NERDTree
 "3: tree style listing
-let g:netrw_liststyle=3
+let g:netrw_liststyle= 3
 
 "vim-airline settings:
 "leaving some commented out themes that I liked while I am deciding on a theme
@@ -72,7 +72,7 @@ let g:netrw_liststyle=3
 "let g:airline_theme='base16_ashes'
 
 "allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts= 1
 "prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
 
@@ -92,8 +92,6 @@ set tabstop=4
 set shiftwidth=4
 set backspace=indent,eol,start
 
-"more accurate jump to
-nnoremap <C-]> g<C-]>
 " 'disable' the mouse
 set mouse=c
 "arrow keys are the devil
