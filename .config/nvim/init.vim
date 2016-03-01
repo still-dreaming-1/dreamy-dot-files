@@ -44,6 +44,9 @@ Plug 'still-dreaming-1/vim-php-jump'
 "Plug 'haya14busa/vim-operator-flashy'
 call plug#end()
 
+" a nice mapping for my only plugin feature
+nmap <leader>] <Plug>(php_jump_list)
+
 "the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 "exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 "just create it and leave it blank.
