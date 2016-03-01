@@ -30,6 +30,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
 Plug 'szw/vim-tags'
+Plug 'still-dreaming-1/vim-php-jump'
 " Tried out this php plugin. Currently not working, so leaving commented out for now
 "if has('nvim')
 	"Plug 'phpvim/phpcd.vim'
@@ -316,6 +317,13 @@ function! s:term_gf()
     exe 'e <cfile>'
 endfunction
 
+function! PastePhpTemplate()
+	let l:file_name = expand("%:t:r")
+	let l:paste_php_template = "i<?\<enter>function ".l:file_name."() {\<enter>return new ".l:file_name.";\<enter>}\<esc>==a\<enter>class ".l:file_name." {\<enter>\}\<esc>k^we"
+		"\<enter>}\<esc>k\<leader>hwe"
+	execute "normal! ".l:paste_php_template
+endfunction
+
 augroup mapping_group
 	if has("autocmd")
 		"removes all autocmd in group
@@ -360,7 +368,7 @@ augroup mapping_group
 		"constructor template
 		autocmd FileType php                     nnoremap <buffer> <leader>po ofunction __construct() {<enter>}<esc>Vk=
 		"php template
-		autocmd FileType php                     nnoremap <buffer> <leader>pp i<?<enter>function <C-R>=expand("%:t:r")<enter>() {<enter>return new <C-R>=expand("%:t:r")<enter>;<enter>}<esc>==a<enter>class <C-R>=expand("%:t:r")<enter> {<enter>}<esc>k<leader>hwe
+		autocmd FileType php                     nnoremap <buffer> <leader>pp :call PastePhpTemplate()<enter>
 		"past debug::log();
 		autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
 		autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<enter>}<esc>
