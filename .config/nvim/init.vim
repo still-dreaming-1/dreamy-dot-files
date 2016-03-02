@@ -102,7 +102,7 @@ function! s:FindInPhpFiles(search)
 	let @/ = a:search
 	normal! n
 	nnoremap <buffer> q :bdelete<enter>
-	exec 'nnoremap <enter> :Top<enter>:q<enter>^<C-W>F/'.a:search."\<enter>"
+	nnoremap <enter> :Top<enter>:q<enter>^<C-W>Fn
 endfunction
 
 "warning: next two settings make recovery impossible
