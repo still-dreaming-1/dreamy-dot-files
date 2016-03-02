@@ -87,6 +87,23 @@ set smartcase
 set hlsearch
 set incsearch
 
+"search commands and mappings:
+command! -nargs=1 Fp call s:FindInPhpFiles(<f-args>)
+function! s:FindInPhpFiles(search)
+	"create a scratch buffer below the current window
+	below new
+	setlocal buftype=nofile
+	setlocal bufhidden=hide
+	setlocal noswapfile
+	silent exec 'read !grep -Frin --include="*.php" "'.a:search.'" .'
+	normal! ggdd
+	nnoremap <buffer> q :bdelete<enter>
+	nnoremap <enter> :Top<enter>:q<enter>^<C-W>F
+
+	"grep -Frin --include="*.php" "$@" .
+	"exec 'normal! :grep -Frin --include="*.php" "'.a:search.'" .'."\<esc>"
+endfunction
+
 "warning: next two settings make recovery impossible
 set nobackup
 set noswapfile
