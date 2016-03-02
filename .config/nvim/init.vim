@@ -98,7 +98,7 @@ function! s:FindInPhpFiles(search)
 	silent exec 'read !grep -Frin --include="*.php" "'.a:search.'" .'
 	normal! ggdd
 	nnoremap <buffer> q :bdelete<enter>
-	nnoremap <enter> :Top<enter>:q<enter>^<C-W>F
+	exec 'nnoremap <enter> :Top<enter>:q<enter>^<C-W>F/'.a:search."\<enter>"
 endfunction
 
 "warning: next two settings make recovery impossible
