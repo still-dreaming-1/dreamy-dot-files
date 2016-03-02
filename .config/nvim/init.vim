@@ -99,9 +99,6 @@ function! s:FindInPhpFiles(search)
 	normal! ggdd
 	nnoremap <buffer> q :bdelete<enter>
 	nnoremap <enter> :Top<enter>:q<enter>^<C-W>F
-
-	"grep -Frin --include="*.php" "$@" .
-	"exec 'normal! :grep -Frin --include="*.php" "'.a:search.'" .'."\<esc>"
 endfunction
 
 "warning: next two settings make recovery impossible
