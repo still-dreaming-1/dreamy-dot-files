@@ -88,7 +88,7 @@ set hlsearch
 set incsearch
 
 "search commands
-command! -nargs=1 Fp call s:FindInPhpFiles(<f-args>)
+command! -nargs=1 Fp set hlsearch | call s:FindInPhpFiles(<f-args>)
 function! s:FindInPhpFiles(search)
 	"create a scratch buffer below the current window
 	below new
