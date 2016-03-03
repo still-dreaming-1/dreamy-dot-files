@@ -31,6 +31,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
 Plug 'szw/vim-tags'
 Plug 'still-dreaming-1/vim-php-jump'
+Plug 'mhinz/vim-startify'
 " Tried out this php plugin. Currently not working, so leaving commented out for now
 "if has('nvim')
 	"Plug 'phpvim/phpcd.vim'
@@ -50,6 +51,11 @@ call plug#end()
 source ~/.config/nvim/.beforeinit.vim
 syntax on
 
+" startify settings
+let g:startify_session_autoload= 1
+" delete open buffers before loading a new session
+let g:startify_session_delete_buffers= 1
+let g:startify_session_persistence= 1
 " a nice mapping for my only plugin feature
 nmap <leader>] <Plug>(php_jump_list)
 
