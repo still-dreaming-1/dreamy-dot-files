@@ -320,6 +320,22 @@ au Syntax * RainbowParenthesesLoadBraces
 
 set laststatus=2
 
+" mapping to open a plugins home page in Chrome. The cursor must be on a line using vim-plug to include a plugin
+nnoremap <leader>w :call OpenChromeAtPluginPage()<enter>
+function! OpenChromeAtPluginPage()
+	let l:plugin_name= GetPluginPageFromCurrentLine()
+	silent execute '!google-chrome "https://www.github.com/'.l:plugin_name.'"'
+endfunction
+function! GetPluginPageFromCurrentLine()
+	normal! ^w
+	let l:start_plugin_name_pos= col(".")
+	normal! f'
+	let l:end_plugin_name_pos= col(".") - 2
+	let l:line= getline(".")
+	let l:plugin_name= l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
+	return l:plugin_name
+endfunction
+
 "putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
 	"removes all autocmd in group
