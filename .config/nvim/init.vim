@@ -39,10 +39,11 @@ Plug 'mhinz/vim-startify'
 	" to enable phpcd plugin for completion
 	"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 "endif
+Plug 'terryma/vim-multiple-cursors'
 " Try these out later:
-"Plug 'ntpeters/vim-better-whitespace'
-"Plug 'terryma/vim-multiple-cursors'
 "Plug 'haya14busa/vim-operator-flashy'
+"Plug 'ntpeters/vim-better-whitespace'
+"Plug 'vim-scripts/vis'
 call plug#end()
 
 "the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
@@ -56,8 +57,6 @@ let g:startify_session_autoload= 1
 " delete open buffers before loading a new session
 let g:startify_session_delete_buffers= 1
 let g:startify_session_persistence= 1
-" a nice mapping for my only plugin feature
-nmap <leader>] <Plug>(php_jump_list)
 
 "best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
