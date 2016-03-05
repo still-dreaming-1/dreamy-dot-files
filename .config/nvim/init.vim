@@ -44,6 +44,7 @@ Plug 'terryma/vim-multiple-cursors'
 "Plug 'haya14busa/vim-operator-flashy'
 "Plug 'ntpeters/vim-better-whitespace'
 "Plug 'vim-scripts/vis'
+" https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/dragvisuals.vim
 call plug#end()
 
 "the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
