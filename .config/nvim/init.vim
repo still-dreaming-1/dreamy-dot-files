@@ -50,6 +50,11 @@ call plug#end()
 "exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 "just create it and leave it blank.
 source ~/.config/nvim/.beforeinit.vim
+
+let mapleader=" "
+" use backslash for localleader (2 backslashes since the first one is the escape char)
+let maplocalleader="\\"
+
 syntax on
 
 " startify settings
@@ -142,10 +147,6 @@ endif
 inoremap <esc> <nop>
 "pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
-
-let mapleader=" "
-"use backslash for localleader (2 backslashes since the first one is the escape char)
-let maplocalleader="\\"
 
 set timeoutlen=18000
 
