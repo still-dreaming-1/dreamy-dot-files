@@ -144,8 +144,29 @@ inoremap kk <esc><esc>
 if has('nvim')
 	" use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
 	" entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
-	tnoremap kk <C-\><C-n>G$?jesse<enter>$bl
+	tnoremap kk <C-\><C-n>:call s:MoveCursorToLastTerminalChar()<CR>
 endif
+
+function! s:MoveCursorToLastTerminalChar()
+	normal! G$
+	let l:cursor_char= getline(".")[col(".")-1]
+	let l:numeric_code= char2nr(l:cursor_char)
+	while l:numeric_code == 0
+		normal! k$
+		let l:cursor_char= getline(".")[col(".")-1]
+		let l:numeric_code= char2nr(l:cursor_char)
+	endwhile
+	if l:numeric_code == 226
+		normal! h
+		let l:cursor_char= getline(".")[col(".")-1]
+		let l:numeric_code= char2nr(l:cursor_char)
+		while l:cursor_char == ' '
+			normal! h
+			let l:cursor_char= getline(".")[col(".")-1]
+		endwhile
+		normal l
+	endif
+endfunction
 
 " disable escape. This serves the purpose of training myself to use kk instead
 inoremap <esc> <nop>
