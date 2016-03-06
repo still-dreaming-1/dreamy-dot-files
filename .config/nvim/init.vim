@@ -32,6 +32,7 @@ Plug 'Shougo/vimshell.vim'
 Plug 'szw/vim-tags'
 Plug 'still-dreaming-1/vim-php-jump'
 Plug 'mhinz/vim-startify'
+Plug 'jreybert/vimagit'
 " Tried out this php plugin. Currently not working, so leaving commented out for now
 "if has('nvim')
 	"Plug 'phpvim/phpcd.vim'
