@@ -64,9 +64,9 @@ let g:startify_session_autoload= 1
 let g:startify_session_delete_buffers= 1
 let g:startify_session_persistence= 1
 
-"best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
+" best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
-"highlight the current line and column:
+" highlight the current line and column:
 hi CursorLine cterm=NONE ctermbg=black
 set cursorline
 hi CursorColumn cterm=NONE ctermbg=black
@@ -76,8 +76,8 @@ if exists('+relativenumber')
 	set relativenumber
 endif
 
-"netwrw setting. netrw is a builtin file explorer similar to NERDTree
-"3: tree style listing
+" netwrw setting. netrw is a builtin file explorer similar to NERDTree
+" 3: tree style listing
 let g:netrw_liststyle= 3
 
 "vim-airline settings:
@@ -87,21 +87,21 @@ let g:netrw_liststyle= 3
 "let g:airline_theme='base16_3024'
 "let g:airline_theme='base16_ashes'
 
-"allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
+" allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
 let g:airline_powerline_fonts= 1
 "prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
 
-"make searching easier:
+" make searching easier:
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
 
-"search commands
+" search commands
 command! -nargs=1 Fp set hlsearch | call s:FindInPhpFiles(<f-args>)
 function! s:FindInPhpFiles(search)
-	"create a scratch buffer below the current window
+	" create a scratch buffer below the current window
 	below new
 	setlocal buftype=nofile
 	setlocal bufhidden=hide
@@ -116,11 +116,11 @@ function! s:FindInPhpFiles(search)
 	nnoremap <enter> :Top<enter>:q<enter>^<C-W>Fn
 endfunction
 
-"warning: next two settings make recovery impossible
+" warning: next two settings make recovery impossible
 set nobackup
 set noswapfile
 
-set autoindent "copy the indentation from the previous line (supposedly, but does not always work).
+set autoindent " copy the indentation from the previous line (supposedly, but does not always work).
 
 set tabstop=4
 set shiftwidth=4
@@ -128,7 +128,7 @@ set backspace=indent,eol,start
 
 " 'disable' the mouse
 set mouse=c
-"arrow keys are the devil
+" arrow keys are the devil
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -137,24 +137,24 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-"use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
+" use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
 inoremap kk <esc><esc>
 if has('nvim')
 	" use kk to return to normal mode from terminal buffer
 	tnoremap kk <C-\><C-n>
 endif
 
-"disable escape. This serves the purpose of training myself to use kk instead
+" disable escape. This serves the purpose of training myself to use kk instead
 inoremap <esc> <nop>
-"pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
+" pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
 
 set timeoutlen=18000
 
-"use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
+" use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
 
-"vim-fugitive mappings for git
+" vim-fugitive mappings for git
 nnoremap <leader>ga :Git add -A<enter>
 nnoremap <leader>gs :Gstatus<enter>/modified<enter>
 nnoremap <leader>gd :Gdiff<enter>
@@ -162,116 +162,116 @@ nnoremap <leader>gc :Gcommit<enter>i
 nnoremap <leader>gp :Gpush<enter>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<enter>
 
-"use to add a space
+" use to add a space
 nnoremap <leader>z i <esc>
-"make up and down not ignore wrapping lines
+" make up and down not ignore wrapping lines
 nnoremap j gj
 nnoremap k gk
-"<leader>. will now repeat the last command. Similar to using . to repeate
+" <leader>. will now repeat the last command. Similar to using . to repeate
 nnoremap <leader>. @:
-"make backspace delete everything before the cursor until only white space
+" make backspace delete everything before the cursor until only white space
 nnoremap <bs> hv^d
-"use ( to move line up
+" use ( to move line up
 nnoremap ( ddkP
-"use ) to move line down
+" use ) to move line down
 nnoremap ) ddp
-"use <leader>( to move function above previous function (One bug is
-"if the cursor is on the 'f' in function, it will find the previous function
-"and move it above its' previous function. Will have to make into function to
-"fix this, but it is still useful as is.)
+" use <leader>( to move function above previous function (One bug is
+" if the cursor is on the 'f' in function, it will find the previous function
+" and move it above its' previous function. Will have to make into function to
+" fix this, but it is still useful as is.)
 nnoremap <leader>( ?function<enter>V$%d?function<enter>P
-"use - to create new line below current line without leaving normal mode or moving cursor
+" use - to create new line below current line without leaving normal mode or moving cursor
 nnoremap - m`o<esc>``
-"use _ to create new line above current line without leaving normal mode or moving cursor
+" use _ to create new line above current line without leaving normal mode or moving cursor
 nnoremap _ m`O<esc>``
-"disable ^
+" disable ^
 nnoremap ^ <nop>
-"go to smart start of line
+" go to smart start of line
 nnoremap <leader>h ^
-"go to start of line
+" go to start of line
 nnoremap <leader>H 0
-"disable 0
+" disable 0
 nnoremap 0 <nop>
-"go to end of line
+" go to end of line
 nnoremap <leader>l $
 xnoremap <leader>l $
 onoremap <leader>l $
-"disable $
+" disable $
 nnoremap $ <nop>
 xnoremap $ <nop>
 onoremap $ <nop>
-"go one screen down
+" go one screen down
 nnoremap <leader>j Lzt
-"go one screen up
+" go one screen up
 nnoremap <leader>k Hzb
-"move everything from current curson on, to the next line without leaving normal mode or moving cursor
+" move everything from current curson on, to the next line without leaving normal mode or moving cursor
 nnoremap <leader><enter> i<enter><esc>
-"surround visual selection with double quotes
+" surround visual selection with double quotes
 xnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
-"surround visual selection with single quotes
+" surround visual selection with single quotes
 xnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
-"surround visual selection with backticks
+" surround visual selection with backticks
 xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
-"save
+" save
 nnoremap <leader>s :w<enter>
-"use leader f to run FZF command (fuzzy file finder)
+" use leader f to run FZF command (fuzzy file finder)
 nnoremap <leader>f :FZF<enter>
-"load NERDTree
+" load NERDTree
 nnoremap <leader>t :T<enter>
-"edit .vimrc
+" edit .vimrc
 nnoremap <leader>ev :e $HOME/.vimshrc<enter>
-"edit Neovim's init.vim config
+" edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<enter>
-"edit .zshrc
+" edit .zshrc
 nnoremap <leader>ez :e~/.zshrc<enter>
-"edit .bashrc
+" edit .bashrc
 nnoremap <leader>eb :e~/.bashrc<enter>
-"edit .aliashrc
+" edit .aliashrc
 nnoremap <leader>ea :e~/.aliashrc<enter>
-"edit .functionshrc
+" edit .functionshrc
 nnoremap <leader>ef :e~/.functionshrc<enter>
-"unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
+" unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :bd<enter>
-"jump previous movement
+" jump previous movement
 nnoremap <leader>o <C-o>
-"search for next function
+" search for next function
 nnoremap <leader>n /function <enter>
-"search for previous function
+" search for previous function
 nnoremap <leader>N ?function <enter>
-"quit
+" quit
 nnoremap <leader>q :q<enter>
 nnoremap <leader><leader>q :q!<enter>
-"launch mysql from terminal in vim buffer:
+" launch mysql from terminal in vim buffer:
 nnoremap <leader><leader>d :ConqueTerm mysql info<enter>
-"launch MongoDB from terminal in vim buffer:
+" launch MongoDB from terminal in vim buffer:
 nnoremap <leader>mg :ConqueTerm mongo datazeo -u jesse -p<enter>
-"use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
+" use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
 nmap <leader>; <leader>bej
 
-"change key mappings for the vim-expand-region plugin. Setting both of these up as visual mappings makes sense so they don't override mappings for other
-"modes. Visual mode mappings are also the natural fit since you would only use these after entering visual mode (by pressing v).
+" change key mappings for the vim-expand-region plugin. Setting both of these up as visual mappings makes sense so they don't override mappings for other
+" modes. Visual mode mappings are also the natural fit since you would only use these after entering visual mode (by pressing v).
 
-"after pressing v to go into visual mode, press v again to expand what is selected. You can press v repeatedly to keep expanding the selection
+" after pressing v to go into visual mode, press v again to expand what is selected. You can press v repeatedly to keep expanding the selection
 vmap v <Plug>(expand_region_expand)
-"after pressing v to go into visual and pressing v again one or more times, press V (shift+v for capital v) to decrease the selected area. If you do this
-"enough times, you will exit visual mode. Alternatively pressing esc also exits visual mode.
+" after pressing v to go into visual and pressing v again one or more times, press V (shift+v for capital v) to decrease the selected area. If you do
+" this enough times, you will exit visual mode. Alternatively pressing esc also exits visual mode.
 vmap V <Plug>(expand_region_shrink)
 
-"configure NERDTree plugin work the RIGHT way
+" configure NERDTree plugin work the RIGHT way
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=70
 let NERDTreeQuitOnOpen=1
-"When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
+" When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
 let NERDTreeAutoDeleteBuffer=1
-"add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
+" add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
 
-"configure VimShell
-"Use current directory as vimshell prompt.
+" configure VimShell
+" Use current directory as vimshell prompt.
 let g:vimshell_prompt_expr =
 \ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
-"The following mapping is not working. It is supposed to run the VimShell command
+" The following mapping is not working. It is supposed to run the VimShell command
 nmap <leader>v <Plug>(vimshell_switch)
 
 " syntastic settings
@@ -284,36 +284,36 @@ command! Ptest :call TestPHP()
 command! Putest :call TestPHPUnitShort()
 command! Lptest :call TestPHPUnitLong()
 
-"send contents of file to mysql
+" send contents of file to mysql
 command! Sendb :!mysql < %:p
 
-"make current window bottom window
+" make current window bottom window
 nnoremap <leader>mj :BOTTOM<enter>
 command! BOTTOM normal <C-w>J
-"go down one window
+" go down one window
 nnoremap <C-j> :Bottom<enter>
 command! Bottom normal <C-w>j
-"make current window top window
+" make current window top window
 nnoremap <leader>mk :TOP<enter>
 command! TOP normal <C-w>K
-"go up one window
+" go up one window
 nnoremap <C-k> :Top<enter>
 command! Top normal <C-w>k
-"make current window left window
+" make current window left window
 nnoremap <leader>mh :LEFT<enter>
 command! LEFT normal <C-w>H
-"go left one window
+" go left one window
 nnoremap <C-h> :Left<enter>
 command! Left normal <C-w>h
-"make current window right window
+" make current window right window
 nnoremap <leader>ml :RIGHT<enter>
 command! RIGHT normal <C-w>L
-"go right one window
+" go right one window
 nnoremap <C-l> :Right<enter>
 command! Right normal <C-w>l
-"go to next window
+" go to next window
 command! NextWindow normal <C-w>w
-"better rainbow parentheses settings
+" better rainbow parentheses settings
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -337,9 +337,9 @@ function! GetPluginPageFromCurrentLine()
 	return l:plugin_name
 endfunction
 
-"putting autocmds into groups allows to source .vimrc without creating extra autocmds
+" putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
-	"removes all autocmd in group
+	" removes all autocmd in group
 	if has("autocmd")
 		autocmd!
 		autocmd FileType vim            iabbrev <buffer> iab iabbrev
@@ -353,7 +353,7 @@ augroup code_abbreviations
 	endif
 augroup END
 
-"this is part of a workaround to fix the way gf works inside a terminal buffer
+" this is part of a workaround to fix the way gf works inside a terminal buffer
 function! s:term_gf()
     let procid = matchstr(bufname(""), '\(://.*/\)\@<=\(\d\+\)')
     let proc_cwd = resolve('/proc/'.procid.'/cwd')
@@ -370,7 +370,7 @@ endfunction
 
 augroup mapping_group
 	if has("autocmd")
-		"removes all autocmd in group
+		" removes all autocmd in group
 		autocmd!
 		if has('nvim')
 			" fixes the gf when run from a terminal buffer
