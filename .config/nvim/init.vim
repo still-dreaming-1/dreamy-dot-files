@@ -40,7 +40,6 @@ Plug 'jreybert/vimagit'
 	" to enable phpcd plugin for completion
 	"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 "endif
-Plug 'terryma/vim-multiple-cursors'
 " Try these out later:
 "Plug 'haya14busa/vim-operator-flashy'
 "Plug 'ntpeters/vim-better-whitespace'
