@@ -142,8 +142,9 @@ inoremap <right> <nop>
 " use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
 inoremap kk <esc><esc>
 if has('nvim')
-	" use kk to return to normal mode from terminal buffer
-	tnoremap kk <C-\><C-n>
+	" use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
+	" entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
+	tnoremap kk <C-\><C-n>G$?jesse<enter>$bl
 endif
 
 " disable escape. This serves the purpose of training myself to use kk instead
