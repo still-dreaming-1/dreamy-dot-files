@@ -16,9 +16,8 @@ let maplocalleader="\\"
 
 nmap <leader>g <Plug>(php_jump_list)
 
-"the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
-"exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
-"just create it and leave it blank.
+" I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
+set hidden
 syntax on
 
 "best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground

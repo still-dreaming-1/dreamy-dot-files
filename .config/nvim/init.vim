@@ -56,6 +56,8 @@ let mapleader=" "
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let maplocalleader="\\"
 
+" I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
+set hidden
 syntax on
 
 " startify settings
