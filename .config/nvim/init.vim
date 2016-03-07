@@ -164,7 +164,10 @@ function! MoveCursorToLastTerminalChar()
 			normal! h
 			let l:cursor_char= getline(".")[col(".")-1]
 		endwhile
-		normal l
+		let l:numeric_code= char2nr(l:cursor_char)
+		if l:numeric_code == 226
+			normal l
+		endif
 	endif
 endfunction
 
