@@ -41,7 +41,7 @@ Plug 'jreybert/vimagit'
 	"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 "endif
 " Try these out later:
-Plug 'vim-scripts/vis'
+"Plug 'vim-scripts/vis'
 "Plug 'ntpeters/vim-better-whitespace'
 " https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/dragvisuals.vim
 call plug#end()
