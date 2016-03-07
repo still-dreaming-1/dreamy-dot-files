@@ -65,6 +65,11 @@ let g:startify_session_autoload= 1
 let g:startify_session_delete_buffers= 1
 let g:startify_session_persistence= 1
 
+" vim-tags settings
+" Not using this setting because it causes :TagsGenerate to run which has a bug where the generate tags file is missing tags. Further in this config
+" :TagsGenerate! is getting run automatically when a php file is saved
+let g:vim_tags_auto_generate = 0
+
 " best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
 " highlight the current line and column:
@@ -417,6 +422,7 @@ augroup mapping_group
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
 		autocmd bufwritepost .afterinit.vim source $MYVIMRC
+		autocmd bufwritepost *.php :TagsGenerate!
 		autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
 		"comment out visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
