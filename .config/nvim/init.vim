@@ -447,29 +447,29 @@ augroup mapping_group
 			" fixes the gf when run from a terminal buffer
 			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<CR>
 		endif
-		"enable zsh syntax for .aliashrc file
+		" enable zsh syntax for .aliashrc file
 		autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
-		"enable zsh syntax for .functionshrc file
+		" enable zsh syntax for .functionshrc file
 		autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
-		"enable vimshrc syntax for .aftervimshrc file
+		" enable vimshrc syntax for .aftervimshrc file
 		autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
 		" use php tags for php files
 		autocmd BufRead *.php setlocal tags=./phptags;
 		" use php tags for php files
 		autocmd BufRead *.js setlocal tags=./jstags;
-		"comment out current line
+		" comment out current line
 		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
-		"auto source the config after saving Vim's .vimrc config file (helps when using Vim)
+		" auto source the config after saving Vim's .vimrc config file (helps when using Vim)
 		autocmd bufwritepost .vimrc source $MYVIMRC
-		"auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
+		" auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
 		autocmd bufwritepost .afterinit.vim source $MYVIMRC
 		autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
-		"comment out visually selected lines
+		" comment out visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
-		"uncomment visually selected lines
+		" uncomment visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>?  <esc>'<kdd'>jdd<esc>
 		autocmd FileType php                     nnoremap <buffer> <leader><  :call MoveParamLeft()<CR>
 		autocmd FileType php                     nnoremap <buffer> <leader>>  :call MoveParamRight()<CR>
@@ -502,7 +502,7 @@ augroup mapping_group
 	endif
 augroup END
 
-"dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
+" dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
 		let c=getline(".")[col(".")-1]
 		if c=="$"
@@ -613,18 +613,18 @@ function! MakeParam()
 	call cursor(y,x)
 endfunction
 
-"highlight the part of lines that wrap past the edge of screen using a pre-set number of characters that fit your screen (change this to match your current screen)
+" highlight the part of lines that wrap past the edge of screen using a pre-set number of characters that fit your screen (change this to match your current screen)
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>185v.\+/
 
-"when switching buffers preserver cursor postion after switching back
+" when switching buffers preserver cursor postion after switching back
 if v:version >= 700
 	au BufLeave * let b:winview = winsaveview()
 	au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 endif
 
-"this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
-"if the file does not exist however the lack of its existence will not cause any problems.
-"If you want the error message to go away, but do not wan to use this file, just create it and
-"leave it blank.
+" this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
+" if the file does not exist however the lack of its existence will not cause any problems.
+" If you want the error message to go away, but do not wan to use this file, just create it and
+" leave it blank.
 source ~/.config/nvim/.afterinit.vim
