@@ -29,7 +29,6 @@ Plug 'tpope/vim-fugitive'
 " The only reason I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
-Plug 'szw/vim-tags'
 Plug 'still-dreaming-1/vim-php-jump'
 Plug 'mhinz/vim-startify'
 Plug 'jreybert/vimagit'
@@ -59,16 +58,51 @@ let maplocalleader="\\"
 set hidden
 syntax on
 
+function! GeneratePhpTags()
+	let l:project_root_dir_path= FindProjectRoot()
+	system('')
+endfunction
+function! FindProjectRoot()
+	let l:buffer_dir_path = expand("%:h")
+	return FindProjectRootRecursive(l:buffer_dir_path)
+endfunction
+
+function! FindProjectRootRecursive(dir_path)
+	echo 'recursive dir path '.a:dir_path
+	echo 'recursive dir path length: '.len(a:dir_path)
+	let l:git_dir_path = a:dir_path.'/.git'
+	if isdirectory(l:git_dir_path)
+		echo 'found git dir: '.l:git_dir_path
+		return a:dir_path
+	endif
+	echo 'failed git path: '.l:git_dir_path
+	echo 'failed git path lenght: '.len(l:git_dir_path)
+	let l:parent_dir_path= ParseParentDir(a:dir_path)
+	if l:parent_dir_path == '/'
+		echo 'no parent dir. parent dir= '.l:parent_dir_path
+		return 0
+	endif
+	return FindProjectRootRecursive(l:parent_dir_path)
+endfunction
+
+function! ParseParentDir(dir_path)
+	echo 'original dir '.a:dir_path
+	let l:parent_dir= system("dirname '".a:dir_path."'")
+	let l:len = len(l:parent_dir)
+	if l:parent_dir[l:len - 1] == "\n"
+		echo 'found newline in parent dir'
+		let l:parent_dir= l:parent_dir[0 : l:len - 2]
+	endif
+	echo 'parent dir '.l:parent_dir
+	echo 'parent dir length: '.len(l:parent_dir)
+	return l:parent_dir
+endfunction
+
 " startify settings
 let g:startify_session_autoload= 1
 " delete open buffers before loading a new session
 let g:startify_session_delete_buffers= 1
 let g:startify_session_persistence= 1
-
-" vim-tags settings
-" Not using this setting because it causes :TagsGenerate to run which has a bug where the generate tags file is missing tags. Further in this config
-" :TagsGenerate! is getting run automatically when a php file is saved
-let g:vim_tags_auto_generate = 0
 
 " best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
@@ -419,6 +453,10 @@ augroup mapping_group
 		autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
 		"enable vimshrc syntax for .aftervimshrc file
 		autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
+		" use php tags for php files
+		autocmd BufRead *.php setlocal tags=./phptags;
+		" use php tags for php files
+		autocmd BufRead *.js setlocal tags=./jstags;
 		"comment out current line
 		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
@@ -428,7 +466,6 @@ augroup mapping_group
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
 		autocmd bufwritepost .afterinit.vim source $MYVIMRC
-		autocmd bufwritepost *.php :TagsGenerate!
 		autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
 		"comment out visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
