@@ -193,8 +193,14 @@ nnoremap <leader>gc :Gcommit<enter>i
 nnoremap <leader>gp :Gpush<enter>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<enter>
 
+"vimagit mapping
+nnoremap <leader>gv :Magit<CR>
+
 " use to add a space
 nnoremap <leader>z i <esc>
+nnoremap <leader>pc "*p
+nnoremap <leader>yc "*y
+vnoremap <leader>yc "*y
 " make up and down not ignore wrapping lines
 nnoremap j gj
 nnoremap k gk
