@@ -152,8 +152,8 @@ function! s:FindInPhpFiles(search)
 	" already searched on something
 	let @/ = a:search
 	normal! n
-	nnoremap <buffer> q :bdelete<enter>
-	nnoremap <enter> :Top<enter>:q<enter>^<C-W>Fn
+	nnoremap <buffer> q :bdelete<CR>
+	nnoremap <CR> :Top<CR>:q<CR>^<C-W>Fn
 endfunction
 
 " warning: next two settings make recovery impossible
@@ -220,12 +220,12 @@ set timeoutlen=18000
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
 
 " vim-fugitive mappings for git
-nnoremap <leader>ga :Git add -A<enter>
-nnoremap <leader>gs :Gstatus<enter>/modified<enter>
-nnoremap <leader>gd :Gdiff<enter>
-nnoremap <leader>gc :Gcommit<enter>i
-nnoremap <leader>gp :Gpush<enter>
-nnoremap <leader>gl :Git! log --decorate --stat --graph<enter>
+nnoremap <leader>ga :Git add -A<CR>
+nnoremap <leader>gs :Gstatus<CR>/modified<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gc :Gcommit<CR>i
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 
 "vimagit mapping
 nnoremap <leader>gv :Magit<CR>
@@ -250,7 +250,7 @@ nnoremap ) ddp
 " if the cursor is on the 'f' in function, it will find the previous function
 " and move it above its' previous function. Will have to make into function to
 " fix this, but it is still useful as is.)
-nnoremap <leader>( ?function<enter>V$%d?function<enter>P
+nnoremap <leader>( ?function<CR>V$%d?function<CR>P
 " use - to create new line below current line without leaving normal mode or moving cursor
 nnoremap - m`o<esc>``
 " use _ to create new line above current line without leaving normal mode or moving cursor
@@ -276,7 +276,7 @@ nnoremap <leader>j Lzt
 " go one screen up
 nnoremap <leader>k Hzb
 " move everything from current curson on, to the next line without leaving normal mode or moving cursor
-nnoremap <leader><enter> i<enter><esc>
+nnoremap <leader><CR> i<CR><esc>
 " surround visual selection with double quotes
 xnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 " surround visual selection with single quotes
@@ -284,38 +284,38 @@ xnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 " surround visual selection with backticks
 xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 " save
-nnoremap <leader>s :w<enter>
+nnoremap <leader>s :w<CR>
 " use leader f to run FZF command (fuzzy file finder)
-nnoremap <leader>f :FZF<enter>
+nnoremap <leader>f :FZF<CR>
 " load NERDTree
-nnoremap <leader>t :T<enter>
+nnoremap <leader>t :T<CR>
 " edit .vimrc
-nnoremap <leader>ev :e $HOME/.vimshrc<enter>
+nnoremap <leader>ev :e $HOME/.vimshrc<CR>
 " edit Neovim's init.vim config
-nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<enter>
+nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
 " edit .zshrc
-nnoremap <leader>ez :e~/.zshrc<enter>
+nnoremap <leader>ez :e~/.zshrc<CR>
 " edit .bashrc
-nnoremap <leader>eb :e~/.bashrc<enter>
+nnoremap <leader>eb :e~/.bashrc<CR>
 " edit .aliashrc
-nnoremap <leader>ea :e~/.aliashrc<enter>
+nnoremap <leader>ea :e~/.aliashrc<CR>
 " edit .functionshrc
-nnoremap <leader>ef :e~/.functionshrc<enter>
+nnoremap <leader>ef :e~/.functionshrc<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
-nnoremap <leader>d :bd<enter>
+nnoremap <leader>d :bd<CR>
 " jump previous movement
 nnoremap <leader>o <C-o>
 " search for next function
-nnoremap <leader>n /function <enter>
+nnoremap <leader>n /function <CR>
 " search for previous function
-nnoremap <leader>N ?function <enter>
+nnoremap <leader>N ?function <CR>
 " quit
-nnoremap <leader>q :q<enter>
-nnoremap <leader><leader>q :q!<enter>
+nnoremap <leader>q :q<CR>
+nnoremap <leader><leader>q :q!<CR>
 " launch mysql from terminal in vim buffer:
-nnoremap <leader><leader>d :ConqueTerm mysql info<enter>
+nnoremap <leader><leader>d :ConqueTerm mysql info<CR>
 " launch MongoDB from terminal in vim buffer:
-nnoremap <leader>mg :ConqueTerm mongo datazeo -u jesse -p<enter>
+nnoremap <leader>mg :ConqueTerm mongo datazeo -u jesse -p<CR>
 " use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
 nmap <leader>; <leader>bej
 
@@ -359,28 +359,28 @@ command! Lptest :call TestPHPUnitLong()
 command! Sendb :!mysql < %:p
 
 " make current window bottom window
-nnoremap <leader>mj :BOTTOM<enter>
+nnoremap <leader>mj :BOTTOM<CR>
 command! BOTTOM normal <C-w>J
 " go down one window
-nnoremap <C-j> :Bottom<enter>
+nnoremap <C-j> :Bottom<CR>
 command! Bottom normal <C-w>j
 " make current window top window
-nnoremap <leader>mk :TOP<enter>
+nnoremap <leader>mk :TOP<CR>
 command! TOP normal <C-w>K
 " go up one window
-nnoremap <C-k> :Top<enter>
+nnoremap <C-k> :Top<CR>
 command! Top normal <C-w>k
 " make current window left window
-nnoremap <leader>mh :LEFT<enter>
+nnoremap <leader>mh :LEFT<CR>
 command! LEFT normal <C-w>H
 " go left one window
-nnoremap <C-h> :Left<enter>
+nnoremap <C-h> :Left<CR>
 command! Left normal <C-w>h
 " make current window right window
-nnoremap <leader>ml :RIGHT<enter>
+nnoremap <leader>ml :RIGHT<CR>
 command! RIGHT normal <C-w>L
 " go right one window
-nnoremap <C-l> :Right<enter>
+nnoremap <C-l> :Right<CR>
 command! Right normal <C-w>l
 " go to next window
 command! NextWindow normal <C-w>w
@@ -393,7 +393,7 @@ au Syntax * RainbowParenthesesLoadBraces
 set laststatus=2
 
 " mapping to open a plugins home page in Chrome. The cursor must be on a line using vim-plug to include a plugin
-nnoremap <leader>w :call OpenChromeAtPluginPage()<enter>
+nnoremap <leader>w :call OpenChromeAtPluginPage()<CR>
 function! OpenChromeAtPluginPage()
 	let l:plugin_name= GetPluginPageFromCurrentLine()
 	silent execute '!google-chrome "https://www.github.com/'.l:plugin_name.'"'
@@ -434,8 +434,8 @@ endfunction
 
 function! PastePhpTemplate()
 	let l:file_name = expand("%:t:r")
-	let l:paste_php_template = "i<?\<enter>function ".l:file_name."() {\<enter>return new ".l:file_name.";\<enter>}\<esc>==a\<enter>class ".l:file_name." {\<enter>\}\<esc>k^we"
-		"\<enter>}\<esc>k\<leader>hwe"
+	let l:paste_php_template = "i<?\<CR>function ".l:file_name."() {\<CR>return new ".l:file_name.";\<CR>}\<esc>==a\<CR>class ".l:file_name." {\<CR>\}\<esc>k^we"
+		"\<CR>}\<esc>k\<leader>hwe"
 	execute "normal! ".l:paste_php_template
 endfunction
 
@@ -445,7 +445,7 @@ augroup mapping_group
 		autocmd!
 		if has('nvim')
 			" fixes the gf when run from a terminal buffer
-			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<enter>
+			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<CR>
 		endif
 		"enable zsh syntax for .aliashrc file
 		autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
@@ -471,34 +471,34 @@ augroup mapping_group
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
 		"uncomment visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>?  <esc>'<kdd'>jdd<esc>
-		autocmd FileType php                     nnoremap <buffer> <leader><  :call MoveParamLeft()<enter>
-		autocmd FileType php                     nnoremap <buffer> <leader>>  :call MoveParamRight()<enter>
-		autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakeParam()<enter>
+		autocmd FileType php                     nnoremap <buffer> <leader><  :call MoveParamLeft()<CR>
+		autocmd FileType php                     nnoremap <buffer> <leader>>  :call MoveParamRight()<CR>
+		autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakeParam()<CR>
 		"refactor to function
 		autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
 		"refactor to method
 		autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
 		"class template
-		autocmd FileType php                     nnoremap <buffer> <leader>pc aclass {<enter>}<esc>%hi<space>
+		autocmd FileType php                     nnoremap <buffer> <leader>pc aclass {<CR>}<esc>%hi<space>
 		"function template
-		autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<enter>}<esc>%bi
+		autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
 		"method template
-		autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<enter>}<esc>Vk=f(i
+		autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<CR>}<esc>Vk=f(i
 		"constructor template
-		autocmd FileType php                     nnoremap <buffer> <leader>po ofunction __construct() {<enter>}<esc>Vk=
+		autocmd FileType php                     nnoremap <buffer> <leader>po ofunction __construct() {<CR>}<esc>Vk=
 		"php template
-		autocmd FileType php                     nnoremap <buffer> <leader>pp :call PastePhpTemplate()<enter>
+		autocmd FileType php                     nnoremap <buffer> <leader>pp :call PastePhpTemplate()<CR>
 		"past debug::log();
 		autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
-		autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<enter>}<esc>
-		autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<enter>}<esc>
+		autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
+		autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
 		"dump the current variable
-		autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<enter>
-		"autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<enter><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
+		autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
+		"autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<CR><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
 		"creates a new slot (import and export DSL) named after the word under the cursor
 		autocmd FileType php		             nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
 		"run the PHP short tests
-		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<enter>
+		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<CR>
 	endif
 augroup END
 
@@ -508,7 +508,7 @@ function! DumpVarUnderCursor()
 		if c=="$"
 			normal l
 		endif
-		execute "normal! viw\<esc>vF$ly/;\<enter>o\<esc>idump('\<esc>pa',$\<esc>pa);\<esc>=="
+		execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idump('\<esc>pa',$\<esc>pa);\<esc>=="
 endfunction
 
 function! MoveParamLeft()
