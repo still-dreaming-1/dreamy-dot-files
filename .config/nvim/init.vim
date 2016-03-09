@@ -60,8 +60,10 @@ syntax on
 
 function! GeneratePhpTags()
 	let l:project_root_dir_path= FindProjectRoot()
-	system('')
+	let l:out= system('sh '.$HOME.'/.config/nvim/generate_php_tags.sh '.l:project_root_dir_path)
+	echo l:out
 endfunction
+
 function! FindProjectRoot()
 	let l:buffer_dir_path = expand("%:h")
 	return FindProjectRootRecursive(l:buffer_dir_path)
@@ -475,6 +477,7 @@ augroup mapping_group
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
 		autocmd bufwritepost .afterinit.vim source $MYVIMRC
+		autocmd bufwritepost *.php silent call GeneratePhpTags()
 		autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
 		" comment out visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
