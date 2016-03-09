@@ -233,9 +233,9 @@ nnoremap <leader>gv :Magit<CR>
 " use to add a space
 nnoremap <leader>z i <esc>
 " put from mouse clipboard
-nnoremap <leader>pm "*p
+nnoremap <leader><leader>pm "*p
 " put from clipboard
-nnoremap <leader>pc "+p
+nnoremap <leader><leader>pc "+p
 " yank to mouse clipboard from normal mode
 nnoremap <leader>ym "*y
 " yank to mouse clipboard from visual mode
