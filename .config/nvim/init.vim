@@ -232,9 +232,18 @@ nnoremap <leader>gv :Magit<CR>
 
 " use to add a space
 nnoremap <leader>z i <esc>
-nnoremap <leader>pc "*p
-nnoremap <leader>yc "*y
-vnoremap <leader>yc "*y
+" paste from mouse clipboard
+nnoremap <leader>pm "*p
+" paste from clipboard
+nnoremap <leader>pc "+p
+" yank to mouse clipboard from normal mode
+nnoremap <leader>ym "*y
+" yank to mouse clipboard from visual mode
+vnoremap <leader>ym "*y
+" yank to clipboard from normal mode
+nnoremap <leader>ym "+y
+" yank to clipboard from visual mode
+vnoremap <leader>ym "+y
 " make up and down not ignore wrapping lines
 nnoremap j gj
 nnoremap k gk
