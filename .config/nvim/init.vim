@@ -100,6 +100,9 @@ function! ParseParentDir(dir_path)
 	return l:parent_dir
 endfunction
 
+" show title in console title bar
+set title
+
 " startify settings
 let g:startify_session_autoload= 1
 " delete open buffers before loading a new session
