@@ -153,8 +153,8 @@ function! s:FindInPhpFiles(search)
 	setlocal noswapfile
 	silent exec 'read !grep -Frin --include="*.php" "'.a:search.'" .'
 	normal! ggdd
-	" Vim is designed so that searching in Vimscript does not replace the last search. This is a workaround for that. It still does not highlight the last search term unless the user had
-	" already searched on something
+	" Vim is designed so that searching in Vimscript does not replace the last search. This is a workaround for that. It still does not highlight the last search term unless the user
+	" had already searched on something
 	let @/ = a:search
 	normal! n
 	nnoremap <buffer> q :bdelete<CR>
