@@ -143,7 +143,7 @@ set smartcase
 set hlsearch
 set incsearch
 
-" search commands
+" search commands (may want to look into using and mapping :cnext and :cprev in conjuction with this. It may work well if the first result is automatically 'selected')
 command! -nargs=1 Fp set hlsearch | call s:FindInPhpFiles(<f-args>)
 function! s:FindInPhpFiles(search)
 	" create a scratch buffer below the current window
