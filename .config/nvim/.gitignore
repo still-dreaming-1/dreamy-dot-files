@@ -1,4 +1,5 @@
 .beforeinit.vim
 .afterinit.vim
 .netrwhist
+Session.vim
 plugged/
