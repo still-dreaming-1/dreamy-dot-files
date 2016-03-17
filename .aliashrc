@@ -23,5 +23,5 @@ alias clone='git clone'
 alias c='cd'
 alias c.='cd ..'
 alias c~='cd ~'
-alias cacs='cd ~/hacking/acs'
 alias cvim="cd ~/.config/nvim"
+alias cjump="cd ~/.config/nvim/plugged/vim-php-jump"
