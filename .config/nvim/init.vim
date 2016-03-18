@@ -186,6 +186,11 @@ function! s:FindInPhpFiles(search)
 	nnoremap <CR> :Top<CR>:q<CR>^<C-W>Fn
 endfunction
 
+function! FindFpUnderCursor()
+	let word= expand('<cword>')
+	execute 'Fp '.l:word
+endfunction
+
 " warning: next two settings make recovery impossible
 set nobackup
 set noswapfile
@@ -539,6 +544,7 @@ augroup mapping_group
 		autocmd FileType php		             nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
 		"run the PHP short tests
 		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<CR>
+		autocmd FileType php nnoremap <buffer> <leader>* :call FindFpUnderCursor()<CR>
 	endif
 augroup END
 
