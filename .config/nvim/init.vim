@@ -440,7 +440,7 @@ set laststatus=2
 nnoremap <leader>w :call OpenChromeAtPluginPage()<CR>
 function! OpenChromeAtPluginPage()
 	let l:plugin_name= GetPluginPageFromCurrentLine()
-	silent execute '!google-chrome "https://www.github.com/'.l:plugin_name.'"'
+	call jobstart('google-chrome "https://www.github.com/'.l:plugin_name.'"')
 endfunction
 function! GetPluginPageFromCurrentLine()
 	normal! ^w
@@ -451,6 +451,9 @@ function! GetPluginPageFromCurrentLine()
 	let l:plugin_name= l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
 	return l:plugin_name
 endfunction
+
+" mapping to open chrome
+nnoremap <leader>cc :call jobstart('google-chrome')<CR>
 
 " putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
