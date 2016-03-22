@@ -433,10 +433,6 @@ augroup mapping_group
 		autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
 		" enable vimshrc syntax for .aftervimshrc file
 		autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
-		" use php tags for php files
-		autocmd BufRead *.php setlocal tags=./phptags;
-		" use php tags for php files
-		autocmd BufRead *.js setlocal tags=./jstags;
 		" comment out current line
 		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
