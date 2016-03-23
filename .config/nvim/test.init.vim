@@ -24,7 +24,7 @@ syntax on
 color kolor
 set number
 
-"netwrw setting. netrw is a builtin file explorer similar to NERDTree
+"netrw setting. netrw is a builtin file explorer similar to NERDTree
 "3: tree style listing
 let g:netrw_liststyle= 3
 
