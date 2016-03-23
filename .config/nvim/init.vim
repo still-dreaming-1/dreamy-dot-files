@@ -210,9 +210,9 @@ nnoremap <leader>ym "*y
 " yank to mouse clipboard from visual mode
 vnoremap <leader>ym "*y
 " yank to clipboard from normal mode
-nnoremap <leader>ym "+y
+nnoremap <leader>yc "+y
 " yank to clipboard from visual mode
-vnoremap <leader>ym "+y
+vnoremap <leader>yc "+y
 " make up and down not ignore wrapping lines
 nnoremap j gj
 nnoremap k gk
