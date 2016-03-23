@@ -30,13 +30,14 @@ Plug 'still-dreaming-1/vim-php-jump'
 Plug 'still-dreaming-1/vim-project-tags'
 Plug 'mhinz/vim-startify'
 Plug 'jreybert/vimagit'
-" Tried out this php plugin. Currently not working, so leaving commented out for now
-"if has('nvim')
-	"Plug 'phpvim/phpcd.vim'
-	"Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
-	" to enable phpcd plugin for completion
-	"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-"endif
+" YouCompleteMe has been causing a lot of problems lately, then it stopped working
+"Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer' }
+" the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
+" intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
+"Plug 'phpvim/phpcd.vim'
+"Plug 'vim-scripts/progressbar-widget' " used by phpcd.vim for showing the index progress
+" to enable phpcd plugin for completion
+"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 " Try these out later:
 "Plug 'vim-scripts/vis'
 "Plug 'ntpeters/vim-better-whitespace'
