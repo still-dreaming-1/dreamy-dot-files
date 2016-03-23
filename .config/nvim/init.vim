@@ -156,7 +156,7 @@ endif
 
 function! MoveCursorToLastTerminalChar()
 	normal! G$
-	let l:cursor_char= getline(".")[col(".")-1]
+	let l:cursor_char= GetCursorChar()
 	let l:numeric_code= char2nr(l:cursor_char)
 	while l:numeric_code == 0
 		normal! k$
@@ -389,6 +389,23 @@ endfunction
 " mapping to open chrome
 nnoremap <leader>cc :call jobstart('google-chrome')<CR>
 
+" user functions: (to be called manually while editing)
+
+" place some text after the first word on the current line
+function! AfterFirstWord(text)
+	normal! ^
+	let l:first_word= expand('<cword>')
+	let l:word_len= len(l:first_word)
+	if l:word_len == 0
+		normal! ^
+	elseif l:word_len == 1
+		normal! l
+	elseif l:word_len > 1
+		execute 'normal! '.l:word_len.'l\<esc>'
+	endif
+	execute 'normal! i'.a:text
+endfunction
+
 " putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
 	" removes all autocmd in group
@@ -591,9 +608,16 @@ function! MakeParam()
 	call cursor(y,x)
 endfunction
 
+" general purpose, reusable functions
+
+function! GetCursorChar()
+	return getline(".")[col(".")-1]
+endfunction
+
 " highlight the part of lines that wrap past the edge of screen using a pre-set number of characters that fit your screen (change this to match your current screen)
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>185v.\+/
+
 
 " when switching buffers preserver cursor postion after switching back
 if v:version >= 700
