@@ -406,6 +406,17 @@ function! AfterFirstWord(text)
 	execute 'normal! i'.a:text
 endfunction
 
+function! RunMacroUntilLastLine(macro)
+	while !CursorIsLastLine()
+		let l:current_line_num= GetCursorLineNum()
+		execute 'normal! @'.a:macro
+		let l:new_line_num= GetCursorLineNum()
+		if l:new_line_num <= l:current_line_num
+			return
+		endif
+	endwhile
+endfunction
+
 " putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
 	" removes all autocmd in group
@@ -613,6 +624,22 @@ endfunction
 function! GetCursorChar()
 	return getline(".")[col(".")-1]
 endfunction
+
+function! CursorIsLastLine()
+	let l:cursor_line_num= GetCursorLineNum()
+	let l:last_line_num= GetLastLineNum()
+	return l:cursor_line_num == l:last_line_num
+endfunction
+
+function! GetCursorLineNum()
+	return line('.')
+endfunction
+
+function! GetLastLineNum()
+	return line('$')
+endfunction
+
+"end general purpose, reusable functions
 
 " highlight the part of lines that wrap past the edge of screen using a pre-set number of characters that fit your screen (change this to match your current screen)
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
