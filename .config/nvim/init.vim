@@ -30,6 +30,7 @@ Plug 'still-dreaming-1/vim-php-jump'
 Plug 'still-dreaming-1/vim-project-tags'
 Plug 'mhinz/vim-startify'
 Plug 'jreybert/vimagit'
+Plug 'tpope/vim-commentary'
 " YouCompleteMe has been causing a lot of problems lately, then it stopped working
 "Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer' }
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
@@ -60,6 +61,9 @@ syntax on
 " show title in console title bar
 set title
 
+"commentary mappings
+nmap <leader>/ gcc
+vmap <leader>/ gc
 " startify settings
 let g:startify_session_autoload= 1
 " delete open buffers before loading a new session
@@ -463,17 +467,17 @@ augroup mapping_group
 		" enable vimshrc syntax for .aftervimshrc file
 		autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
 		" comment out current line
-		autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
-		autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
+		"autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
+		"autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
 		" auto source the config after saving Vim's .vimrc config file (helps when using Vim)
 		autocmd bufwritepost .vimrc source $MYVIMRC
 		" auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
 		autocmd bufwritepost .afterinit.vim source $MYVIMRC
-		autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
+		"autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
 		" comment out visually selected lines
-		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
+		"autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
 		" uncomment visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>?  <esc>'<kdd'>jdd<esc>
 		autocmd FileType php                     nnoremap <buffer> <leader><  :call MoveParamLeft()<CR>
