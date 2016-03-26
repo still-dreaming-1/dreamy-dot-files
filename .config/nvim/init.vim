@@ -88,13 +88,7 @@ endif
 " 3: tree style listing
 let g:netrw_liststyle= 3
 
-"vim-airline settings:
-"leaving some commented out themes that I liked while I am deciding on a theme
-"let g:airline_theme='murmur'
-"let g:airline_theme='base16'
-"let g:airline_theme='base16_3024'
-"let g:airline_theme='base16_ashes'
-
+"vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
 let g:airline_powerline_fonts= 1
 "prevent showing INSERT at bottom of screen below the airline status in insert mode
@@ -287,8 +281,6 @@ nnoremap <leader>ef :e~/.functionshrc<CR>
 nnoremap <leader>d :bd<CR>
 " jump previous movement
 nnoremap <leader>o <C-o>
-" search for next function
-nnoremap <leader>n /function <CR>
 " search for previous function
 nnoremap <leader>N ?function <CR>
 " quit
@@ -469,6 +461,9 @@ augroup mapping_group
 		" comment out current line
 		"autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		"autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
+		" search for next php function
+		autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
+		autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
 		" auto source the config after saving Vim's .vimrc config file (helps when using Vim)
 		autocmd bufwritepost .vimrc source $MYVIMRC
 		" auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
@@ -641,6 +636,31 @@ endfunction
 
 function! GetLastLineNum()
 	return line('$')
+endfunction
+
+function! GetCursorPos()
+	return {'line': GetCursorLineNum(), 'col': GetCursorColNum()}
+endfunction
+
+function! SetCursorPos(pos)
+	call cursor(a:pos['line'], a:pos['col'])
+endfunction
+
+function! EchoCursorPos(pos, ...)
+	if a:0 > 0
+		let l:name= a:1
+	else
+		let l:name= ''
+	endif
+	if l:name != ''
+		echo 'cursor '.name.' :'
+	endif
+	echo 'line: '.a:pos['line']
+	echo 'col: '.a:pos['col']
+endfunction
+
+function! GetCursorColNum()
+	return col(".")
 endfunction
 
 "end general purpose, reusable functions
