@@ -16,7 +16,7 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gl='git log --decorate --stat --graph'
 alias gdev='git checkout develop'
-alias gmaster='git checkout master'
+alias gmas='git checkout master'
 alias s='git status'
 alias clone='git clone'
 
