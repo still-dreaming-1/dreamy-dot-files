@@ -1,4 +1,4 @@
-# trick to make sudo work with other aliases in bash
+# trick to make sudo work with other aliases
 alias sudo='sudo '
 # this file contains aliases shared between bash and zsh
 alias ll='ls -la'
