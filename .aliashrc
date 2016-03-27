@@ -9,7 +9,7 @@ alias g='git'
 # alias for gitting latest versions in version sorted order
 alias gtag='git tag -n1 | sort -V | tail'
 alias gb='git branch'
-alias gadd='git add -A'
+alias ga='git add -A'
 alias gdiff='git difftool'
 alias gcommit='git commit'
 alias gpush='git push'
