@@ -8,7 +8,7 @@ alias v='nvim' # can be overridden in .afteraliashrc on computers without neovim
 alias g='git'
 # alias for gitting latest versions in version sorted order
 alias gtag='git tag -n1 | sort -V | tail'
-alias gbranch='git branch'
+alias gb='git branch'
 alias gadd='git add -A'
 alias gdiff='git difftool'
 alias gcommit='git commit'
