@@ -159,7 +159,7 @@ endif
 
 function! MoveCursorToLastTerminalChar()
 	normal! G$
-	let l:cursor_char= GetCursorChar()
+	let l:cursor_char= elhiv#get_cursor_char()
 	let l:numeric_code= char2nr(l:cursor_char)
 	while l:numeric_code == 0
 		normal! k$
@@ -624,10 +624,6 @@ function! MakeParam()
 endfunction
 
 " general purpose, reusable functions
-
-function! GetCursorChar()
-	return getline(".")[col(".")-1]
-endfunction
 
 function! CursorIsLastLine()
 	let l:cursor_line_num= GetCursorLineNum()
