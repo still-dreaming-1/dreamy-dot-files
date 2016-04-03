@@ -159,7 +159,7 @@ endif
 
 function! MoveCursorToLastTerminalChar()
 	normal! G$
-	let l:cursor_char= elhiv#get_cursor_char()
+	let l:cursor_char= l#get_cursor_char()
 	let l:numeric_code= char2nr(l:cursor_char)
 	while l:numeric_code == 0
 		normal! k$
