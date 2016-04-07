@@ -124,8 +124,7 @@ function! s:FindInPhpFiles(search)
 endfunction
 
 function! FindFpUnderCursor()
-	let word= expand('<cword>')
-	execute 'Fp '.l:word
+	execute 'Fp '.l_cursor#current().word()
 endfunction
 
 " warning: next two settings make recovery impossible
