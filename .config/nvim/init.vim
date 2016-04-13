@@ -28,6 +28,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
 Plug 'still-dreaming-1/vim-php-jump'
 Plug 'still-dreaming-1/vim-elhiv'
+Plug 'still-dreaming-1/vim-elhirl'
 Plug 'still-dreaming-1/vim-project-tags'
 Plug 'mhinz/vim-startify'
 Plug 'jreybert/vimagit'
@@ -36,6 +37,7 @@ Plug 'tpope/vim-commentary'
 Plug 'LucHermitte/lh-vim-lib'
 "unit testing
 Plug 'LucHermitte/vim-UT'
+Plug 'luke-gru/vim-riml'
 " YouCompleteMe has been causing a lot of problems lately, then it stopped working
 "Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer' }
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
