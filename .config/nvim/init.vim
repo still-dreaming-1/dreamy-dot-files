@@ -28,6 +28,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
 Plug 'still-dreaming-1/vim-php-jump'
 Plug 'still-dreaming-1/vim-elhiv'
+Plug 'still-dreaming-1/vim-elhirl'
 Plug 'still-dreaming-1/vim-project-tags'
 Plug 'mhinz/vim-startify'
 Plug 'jreybert/vimagit'
