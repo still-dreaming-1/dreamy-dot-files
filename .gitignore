@@ -16,3 +16,4 @@
 !.config/
 !.config/nvim/
 !.config/nvim/**
+!.gemrc
