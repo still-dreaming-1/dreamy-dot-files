@@ -46,7 +46,7 @@ path=(
   /usr/local/{bin,sbin}
   $path
   ~/riml/bin
-  ~/.gem/ruby/2.3.0/bin
+  ~/.gem/ruby/1.9.1/bin
 )
 
 #
