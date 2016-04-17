@@ -129,7 +129,7 @@ function! s:FindInPhpFiles(search)
 endfunction
 
 function! FindFpUnderCursor()
-	execute 'Fp '.l_cursor#current().word()
+	execute 'Fp '.Curent_cursor().word()
 endfunction
 
 " warning: next two settings make recovery impossible
@@ -163,7 +163,7 @@ endif
 
 function! MoveCursorToLastTerminalChar()
 	normal! G$
-	let l:cursor_char= l#get_cursor_char()
+	let l:cursor_char= Get_cursor_char()
 	let l:numeric_code= char2nr(l:cursor_char)
 	while l:numeric_code == 0
 		normal! k$
