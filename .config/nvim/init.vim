@@ -129,7 +129,7 @@ function! s:FindInPhpFiles(search)
 endfunction
 
 function! FindFpUnderCursor()
-	execute 'Fp '.Curent_cursor().word()
+	execute 'Fp '.Current_cursor().word()
 endfunction
 
 " warning: next two settings make recovery impossible
