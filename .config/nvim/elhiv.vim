@@ -3,29 +3,18 @@
 
 
 let s:current_script_path= expand('<sfile>')
+let s:elhiv_dir_info= l_dir_info#new(s:current_script_path).parent()
+let s:src_dir_info= s:elhiv_dir_info.get_contained_dir_info('src')
 
-function! Elhiv_dir()
-	let dir= l_dir_info(s:current_script_path).parent()
-
-	function! dir.get_src_dir_info()
-		return self.get_contained_dir_info('src')
-	endfunction
-
-	return dir
-endfunction
-
-let s:src_dir_path= Elhiv_dir().get_src_dir_info().path
-
-execute 'source '.s:src_dir_path.'/Null.vim'
-execute 'source '.s:src_dir_path.'/Current_buf.vim'
-execute 'source '.s:src_dir_path.'/Current_cursor.vim'
-execute 'source '.s:src_dir_path.'/Dir.vim'
-execute 'source '.s:src_dir_path.'/l.vim'
-execute 'source '.s:src_dir_path.'/U_ls.vim'
-execute 'source '.s:src_dir_path.'/Ls.vim'
-execute 'source '.s:src_dir_path.'/S.vim'
-execute 'source '.s:src_dir_path.'/types.vim'
-execute 'source '.s:src_dir_path.'/File.vim'
-execute 'source '.s:src_dir_path.'/Elhiv_file.vim'
-execute 'source '.s:src_dir_path.'/Shell_cmd_saver.vim'
-execute 'source '.s:src_dir_path.'/Shell.vim'
+execute 'source '.s:src_dir_info.get_contained_file_info('Null.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('Current_buf.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('Current_cursor.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('Dir.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('l.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('U_ls.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('Ls.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('S.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('types.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('File.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('Shell_cmd_saver.vim').path
+execute 'source '.s:src_dir_info.get_contained_file_info('Shell.vim').path

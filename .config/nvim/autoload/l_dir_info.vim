@@ -1,4 +1,4 @@
-function! l_dir_info#new()
+function! l_dir_info#new(path)
 	let dir= {}
 	let dir.path= a:path
 	let dir.exists= isdirectory(a:path)
@@ -13,6 +13,10 @@ function! l_dir_info#new()
 
 	function! dir.get_contained_dir_info(name)
 		return l_dir_info#new(self.path.'/'.a:name)
+	endfunction
+
+	function! dir.get_contained_file_info(name)
+		return l_file_info#new(self.path.'/'.a:name)
 	endfunction
 
 	return dir

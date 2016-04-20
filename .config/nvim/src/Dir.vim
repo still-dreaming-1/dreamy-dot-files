@@ -1,8 +1,8 @@
 function! Dir(path)
 	let info= l_dir_info#new(a:path)
 	let dir= {}
-	dir.path= info.path
-	dir.exists= info.exists
+	let dir.path= info.path
+	let dir.exists= info.exists
 
 	function! dir.parent()
 		let parent_info= l_dir_info#new(self.path).parent()
@@ -18,7 +18,8 @@ function! Dir(path)
 	endfunction
 
 	function! dir.get_contained_file(name)
-		return File(self.path.'/'.a:name)
+		let contained_info= l_dir_info#new(self.path).get_contained_file_info(a:name)
+		return File(contained_info.path)
 	endfunction
 	
 	" function! dir.copy_to(dir)
