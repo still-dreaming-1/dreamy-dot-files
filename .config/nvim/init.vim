@@ -26,10 +26,6 @@ Plug 'tpope/vim-fugitive'
 " The only reason I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
-Plug 'still-dreaming-1/vim-php-jump'
-Plug 'still-dreaming-1/vim-elhiv'
-Plug 'still-dreaming-1/vim-elhirl'
-Plug 'still-dreaming-1/vim-project-tags'
 Plug 'mhinz/vim-startify'
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-commentary'
@@ -53,7 +49,7 @@ Plug 'luke-gru/vim-riml'
 call plug#end()
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
-source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
+source $HOME/.config/nvim/elhiv.vim
 
 "the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 "exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
