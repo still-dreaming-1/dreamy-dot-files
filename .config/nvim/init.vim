@@ -56,7 +56,7 @@ call plug#end()
 let g:plug_shallow= 0
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
-source $HOME/.config/nvim/elhiv.vim
+source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 
 "the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 "exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
