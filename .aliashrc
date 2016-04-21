@@ -26,3 +26,5 @@ alias c.='cd ..'
 alias c~='cd ~'
 alias cvim="cd ~/.config/nvim"
 alias cplug="cd ~/.config/nvim/plugged"
+alias cproj="cd ~/.config/nvim/plugged/vim-project-tags"
+alias chiv="cd ~/.config/nvim/plugged/vim-elhiv"
