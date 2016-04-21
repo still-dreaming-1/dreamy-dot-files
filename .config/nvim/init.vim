@@ -47,8 +47,13 @@ Plug 'luke-gru/vim-riml'
 "Plug 'ntpeters/vim-better-whitespace'
 " https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/dragvisuals.vim
 
+" These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
+Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
 Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
 call plug#end()
+
+" Shallow clones are no good for me because I develop my plugins off these clones
+let g:plug_shallow= 0
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/elhiv.vim
