@@ -46,6 +46,8 @@ Plug 'luke-gru/vim-riml'
 "Plug 'vim-scripts/vis'
 "Plug 'ntpeters/vim-better-whitespace'
 " https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/dragvisuals.vim
+
+Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
 call plug#end()
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
