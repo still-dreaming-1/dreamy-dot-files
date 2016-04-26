@@ -1,6 +1,5 @@
 # ignore everything
 *
-.config/nvim/plugged/
 
 # except these files:
 !*.gitignore
