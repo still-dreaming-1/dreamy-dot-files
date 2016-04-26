@@ -33,6 +33,7 @@ Plug 'tpope/vim-commentary'
 Plug 'LucHermitte/lh-vim-lib'
 "unit testing
 Plug 'LucHermitte/vim-UT'
+Plug 'qpkorr/vim-bufkill'
 " YouCompleteMe has been causing a lot of problems lately, then it stopped working
 "Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer' }
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
@@ -304,7 +305,7 @@ nnoremap <leader>ea :e~/.aliashrc<CR>
 " edit .functionshrc
 nnoremap <leader>ef :e~/.functionshrc<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
-nnoremap <leader>d :bd<CR>
+nnoremap <leader>d :BD<CR>
 " jump previous movement
 nnoremap <leader>o <C-o>
 " search for previous function
