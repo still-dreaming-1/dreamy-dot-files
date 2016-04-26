@@ -112,6 +112,9 @@ set smartcase
 set hlsearch
 set incsearch
 
+" alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
+command! Chiv cd $HOME/.config/nvim/plugged/vim-elhiv
+
 " search commands (may want to look into using and mapping :cnext and :cprev in conjuction with this. It may work well if the first result is automatically 'selected')
 command! -nargs=1 Fp set hlsearch | call s:FindInPhpFiles(<f-args>)
 function! s:FindInPhpFiles(search)
