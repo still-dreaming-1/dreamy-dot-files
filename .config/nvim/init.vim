@@ -478,6 +478,7 @@ augroup mapping_group
 		if has('nvim')
 			" fixes the gf when run from a terminal buffer
 			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<CR>
+			" autocmd TermOpen * <buffer> command! BD :BD!
 		endif
 		" enable zsh syntax for .aliashrc file
 		autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
