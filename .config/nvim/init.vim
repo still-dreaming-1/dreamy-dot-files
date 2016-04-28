@@ -73,6 +73,8 @@ syntax on
 
 " show title in console title bar
 set title
+" at the bottom of the screen show the number of visually selected characters, and other stuff...
+set showcmd
 
 "commentary mappings
 nmap <leader>/ gcc
