@@ -73,7 +73,7 @@ syntax on
 
 " show title in console title bar
 set title
-" at the bottom of the screen show the number of visually selected characters, and other stuff...
+" at the bottom of the screen show the number of visually selected characters, and other stuff... If the selection is more than one row, shows the row count instead.
 set showcmd
 
 "commentary mappings
