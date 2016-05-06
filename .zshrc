@@ -18,3 +18,6 @@ source "${ZDOTDIR:-$HOME}/.afterzshrc"
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+# prezto agnoster theme. This theme also works well with the iOS prompt app
+prompt agnoster
