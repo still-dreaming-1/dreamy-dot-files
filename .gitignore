@@ -11,8 +11,6 @@
 !.vimshrc
 !.aliashrc
 !.functionshrc
-!.zprezto/
-!.zprezto/**
 !.config/
 !.config/nvim/
 !.config/nvim/**
