@@ -1,6 +1,13 @@
 " look into this as an alternative to tags: :help include-search
 " because vim is better than vi
 set nocompatible
+
+"the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
+"exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
+"just create it and leave it blank.
+let g:dreamy_developer= 0
+source ~/.config/nvim/.beforeinit.vim
+
 " vim-plug plugin manager:
 " commands:
 " PlugUpdate [name ...] - install or update plugins
@@ -48,8 +55,16 @@ Plug 'qpkorr/vim-bufkill'
 " https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/dragvisuals.vim
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
-Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
-Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
+else
+	Plug 'still-dreaming-1/vim-elhiv'
+endif
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
+else
+	Plug 'still-dreaming-1/vim-project-tags'
+endif
 call plug#end()
 
 " Shallow clones are no good for me because I develop my plugins off these clones
@@ -57,11 +72,6 @@ let g:plug_shallow= 0
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
-
-"the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
-"exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
-"just create it and leave it blank.
-source ~/.config/nvim/.beforeinit.vim
 
 let mapleader=" "
 " use backslash for localleader (2 backslashes since the first one is the escape char)
