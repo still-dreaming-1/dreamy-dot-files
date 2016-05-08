@@ -140,15 +140,18 @@ function! ChangeDirectoryInVimAndNERDTree(dir_path)
 	endif
 endfunction
 
+nnoremap <leader>* :call FindWordUnderCursorInCurrentFileTypes()<CR>
 " search commands (may want to look into using and mapping :cnext and :cprev in conjuction with this. It may work well if the first result is automatically 'selected')
-command! -nargs=1 Fp set hlsearch | call s:FindInPhpFiles(<f-args>)
-function! s:FindInPhpFiles(search)
+command! -nargs=1 Fw set hlsearch | call FindInCurrentFileTypes(<f-args>)
+function! FindInCurrentFileTypes(search)
+	let current_file_extension= Current_buf().file().extension
 	" create a scratch buffer below the current window
 	below new
 	setlocal buftype=nofile
 	setlocal bufhidden=hide
 	setlocal noswapfile
-	silent exec 'read !grep -Frin --include="*.php" "'.a:search.'" .'
+	let cmd= 'read !grep -Frin --include="*.'.current_file_extension.'" "'.a:search.'" .'
+	silent exec cmd
 	normal! ggdd
 	" Vim is designed so that searching in Vimscript does not replace the last search. This is a workaround for that. It still does not highlight the last search term unless the user
 	" had already searched on something
@@ -158,8 +161,8 @@ function! s:FindInPhpFiles(search)
 	nnoremap <CR> :Top<CR>:q<CR>^<C-W>Fn
 endfunction
 
-function! FindFpUnderCursor()
-	execute 'Fp '.Current_cursor().word()
+function! FindWordUnderCursorInCurrentFileTypes()
+	execute 'Fw '.Current_cursor().word()
 endfunction
 
 " warning: next two settings make recovery impossible
@@ -543,7 +546,6 @@ augroup mapping_group
 		autocmd FileType php		             nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
 		"run the PHP short tests
 		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<CR>
-		autocmd FileType php nnoremap <buffer> <leader>* :call FindFpUnderCursor()<CR>
 	endif
 augroup END
 
