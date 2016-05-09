@@ -489,20 +489,6 @@ endfunction
 nnoremap <leader><  :call MoveParamLeft()<CR>
 nnoremap <leader>>  :call MoveParamRight()<CR>
 
-function! MoveParamLeft()
-	let current_file_extension= Current_buf().file().extension
-	if current_file_extension == 'php'
-		call MovePHPParamLeft()
-	endif
-endfunction
-
-function! MoveParamRight()
-	let current_file_extension= Current_buf().file().extension
-	if current_file_extension == 'php'
-		call MovePHPParamRight()
-	endif
-endfunction
-
 augroup mapping_group
 	if has("autocmd")
 		" removes all autocmd in group
@@ -643,6 +629,20 @@ function! UnsafeMovePHPParamRight()
 		return
 	endif
 	call cursor(y,x)
+endfunction
+
+function! MoveParamLeft()
+	let current_file_extension= Current_buf().file().extension
+	if current_file_extension == 'php'
+		call MovePHPParamLeft()
+	endif
+endfunction
+
+function! MoveParamRight()
+	let current_file_extension= Current_buf().file().extension
+	if current_file_extension == 'php'
+		call MovePHPParamRight()
+	endif
 endfunction
 
 function! MakePHPParam()
