@@ -490,11 +490,17 @@ nnoremap <leader><  :call MoveParamLeft()<CR>
 nnoremap <leader>>  :call MoveParamRight()<CR>
 
 function! MoveParamLeft()
-	call MovePHPParamLeft()
+	let current_file_extension= Current_buf().file().extension
+	if current_file_extension == 'php'
+		call MovePHPParamLeft()
+	endif
 endfunction
 
 function! MoveParamRight()
-	call MovePHPParamRight()
+	let current_file_extension= Current_buf().file().extension
+	if current_file_extension == 'php'
+		call MovePHPParamRight()
+	endif
 endfunction
 
 augroup mapping_group
