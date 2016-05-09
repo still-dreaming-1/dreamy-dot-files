@@ -518,9 +518,9 @@ augroup mapping_group
 		"autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
 		" uncomment visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>?  <esc>'<kdd'>jdd<esc>
-		autocmd FileType php                     nnoremap <buffer> <leader><  :call MoveParamLeft()<CR>
-		autocmd FileType php                     nnoremap <buffer> <leader>>  :call MoveParamRight()<CR>
-		autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakeParam()<CR>
+		autocmd FileType php                     nnoremap <buffer> <leader><  :call MovePHPParamLeft()<CR>
+		autocmd FileType php                     nnoremap <buffer> <leader>>  :call MovePHPParamRight()<CR>
+		autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
 		"refactor to function
 		autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
 		"refactor to method
@@ -558,19 +558,19 @@ function! DumpVarUnderCursor()
 		execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idump('\<esc>pa',$\<esc>pa);\<esc>=="
 endfunction
 
-function! MoveParamLeft()
+function! MovePHPParamLeft()
 	if col(".") > 1
 		let c=getline(".")[col(".")-1]
 		if c=="$"
-			call UnsafeMoveParamLeft()
+			call UnsafeMovePHPParamLeft()
 		else
 			normal h
-			call MoveParamLeft()
+			call MovePHPParamLeft()
 		endif
 	endif
 endfunction
 
-function! UnsafeMoveParamLeft()
+function! UnsafeMovePHPParamLeft()
 	let x = col(".")
 	let y = line(".")
 	normal f,
@@ -595,19 +595,19 @@ function! UnsafeMoveParamLeft()
 	call cursor(y,x)
 endfunction
 
-function! MoveParamRight()
+function! MovePHPParamRight()
 	if col(".") > 1
 		let c=getline(".")[col(".")-1]
 		if c=="$"
-			call UnsafeMoveParamRight()
+			call UnsafeMovePHPParamRight()
 		else
 			normal h
-			call MoveParamRight()
+			call MovePHPParamRight()
 		endif
 	endif
 endfunction
 
-function! UnsafeMoveParamRight()
+function! UnsafeMovePHPParamRight()
 	let x = col(".")
 	let y = line(".")
 	normal f,
@@ -630,7 +630,7 @@ function! UnsafeMoveParamRight()
 	call cursor(y,x)
 endfunction
 
-function! MakeParam()
+function! MakePHPParam()
 	let x = col(".")
 	let y = line(".")
 	normal viwy
