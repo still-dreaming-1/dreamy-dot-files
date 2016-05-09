@@ -486,6 +486,17 @@ function! PastePhpTemplate()
 	execute "normal! ".l:paste_php_template
 endfunction
 
+nnoremap <leader><  :call MoveParamLeft()<CR>
+nnoremap <leader>>  :call MoveParamRight()<CR>
+
+function! MoveParamLeft()
+	call MovePHPParamLeft()
+endfunction
+
+function! MoveParamRight()
+	call MovePHPParamRight()
+endfunction
+
 augroup mapping_group
 	if has("autocmd")
 		" removes all autocmd in group
@@ -518,8 +529,6 @@ augroup mapping_group
 		"autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
 		" uncomment visually selected lines
 		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>?  <esc>'<kdd'>jdd<esc>
-		autocmd FileType php                     nnoremap <buffer> <leader><  :call MovePHPParamLeft()<CR>
-		autocmd FileType php                     nnoremap <buffer> <leader>>  :call MovePHPParamRight()<CR>
 		autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
 		"refactor to function
 		autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
