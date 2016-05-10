@@ -635,13 +635,62 @@ function! MoveParamLeft()
 	let current_file_extension= Current_buf().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamLeft()
+	else
+		call GenericMoveParamLeft()
 	endif
+endfunction
+
+function! GenericMoveParamLeft()
+	" move to beginning of current word
+	normal! wb
+	" capture the x and y at the beginning of the param
+	let x = col(".")
+	let y = line(".")
+	"find the comma separating current param from the next
+	normal! f,
+	" if there actually was a comma, meaning there is another param after this one
+	if Get_cursor_char() == ","
+		call cursor(y,x)
+		" Delete the current param and the comma, copying it at the same time. Put copied param before the previous one
+		normal! df,
+		" if the current character is a space, which it probably is
+		if Get_cursor_char() == " "
+			" delete the space without yanking it
+			normal! v"_d
+		endif
+		normal! bbP
+		execute "normal! a "
+		normal! bb
+		return
+	endif
+	" there was not a comma, so this is the last param
+	" move cursor back to the
+	call cursor(y,x)
+	normal f)
+	if getline(".")[col(".")-1] == ")"
+		call cursor(y,x)
+		normal F,
+		if col(".") >= x
+			call cursor(y,x)
+			return
+		endif
+		normal xf$
+		normal vf)hdF$Pa,
+		return
+	endif
+	call cursor(y,x)
+endfunction
+
+function! GenericMoveParamRight()
+	normal! wb
 endfunction
 
 function! MoveParamRight()
 	let current_file_extension= Current_buf().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamRight()
+	else
+		call GenericMoveParamRight()
 	endif
 endfunction
 
