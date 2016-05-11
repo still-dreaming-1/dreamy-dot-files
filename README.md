@@ -5,6 +5,8 @@ Some people were interested in seeing my dot files. It will also be useful for m
 
 <b>Installation instructions</b>
 
+The develop branch is compatible with the develop branch of my Vim plugins. The master branch is compatible with the master branch of my Vim plugins. I only update the master branch here when I update the master branch on my plugins.
+
 1) clone this repository to a new directory
 
 2) Copy the .git directory from the clone to your home
