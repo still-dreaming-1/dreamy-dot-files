@@ -1,9 +1,11 @@
 # dreamy-dot-files
 My personal dot files
 
-Some people were interested in seeing my dot files. It will also be useful for me to be able to clone these to other machices or fresh OS installs. I have not decided if I will spend time reviewing pull requests, probably depends on how many this gets. I am more interested in keeping this useful for me than being general settings that would be good for everyone.
+Some people were interested in seeing my dot files. It will also be useful for me to be able to clone these to other machines or fresh OS installs. I am more interested in keeping this useful for me than being general settings that would be good lots of people.
 
 <b>Installation instructions</b>
+
+I don't recommend trying to install this. These instructions are not complete, and this has not been installed or tested on any systems other than ones I develop on. You can easilly damage your system or lose settings or files trying to install this. I recommend looking through these files for inspiration rather than trying to install them, as this is all very custom to my workflow. If you don't yet understand the concept of dot files or why someone would make their dot file available on github, you should learn that first.
 
 The develop branch is compatible with the develop branch of my Vim plugins. The master branch is compatible with the master branch of my Vim plugins. I only update the master branch here when I update the master branch on my plugins.
 
