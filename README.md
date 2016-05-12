@@ -5,7 +5,7 @@ Some people were interested in seeing my dot files. It will also be useful for m
 
 <b>Installation instructions</b>
 
-I don't recommend trying to install this. These instructions are not complete, and this has not been installed or tested on any systems other than ones I develop on. You can easilly damage your system or lose settings or files trying to install this. I recommend looking through these files for inspiration rather than trying to install them, as this is all very custom to my workflow. If you don't yet understand the concept of dot files or why someone would make their dot file available on github, you should learn that first.
+I don't recommend trying to install this. These instructions are not complete, and this has not been installed or tested on any systems other than ones I develop on. You can easilly damage your system or lose settings or files trying to install this. I recommend looking through these files for inspiration rather than trying to install them, as this is all very custom to my workflow. If you don't yet understand the concept of dot files or why someone would make their dot files available on github, you should learn that first.
 
 The develop branch is compatible with the develop branch of my Vim plugins. The master branch is compatible with the master branch of my Vim plugins. I only update the master branch here when I update the master branch on my plugins.
 
