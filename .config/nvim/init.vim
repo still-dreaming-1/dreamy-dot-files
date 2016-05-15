@@ -41,6 +41,8 @@ Plug 'LucHermitte/lh-vim-lib'
 "unit testing
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
+Plug 'tpope/vim-scriptease' " Possible that with this script, running :Runtime will allow tests to be rerun withougt restarting Vim
+Plug 'thinca/vim-quickrun' " Might be helpful for running line_numberQuickRun
 " YouCompleteMe has been causing a lot of problems lately, then it stopped working
 "Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer' }
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
