@@ -402,6 +402,9 @@ nnoremap <C-l> :Right<CR>
 command! Right normal <C-w>l
 " go to next window
 command! NextWindow normal <C-w>w
+
+nnoremap <leader>v :UTRun %<CR>
+
 " better rainbow parentheses settings
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -484,8 +487,13 @@ endfunction
 function! PastePhpTemplate()
 	let l:file_name = expand("%:t:r")
 	let l:paste_php_template = "i<?\<CR>function ".l:file_name."() {\<CR>return new ".l:file_name.";\<CR>}\<esc>==a\<CR>class ".l:file_name." {\<CR>\}\<esc>k^we"
-		"\<CR>}\<esc>k\<leader>hwe"
 	execute "normal! ".l:paste_php_template
+endfunction
+
+function! PasteVimTemplate()
+	let l:file_name = expand("%:t:r")
+	let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>"
+	execute "normal! ".l:paste_vim_template
 endfunction
 
 nnoremap <leader><  :call MoveParamLeft()<CR>
@@ -529,7 +537,8 @@ augroup mapping_group
 		"refactor to method
 		autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
 		"class template
-		autocmd FileType php                     nnoremap <buffer> <leader>pc aclass {<CR>}<esc>%hi<space>
+		autocmd FileType php                     nnoremap <buffer> <leader>pc :call PastePhpTemplate()<CR>
+		autocmd FileType vim                     nnoremap <buffer> <leader>pc :call PasteVimTemplate()<CR>
 		"function template
 		autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
 		autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
@@ -537,8 +546,6 @@ augroup mapping_group
 		autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<CR>}<esc>Vk=f(i
 		"constructor template
 		autocmd FileType php                     nnoremap <buffer> <leader>po ofunction __construct() {<CR>}<esc>Vk=
-		"php template
-		autocmd FileType php                     nnoremap <buffer> <leader>pp :call PastePhpTemplate()<CR>
 		"past debug::log();
 		autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
 		autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
