@@ -361,7 +361,7 @@ let g:vimshell_prompt_expr =
 \ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 " The following mapping is not working. It is supposed to run the VimShell command
-nmap <leader>v <Plug>(vimshell_switch)
+nmap <leader>V <Plug>(vimshell_switch)
 
 " syntastic settings
 let g:syntastic_always_populate_loc_list = 1
