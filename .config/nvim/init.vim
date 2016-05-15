@@ -532,6 +532,7 @@ augroup mapping_group
 		autocmd FileType php                     nnoremap <buffer> <leader>pc aclass {<CR>}<esc>%hi<space>
 		"function template
 		autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
+		autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
 		"method template
 		autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<CR>}<esc>Vk=f(i
 		"constructor template
