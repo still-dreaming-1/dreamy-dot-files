@@ -135,6 +135,7 @@ set incsearch
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
 command! Chiv call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-elhiv")
 command! Cproj call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-project-tags")
+command! Cgen call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim")
 command! Cit call ChangeDirectoryInVimAndNERDTree("$HOME/hacking/cities")
 
