@@ -137,7 +137,6 @@ command! Chiv call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/v
 command! Cproj call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-project-tags")
 command! Cgen call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim")
-command! Cit call ChangeDirectoryInVimAndNERDTree("$HOME/hacking/cities")
 
 function! ChangeDirectoryInVimAndNERDTree(dir_path)
 	let before_dir= getcwd()
