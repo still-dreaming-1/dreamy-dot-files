@@ -363,6 +363,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeAutoDeleteBuffer=1
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
+let NERDTreeChDirMode= 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
 
 " configure VimShell
 " Use current directory as vimshell prompt.
