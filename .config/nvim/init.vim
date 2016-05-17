@@ -126,6 +126,8 @@ let g:airline_powerline_fonts= 1
 "prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
 
+set nofoldenable " disable folding
+
 " make searching easier:
 set ignorecase
 set smartcase
@@ -133,6 +135,7 @@ set hlsearch
 set incsearch
 
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
+command! Cplug call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged")
 command! Chiv call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-elhiv")
 command! Cproj call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-project-tags")
 command! Cgen call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-generator")
