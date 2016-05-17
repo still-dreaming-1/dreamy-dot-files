@@ -493,7 +493,7 @@ endfunction
 
 function! PasteVimTemplate()
 	let l:file_name = expand("%:t:r")
-	let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>"
+	let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name."\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
 	execute "normal! ".l:paste_vim_template
 endfunction
 
