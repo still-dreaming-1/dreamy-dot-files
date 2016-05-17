@@ -67,6 +67,11 @@ if dreamy_developer
 else
 	Plug 'still-dreaming-1/vim-project-tags'
 endif
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
+else
+	Plug 'still-dreaming-1/vim-generator'
+endif
 call plug#end()
 
 " Shallow clones are no good for me because I develop my plugins off these clones
