@@ -154,7 +154,8 @@ endfunction
 
 nnoremap <leader>* :call FindWordUnderCursorInCurrentFileTypes()<CR>
 " search commands (may want to look into using and mapping :cnext and :cprev in conjuction with this. It may work well if the first result is automatically 'selected')
-command! -nargs=1 Fw set hlsearch | call FindInCurrentFileTypes(<f-args>)
+" Fc = find current
+command! -nargs=1 Fc set hlsearch | call FindInCurrentFileTypes(<f-args>)
 function! FindInCurrentFileTypes(search)
 	let current_file_extension= Current_buf().file().extension
 	" create a scratch buffer below the current window
@@ -174,7 +175,7 @@ function! FindInCurrentFileTypes(search)
 endfunction
 
 function! FindWordUnderCursorInCurrentFileTypes()
-	execute 'Fw '.Current_cursor().word()
+	execute 'Fc '.Current_cursor().word()
 endfunction
 
 " warning: next two settings make recovery impossible
