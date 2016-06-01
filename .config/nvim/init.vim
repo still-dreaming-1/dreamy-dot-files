@@ -33,7 +33,6 @@ Plug 'tpope/vim-fugitive'
 " The only reason I have vimproc installed is vimshell depends on it
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/vimshell.vim'
-Plug 'mhinz/vim-startify'
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-commentary'
 " vim-UT depends on this
@@ -96,13 +95,6 @@ set showcmd
 "commentary mappings
 nmap <leader>/ gcc
 vmap <leader>/ gc
-" startify settings
-let g:startify_session_autoload= 1
-" delete open buffers before loading a new session
-let g:startify_session_delete_buffers= 1
-let g:startify_session_persistence= 1
-" disable startup screen
-let g:startify_disable_at_vimenter= 1
 
 " best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
