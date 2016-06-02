@@ -149,7 +149,7 @@ nnoremap <leader>* :call FindWordUnderCursorInCurrentFileTypes()<CR>
 " Fc = find current
 command! -nargs=1 Fc set hlsearch | call FindInCurrentFileTypes(<f-args>)
 function! FindInCurrentFileTypes(search)
-	let current_file_extension= Current_buf().file().extension
+	let current_file_extension= Current_buffer().file().extension
 	" create a scratch buffer below the current window
 	below new
 	setlocal buftype=nofile
@@ -648,7 +648,7 @@ function! UnsafeMovePHPParamRight()
 endfunction
 
 function! MoveParamLeft()
-	let current_file_extension= Current_buf().file().extension
+	let current_file_extension= Current_buffer().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamLeft()
 	else
@@ -702,7 +702,7 @@ function! GenericMoveParamRight()
 endfunction
 
 function! MoveParamRight()
-	let current_file_extension= Current_buf().file().extension
+	let current_file_extension= Current_buffer().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamRight()
 	else
