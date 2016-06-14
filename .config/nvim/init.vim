@@ -136,7 +136,7 @@ command! Cvim call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim")
 
 function! ChangeDirectoryInVimAndNERDTree(dir_path)
 	let before_dir= getcwd()
-	execute 'cd '.a:dir_path
+	execute 'cd '.fnameescape(a:dir_path)
 	let after_dir= getcwd()
 	if before_dir !=# after_dir
 		NERDTreeCWD
