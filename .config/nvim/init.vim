@@ -143,12 +143,13 @@ function! ChangeDirectoryCustom(dir_path)
 		" make NERDTree root match new current directory
 		NERDTreeCWD
 		NERDTreeClose
-		" Make vim-fugitive use the new current directory repository
-		if exists('b:git_dir')
-			unlet b:git_dir
-		endif
-		call fugitive#detect(getcwd())
 	endif
+	" Make vim-fugitive use the new current directory repository.
+	" This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
+	if exists('b:git_dir')
+		unlet b:git_dir
+	endif
+	call fugitive#detect(getcwd())
 endfunction
 
 nnoremap <leader>* :call FindWordUnderCursorInCurrentFileTypes()<CR>
