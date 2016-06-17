@@ -794,7 +794,6 @@ endfunction
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>185v.\+/
 
-
 " when switching buffers preserver cursor postion after switching back
 if v:version >= 700
 	au BufLeave * let b:winview = winsaveview()
