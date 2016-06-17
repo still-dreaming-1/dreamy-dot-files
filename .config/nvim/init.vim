@@ -127,20 +127,30 @@ set hlsearch
 set incsearch
 
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
-command! Chome call ChangeDirectoryInVimAndNERDTree("$HOME")
-command! Cplug call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged")
-command! Chiv call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-elhiv")
-command! Cproj call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-project-tags")
-command! Cgen call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim/plugged/vim-generator")
-command! Cvim call ChangeDirectoryInVimAndNERDTree("$HOME/.config/nvim")
+command! Chome call ChangeDirectoryCustom("$HOME")
+command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
+command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
+command! Cproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-tags")
+command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
+command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 
-function! ChangeDirectoryInVimAndNERDTree(dir_path)
+function! ChangeDirectoryCustom(dir_path)
 	let before_dir= getcwd()
 	execute 'cd '.fnameescape(a:dir_path)
 	let after_dir= getcwd()
 	if before_dir !=# after_dir
+		" place custom current directory changed event handler code here
+		" make NERDTree root match new current directory
 		NERDTreeCWD
 		NERDTreeClose
+		" Make vim-fugitive use the new current directory repository if there is no current file
+		let current_file_name= expand('%')
+		if current_file_name == ''
+			if exists('b:git_dir')
+				unlet b:git_dir
+			endif
+			call fugitive#detect(getcwd())
+		endif
 	endif
 endfunction
 
