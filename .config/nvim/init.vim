@@ -143,14 +143,11 @@ function! ChangeDirectoryCustom(dir_path)
 		" make NERDTree root match new current directory
 		NERDTreeCWD
 		NERDTreeClose
-		" Make vim-fugitive use the new current directory repository if there is no current file
-		let current_file_name= expand('%')
-		if current_file_name == ''
-			if exists('b:git_dir')
-				unlet b:git_dir
-			endif
-			call fugitive#detect(getcwd())
+		" Make vim-fugitive use the new current directory repository
+		if exists('b:git_dir')
+			unlet b:git_dir
 		endif
+		call fugitive#detect(getcwd())
 	endif
 endfunction
 
