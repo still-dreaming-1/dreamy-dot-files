@@ -374,8 +374,6 @@ let NERDTreeChDirMode= 2 " whenever NERDTree root changes, also change Vim's cur
 let g:vimshell_prompt_expr =
 \ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
-" runs the VimShell command
-nmap <leader>V <Plug>(vimshell_switch)
 
 " syntastic settings
 let g:syntastic_always_populate_loc_list = 1
@@ -418,6 +416,8 @@ command! Right normal <C-w>l
 command! NextWindow normal <C-w>w
 
 nnoremap <leader>v :UTRun %<CR>
+" runs the VimShell command
+nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
 " better rainbow parentheses settings
 au VimEnter * RainbowParenthesesToggle
