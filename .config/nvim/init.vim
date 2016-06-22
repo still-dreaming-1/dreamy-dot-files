@@ -71,6 +71,11 @@ if dreamy_developer
 else
 	Plug 'still-dreaming-1/vim-generator'
 endif
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/vim-project-search.git', { 'branch' : 'develop' }
+else
+	Plug 'still-dreaming-1/vim-project-search'
+endif
 call plug#end()
 
 " Shallow clones are no good for me because I develop my plugins off these clones
@@ -133,6 +138,7 @@ command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
 command! Cproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-tags")
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
+command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
 
 function! ChangeDirectoryCustom(dir_path)
 	let before_dir= getcwd()
@@ -150,32 +156,6 @@ function! ChangeDirectoryCustom(dir_path)
 		unlet b:git_dir
 	endif
 	call fugitive#detect(getcwd())
-endfunction
-
-nnoremap <leader>* :call FindWordUnderCursorInCurrentFileTypes()<CR>
-" search commands (may want to look into using and mapping :cnext and :cprev in conjuction with this. It may work well if the first result is automatically 'selected')
-" Fc = find current
-command! -nargs=1 Fc set hlsearch | call FindInCurrentFileTypes(<f-args>)
-function! FindInCurrentFileTypes(search)
-	let current_file_extension= Current_buffer().file().extension
-	" create a scratch buffer below the current window
-	below new
-	setlocal buftype=nofile
-	setlocal bufhidden=hide
-	setlocal noswapfile
-	let cmd= 'read !grep -Frin --include="*.'.current_file_extension.'" "'.a:search.'" .'
-	silent exec cmd
-	normal! ggdd
-	" Vim is designed so that searching in Vimscript does not replace the last search. This is a workaround for that. It still does not highlight the last search term unless the user
-	" had already searched on something
-	let @/ = a:search
-	normal! n
-	nnoremap <buffer> q :bdelete<CR>
-	nnoremap <CR> :Top<CR>:q<CR>^<C-W>Fn
-endfunction
-
-function! FindWordUnderCursorInCurrentFileTypes()
-	execute 'Fc '.Current_cursor().word()
 endfunction
 
 " warning: next two settings make recovery impossible
