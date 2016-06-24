@@ -636,7 +636,7 @@ function! UnsafeMovePHPParamRight()
 endfunction
 
 function! MoveParamLeft()
-	let current_file_extension= Current_buffer().file().extension
+	let current_file_extension= L_current_buffer().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamLeft()
 	else
@@ -690,7 +690,7 @@ function! GenericMoveParamRight()
 endfunction
 
 function! MoveParamRight()
-	let current_file_extension= Current_buffer().file().extension
+	let current_file_extension= L_current_buffer().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamRight()
 	else
