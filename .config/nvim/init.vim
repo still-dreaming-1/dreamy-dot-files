@@ -189,7 +189,7 @@ endif
 
 function! MoveCursorToLastTerminalChar()
 	normal! G$
-	let l:cursor_char= l#get_cursor_char()
+	let l:cursor_char= L_current_cursor().char()
 	let l:numeric_code= char2nr(l:cursor_char)
 	while l:numeric_code == 0
 		normal! k$
@@ -653,12 +653,13 @@ function! GenericMoveParamLeft()
 	"find the comma separating current param from the next
 	normal! f,
 	" if there actually was a comma, meaning there is another param after this one
-	if l#get_cursor_char() == ","
+	let current_cursor= L_current_cursor()
+	if current_cursor().char() == ","
 		call cursor(y,x)
 		" Delete the current param and the comma, copying it at the same time. Put copied param before the previous one
 		normal! df,
 		" if the current character is a space, which it probably is
-		if l#get_cursor_char() == " "
+		if current_cursor().char() == " "
 			" delete the space without yanking it
 			normal! v"_d
 		endif
