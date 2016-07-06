@@ -131,8 +131,6 @@ set noshowmode
 
 " deoplete settings
 let g:deoplete#enable_at_startup= 1
-" tab-complete
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
 " <BS>: close popup and delete backword char.
 " inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
