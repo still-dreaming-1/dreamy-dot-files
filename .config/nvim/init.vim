@@ -131,8 +131,8 @@ set noshowmode
 
 " deoplete settings
 let g:deoplete#enable_at_startup= 1
-" tab-complete
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+" space-complete
+inoremap <expr><space> pumvisible() ? "\<C-n>" : "\<space>"
 
 set nofoldenable " disable folding
 
