@@ -131,8 +131,10 @@ set noshowmode
 
 " deoplete settings
 let g:deoplete#enable_at_startup= 1
-" space-complete
-inoremap <expr><space> pumvisible() ? "\<C-n>" : "\<space>"
+" tab-complete
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+" <BS>: close popup and delete backword char.
+" inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
 set nofoldenable " disable folding
 
