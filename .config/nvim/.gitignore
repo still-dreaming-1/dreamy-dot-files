@@ -3,3 +3,4 @@
 .netrwhist
 Session.vim
 plugged/
+.init.vim-rplugin~
