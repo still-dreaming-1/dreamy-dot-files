@@ -131,8 +131,6 @@ set noshowmode
 
 " deoplete settings
 let g:deoplete#enable_at_startup= 1
-" <BS>: close popup and delete backword char.
-" inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
 set nofoldenable " disable folding
 
@@ -259,6 +257,8 @@ vnoremap <leader>ym "*y
 nnoremap <leader>yc "+y
 " yank to clipboard from visual mode
 vnoremap <leader>yc "+y
+" make . work with visually selected lines
+vnoremap . :norm.<CR>
 " make up and down not ignore wrapping lines
 nnoremap j gj
 nnoremap k gk
