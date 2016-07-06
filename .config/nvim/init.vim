@@ -54,6 +54,10 @@ Plug 'thinca/vim-quickrun' " Might be helpful for running line_numberQuickRun
 "Plug 'vim-scripts/vis'
 "Plug 'ntpeters/vim-better-whitespace'
 " https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/dragvisuals.vim
+function! UpdateRemotePluginsAlias(required_but_unused_arg)
+	UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
 if dreamy_developer
@@ -117,11 +121,18 @@ endif
 " 3: tree style listing
 let g:netrw_liststyle= 3
 
+"plugin settings
+"---------------
 "vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
 let g:airline_powerline_fonts= 1
 "prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
+
+" deoplete settings
+let g:deoplete#enable_at_startup= 1
+" tab-complete
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
 
 set nofoldenable " disable folding
 
