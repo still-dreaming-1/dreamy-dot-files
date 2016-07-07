@@ -58,6 +58,7 @@ function! UpdateRemotePluginsAlias(required_but_unused_arg)
 	UpdateRemotePlugins
 endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
+" Plug 'vim-scripts/dbext.vim'
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
 if dreamy_developer
