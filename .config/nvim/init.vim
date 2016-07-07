@@ -335,8 +335,6 @@ nnoremap <leader>N ?function <CR>
 " quit
 nnoremap <leader>q :q<CR>
 nnoremap <leader><leader>q :q!<CR>
-" launch mysql from terminal in vim buffer:
-nnoremap <leader><leader>d :ConqueTerm mysql info<CR>
 " launch MongoDB from terminal in vim buffer:
 nnoremap <leader>mg :ConqueTerm mongo datazeo -u jesse -p<CR>
 " use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
