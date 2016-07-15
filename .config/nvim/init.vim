@@ -429,7 +429,6 @@ command! Right normal <C-w>l
 command! NextWindow normal <C-w>w
 
 nnoremap <leader>v :UTRun %<CR>
-" runs the VimShell command
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
 " better rainbow parentheses settings
