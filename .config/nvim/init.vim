@@ -36,8 +36,6 @@ Plug 'LucHermitte/lh-vim-lib'
 " unit testing
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
-" YouCompleteMe has been causing a lot of problems lately, then it stopped working
-"Plug 'Valloric/YouCompleteMe', {'do': './install.py --tern-completer' }
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
 " intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
 "Plug 'phpvim/phpcd.vim'
