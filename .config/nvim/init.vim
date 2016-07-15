@@ -389,12 +389,6 @@ let NERDTreeAutoDeleteBuffer=1
 command! T NERDTreeToggle
 let NERDTreeChDirMode= 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
 
-" configure VimShell
-" Use current directory as vimshell prompt.
-let g:vimshell_prompt_expr =
-\ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
-let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
-
 " syntastic settings
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
