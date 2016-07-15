@@ -29,8 +29,6 @@ Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-" The only reason I have vimproc installed is vimshell depends on it
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-commentary'
 " vim-UT depends on this
