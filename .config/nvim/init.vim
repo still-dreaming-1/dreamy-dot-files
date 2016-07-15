@@ -25,7 +25,6 @@ if version > 703
 endif
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'rosenfeld/conque-term'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -134,6 +133,42 @@ set noshowmode
 let g:deoplete#enable_at_startup= 1
 
 set nofoldenable " disable folding
+
+" dbext settings
+" Changing all the mappings so they don't conflict with mine. Changing everything to start with leader leader d (for database) instead of leader s
+" vnoremap <leader><leader>de <Plug>DBExecVisualSQL
+" vnoremap <leader><leader>dt <Plug>DBSelectFromTable
+" vnoremap <leader><leader>ddt <Plug>DBDescribeTable
+" vnoremap <leader><leader>ddp <Plug>DBDescribeProcedure
+" vnoremap <leader><leader>dlt <Plug>DBListTable
+" vnoremap <leader><leader>dlp <Plug>DBListProcedure
+" vnoremap <leader><leader>dlv <Plug>DBListView
+" vnoremap <leader><leader>dlc <Plug>DBListColumn
+" nnoremap <leader><leader>de <Plug>DBExecSQLUnderCursor
+" nnoremap <leader><leader>dE <Plug>DBExecSQLTopX
+" nnoremap <leader><leader>dea :1,$DBExecRangeSQL
+" nnoremap <leader><leader>del :.,.DBExecRangeSQL
+" nnoremap <leader><leader>dep :'<,'>DBExecRangeSQL
+" nnoremap <leader><leader>dt <Plug>DBSelectFromTable
+" nnoremap <leader><leader>dT <Plug>DBSelectFromTableTopX
+" nnoremap <leader><leader>dtw <Plug>DBSelectFromTableWithWhere
+" nnoremap <leader><leader>dta <Plug>DBSelectFromTableAskName
+" nnoremap <leader><leader>dd <Plug>DBDescribeTable
+" nnoremap <leader><leader>dda <Plug>DBDescribeTableAskName
+" nnoremap <leader><leader>ddp <Plug>DBDescribeProcedure
+" nnoremap <leader><leader>ddpa <Plug>DBDescribeProcedureAskName
+" nnoremap <leader><leader>dlt <Plug>DBListTable
+" nnoremap <leader><leader>dlp <Plug>DBListProcedure
+" nnoremap <leader><leader>dlv <Plug>DBListView
+" nnoremap <leader><leader>dlc <Plug>DBListColumn
+" nnoremap <leader><leader>dvr <Plug>DBListVar
+" nmap <silent> <leader><leader>dal :.,.DBVarRangeAssign<CR>
+" nmap <silent> <leader><leader>daa :1,$DBVarRangeAssign<CR>
+" nmap <silent> <leader>dap :'<,'>DBVarRangeAssign<CR>
+" xmap <silent> <leader>sa :DBVarRangeAssign<CR>
+" nnoremap <leader><leader>dh :DBHistory
+" nnoremap <leader><leader>do :DBOrientation
+" nnoremap <leader><leader>dbp <Plug>DBPromptForBufferParameters
 
 " make searching easier:
 set ignorecase
@@ -335,8 +370,6 @@ nnoremap <leader>N ?function <CR>
 " quit
 nnoremap <leader>q :q<CR>
 nnoremap <leader><leader>q :q!<CR>
-" launch MongoDB from terminal in vim buffer:
-nnoremap <leader>mg :ConqueTerm mongo datazeo -u jesse -p<CR>
 " use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
 nmap <leader>; <leader>bej
 
@@ -370,7 +403,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 
-command! Term ConqueTerm bash
 command! Ptest :call TestPHP()
 command! Putest :call TestPHPUnitShort()
 command! Lptest :call TestPHPUnitLong()
