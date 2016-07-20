@@ -36,6 +36,7 @@ Plug 'LucHermitte/lh-vim-lib'
 " unit testing
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
+Plug 'neovim/node-host'
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
 " intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
 "Plug 'phpvim/phpcd.vim'
@@ -72,6 +73,11 @@ if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/vim-project-search.git', { 'branch' : 'develop' }
 else
 	Plug 'still-dreaming-1/vim-project-search'
+endif
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/nvim-project-tags.git', { 'branch' : 'develop' }
+else
+	Plug 'still-dreaming-1/nvim-project-tags'
 endif
 call plug#end()
 
@@ -174,6 +180,7 @@ command! Chome call ChangeDirectoryCustom("$HOME")
 command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
 command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
 command! Cproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-tags")
+command! Cnproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/nvim-project-tags")
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
