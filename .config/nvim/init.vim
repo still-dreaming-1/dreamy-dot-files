@@ -431,6 +431,17 @@ command! Right normal <C-w>l
 " go to next window
 command! NextWindow normal <C-w>w
 
+" command! Mocha :split<CR>:te<CR>mocha<CR>
+command! Mocha :call RunMochaTests()
+
+function! RunMochaTests()
+	split
+	BOTTOM
+	enew
+	call termopen('mocha')
+	nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
 nnoremap <leader>v :UTRun %<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
