@@ -433,12 +433,18 @@ command! NextWindow normal <C-w>w
 
 " command! Mocha :split<CR>:te<CR>mocha<CR>
 command! Mocha :call RunMochaTests()
+command! MochaFile :call RunMochaTests(L_current_buffer().file().path)
 
-function! RunMochaTests()
+function! RunMochaTests(...)
 	split
 	BOTTOM
 	enew
-	call termopen('mocha')
+	let command= 'mocha'
+	if a:0 > 0
+		let test_file_path= a:1
+		let command= command.' '.shellescape(test_file_path)
+	endif
+	call termopen(command)
 	nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
