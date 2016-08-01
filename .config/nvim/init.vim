@@ -565,7 +565,6 @@ nnoremap <leader>>  :call MoveParamRight()<CR>
 
 function! JumpToNextJSFunction()
 	let search_string= L_s('= function(').get_no_magic().str
-	call matchadd("Search", search_string)
 	call search(search_string)
 	let @/ = search_string
 endfunction
