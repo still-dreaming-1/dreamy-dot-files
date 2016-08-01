@@ -563,6 +563,13 @@ endfunction
 nnoremap <leader><  :call MoveParamLeft()<CR>
 nnoremap <leader>>  :call MoveParamRight()<CR>
 
+function! JumpToNextJSFunction()
+	let search_string= L_s('= function(').get_no_magic().str
+	call matchadd("Search", search_string)
+	call search(search_string)
+	let @/ = search_string
+endfunction
+
 augroup mapping_group
 	if has("autocmd")
 		" removes all autocmd in group
@@ -582,6 +589,7 @@ augroup mapping_group
 		"autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		"autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
 		" search for next php function
+		autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
 		autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
 		autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
 		" auto source the config after saving Vim's .vimrc config file (helps when using Vim)
