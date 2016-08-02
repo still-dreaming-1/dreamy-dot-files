@@ -230,6 +230,7 @@ if has('nvim')
 	" use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
 	" entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
 	tnoremap kk <C-\><C-n>:call MoveCursorToLastTerminalChar()<CR>
+	" let g:terminal_scrollback_buffer_size= 100000
 endif
 
 function! MoveCursorToLastTerminalChar()
@@ -434,6 +435,7 @@ command! NextWindow normal <C-w>w
 " command! Mocha :split<CR>:te<CR>mocha<CR>
 command! Mocha :call RunMochaTests()
 command! MochaFile :call RunMochaTests(L_current_buffer().file().path)
+command! MochaFilter :call RunMochaTests(L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
 
 function! RunMochaTests(...)
 	split
@@ -443,9 +445,35 @@ function! RunMochaTests(...)
 	if a:0 > 0
 		let test_file_path= a:1
 		let command= command.' '.shellescape(test_file_path)
+		if a:0  > 1
+			let filtered_text= a:2
+			let command= command.' -f "'.filtered_text.'"'
+		endif
 	endif
+	call l#log('command about to run from RunMochaTests(): '.command)
 	call termopen(command)
 	nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
+function! GetMochaFilteredTextOfTestUnderCursor()
+	let line_text= L_s(getline('.'))
+	let filtered_text= line_text
+	while !filtered_text.starts_with("'")
+		let filtered_text= filtered_text.remove_start()
+		if filtered_text.len == 0
+			break
+		endif
+	endwhile
+	while !filtered_text.ends_with("'")
+		let filtered_text=  filtered_text.remove_end()
+		if filtered_text.len == 0
+			break
+		endif
+	endwhile
+	let filtered_text= filtered_text.remove_start()
+	let filtered_text= filtered_text.remove_end()
+	call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
+	return filtered_text.str
 endfunction
 
 nnoremap <leader>v :UTRun %<CR>
