@@ -18,6 +18,7 @@ source "${ZDOTDIR:-$HOME}/.afterzshrc"
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+export NVIM_PYTHON_LOG_FILE=/home/jesse/logs/nvim_python.log
 
 # prezto agnoster theme. This theme also works well with the iOS prompt app
 prompt agnoster
