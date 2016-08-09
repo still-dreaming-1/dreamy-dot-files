@@ -436,8 +436,11 @@ command! NextWindow normal <C-w>w
 
 " command! Mocha :split<CR>:te<CR>mocha<CR>
 command! Mocha :call RunMochaTests()
-command! MochaFile :call RunMochaTests(L_current_buffer().file().path)
-command! MochaFilter :call RunMochaTests(L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
+command! MochaD :call RunMochaTests(1)
+command! MochaFile :call RunMochaTests(0, L_current_buffer().file().path)
+command! MochaFileD :call RunMochaTests(1, L_current_buffer().file().path)
+command! MochaFilter :call RunMochaTests(0, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
+command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
 
 function! RunMochaTests(...)
 	split
@@ -445,11 +448,17 @@ function! RunMochaTests(...)
 	enew
 	let command= 'mocha'
 	if a:0 > 0
-		let test_file_path= a:1
-		let command= command.' '.shellescape(test_file_path)
-		if a:0  > 1
-			let filtered_text= a:2
-			let command= command.' -f "'.filtered_text.'"'
+		let debug= a:1
+		if debug
+			let command= command.' debug'
+		endif
+		if a:0 > 1
+			let test_file_path= a:2
+			let command= command.' '.shellescape(test_file_path)
+			if a:0  > 2
+				let filtered_text= a:3
+				let command= command.' -f "'.filtered_text.'"'
+			endif
 		endif
 	endif
 	call l#log('command about to run from RunMochaTests(): '.command)
