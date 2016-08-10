@@ -446,7 +446,7 @@ function! RunMochaTests(...)
 	split
 	BOTTOM
 	enew
-	let command= 'mocha'
+	let command= 'mocha --recursive'
 	if a:0 > 0
 		let debug= a:1
 		if debug
