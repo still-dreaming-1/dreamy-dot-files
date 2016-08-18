@@ -40,7 +40,7 @@ Plug 'neovim/node-host'
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
 Plug 'rhysd/nyaovim-mini-browser'
-Plug 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim', { 'branch': 'user/metakirby5' }
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
 " intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
 "Plug 'phpvim/phpcd.vim'
@@ -188,6 +188,7 @@ command! Cnproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/nvim-proj
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
+command! Cnyao call ChangeDirectoryCustom("$HOME/.config/nyaovim")
 
 function! ChangeDirectoryCustom(dir_path)
 	let before_dir= getcwd()
@@ -366,6 +367,7 @@ nnoremap <leader>eb :e~/.bashrc<CR>
 nnoremap <leader>ea :e~/.aliashrc<CR>
 " edit .functionshrc
 nnoremap <leader>ef :e~/.functionshrc<CR>
+nnoremap <leader>ey :e~/.config/nyaovim/nyaovimrc.html<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :BD<CR>
 " jump previous movement
