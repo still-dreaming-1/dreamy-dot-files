@@ -42,8 +42,8 @@ endif
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
 Plug 'rhysd/nyaovim-mini-browser'
-" Plug 'metakirby5/codi.vim', { 'branch': 'user/metakirby5' }
-Plug 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim', { 'branch': 'user/metakirby5' }
+" Plug 'metakirby5/codi.vim'
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
 " intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
 "Plug 'phpvim/phpcd.vim'
@@ -57,7 +57,9 @@ Plug 'metakirby5/codi.vim'
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
 	UpdateRemotePlugins
 endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
+endif
 " Plug 'vim-scripts/dbext.vim'
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
