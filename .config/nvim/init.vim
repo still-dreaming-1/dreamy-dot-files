@@ -42,8 +42,7 @@ endif
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
 Plug 'rhysd/nyaovim-mini-browser'
-Plug 'metakirby5/codi.vim', { 'branch': 'user/metakirby5' }
-" Plug 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim'
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
 " intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
 "Plug 'phpvim/phpcd.vim'
