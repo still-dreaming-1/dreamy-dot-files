@@ -42,7 +42,11 @@ endif
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
 Plug 'rhysd/nyaovim-mini-browser'
-Plug 'metakirby5/codi.vim'
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'repl-starting-dir' }
+else
+	Plug 'metakirby5/codi.vim'
+endif
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
 " intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
 "Plug 'phpvim/phpcd.vim'
@@ -91,6 +95,8 @@ call plug#end()
 
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow= 0
+
+" Codi settings
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
@@ -905,6 +911,8 @@ if v:version >= 700
 	au BufLeave * let b:winview = winsaveview()
 	au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 endif
+
+set path+=**
 
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
 " if the file does not exist however the lack of its existence will not cause any problems.
