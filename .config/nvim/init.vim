@@ -43,7 +43,7 @@ Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
 Plug 'rhysd/nyaovim-mini-browser'
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'repl-starting-dir' }
+	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'logger' }
 else
 	Plug 'metakirby5/codi.vim'
 endif
@@ -97,6 +97,7 @@ call plug#end()
 let g:plug_shallow= 0
 
 " Codi settings
+let g:codi#log= '/home/jesse/logs/codi_log'
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
