@@ -500,7 +500,7 @@ endfunction
 
 command! Php :call Run_phpunit_tests()
 command! PhpFile :call Run_phpunit_tests_in_file(L_current_buffer().file().name_without_extension)
-command! PhpFilter :call Run_phpunit_tests(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
+command! PhpMethod :call Run_phpunit_tests(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
 
 function! Run_phpunit_tests(...)
 	split
