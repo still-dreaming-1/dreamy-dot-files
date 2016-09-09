@@ -446,7 +446,6 @@ command! Right normal <C-w>l
 " go to next window
 command! NextWindow normal <C-w>w
 
-" command! Mocha :split<CR>:te<CR>mocha<CR>
 command! Mocha :call RunMochaTests()
 command! MochaD :call RunMochaTests(1)
 command! MochaFile :call RunMochaTests(0, L_current_buffer().file().path)
