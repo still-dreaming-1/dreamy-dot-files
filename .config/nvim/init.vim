@@ -416,10 +416,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 
-command! Ptest :call TestPHP()
-command! Putest :call TestPHPUnitShort()
-command! Lptest :call TestPHPUnitLong()
-
 " send contents of file to mysql
 command! Sendb :!mysql < %:p
 
