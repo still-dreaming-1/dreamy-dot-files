@@ -18,10 +18,10 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'tag': '0.11.4', 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kien/rainbow_parentheses.vim'
 if version < 704
-    Plug 'crookedneighbor/bufexplorer'
+	Plug 'crookedneighbor/bufexplorer'
 endif
 if version > 703
-    Plug 'jlanzarotta/bufexplorer'
+	Plug 'jlanzarotta/bufexplorer'
 endif
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -647,10 +647,10 @@ augroup END
 
 " this is part of a workaround to fix the way gf works inside a terminal buffer
 function! s:term_gf()
-    let procid = matchstr(bufname(""), '\(://.*/\)\@<=\(\d\+\)')
-    let proc_cwd = resolve('/proc/'.procid.'/cwd')
-    exe 'lcd '.proc_cwd
-    exe 'e <cfile>'
+	let procid = matchstr(bufname(""), '\(://.*/\)\@<=\(\d\+\)')
+	let proc_cwd = resolve('/proc/'.procid.'/cwd')
+	exe 'lcd '.proc_cwd
+	exe 'e <cfile>'
 endfunction
 
 function! PastePhpTemplate()
