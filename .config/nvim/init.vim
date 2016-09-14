@@ -500,6 +500,7 @@ function! GetMochaFilteredTextOfTestUnderCursor()
 endfunction
 
 command! Php :call Run_phpunit_tests()
+command! PhpAll :call Run_all_phpunit_tests()
 command! PhpFile :call Run_phpunit_tests_in_file(L_current_buffer().file().name_without_extension)
 command! PhpMethod :call Run_phpunit_tests(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
 
@@ -517,6 +518,16 @@ function! Run_phpunit_tests(...)
 		endif
 	endif
 	call l#log('command about to run from Run_phpunit_tests(): '.command)
+	call termopen(command)
+	nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
+function! Run_all_phpunit_tests()
+	split
+	BOTTOM
+	enew
+	let command= 'phpunit --configuration phpunit_all.xml'
+	call l#log('command about to run from Run_all_phpunit_tests(): '.command)
 	call termopen(command)
 	nnoremap <buffer><leader>q :q!<CR>
 endfunction
