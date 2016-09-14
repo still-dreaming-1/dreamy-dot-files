@@ -44,7 +44,7 @@ Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
 Plug 'rhysd/nyaovim-mini-browser'
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'logger' }
+	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'master' }
 else
 	Plug 'metakirby5/codi.vim'
 endif
