@@ -99,6 +99,7 @@ let g:plug_shallow= 0
 
 " Codi settings
 let g:codi#log= '/home/jesse/logs/codi_log'
+let g:codi#width= 80
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
