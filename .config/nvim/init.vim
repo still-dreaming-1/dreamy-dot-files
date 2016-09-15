@@ -42,7 +42,6 @@ if has('nvim')
 endif
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
-Plug 'rhysd/nyaovim-mini-browser'
 if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'master' }
 else
@@ -201,7 +200,6 @@ command! Cnproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/nvim-proj
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
-command! Cnyao call ChangeDirectoryCustom("$HOME/.config/nyaovim")
 
 function! ChangeDirectoryCustom(dir_path)
 	let before_dir= getcwd()
@@ -380,7 +378,6 @@ nnoremap <leader>eb :e~/.bashrc<CR>
 nnoremap <leader>ea :e~/.aliashrc<CR>
 " edit .functionshrc
 nnoremap <leader>ef :e~/.functionshrc<CR>
-nnoremap <leader>ey :e~/.config/nyaovim/nyaovimrc.html<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :BD<CR>
 " jump previous movement
