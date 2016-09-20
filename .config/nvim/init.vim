@@ -578,11 +578,11 @@ au Syntax * RainbowParenthesesLoadBraces
 
 set laststatus=2
 
-" mapping to open a plugins home page in Chrome. The cursor must be on a line using vim-plug to include a plugin
-command! Hub call OpenChromeAtPluginPage()
-function! OpenChromeAtPluginPage()
+" mapping to open a plugins home page in Vivaldi. The cursor must be on a line using vim-plug to include a plugin
+command! Hub call OpenVivaldiAtPluginPage()
+function! OpenVivaldiAtPluginPage()
 	let l:plugin_name= GetPluginPageFromCurrentLine()
-	call jobstart('google-chrome "https://www.github.com/'.l:plugin_name.'"')
+	call jobstart('vivaldi "https://www.github.com/'.l:plugin_name.'"')
 endfunction
 function! GetPluginPageFromCurrentLine()
 	normal! ^w
@@ -593,9 +593,6 @@ function! GetPluginPageFromCurrentLine()
 	let l:plugin_name= l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
 	return l:plugin_name
 endfunction
-
-" mapping to open chrome
-nnoremap <leader>cc :call jobstart('google-chrome')<CR>
 
 " user functions: (to be called manually while editing)
 
