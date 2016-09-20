@@ -579,7 +579,7 @@ au Syntax * RainbowParenthesesLoadBraces
 set laststatus=2
 
 " mapping to open a plugins home page in Chrome. The cursor must be on a line using vim-plug to include a plugin
-nnoremap <leader>w :call OpenChromeAtPluginPage()<CR>
+command! Hub call OpenChromeAtPluginPage()
 function! OpenChromeAtPluginPage()
 	let l:plugin_name= GetPluginPageFromCurrentLine()
 	call jobstart('google-chrome "https://www.github.com/'.l:plugin_name.'"')
