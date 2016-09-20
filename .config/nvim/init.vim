@@ -27,7 +27,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
-" the commit after this introduces a bug in Neovim:
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
