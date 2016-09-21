@@ -22,3 +22,7 @@ export NVIM_PYTHON_LOG_FILE=/home/jesse/logs/nvim_python.log
 
 # prezto agnoster theme. This theme also works well with the iOS prompt app
 prompt agnoster
+
+# disable auto-correct. This allows sudo to work with other aliases with a special sudo alias and still work with commands like mkdir
+unsetopt correct_all
+unsetopt correct
