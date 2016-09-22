@@ -498,47 +498,29 @@ function! GetMochaFilteredTextOfTestUnderCursor()
 	return filtered_text.str
 endfunction
 
-command! Php :call Run_phpunit_tests()
-command! PhpAll :call Run_all_phpunit_tests()
+command! Php :call Run_phpunit_tests_with_command('phpunit')
+command! PhpCovered :call Run_phpunit_tests_with_command('phpunit --configuration phpunit_with_code_coverage.xml')
+command! PhpAll :call Run_phpunit_tests_with_command('phpunit --configuration phpunit_all.xml')
+command! PhpAllCovered :call Run_phpunit_tests_with_command('phpunit --configuration phpunit_all_with_code_coverage.xml')
 command! PhpFile :call Run_phpunit_tests_in_file(L_current_buffer().file().name_without_extension)
-command! PhpMethod :call Run_phpunit_tests(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
+command! PhpMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
 
-function! Run_phpunit_tests(...)
+function! Run_phpunit_tests_with_command(command)
 	split
 	BOTTOM
 	enew
-	let command= 'phpunit'
-	if a:0 > 0
-		let function_name= a:1
-		let command= command.' --configuration phpunit_all.xml --filter '.shellescape(function_name)
-		if a:0  > 1
-			let test_file_path= a:2
-			let command= command.' '.shellescape(test_file_path)
-		endif
-	endif
-	call l#log('command about to run from Run_phpunit_tests(): '.command)
-	call termopen(command)
+	call l#log('command about to run from Run_phpunit_tests_with_command(): '.a:command)
+	call termopen(a:command)
 	nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
-function! Run_all_phpunit_tests()
-	split
-	BOTTOM
-	enew
-	let command= 'phpunit --configuration phpunit_all.xml'
-	call l#log('command about to run from Run_all_phpunit_tests(): '.command)
-	call termopen(command)
-	nnoremap <buffer><leader>q :q!<CR>
+function! Run_single_phpunit_test_method(test_method_name, test_file_path)
+	let command= 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
+	call Run_phpunit_tests_with_command(command)
 endfunction
 
 function! Run_phpunit_tests_in_file(class)
-	split
-	BOTTOM
-	enew
-	let command= 'phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class)
-	call l#log('command about to run from Run_phpunit_tests(): '.command)
-	call termopen(command)
-	nnoremap <buffer><leader>q :q!<CR>
+	call Run_phpunit_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
 endfunction
 
 function! Get_php_method_name_from_cursor_line()
