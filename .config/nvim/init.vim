@@ -27,8 +27,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-fugitive'
+" Plug 'scrooloose/syntastic'
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/vim-fugitive.git', { 'branch' : 'commit_fixup' }
+else
+	Plug 'tpope/vim-fugitive'
+endif
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-commentary'
 " vim-UT depends on this
@@ -41,11 +45,11 @@ if has('nvim')
 endif
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
-" if dreamy_developer
-	" Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'master' }
-" else
+if dreamy_developer
+	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'master' }
+else
 	Plug 'metakirby5/codi.vim'
-" endif
+endif
 " the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
 " intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
 "Plug 'phpvim/phpcd.vim'
@@ -71,9 +75,9 @@ else
 	Plug 'still-dreaming-1/vim-elhiv'
 endif
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
+	" Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
 else
-	Plug 'still-dreaming-1/vim-project-tags'
+	" Plug 'still-dreaming-1/vim-project-tags'
 endif
 if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
@@ -380,6 +384,8 @@ nnoremap <leader>eb :e~/.bashrc<CR>
 nnoremap <leader>ea :e~/.aliashrc<CR>
 " edit .functionshrc
 nnoremap <leader>ef :e~/.functionshrc<CR>
+" edit .captain slog
+nnoremap <leader>ec :e ~/captains\ log<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :BD<CR>
 " jump previous movement
