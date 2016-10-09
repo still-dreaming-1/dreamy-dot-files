@@ -658,7 +658,7 @@ function! JumpToNextJSFunction()
 	let @/ = search_string
 endfunction
 
-augroup mapping_group
+augroup all_other_autocmd_group
 	if has("autocmd")
 		" removes all autocmd in group
 		autocmd!
@@ -667,6 +667,7 @@ augroup mapping_group
 			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<CR>
 			" autocmd TermOpen * <buffer> command! BD :BD!
 		endif
+		autocmd! BufWritePost * Neomake
 		" enable zsh syntax for .aliashrc file
 		autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
 		" enable zsh syntax for .functionshrc file
