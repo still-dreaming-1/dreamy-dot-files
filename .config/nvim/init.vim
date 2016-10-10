@@ -28,6 +28,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 " Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/vim-fugitive.git', { 'branch' : 'commit_fixup' }
 else
@@ -102,6 +103,7 @@ let g:plug_shallow= 0
 " Codi settings
 let g:codi#log= '/home/jesse/logs/codi_log'
 let g:codi#width= 80
+nnoremap <leader>c :Codi!!<CR>
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
