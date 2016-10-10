@@ -27,7 +27,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
-" Plug 'scrooloose/syntastic'
 Plug 'neomake/neomake'
 if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/vim-fugitive.git', { 'branch' : 'commit_fixup' }
@@ -51,19 +50,11 @@ if dreamy_developer
 else
 	Plug 'metakirby5/codi.vim'
 endif
-" the creator of phpcd.vim helped me get it working. I learned the php project you are using it for needs to use composer. The plugin instructions about running composer update are
-" intended to be run from the php project directory. He said it is compatible with YouCompleteMe out of the box. Until I learn more about composer, I can't really use this.
-"Plug 'phpvim/phpcd.vim'
-"Plug 'vim-scripts/progressbar-widget' " used by phpcd.vim for showing the index progress
-" to enable phpcd plugin for completion
-"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-" Try these out later:
-"Plug 'vim-scripts/vis'
-"Plug 'ntpeters/vim-better-whitespace'
-" https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup/blob/master/plugin/dragvisuals.vim
+
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
 	UpdateRemotePlugins
 endfunction
+
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
 endif
@@ -76,9 +67,9 @@ else
 	Plug 'still-dreaming-1/vim-elhiv'
 endif
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
+	" Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
 else
-	Plug 'still-dreaming-1/vim-project-tags'
+	" Plug 'still-dreaming-1/vim-project-tags'
 endif
 if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
