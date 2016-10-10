@@ -29,7 +29,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/vim-fugitive.git', { 'branch' : 'commit_fixup' }
+	Plug 'git@github.com:still-dreaming-1/vim-fugitive.git', { 'branch' : 'commit_fixup_2' }
 else
 	Plug 'tpope/vim-fugitive'
 endif
