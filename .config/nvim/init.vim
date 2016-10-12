@@ -89,12 +89,11 @@ endif
 call plug#end()
 
 " Shallow clones are no good for me because I develop my plugins off these clones
-let g:plug_shallow= 0
+let g:plug_shallow = 0
 
 " Codi settings
-let g:codi#log= '/home/jesse/logs/codi_log'
-let g:codi#width= 80
-nnoremap <leader>c :Codi!!<CR>
+let g:codi#log = '/home/jesse/logs/codi_log'
+let g:codi#width = 80
 
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
@@ -533,8 +532,21 @@ function! Get_php_method_name_from_cursor_line()
 	return function_name.str
 endfunction
 
-nnoremap <leader>v :UTRun %<CR>
+command! VimFile :UTRun %<CR>
+
+nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
+
+function! Run_current_file_tests()
+	let current_file_extension = L_current_buffer().file().extension
+	if current_file_extension == 'php'
+		PhpFile
+	elseif current_file_extension == 'js'
+		Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
+	elseif current_file_extension == 'vim'
+		VimFile
+	endif
+endfunction
 
 " better rainbow parentheses settings
 let g:rbpt_colorpairs = [
