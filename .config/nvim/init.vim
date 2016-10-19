@@ -496,29 +496,49 @@ function! GetMochaFilteredTextOfTestUnderCursor()
 	return filtered_text.str
 endfunction
 
-command! Php :call Run_phpunit_tests_with_command('phpunit')
-command! PhpCovered :call Run_phpunit_tests_with_command('phpunit --configuration phpunit_with_code_coverage.xml')
-command! PhpAll :call Run_phpunit_tests_with_command('phpunit --configuration phpunit_all.xml')
-command! PhpAllCovered :call Run_phpunit_tests_with_command('phpunit --configuration phpunit_all_with_code_coverage.xml')
-command! PhpFile :call Run_phpunit_tests_in_file(L_current_buffer().file().name_without_extension)
-command! PhpMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
+" SimpleTest commands
+command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
+command! Php :call Run_safe_simple_tests()
+command! PhpAll :call Run_all_simple_tests()
+" PHPUnit commands
+command! PhpUnit :call Run_tests_with_command('phpunit')
+command! PhpUnitCovered :call Run_tests_with_command('phpunit --configuration phpunit_with_code_coverage.xml')
+command! PhpUnitAll :call Run_tests_with_command('phpunit --configuration phpunit_all.xml')
+command! PhpUnitAllCovered :call Run_tests_with_command('phpunit --configuration phpunit_all_with_code_coverage.xml')
+command! PhpUnitFile :call Run_PHPUnit_tests_in_file(L_current_buffer().file().name_without_extension)
+command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
 
-function! Run_phpunit_tests_with_command(command)
+function! Run_tests_with_command(command)
 	split
 	BOTTOM
 	enew
-	call l#log('command about to run from Run_phpunit_tests_with_command(): '.a:command)
+	call l#log('command about to run from Run_tests_with_command(): '.a:command)
 	call termopen(a:command)
 	nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
-function! Run_single_phpunit_test_method(test_method_name, test_file_path)
-	let command= 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
-	call Run_phpunit_tests_with_command(command)
+let g:safe_simple_test_suite_file_path = 0
+function! Run_safe_simple_tests()
+	let command = 'php '.g:safe_simple_test_suite_file_path
+	call Run_tests_with_command(command)
+endfunction
+let g:all_simple_test_suite_file_path = 0
+function! Run_all_simple_tests()
+	let command = 'php '.g:all_simple_test_suite_file_path
+	call Run_tests_with_command(command)
 endfunction
 
-function! Run_phpunit_tests_in_file(class)
-	call Run_phpunit_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
+function! Run_single_phpunit_test_method(test_method_name, test_file_path)
+	let command= 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
+	call Run_tests_with_command(command)
+endfunction
+
+function! Run_simple_tests_in_file(path)
+	call Run_tests_with_command('php '.shellescape(a:path))
+endfunction
+
+function! Run_PHPUnit_tests_in_file(class)
+	call Run_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
 endfunction
 
 function! Get_php_method_name_from_cursor_line()
