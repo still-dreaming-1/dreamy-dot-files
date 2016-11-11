@@ -9,6 +9,10 @@ alias vnothing='nvim -u ~/.config/nvim/nothing.init.vim' # helpful when I want t
 # helpful when I want to reproduce an issue in someone's plugin with the least config possible. debug.init.vim is not tracked by git so you it can be chagned as needed.
 alias vdebug='nvim -u ~/.config/nvim/debug.init.vim'
 alias vimdebug='vim -u ~/.config/nvim/debug.init.vim'
+
+###
+# git stuff
+###
 alias g='git'
 # alias for gitting latest versions in version sorted order
 alias gtag='git tag -n1 | sort -V | tail'
