@@ -45,6 +45,7 @@ if has('nvim')
 endif
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
+Plug 'ElmCast/elm-vim'
 if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'master' }
 else
@@ -136,6 +137,8 @@ let g:netrw_liststyle= 3
 
 "plugin settings
 "---------------
+"elm-vim
+let g:elm_format_autosave = 1
 "vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
 let g:airline_powerline_fonts= 1
@@ -223,8 +226,6 @@ set noswapfile
 
 set autoindent " copy the indentation from the previous line (supposedly, but does not always work).
 
-set tabstop=4
-set shiftwidth=4
 set backspace=indent,eol,start
 
 " 'disable' the mouse
@@ -445,6 +446,7 @@ command! Right normal <C-w>l
 command! NextWindow normal <C-w>w
 
 command! Mocha :call RunMochaTests()
+command! Npm :call RunNpmTests()
 command! MochaD :call RunMochaTests(1)
 command! MochaFile :call RunMochaTests(0, L_current_buffer().file().path)
 command! MochaFileD :call RunMochaTests(1, L_current_buffer().file().path)
@@ -471,6 +473,15 @@ function! RunMochaTests(...)
 		endif
 	endif
 	call l#log('command about to run from RunMochaTests(): '.command)
+	call termopen(command)
+	nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
+function! RunNpmTests()
+	split
+	BOTTOM
+	enew
+	let command= 'npm test'
 	call termopen(command)
 	nnoremap <buffer><leader>q :q!<CR>
 endfunction
@@ -702,6 +713,7 @@ augroup all_other_autocmd_group
 		" comment out current line
 		"autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		"autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
+		autocmd BufRead,BufNewFile * call EnableTabSettings()
 		" search for next php function
 		autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
 		autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
@@ -745,6 +757,25 @@ augroup all_other_autocmd_group
 		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<CR>
 	endif
 augroup END
+
+function! EnableTabSettings()
+	let current_file_extension= L_current_buffer().file().extension
+	if current_file_extension == 'elm'
+		call EnableElmTabSettings()
+	else
+		call EnableNonElmTabSettings()
+	endif
+endfunction
+
+function! EnableElmTabSettings()
+	set tabstop=2
+	set shiftwidth=2
+endfunction
+
+function! EnableNonElmTabSettings()
+	set tabstop=4
+	set shiftwidth=4
+endfunction
 
 " dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
