@@ -26,3 +26,6 @@ prompt agnoster
 # disable auto-correct. This allows sudo to work with other aliases with a special sudo alias and still work with commands like mkdir
 unsetopt correct_all
 unsetopt correct
+
+export NVM_DIR="/home/jesse/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
