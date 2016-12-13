@@ -15,7 +15,7 @@ source ~/.config/nvim/.beforeinit.vim
 " PlugUpgrade Upgrade vim-plug itself
 " PlugStatus Check status of plugins
 call plug#begin()
-Plug 'junegunn/fzf', { 'tag': '0.11.4', 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kien/rainbow_parentheses.vim'
 if version < 704
 	Plug 'crookedneighbor/bufexplorer'
