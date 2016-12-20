@@ -511,9 +511,10 @@ endfunction
 command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
 command! Php :call Run_safe_simple_tests()
 command! PhpAll :call Run_all_simple_tests()
-" Codecepttion commands
+" Codeception commands
 command! Code :call Run_tests_with_command('codecept run')
 command! CodeFail :call Run_tests_with_command('codecept run -g failed')
+command! CodeFile :call Run_codeception_tests_in_current_file()
 " PHPUnit commands
 command! PhpUnit :call Run_tests_with_command('phpunit')
 command! PhpUnitCovered :call Run_tests_with_command('phpunit --configuration phpunit_with_code_coverage.xml')
@@ -529,6 +530,10 @@ function! Run_tests_with_command(command)
 	call l#log('command about to run from Run_tests_with_command(): '.a:command)
 	call termopen(a:command)
 	nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
+function! Run_codeception_tests_in_current_file()
+	call Run_tests_with_command('codecept run acceptance '.shellescape(L_current_buffer().file().name_without_extension))
 endfunction
 
 let g:safe_simple_test_suite_file_path = 0
