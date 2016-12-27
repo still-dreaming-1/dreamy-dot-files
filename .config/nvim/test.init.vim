@@ -8,13 +8,10 @@ set nocompatible
 " PlugUpgrade Upgrade vim-plug itself
 " PlugStatus Check status of plugins
 call plug#begin()
-Plug 'still-dreaming-1/vim-php-jump'
 call plug#end()
 let mapleader=" "
 "use backslash for localleader (2 backslashes since the first one is the escape char)
 let maplocalleader="\\"
-
-nmap <leader>g <Plug>(php_jump_list)
 
 " I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
 set hidden
