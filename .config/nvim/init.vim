@@ -512,7 +512,7 @@ command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
 command! Php :call Run_safe_simple_tests()
 command! PhpAll :call Run_all_simple_tests()
 " Codeception commands
-command! Code :call Run_tests_with_command('codecept run')
+command! Code :call Run_tests_with_command('codecept run --fail-fast')
 command! CodeFail :call Run_tests_with_command('codecept run -g failed')
 command! CodeFile :call Run_codeception_tests_in_current_file()
 " PHPUnit commands
