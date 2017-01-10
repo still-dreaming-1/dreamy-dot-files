@@ -622,7 +622,7 @@ function! Match_previous_indentation(...) " assumes tabs for indentation
 	let current_line_tab_indentation_level = 0
 	let desired_indentation_level = previous_line_tab_indentation_level + alter_indentation_level_by
 	if desired_indentation_level < 0
-		desired_indentation_level = 0
+		let desired_indentation_level = 0
 	endif
 	while current_line_tab_indentation_level != desired_indentation_level
 		let current_line_string = "\t".current_line_string
