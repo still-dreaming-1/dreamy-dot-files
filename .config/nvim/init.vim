@@ -592,9 +592,9 @@ command! Less call Match_previous_indentation(-1)
 command! More call Match_previous_indentation(1)
 
 function! Match_previous_indentation(...) " assumes tabs for indentation
-	let alter_indenation_level_by = 0
+	let alter_indentation_level_by = 0
 	if a:0 > 0
-		let alter_indenation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
+		let alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
 	endif
 	let current_line_number = line('.')
 	let previous_line_number = current_line_number - 1
@@ -611,7 +611,7 @@ function! Match_previous_indentation(...) " assumes tabs for indentation
 	endwhile
 	let current_line_string = current_line_s.str
 	let current_line_tab_indentation_level = 0
-	let desired_indentation_level = previous_line_tab_indentation_level + alter_indenation_level_by
+	let desired_indentation_level = previous_line_tab_indentation_level + alter_indentation_level_by
 	if desired_indentation_level < 0
 		desired_indentation_level = 0
 	endif
