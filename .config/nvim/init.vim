@@ -737,8 +737,11 @@ function! PasteVimTemplate()
 	execute "normal! ".l:paste_vim_template
 endfunction
 
-nnoremap <leader><  :call MoveParamLeft()<CR>
-nnoremap <leader>>  :call MoveParamRight()<CR>
+nnoremap <leader>= :Same<CR>
+nnoremap <leader>< :Less<CR>
+nnoremap <leader>> :More<CR>
+nnoremap <leader><leader><  :call MoveParamLeft()<CR>
+nnoremap <leader><leader>>  :call MoveParamRight()<CR>
 
 function! JumpToNextJSFunction()
 	let search_string= L_s('= function(').get_no_magic().str
