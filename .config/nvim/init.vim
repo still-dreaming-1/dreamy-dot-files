@@ -587,9 +587,18 @@ function! Run_current_file_tests()
 	endif
 endfunction
 
-command! Same call Match_previous_indentation()
-command! Less call Match_previous_indentation(-1)
-command! More call Match_previous_indentation(1)
+command! Same call Match_previous_indentation_command()
+command! Less call Match_previous_indentation_command(-1)
+command! More call Match_previous_indentation_command(1)
+
+function! Match_previous_indentation_command(...)
+	if a:0 > 0
+		call Match_previous_indentation(a:1)
+	else
+		call Match_previous_indentation()
+	endif
+	normal! ^
+endfunction
 
 function! Match_previous_indentation(...) " assumes tabs for indentation
 	let alter_indentation_level_by = 0
