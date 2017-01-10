@@ -620,7 +620,6 @@ function! Match_previous_indentation(...) " assumes tabs for indentation
 		let current_line_tab_indentation_level = current_line_tab_indentation_level + 1
 	endwhile
 	call setline(current_line_number, current_line_string)
-	" return desired_indentation_level
 endfunction
 
 " better rainbow parentheses settings
