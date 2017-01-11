@@ -727,7 +727,7 @@ endfunction
 
 function! PastePhpTemplate()
 	let l:file_name = expand("%:t:r")
-	let l:paste_php_template = "i<?\<CR>\<CR>class ".l:file_name." {\<CR>\}\<esc>k^we"
+	let l:paste_php_template = "i<?php\<CR>\<CR>class ".l:file_name." {\<CR>\}\<esc>k^we"
 	execute "normal! ".l:paste_php_template
 endfunction
 
