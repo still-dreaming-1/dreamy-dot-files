@@ -28,11 +28,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
-if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/vim-fugitive.git', { 'branch' : 'commit_fixup_2' }
-else
-	Plug 'tpope/vim-fugitive'
-endif
+Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-commentary'
 " vim-UT depends on this
@@ -43,11 +39,7 @@ Plug 'qpkorr/vim-bufkill'
 if has('nvim')
 	Plug 'neovim/node-host'
 endif
-if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'master' }
-else
-	Plug 'metakirby5/codi.vim'
-endif
+Plug 'metakirby5/codi.vim'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
 	UpdateRemotePlugins
