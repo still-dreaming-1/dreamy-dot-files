@@ -767,9 +767,6 @@ augroup all_other_autocmd_group
 		autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
 		" enable vimshrc syntax for .aftervimshrc file
 		autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
-		" comment out current line
-		"autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
-		"autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
 		" search for next php function
 		autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
 		autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
@@ -780,11 +777,6 @@ augroup all_other_autocmd_group
 		autocmd bufwritepost init.vim source $MYVIMRC
 		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
 		autocmd bufwritepost .afterinit.vim source $MYVIMRC
-		"autocmd FileType php,javascript,cs,c,cpp nnoremap <buffer> <leader>/ m`I//<esc>``ll
-		" comment out visually selected lines
-		"autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>/ <esc>'<O/*<esc>'>o*/<esc>
-		" uncomment visually selected lines
-		autocmd FileType php,javascript,cs,c,cpp xnoremap <buffer> <leader>?  <esc>'<kdd'>jdd<esc>
 		autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
 		"refactor to function
 		autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
