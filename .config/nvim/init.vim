@@ -45,7 +45,6 @@ if has('nvim')
 endif
 Plug 'Shougo/vimshell.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " depended upon by vimshell
-Plug 'ElmCast/elm-vim'
 if dreamy_developer
 	Plug 'git@github.com:still-dreaming-1/codi.vim.git', { 'branch' : 'master' }
 else
@@ -115,6 +114,9 @@ set title
 " at the bottom of the screen show the number of visually selected characters, and other stuff... If the selection is more than one row, shows the row count instead.
 set showcmd
 
+set tabstop=4
+set shiftwidth=4
+
 "commentary mappings
 nmap <leader>/ gcc
 vmap <leader>/ gc
@@ -137,9 +139,6 @@ let g:netrw_liststyle = 3
 
 " plugin settings
 " ---------------
-
-" elm-vim
-let g:elm_format_autosave = 1
 
 " vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
@@ -771,7 +770,6 @@ augroup all_other_autocmd_group
 		" comment out current line
 		"autocmd FileType python,sql,zsh              nnoremap <buffer> <leader>/ m`I#<esc>``l
 		"autocmd FileType vim                     nnoremap <buffer> <leader>/ m`I"<esc>``l
-		autocmd BufRead,BufNewFile * call EnableTabSettings()
 		" search for next php function
 		autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
 		autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
@@ -815,25 +813,6 @@ augroup all_other_autocmd_group
 		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<CR>
 	endif
 augroup END
-
-function! EnableTabSettings()
-	let current_file_extension= L_current_buffer().file().extension
-	if current_file_extension == 'elm'
-		call EnableElmTabSettings()
-	else
-		call EnableNonElmTabSettings()
-	endif
-endfunction
-
-function! EnableElmTabSettings()
-	set tabstop=2
-	set shiftwidth=2
-endfunction
-
-function! EnableNonElmTabSettings()
-	set tabstop=4
-	set shiftwidth=4
-endfunction
 
 " dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
