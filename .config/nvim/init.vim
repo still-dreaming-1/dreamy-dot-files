@@ -5,7 +5,7 @@ set nocompatible
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
-let g:dreamy_developer= 0
+let g:dreamy_developer = 0
 source ~/.config/nvim/.beforeinit.vim
 
 " vim-plug plugin manager:
@@ -88,9 +88,9 @@ let g:codi#width = 80
 " This is how you enable elhiv.vim, which is needed by my vim-project-tags plugin
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 
-let mapleader=" "
+let mapleader = " "
 " use backslash for localleader (2 backslashes since the first one is the escape char)
-let maplocalleader="\\"
+let maplocalleader = "\\"
 
 " use the clipboard
 set clipboard+=unnamedplus
@@ -195,9 +195,9 @@ command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
 
 function! ChangeDirectoryCustom(dir_path)
-	let before_dir= getcwd()
+	let before_dir = getcwd()
 	execute 'cd '.fnameescape(a:dir_path)
-	let after_dir= getcwd()
+	let after_dir = getcwd()
 	if before_dir !=# after_dir
 		" place custom current directory changed event handler code here
 		" make NERDTree root match new current directory
@@ -237,27 +237,26 @@ if has('nvim')
 	" use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
 	" entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
 	tnoremap kk <C-\><C-n>:call MoveCursorToLastTerminalChar()<CR>
-	" let g:terminal_scrollback_buffer_size= 100000
 endif
 
 function! MoveCursorToLastTerminalChar()
 	normal! G$
-	let l:cursor_char= L_current_cursor().char()
-	let l:numeric_code= char2nr(l:cursor_char)
+	let l:cursor_char = L_current_cursor().char()
+	let l:numeric_code = char2nr(l:cursor_char)
 	while l:numeric_code == 0
 		normal! k$
-		let l:cursor_char= getline(".")[col(".")-1]
-		let l:numeric_code= char2nr(l:cursor_char)
+		let l:cursor_char = getline(".")[col(".")-1]
+		let l:numeric_code = char2nr(l:cursor_char)
 	endwhile
 	if l:numeric_code == 226
 		normal! h
-		let l:cursor_char= getline(".")[col(".")-1]
-		let l:numeric_code= char2nr(l:cursor_char)
+		let l:cursor_char = getline(".")[col(".")-1]
+		let l:numeric_code = char2nr(l:cursor_char)
 		while l:cursor_char == ' '
 			normal! h
-			let l:cursor_char= getline(".")[col(".")-1]
+			let l:cursor_char = getline(".")[col(".")-1]
 		endwhile
-		let l:numeric_code= char2nr(l:cursor_char)
+		let l:numeric_code = char2nr(l:cursor_char)
 		if l:numeric_code == 226
 			normal l
 		endif
@@ -393,14 +392,14 @@ vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 
 " configure NERDTree plugin work the RIGHT way
-let NERDTreeShowHidden=1
-let NERDTreeWinSize=70
-let NERDTreeQuitOnOpen=1
+let NERDTreeShowHidden = 1
+let NERDTreeWinSize = 70
+let NERDTreeQuitOnOpen = 1
 " When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
-let NERDTreeAutoDeleteBuffer=1
+let NERDTreeAutoDeleteBuffer = 1
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
-let NERDTreeChDirMode= 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
+let NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
 
 " syntastic settings
 let g:syntastic_always_populate_loc_list = 1
@@ -449,18 +448,18 @@ function! RunMochaTests(...)
 	split
 	BOTTOM
 	enew
-	let command= 'mocha --recursive'
+	let command = 'mocha --recursive'
 	if a:0 > 0
-		let debug= a:1
+		let debug = a:1
 		if debug
-			let command= command.' debug'
+			let command = command.' debug'
 		endif
 		if a:0 > 1
-			let test_file_path= a:2
-			let command= command.' '.shellescape(test_file_path)
+			let test_file_path = a:2
+			let command = command.' '.shellescape(test_file_path)
 			if a:0  > 2
-				let filtered_text= a:3
-				let command= command.' -f "'.filtered_text.'"'
+				let filtered_text = a:3
+				let command = command.' -f "'.filtered_text.'"'
 			endif
 		endif
 	endif
@@ -473,28 +472,28 @@ function! RunNpmTests()
 	split
 	BOTTOM
 	enew
-	let command= 'npm test'
+	let command = 'npm test'
 	call termopen(command)
 	nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
 function! GetMochaFilteredTextOfTestUnderCursor()
-	let line_text= L_s(getline('.'))
-	let filtered_text= line_text
+	let line_text = L_s(getline('.'))
+	let filtered_text = line_text
 	while !filtered_text.starts_with("'")
-		let filtered_text= filtered_text.remove_start()
+		let filtered_text = filtered_text.remove_start()
 		if filtered_text.len == 0
 			break
 		endif
 	endwhile
 	while !filtered_text.ends_with("'")
-		let filtered_text=  filtered_text.remove_end()
+		let filtered_text =  filtered_text.remove_end()
 		if filtered_text.len == 0
 			break
 		endif
 	endwhile
-	let filtered_text= filtered_text.remove_start()
-	let filtered_text= filtered_text.remove_end()
+	let filtered_text = filtered_text.remove_start()
+	let filtered_text = filtered_text.remove_end()
 	call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
 	return filtered_text.str
 endfunction
@@ -540,7 +539,7 @@ function! Run_all_simple_tests()
 endfunction
 
 function! Run_single_phpunit_test_method(test_method_name, test_file_path)
-	let command= 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
+	let command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
 	call Run_tests_with_command(command)
 endfunction
 
@@ -553,12 +552,12 @@ function! Run_PHPUnit_tests_in_file(class)
 endfunction
 
 function! Get_php_method_name_from_cursor_line()
-	let line_text= L_s(getline('.'))
-	let function_name= line_text.trim()
+	let line_text = L_s(getline('.'))
+	let function_name = line_text.trim()
 	while function_name.contains('(')
-		let function_name= function_name.remove_end()
+		let function_name = function_name.remove_end()
 	endwhile
-	let function_name= function_name.after('function').trim()
+	let function_name = function_name.after('function').trim()
 	call l#log('value returned from Get_php_method_name_from_cursor_line(): '.function_name.str)
 	return function_name.str
 endfunction
@@ -652,16 +651,16 @@ set laststatus=2
 " mapping to open a plugins home page in Vivaldi. The cursor must be on a line using vim-plug to include a plugin
 command! Hub call OpenVivaldiAtPluginPage()
 function! OpenVivaldiAtPluginPage()
-	let l:plugin_name= GetPluginPageFromCurrentLine()
+	let l:plugin_name = GetPluginPageFromCurrentLine()
 	call jobstart('vivaldi "https://www.github.com/'.l:plugin_name.'"')
 endfunction
 function! GetPluginPageFromCurrentLine()
 	normal! ^w
-	let l:start_plugin_name_pos= col(".")
+	let l:start_plugin_name_pos = col(".")
 	normal! f'
-	let l:end_plugin_name_pos= col(".") - 2
-	let l:line= getline(".")
-	let l:plugin_name= l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
+	let l:end_plugin_name_pos = col(".") - 2
+	let l:line = getline(".")
+	let l:plugin_name = l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
 	return l:plugin_name
 endfunction
 
@@ -670,8 +669,8 @@ endfunction
 " place some text after the first word on the current line
 function! AfterFirstWord(text)
 	normal! ^
-	let l:first_word= expand('<cword>')
-	let l:word_len= len(l:first_word)
+	let l:first_word = expand('<cword>')
+	let l:word_len = len(l:first_word)
 	if l:word_len == 0
 		normal! ^
 	elseif l:word_len == 1
@@ -684,9 +683,9 @@ endfunction
 
 function! RunMacroUntilLastLine(macro)
 	while !CursorIsLastLine()
-		let l:current_line_num= GetCursorLineNum()
+		let l:current_line_num = GetCursorLineNum()
 		execute 'normal! @'.a:macro
-		let l:new_line_num= GetCursorLineNum()
+		let l:new_line_num = GetCursorLineNum()
 		if l:new_line_num <= l:current_line_num
 			return
 		endif
@@ -736,7 +735,7 @@ nnoremap <leader><leader><  :call MoveParamLeft()<CR>
 nnoremap <leader><leader>>  :call MoveParamRight()<CR>
 
 function! JumpToNextJSFunction()
-	let search_string= L_s('= function(').get_no_magic().str
+	let search_string = L_s('= function(').get_no_magic().str
 	call search(search_string)
 	let @/ = search_string
 endfunction
@@ -798,17 +797,17 @@ augroup END
 
 " dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
-		let c=getline(".")[col(".")-1]
-		if c=="$"
-			normal l
-		endif
-		execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idump('\<esc>pa',$\<esc>pa);\<esc>=="
+	let c = getline(".")[col(".")-1]
+	if c == "$"
+		normal l
+	endif
+	execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idump('\<esc>pa',$\<esc>pa);\<esc>=="
 endfunction
 
 function! MovePHPParamLeft()
 	if col(".") > 1
-		let c=getline(".")[col(".")-1]
-		if c=="$"
+		let c = getline(".")[col(".")-1]
+		if c == "$"
 			call UnsafeMovePHPParamLeft()
 		else
 			normal h
@@ -844,8 +843,8 @@ endfunction
 
 function! MovePHPParamRight()
 	if col(".") > 1
-		let c=getline(".")[col(".")-1]
-		if c=="$"
+		let c = getline(".")[col(".")-1]
+		if c == "$"
 			call UnsafeMovePHPParamRight()
 		else
 			normal h
@@ -878,7 +877,7 @@ function! UnsafeMovePHPParamRight()
 endfunction
 
 function! MoveParamLeft()
-	let current_file_extension= L_current_buffer().file().extension
+	let current_file_extension = L_current_buffer().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamLeft()
 	else
@@ -895,7 +894,7 @@ function! GenericMoveParamLeft()
 	"find the comma separating current param from the next
 	normal! f,
 	" if there actually was a comma, meaning there is another param after this one
-	let current_cursor= L_current_cursor()
+	let current_cursor = L_current_cursor()
 	if current_cursor().char() == ","
 		call cursor(y,x)
 		" Delete the current param and the comma, copying it at the same time. Put copied param before the previous one
@@ -933,7 +932,7 @@ function! GenericMoveParamRight()
 endfunction
 
 function! MoveParamRight()
-	let current_file_extension= L_current_buffer().file().extension
+	let current_file_extension = L_current_buffer().file().extension
 	if current_file_extension == 'php'
 		call MovePHPParamRight()
 	else
@@ -974,8 +973,8 @@ endfunction
 " general purpose, reusable functions
 
 function! CursorIsLastLine()
-	let l:cursor_line_num= GetCursorLineNum()
-	let l:last_line_num= GetLastLineNum()
+	let l:cursor_line_num = GetCursorLineNum()
+	let l:last_line_num = GetLastLineNum()
 	return l:cursor_line_num == l:last_line_num
 endfunction
 
@@ -997,9 +996,9 @@ endfunction
 
 function! EchoCursorPos(pos, ...)
 	if a:0 > 0
-		let l:name= a:1
+		let l:name = a:1
 	else
-		let l:name= ''
+		let l:name = ''
 	endif
 	if l:name != ''
 		echo 'cursor '.name.' :'
