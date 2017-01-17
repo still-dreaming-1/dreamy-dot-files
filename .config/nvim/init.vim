@@ -2,10 +2,10 @@
 " because vim is better than vi
 set nocompatible
 
+let g:dreamy_developer = 0 " helps me use my development versions of projects
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
-let g:dreamy_developer = 0
 source ~/.config/nvim/.beforeinit.vim
 
 " vim-plug plugin manager:
