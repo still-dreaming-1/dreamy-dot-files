@@ -104,8 +104,10 @@ set title
 " at the bottom of the screen show the number of visually selected characters, and other stuff... If the selection is more than one row, shows the row count instead.
 set showcmd
 
+" indentation / tab settings
 set tabstop=4
 set shiftwidth=4
+set expandtab " use spaces instead of tabs
 
 "commentary mappings
 nmap <leader>/ gcc
@@ -139,6 +141,8 @@ set noshowmode
 
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
+" neomake settings
+let g:neomake_php_phpcs_args_standard = 'PSR2'
 
 set nofoldenable " disable folding
 
@@ -549,8 +553,14 @@ function! Run_single_phpunit_test_method(test_method_name, test_file_path)
 	call Run_tests_with_command(command)
 endfunction
 
+let g:simpletest_php_bootstrap_filepath = ''
 function! Run_simple_tests_in_file(path)
-	call Run_tests_with_command('php '.shellescape(a:path))
+    let command = 'php'
+    if g:simpletest_php_bootstrap_filepath !=# ''
+        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
+    endif
+    let command .= ' -f '.shellescape(a:path)
+	call Run_tests_with_command(command)
 endfunction
 
 function! Run_PHPUnit_tests_in_file(class)
