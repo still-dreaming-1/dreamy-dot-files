@@ -135,7 +135,6 @@ let g:netrw_liststyle = 3
 " vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
 " prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
 
