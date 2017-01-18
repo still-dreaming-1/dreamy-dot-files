@@ -731,9 +731,14 @@ function! s:term_gf()
     exe 'e <cfile>'
 endfunction
 
+let g:dreamy_php_namespace = ''
 function! PastePhpTemplate()
     let l:file_name = expand("%:t:r")
-    let l:paste_php_template = "i<?php\<CR>\<CR>class ".l:file_name." {\<CR>\}\<esc>k^we"
+    let l:paste_php_template = "i<?php\<CR>\<CR>"
+    if g:dreamy_php_namespace !=# ''
+        let l:paste_php_template .= 'namespace '.g:dreamy_php_namespace.";\<CR>\<CR>"
+    endif
+    let l:paste_php_template .= "class ".l:file_name."\<CR>{\<CR>\}\<esc>kk^we"
     execute "normal! ".l:paste_php_template
 endfunction
 
