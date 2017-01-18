@@ -18,10 +18,10 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kien/rainbow_parentheses.vim'
 if version < 704
-	Plug 'crookedneighbor/bufexplorer'
+    Plug 'crookedneighbor/bufexplorer'
 endif
 if version > 703
-	Plug 'jlanzarotta/bufexplorer'
+    Plug 'jlanzarotta/bufexplorer'
 endif
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -37,44 +37,44 @@ Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
 if has('nvim')
-	Plug 'neovim/node-host'
+    Plug 'neovim/node-host'
 endif
 Plug 'metakirby5/codi.vim'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
-	UpdateRemotePlugins
+    UpdateRemotePlugins
 endfunction
 
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
+    Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
 endif
 " Plug 'vim-scripts/dbext.vim'
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
+    Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
 else
-	Plug 'still-dreaming-1/vim-elhiv'
+    Plug 'still-dreaming-1/vim-elhiv'
 endif
 if dreamy_developer
-	" Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
+    " Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
 else
-	" Plug 'still-dreaming-1/vim-project-tags'
+    " Plug 'still-dreaming-1/vim-project-tags'
 endif
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
+    Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
 else
-	Plug 'still-dreaming-1/vim-generator'
+    Plug 'still-dreaming-1/vim-generator'
 endif
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/vim-project-search.git', { 'branch' : 'develop' }
+    Plug 'git@github.com:still-dreaming-1/vim-project-search.git', { 'branch' : 'develop' }
 else
-	Plug 'still-dreaming-1/vim-project-search'
+    Plug 'still-dreaming-1/vim-project-search'
 endif
 if dreamy_developer
-	Plug 'git@github.com:still-dreaming-1/nvim-project-tags.git', { 'branch' : 'develop' }
+    Plug 'git@github.com:still-dreaming-1/nvim-project-tags.git', { 'branch' : 'develop' }
 else
-	Plug 'still-dreaming-1/nvim-project-tags'
+    Plug 'still-dreaming-1/nvim-project-tags'
 endif
 call plug#end()
 
@@ -121,8 +121,8 @@ set cursorline
 hi CursorColumn cterm=NONE ctermbg=black
 set cursorcolumn
 if exists('+relativenumber')
-	set number
-	set relativenumber
+    set number
+    set relativenumber
 endif
 
 " netwrw setting. netrw is a builtin file explorer similar to NERDTree
@@ -198,21 +198,21 @@ command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
 
 function! ChangeDirectoryCustom(dir_path)
-	let before_dir = getcwd()
-	execute 'cd '.fnameescape(a:dir_path)
-	let after_dir = getcwd()
-	if before_dir !=# after_dir
-		" place custom current directory changed event handler code here
-		" make NERDTree root match new current directory
-		NERDTreeCWD
-		NERDTreeClose
-	endif
-	" Make vim-fugitive use the new current directory repository.
-	" This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
-	if exists('b:git_dir')
-		unlet b:git_dir
-	endif
-	call fugitive#detect(getcwd())
+    let before_dir = getcwd()
+    execute 'cd '.fnameescape(a:dir_path)
+    let after_dir = getcwd()
+    if before_dir !=# after_dir
+        " place custom current directory changed event handler code here
+        " make NERDTree root match new current directory
+        NERDTreeCWD
+        NERDTreeClose
+    endif
+    " Make vim-fugitive use the new current directory repository.
+    " This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
+    if exists('b:git_dir')
+        unlet b:git_dir
+    endif
+    call fugitive#detect(getcwd())
 endfunction
 
 " warning: next two settings make recovery impossible
@@ -237,33 +237,33 @@ inoremap <right> <nop>
 " use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
 inoremap kk <esc><esc>
 if has('nvim')
-	" use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
-	" entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
-	tnoremap kk <C-\><C-n>:call MoveCursorToLastTerminalChar()<CR>
+    " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
+    " entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
+    tnoremap kk <C-\><C-n>:call MoveCursorToLastTerminalChar()<CR>
 endif
 
 function! MoveCursorToLastTerminalChar()
-	normal! G$
-	let l:cursor_char = L_current_cursor().char()
-	let l:numeric_code = char2nr(l:cursor_char)
-	while l:numeric_code == 0
-		normal! k$
-		let l:cursor_char = getline(".")[col(".")-1]
-		let l:numeric_code = char2nr(l:cursor_char)
-	endwhile
-	if l:numeric_code == 226
-		normal! h
-		let l:cursor_char = getline(".")[col(".")-1]
-		let l:numeric_code = char2nr(l:cursor_char)
-		while l:cursor_char == ' '
-			normal! h
-			let l:cursor_char = getline(".")[col(".")-1]
-		endwhile
-		let l:numeric_code = char2nr(l:cursor_char)
-		if l:numeric_code == 226
-			normal l
-		endif
-	endif
+    normal! G$
+    let l:cursor_char = L_current_cursor().char()
+    let l:numeric_code = char2nr(l:cursor_char)
+    while l:numeric_code == 0
+        normal! k$
+        let l:cursor_char = getline(".")[col(".")-1]
+        let l:numeric_code = char2nr(l:cursor_char)
+    endwhile
+    if l:numeric_code == 226
+        normal! h
+        let l:cursor_char = getline(".")[col(".")-1]
+        let l:numeric_code = char2nr(l:cursor_char)
+        while l:cursor_char == ' '
+            normal! h
+            let l:cursor_char = getline(".")[col(".")-1]
+        endwhile
+        let l:numeric_code = char2nr(l:cursor_char)
+        if l:numeric_code == 226
+            normal l
+        endif
+    endif
 endfunction
 
 " disable escape. This serves the purpose of training myself to use kk instead
@@ -448,57 +448,57 @@ command! MochaFilter :call RunMochaTests(0, L_current_buffer().file().path, GetM
 command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
 
 function! RunMochaTests(...)
-	split
-	BOTTOM
-	enew
-	let command = 'mocha --recursive'
-	if a:0 > 0
-		let debug = a:1
-		if debug
-			let command = command.' debug'
-		endif
-		if a:0 > 1
-			let test_file_path = a:2
-			let command = command.' '.shellescape(test_file_path)
-			if a:0  > 2
-				let filtered_text = a:3
-				let command = command.' -f "'.filtered_text.'"'
-			endif
-		endif
-	endif
-	call l#log('command about to run from RunMochaTests(): '.command)
-	call termopen(command)
-	nnoremap <buffer><leader>q :q!<CR>
+    split
+    BOTTOM
+    enew
+    let command = 'mocha --recursive'
+    if a:0 > 0
+        let debug = a:1
+        if debug
+            let command = command.' debug'
+        endif
+        if a:0 > 1
+            let test_file_path = a:2
+            let command = command.' '.shellescape(test_file_path)
+            if a:0  > 2
+                let filtered_text = a:3
+                let command = command.' -f "'.filtered_text.'"'
+            endif
+        endif
+    endif
+    call l#log('command about to run from RunMochaTests(): '.command)
+    call termopen(command)
+    nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
 function! RunNpmTests()
-	split
-	BOTTOM
-	enew
-	let command = 'npm test'
-	call termopen(command)
-	nnoremap <buffer><leader>q :q!<CR>
+    split
+    BOTTOM
+    enew
+    let command = 'npm test'
+    call termopen(command)
+    nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
 function! GetMochaFilteredTextOfTestUnderCursor()
-	let line_text = L_s(getline('.'))
-	let filtered_text = line_text
-	while !filtered_text.starts_with("'")
-		let filtered_text = filtered_text.remove_start()
-		if filtered_text.len == 0
-			break
-		endif
-	endwhile
-	while !filtered_text.ends_with("'")
-		let filtered_text =  filtered_text.remove_end()
-		if filtered_text.len == 0
-			break
-		endif
-	endwhile
-	let filtered_text = filtered_text.remove_start()
-	let filtered_text = filtered_text.remove_end()
-	call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
-	return filtered_text.str
+    let line_text = L_s(getline('.'))
+    let filtered_text = line_text
+    while !filtered_text.starts_with("'")
+        let filtered_text = filtered_text.remove_start()
+        if filtered_text.len == 0
+            break
+        endif
+    endwhile
+    while !filtered_text.ends_with("'")
+        let filtered_text =  filtered_text.remove_end()
+        if filtered_text.len == 0
+            break
+        endif
+    endwhile
+    let filtered_text = filtered_text.remove_start()
+    let filtered_text = filtered_text.remove_end()
+    call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
+    return filtered_text.str
 endfunction
 
 " SimpleTest commands
@@ -519,37 +519,37 @@ command! PhpUnitFile :call Run_PHPUnit_tests_in_file(L_current_buffer().file().n
 command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
 
 function! Run_tests_with_command(command)
-	split
-	BOTTOM
-	enew
-	call l#log('command about to run from Run_tests_with_command(): '.a:command)
-	call termopen(a:command)
-	nnoremap <buffer><leader>q :q!<CR>
+    split
+    BOTTOM
+    enew
+    call l#log('command about to run from Run_tests_with_command(): '.a:command)
+    call termopen(a:command)
+    nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
 function! Run_codeception_tests_in_current_file()
-	call Run_tests_with_command('codecept run acceptance '.shellescape(L_current_buffer().file().name_without_extension))
+    call Run_tests_with_command('codecept run acceptance '.shellescape(L_current_buffer().file().name_without_extension))
 endfunction
 
 let g:simpletest_unit_test_suite_file_path = 0
 function! Run_simpletest_unit_test_suite()
-	let command = 'php '.g:simpletest_unit_test_suite_file_path
-	call Run_tests_with_command(command)
+    let command = 'php '.g:simpletest_unit_test_suite_file_path
+    call Run_tests_with_command(command)
 endfunction
 let g:simpletest_integration_test_suite_file_path = 0
 function! Run_simpletest_integration_test_suite()
-	let command = 'php '.g:simpletest_integration_test_suite_file_path
-	call Run_tests_with_command(command)
+    let command = 'php '.g:simpletest_integration_test_suite_file_path
+    call Run_tests_with_command(command)
 endfunction
 let g:simpletest_all_test_suite_file_path = 0
 function! Run_simpletest_all_test_suite()
-	let command = 'php '.g:simpletest_all_test_suite_file_path
-	call Run_tests_with_command(command)
+    let command = 'php '.g:simpletest_all_test_suite_file_path
+    call Run_tests_with_command(command)
 endfunction
 
 function! Run_single_phpunit_test_method(test_method_name, test_file_path)
-	let command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
-	call Run_tests_with_command(command)
+    let command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
+    call Run_tests_with_command(command)
 endfunction
 
 let g:simpletest_php_bootstrap_filepath = ''
@@ -559,22 +559,22 @@ function! Run_simple_tests_in_file(path)
         let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
     endif
     let command .= ' -f '.shellescape(a:path)
-	call Run_tests_with_command(command)
+    call Run_tests_with_command(command)
 endfunction
 
 function! Run_PHPUnit_tests_in_file(class)
-	call Run_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
+    call Run_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
 endfunction
 
 function! Get_php_method_name_from_cursor_line()
-	let line_text = L_s(getline('.'))
-	let function_name = line_text.trim()
-	while function_name.contains('(')
-		let function_name = function_name.remove_end()
-	endwhile
-	let function_name = function_name.after('function').trim()
-	call l#log('value returned from Get_php_method_name_from_cursor_line(): '.function_name.str)
-	return function_name.str
+    let line_text = L_s(getline('.'))
+    let function_name = line_text.trim()
+    while function_name.contains('(')
+        let function_name = function_name.remove_end()
+    endwhile
+    let function_name = function_name.after('function').trim()
+    call l#log('value returned from Get_php_method_name_from_cursor_line(): '.function_name.str)
+    return function_name.str
 endfunction
 
 command! VimFile :UTRun %<CR>
@@ -583,14 +583,14 @@ nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
 function! Run_current_file_tests()
-	let current_file_extension = L_current_buffer().file().extension
-	if current_file_extension == 'php'
-		PhpFile
-	elseif current_file_extension == 'js'
-		Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
-	elseif current_file_extension == 'vim'
-		VimFile
-	endif
+    let current_file_extension = L_current_buffer().file().extension
+    if current_file_extension == 'php'
+        PhpFile
+    elseif current_file_extension == 'js'
+        Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
+    elseif current_file_extension == 'vim'
+        VimFile
+    endif
 endfunction
 
 command! Same call Match_previous_indentation_command()
@@ -598,64 +598,64 @@ command! Less call Match_previous_indentation_command(-1)
 command! More call Match_previous_indentation_command(1)
 
 function! Match_previous_indentation_command(...)
-	if a:0 > 0
-		call Match_previous_indentation(a:1)
-	else
-		call Match_previous_indentation()
-	endif
-	normal! ^
+    if a:0 > 0
+        call Match_previous_indentation(a:1)
+    else
+        call Match_previous_indentation()
+    endif
+    normal! ^
 endfunction
 
 function! Match_previous_indentation(...) " assumes tabs for indentation
-	let alter_indentation_level_by = 0
-	if a:0 > 0
-		let alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
-	endif
-	let current_line_number = line('.')
-	let previous_line_number = current_line_number - 1
-	let original_previous_line_string = getline(previous_line_number)
-	let previous_line_s = L_s(original_previous_line_string)
-	let previous_line_tab_indentation_level = 0
-	while previous_line_s.starts_with("\t") " count indentation of previous line
-		let previous_line_tab_indentation_level = previous_line_tab_indentation_level + 1
-		let previous_line_s = previous_line_s.skip(1)
-	endwhile
-	let current_line_s = L_s(getline(current_line_number))
-	while current_line_s.starts_with("\t") " remove indentation from current_line_s
-		let current_line_s = current_line_s.skip(1)
-	endwhile
-	let current_line_string = current_line_s.str
-	let current_line_tab_indentation_level = 0
-	let desired_indentation_level = previous_line_tab_indentation_level + alter_indentation_level_by
-	if desired_indentation_level < 0
-		let desired_indentation_level = 0
-	endif
-	while current_line_tab_indentation_level != desired_indentation_level
-		let current_line_string = "\t".current_line_string
-		let current_line_tab_indentation_level = current_line_tab_indentation_level + 1
-	endwhile
-	call setline(current_line_number, current_line_string)
+    let alter_indentation_level_by = 0
+    if a:0 > 0
+        let alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
+    endif
+    let current_line_number = line('.')
+    let previous_line_number = current_line_number - 1
+    let original_previous_line_string = getline(previous_line_number)
+    let previous_line_s = L_s(original_previous_line_string)
+    let previous_line_tab_indentation_level = 0
+    while previous_line_s.starts_with("\t") " count indentation of previous line
+        let previous_line_tab_indentation_level = previous_line_tab_indentation_level + 1
+        let previous_line_s = previous_line_s.skip(1)
+    endwhile
+    let current_line_s = L_s(getline(current_line_number))
+    while current_line_s.starts_with("\t") " remove indentation from current_line_s
+        let current_line_s = current_line_s.skip(1)
+    endwhile
+    let current_line_string = current_line_s.str
+    let current_line_tab_indentation_level = 0
+    let desired_indentation_level = previous_line_tab_indentation_level + alter_indentation_level_by
+    if desired_indentation_level < 0
+        let desired_indentation_level = 0
+    endif
+    while current_line_tab_indentation_level != desired_indentation_level
+        let current_line_string = "\t".current_line_string
+        let current_line_tab_indentation_level = current_line_tab_indentation_level + 1
+    endwhile
+    call setline(current_line_number, current_line_string)
 endfunction
 
 " better rainbow parentheses settings
 let g:rbpt_colorpairs = [
-	\ ['brown',       'RoyalBlue3'],
-	\ ['Darkblue',    'SeaGreen3'],
-	\ ['darkgray',    'DarkOrchid3'],
-	\ ['darkgreen',   'firebrick3'],
-	\ ['darkcyan',    'RoyalBlue3'],
-	\ ['darkred',     'SeaGreen3'],
-	\ ['darkmagenta', 'DarkOrchid3'],
-	\ ['brown',       'firebrick3'],
-	\ ['gray',        'RoyalBlue3'],
-	\ ['darkgray',    'SeaGreen3'],
-	\ ['darkmagenta', 'DarkOrchid3'],
-	\ ['Darkblue',    'firebrick3'],
-	\ ['darkgreen',   'RoyalBlue3'],
-	\ ['darkcyan',    'SeaGreen3'],
-	\ ['darkred',     'DarkOrchid3'],
-	\ ['red',         'firebrick3'],
-	\ ]
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkgray',    'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -666,81 +666,81 @@ set laststatus=2
 " mapping to open a plugins home page in Vivaldi. The cursor must be on a line using vim-plug to include a plugin
 command! Hub call OpenVivaldiAtPluginPage()
 function! OpenVivaldiAtPluginPage()
-	let l:plugin_name = GetPluginPageFromCurrentLine()
-	call jobstart('vivaldi "https://www.github.com/'.l:plugin_name.'"')
+    let l:plugin_name = GetPluginPageFromCurrentLine()
+    call jobstart('vivaldi "https://www.github.com/'.l:plugin_name.'"')
 endfunction
 function! GetPluginPageFromCurrentLine()
-	normal! ^w
-	let l:start_plugin_name_pos = col(".")
-	normal! f'
-	let l:end_plugin_name_pos = col(".") - 2
-	let l:line = getline(".")
-	let l:plugin_name = l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
-	return l:plugin_name
+    normal! ^w
+    let l:start_plugin_name_pos = col(".")
+    normal! f'
+    let l:end_plugin_name_pos = col(".") - 2
+    let l:line = getline(".")
+    let l:plugin_name = l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
+    return l:plugin_name
 endfunction
 
 " user functions: (to be called manually while editing)
 
 " place some text after the first word on the current line
 function! AfterFirstWord(text)
-	normal! ^
-	let l:first_word = expand('<cword>')
-	let l:word_len = len(l:first_word)
-	if l:word_len == 0
-		normal! ^
-	elseif l:word_len == 1
-		normal! l
-	elseif l:word_len > 1
-		execute 'normal! '.l:word_len.'l\<esc>'
-	endif
-	execute 'normal! i'.a:text
+    normal! ^
+    let l:first_word = expand('<cword>')
+    let l:word_len = len(l:first_word)
+    if l:word_len == 0
+        normal! ^
+    elseif l:word_len == 1
+        normal! l
+    elseif l:word_len > 1
+        execute 'normal! '.l:word_len.'l\<esc>'
+    endif
+    execute 'normal! i'.a:text
 endfunction
 
 function! RunMacroUntilLastLine(macro)
-	while !CursorIsLastLine()
-		let l:current_line_num = GetCursorLineNum()
-		execute 'normal! @'.a:macro
-		let l:new_line_num = GetCursorLineNum()
-		if l:new_line_num <= l:current_line_num
-			return
-		endif
-	endwhile
+    while !CursorIsLastLine()
+        let l:current_line_num = GetCursorLineNum()
+        execute 'normal! @'.a:macro
+        let l:new_line_num = GetCursorLineNum()
+        if l:new_line_num <= l:current_line_num
+            return
+        endif
+    endwhile
 endfunction
 
 " putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
-	" removes all autocmd in group
-	if has("autocmd")
-		autocmd!
-		autocmd FileType vim            iabbrev <buffer> iab iabbrev
-		autocmd FileType vim            iabbrev <buffer> nnor nnoremap
-		autocmd FileType vim            iabbrev <buffer> xnor xnoremap
-		autocmd FileType vim            iabbrev <buffer> inor inoremap
-		autocmd FileType php,javascript iabbrev <buffer> func function
-		autocmd FileType php,c,cpp,cs   iabbrev <buffer> (s) (string)
-		autocmd FileType php,c,cpp,cs   iabbrev <buffer> (i) (int)
-		autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
-	endif
+    " removes all autocmd in group
+    if has("autocmd")
+        autocmd!
+        autocmd FileType vim            iabbrev <buffer> iab iabbrev
+        autocmd FileType vim            iabbrev <buffer> nnor nnoremap
+        autocmd FileType vim            iabbrev <buffer> xnor xnoremap
+        autocmd FileType vim            iabbrev <buffer> inor inoremap
+        autocmd FileType php,javascript iabbrev <buffer> func function
+        autocmd FileType php,c,cpp,cs   iabbrev <buffer> (s) (string)
+        autocmd FileType php,c,cpp,cs   iabbrev <buffer> (i) (int)
+        autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
+    endif
 augroup END
 
 " this is part of a workaround to fix the way gf works inside a terminal buffer
 function! s:term_gf()
-	let procid = matchstr(bufname(""), '\(://.*/\)\@<=\(\d\+\)')
-	let proc_cwd = resolve('/proc/'.procid.'/cwd')
-	exe 'lcd '.proc_cwd
-	exe 'e <cfile>'
+    let procid = matchstr(bufname(""), '\(://.*/\)\@<=\(\d\+\)')
+    let proc_cwd = resolve('/proc/'.procid.'/cwd')
+    exe 'lcd '.proc_cwd
+    exe 'e <cfile>'
 endfunction
 
 function! PastePhpTemplate()
-	let l:file_name = expand("%:t:r")
-	let l:paste_php_template = "i<?php\<CR>\<CR>class ".l:file_name." {\<CR>\}\<esc>k^we"
-	execute "normal! ".l:paste_php_template
+    let l:file_name = expand("%:t:r")
+    let l:paste_php_template = "i<?php\<CR>\<CR>class ".l:file_name." {\<CR>\}\<esc>k^we"
+    execute "normal! ".l:paste_php_template
 endfunction
 
 function! PasteVimTemplate()
-	let l:file_name = expand("%:t:r")
-	let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name."\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
-	execute "normal! ".l:paste_vim_template
+    let l:file_name = expand("%:t:r")
+    let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name."\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
+    execute "normal! ".l:paste_vim_template
 endfunction
 
 nnoremap <leader>= :Same<CR>
@@ -750,280 +750,280 @@ nnoremap <leader><leader><  :call MoveParamLeft()<CR>
 nnoremap <leader><leader>>  :call MoveParamRight()<CR>
 
 function! JumpToNextJSFunction()
-	let search_string = L_s('= function(').get_no_magic().str
-	call search(search_string)
-	let @/ = search_string
+    let search_string = L_s('= function(').get_no_magic().str
+    call search(search_string)
+    let @/ = search_string
 endfunction
 
 augroup all_other_autocmd_group
-	if has("autocmd")
-		" removes all autocmd in group
-		autocmd!
-		if has('nvim')
-			" fixes the gf when run from a terminal buffer
-			autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<CR>
-			" autocmd TermOpen * <buffer> command! BD :BD!
-		endif
-		autocmd! BufWritePost * Neomake
-		" enable zsh syntax for .aliashrc file
-		autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
-		" enable zsh syntax for .functionshrc file
-		autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
-		" enable vimshrc syntax for .aftervimshrc file
-		autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
-		" search for next php function
-		autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
-		autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
-		autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
-		" auto source the config after saving Vim's .vimrc config file (helps when using Vim)
-		autocmd bufwritepost .vimrc source $MYVIMRC
-		" auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
-		autocmd bufwritepost init.vim source $MYVIMRC
-		autocmd bufwritepost .beforeinit.vim source $MYVIMRC
-		autocmd bufwritepost .afterinit.vim source $MYVIMRC
-		autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
-		"refactor to function
-		autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
-		"refactor to method
-		autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
-		"class template
-		autocmd FileType php                     nnoremap <buffer> <leader>pc :call PastePhpTemplate()<CR>
-		autocmd FileType vim                     nnoremap <buffer> <leader>pc :call PasteVimTemplate()<CR>
-		"function template
-		autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
-		autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
-		"method template
-		autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<CR>}<esc>Vk=f(i
-		"constructor template
-		autocmd FileType php                     nnoremap <buffer> <leader>po ofunction __construct() {<CR>}<esc>Vk=
-		"past debug::log();
-		autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
-		autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
-		autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
-		"dump the current variable
-		autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
-		"autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<CR><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
-		"creates a new slot (import and export DSL) named after the word under the cursor
-		autocmd FileType php		             nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-		"run the PHP short tests
-		autocmd FileType php		             nnoremap <buffer> <leader><leader>f :Putest<CR>
-	endif
+    if has("autocmd")
+        " removes all autocmd in group
+        autocmd!
+        if has('nvim')
+            " fixes the gf when run from a terminal buffer
+            autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<CR>
+            " autocmd TermOpen * <buffer> command! BD :BD!
+        endif
+        autocmd! BufWritePost * Neomake
+        " enable zsh syntax for .aliashrc file
+        autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
+        " enable zsh syntax for .functionshrc file
+        autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
+        " enable vimshrc syntax for .aftervimshrc file
+        autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
+        " search for next php function
+        autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
+        autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
+        autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
+        " auto source the config after saving Vim's .vimrc config file (helps when using Vim)
+        autocmd bufwritepost .vimrc source $MYVIMRC
+        " auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
+        autocmd bufwritepost init.vim source $MYVIMRC
+        autocmd bufwritepost .beforeinit.vim source $MYVIMRC
+        autocmd bufwritepost .afterinit.vim source $MYVIMRC
+        autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
+        "refactor to function
+        autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
+        "refactor to method
+        autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
+        "class template
+        autocmd FileType php                     nnoremap <buffer> <leader>pc :call PastePhpTemplate()<CR>
+        autocmd FileType vim                     nnoremap <buffer> <leader>pc :call PasteVimTemplate()<CR>
+        "function template
+        autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
+        autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
+        "method template
+        autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<CR>}<esc>Vk=f(i
+        "constructor template
+        autocmd FileType php                     nnoremap <buffer> <leader>po ofunction __construct() {<CR>}<esc>Vk=
+        "past debug::log();
+        autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
+        autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
+        autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
+        "dump the current variable
+        autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
+        "autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<CR><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
+        "creates a new slot (import and export DSL) named after the word under the cursor
+        autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
+        "run the PHP short tests
+        autocmd FileType php                     nnoremap <buffer> <leader><leader>f :Putest<CR>
+    endif
 augroup END
 
 " dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
-	let c = getline(".")[col(".")-1]
-	if c == "$"
-		normal l
-	endif
-	execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idump('\<esc>pa',$\<esc>pa);\<esc>=="
+    let c = getline(".")[col(".")-1]
+    if c == "$"
+        normal l
+    endif
+    execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idump('\<esc>pa',$\<esc>pa);\<esc>=="
 endfunction
 
 function! MovePHPParamLeft()
-	if col(".") > 1
-		let c = getline(".")[col(".")-1]
-		if c == "$"
-			call UnsafeMovePHPParamLeft()
-		else
-			normal h
-			call MovePHPParamLeft()
-		endif
-	endif
+    if col(".") > 1
+        let c = getline(".")[col(".")-1]
+        if c == "$"
+            call UnsafeMovePHPParamLeft()
+        else
+            normal h
+            call MovePHPParamLeft()
+        endif
+    endif
 endfunction
 
 function! UnsafeMovePHPParamLeft()
-	let x = col(".")
-	let y = line(".")
-	normal f,
-	if getline(".")[col(".")-1] == ","
-		call cursor(y,x)
-		normal df,F$P
-		return
-	endif
-	call cursor(y,x)
-	normal f)
-	if getline(".")[col(".")-1] == ")"
-		call cursor(y,x)
-		normal F,
-		if col(".") >= x
-			call cursor(y,x)
-			return
-		endif
-		normal xf$
-		normal vf)hdF$Pa,
-		return
-	endif
-	call cursor(y,x)
+    let x = col(".")
+    let y = line(".")
+    normal f,
+    if getline(".")[col(".")-1] == ","
+        call cursor(y,x)
+        normal df,F$P
+        return
+    endif
+    call cursor(y,x)
+    normal f)
+    if getline(".")[col(".")-1] == ")"
+        call cursor(y,x)
+        normal F,
+        if col(".") >= x
+            call cursor(y,x)
+            return
+        endif
+        normal xf$
+        normal vf)hdF$Pa,
+        return
+    endif
+    call cursor(y,x)
 endfunction
 
 function! MovePHPParamRight()
-	if col(".") > 1
-		let c = getline(".")[col(".")-1]
-		if c == "$"
-			call UnsafeMovePHPParamRight()
-		else
-			normal h
-			call MovePHPParamRight()
-		endif
-	endif
+    if col(".") > 1
+        let c = getline(".")[col(".")-1]
+        if c == "$"
+            call UnsafeMovePHPParamRight()
+        else
+            normal h
+            call MovePHPParamRight()
+        endif
+    endif
 endfunction
 
 function! UnsafeMovePHPParamRight()
-	let x = col(".")
-	let y = line(".")
-	normal f,
-	if getline(".")[col(".")-1] == ","
-		call cursor(y,x)
-		normal df,
-		let currentX = col(".")
-		normal f,
-		if col(".") > currentX
-			normal p
-			return
-		endif
-		call cursor(y,currentX)
-		normal f)
-		if col(".") > currentX
-			normal i,kkpx
-		endif
-		return
-	endif
-	call cursor(y,x)
+    let x = col(".")
+    let y = line(".")
+    normal f,
+    if getline(".")[col(".")-1] == ","
+        call cursor(y,x)
+        normal df,
+        let currentX = col(".")
+        normal f,
+        if col(".") > currentX
+            normal p
+            return
+        endif
+        call cursor(y,currentX)
+        normal f)
+        if col(".") > currentX
+            normal i,kkpx
+        endif
+        return
+    endif
+    call cursor(y,x)
 endfunction
 
 function! MoveParamLeft()
-	let current_file_extension = L_current_buffer().file().extension
-	if current_file_extension == 'php'
-		call MovePHPParamLeft()
-	else
-		call GenericMoveParamLeft()
-	endif
+    let current_file_extension = L_current_buffer().file().extension
+    if current_file_extension == 'php'
+        call MovePHPParamLeft()
+    else
+        call GenericMoveParamLeft()
+    endif
 endfunction
 
 function! GenericMoveParamLeft()
-	" move to beginning of current word
-	normal! wb
-	" capture the x and y at the beginning of the param
-	let x = col(".")
-	let y = line(".")
-	"find the comma separating current param from the next
-	normal! f,
-	" if there actually was a comma, meaning there is another param after this one
-	let current_cursor = L_current_cursor()
-	if current_cursor().char() == ","
-		call cursor(y,x)
-		" Delete the current param and the comma, copying it at the same time. Put copied param before the previous one
-		normal! df,
-		" if the current character is a space, which it probably is
-		if current_cursor().char() == " "
-			" delete the space without yanking it
-			normal! v"_d
-		endif
-		normal! bbP
-		execute "normal! a "
-		normal! bb
-		return
-	endif
-	" there was not a comma, so this is the last param
-	" move cursor back to the
-	call cursor(y,x)
-	normal f)
-	if getline(".")[col(".")-1] == ")"
-		call cursor(y,x)
-		normal F,
-		if col(".") >= x
-			call cursor(y,x)
-			return
-		endif
-		normal xf$
-		normal vf)hdF$Pa,
-		return
-	endif
-	call cursor(y,x)
+    " move to beginning of current word
+    normal! wb
+    " capture the x and y at the beginning of the param
+    let x = col(".")
+    let y = line(".")
+    "find the comma separating current param from the next
+    normal! f,
+    " if there actually was a comma, meaning there is another param after this one
+    let current_cursor = L_current_cursor()
+    if current_cursor().char() == ","
+        call cursor(y,x)
+        " Delete the current param and the comma, copying it at the same time. Put copied param before the previous one
+        normal! df,
+        " if the current character is a space, which it probably is
+        if current_cursor().char() == " "
+            " delete the space without yanking it
+            normal! v"_d
+        endif
+        normal! bbP
+        execute "normal! a "
+        normal! bb
+        return
+    endif
+    " there was not a comma, so this is the last param
+    " move cursor back to the
+    call cursor(y,x)
+    normal f)
+    if getline(".")[col(".")-1] == ")"
+        call cursor(y,x)
+        normal F,
+        if col(".") >= x
+            call cursor(y,x)
+            return
+        endif
+        normal xf$
+        normal vf)hdF$Pa,
+        return
+    endif
+    call cursor(y,x)
 endfunction
 
 function! GenericMoveParamRight()
-	normal! wb
+    normal! wb
 endfunction
 
 function! MoveParamRight()
-	let current_file_extension = L_current_buffer().file().extension
-	if current_file_extension == 'php'
-		call MovePHPParamRight()
-	else
-		call GenericMoveParamRight()
-	endif
+    let current_file_extension = L_current_buffer().file().extension
+    if current_file_extension == 'php'
+        call MovePHPParamRight()
+    else
+        call GenericMoveParamRight()
+    endif
 endfunction
 
 function! MakePHPParam()
-	let x = col(".")
-	let y = line(".")
-	normal viwy
-	if getline(".")[col(".")-1] == "$"
-		normal vliwy
-	else
-		let currentX = col(".")
-		normal h
-		let newX = col(".")
-		if newX < currentX
-			if getline(".")[col(".")-1] == "$"
-				normal vliwy
-			endif
-		endif
-	endif
-	call search('function','bW')
-	normal f(
-	let currentX = col(".")
-	normal %
-	let newX = col(".")
-	if newX > currentX + 1
-		normal i,kkp
-	else
-		normal P
-	endif
-	normal m`
-	call cursor(y,x)
+    let x = col(".")
+    let y = line(".")
+    normal viwy
+    if getline(".")[col(".")-1] == "$"
+        normal vliwy
+    else
+        let currentX = col(".")
+        normal h
+        let newX = col(".")
+        if newX < currentX
+            if getline(".")[col(".")-1] == "$"
+                normal vliwy
+            endif
+        endif
+    endif
+    call search('function','bW')
+    normal f(
+    let currentX = col(".")
+    normal %
+    let newX = col(".")
+    if newX > currentX + 1
+        normal i,kkp
+    else
+        normal P
+    endif
+    normal m`
+    call cursor(y,x)
 endfunction
 
 " general purpose, reusable functions
 
 function! CursorIsLastLine()
-	let l:cursor_line_num = GetCursorLineNum()
-	let l:last_line_num = GetLastLineNum()
-	return l:cursor_line_num == l:last_line_num
+    let l:cursor_line_num = GetCursorLineNum()
+    let l:last_line_num = GetLastLineNum()
+    return l:cursor_line_num == l:last_line_num
 endfunction
 
 function! GetCursorLineNum()
-	return line('.')
+    return line('.')
 endfunction
 
 function! GetLastLineNum()
-	return line('$')
+    return line('$')
 endfunction
 
 function! GetCursorPos()
-	return {'line': GetCursorLineNum(), 'col': GetCursorColNum()}
+    return {'line': GetCursorLineNum(), 'col': GetCursorColNum()}
 endfunction
 
 function! SetCursorPos(pos)
-	call cursor(a:pos['line'], a:pos['col'])
+    call cursor(a:pos['line'], a:pos['col'])
 endfunction
 
 function! EchoCursorPos(pos, ...)
-	if a:0 > 0
-		let l:name = a:1
-	else
-		let l:name = ''
-	endif
-	if l:name != ''
-		echo 'cursor '.name.' :'
-	endif
-	echo 'line: '.a:pos['line']
-	echo 'col: '.a:pos['col']
+    if a:0 > 0
+        let l:name = a:1
+    else
+        let l:name = ''
+    endif
+    if l:name != ''
+        echo 'cursor '.name.' :'
+    endif
+    echo 'line: '.a:pos['line']
+    echo 'col: '.a:pos['col']
 endfunction
 
 function! GetCursorColNum()
-	return col(".")
+    return col(".")
 endfunction
 
 "end general purpose, reusable functions
@@ -1034,8 +1034,8 @@ match OverLength /\%>185v.\+/
 
 " when switching buffers preserver cursor postion after switching back
 if v:version >= 700
-	au BufLeave * let b:winview = winsaveview()
-	au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+    au BufLeave * let b:winview = winsaveview()
+    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 endif
 
 set path+=**
