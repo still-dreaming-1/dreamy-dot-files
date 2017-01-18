@@ -586,8 +586,8 @@ function! Run_current_file_tests()
 endfunction
 
 command! Same call Match_previous_indentation_command()
-command! Less call Match_previous_indentation_command(-1)
-command! More call Match_previous_indentation_command(1)
+command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
+command! More call Match_previous_indentation_command(4) " assumes 4 spaces for indentation
 
 function! Match_previous_indentation_command(...)
     if a:0 > 0
@@ -598,7 +598,7 @@ function! Match_previous_indentation_command(...)
     normal! ^
 endfunction
 
-function! Match_previous_indentation(...) " assumes tabs for indentation
+function! Match_previous_indentation(...) " assumes spaces for indentation
     let alter_indentation_level_by = 0
     if a:0 > 0
         let alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
@@ -607,24 +607,24 @@ function! Match_previous_indentation(...) " assumes tabs for indentation
     let previous_line_number = current_line_number - 1
     let original_previous_line_string = getline(previous_line_number)
     let previous_line_s = L_s(original_previous_line_string)
-    let previous_line_tab_indentation_level = 0
-    while previous_line_s.starts_with("\t") " count indentation of previous line
-        let previous_line_tab_indentation_level = previous_line_tab_indentation_level + 1
+    let previous_line_indentation_level = 0
+    while previous_line_s.starts_with(" ") " count indentation of previous line
+        let previous_line_indentation_level = previous_line_indentation_level + 1
         let previous_line_s = previous_line_s.skip(1)
     endwhile
     let current_line_s = L_s(getline(current_line_number))
-    while current_line_s.starts_with("\t") " remove indentation from current_line_s
+    while current_line_s.starts_with(" ") " remove indentation from current_line_s
         let current_line_s = current_line_s.skip(1)
     endwhile
     let current_line_string = current_line_s.str
-    let current_line_tab_indentation_level = 0
-    let desired_indentation_level = previous_line_tab_indentation_level + alter_indentation_level_by
+    let current_line_indentation_level = 0
+    let desired_indentation_level = previous_line_indentation_level + alter_indentation_level_by
     if desired_indentation_level < 0
         let desired_indentation_level = 0
     endif
-    while current_line_tab_indentation_level != desired_indentation_level
-        let current_line_string = "\t".current_line_string
-        let current_line_tab_indentation_level = current_line_tab_indentation_level + 1
+    while current_line_indentation_level != desired_indentation_level
+        let current_line_string = " ".current_line_string
+        let current_line_indentation_level = current_line_indentation_level + 1
     endwhile
     call setline(current_line_number, current_line_string)
 endfunction
