@@ -36,9 +36,6 @@ Plug 'LucHermitte/lh-vim-lib'
 " unit testing
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
-if has('nvim')
-    Plug 'neovim/node-host'
-endif
 Plug 'metakirby5/codi.vim'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
