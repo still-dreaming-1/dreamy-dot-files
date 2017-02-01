@@ -530,8 +530,9 @@ function! Run_simpletest_unit_test_suite()
 endfunction
 let g:simpletest_integration_test_suite_file_path = 0
 function! Run_simpletest_integration_test_suite()
-    let command = 'php '.g:simpletest_integration_test_suite_file_path
-    call Run_tests_with_command(command)
+    " let command = 'php '.g:simpletest_integration_test_suite_file_path
+    " call Run_tests_with_command(command)
+    call Run_simple_tests_in_file(g:simpletest_integration_test_suite_file_path)
 endfunction
 let g:simpletest_all_test_suite_file_path = 0
 function! Run_simpletest_all_test_suite()
@@ -792,7 +793,7 @@ augroup all_other_autocmd_group
         "method template
         autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<CR>}<esc>Vk=f(i
         "constructor template
-        autocmd FileType php                     nnoremap <buffer> <leader>po ofunction __construct() {<CR>}<esc>Vk=
+        autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
         "past debug::log();
         autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
         autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
