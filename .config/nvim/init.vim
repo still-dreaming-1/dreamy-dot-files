@@ -791,7 +791,7 @@ augroup all_other_autocmd_group
         autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
         autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
         "method template
-        autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function () {<CR>}<esc>Vk=f(i
+        autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function ()<CR>{<CR>}<esc>Vkk=f(i
         "constructor template
         autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
         "past debug::log();
