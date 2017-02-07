@@ -787,6 +787,10 @@ function! Dreamy_paste_php_method()
     startinsert
 endfunction
 
+function! Dreamy_paste_php_property()
+    execute "normal! opublic $;"
+    startinsert
+endfunction
 
 function! Dreamy_paste_vim_template()
     let l:file_name = expand("%:t:r")
@@ -845,6 +849,8 @@ augroup all_other_autocmd_group
         autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
         "method template
         autocmd FileType php                     nnoremap <buffer> <leader>pm :call Dreamy_paste_php_method()<CR>
+        "property template
+        autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property()<CR>
         "constructor template
         autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
         "past debug::log();
