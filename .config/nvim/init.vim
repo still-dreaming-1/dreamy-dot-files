@@ -570,8 +570,6 @@ function! Get_php_method_name_from_cursor_line()
     return function_name.str
 endfunction
 
-command! VimFile :UTRun %<CR>
-
 nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
@@ -582,7 +580,7 @@ function! Run_current_file_tests()
     elseif current_file_extension == 'js'
         Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
     elseif current_file_extension == 'vim'
-        VimFile
+        execute "normal! :UTRun %\<CR>"
     endif
 endfunction
 
@@ -733,7 +731,7 @@ function! Dreamy_paste_php_template()
     let namespace = g:dreamy_php_namespace
     if current_buffer_directory_s_path.contains(g:dreamy_php_namespace_directory_root)
         let dir_after_root = L_dir(current_buffer_directory_s_path.after(g:dreamy_php_namespace_directory_root).str)
-        let namespace .= '\' . L_s(dir_after_root.path).remove_end().str
+        let namespace .= '\' . L_s(dir_after_root.path).str
     endif
     if g:dreamy_php_namespace !=# ''
         let paste_php_template .= 'namespace '.namespace.";\<CR>\<CR>"
@@ -742,10 +740,16 @@ function! Dreamy_paste_php_template()
     let paste_php_template .= "class ".current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
         let paste_php_template .= " extends \\test\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
-        let paste_php_template .= current_buffer_file.name_without_extension . " = new "
-        let paste_php_template .= current_buffer_file.name_without_extension . "();\<CR>"
-        let paste_php_template .= "$this->assertSame(is_object($" . current_buffer_file.name_without_extension . "), "
-        let paste_php_template .= "true);\<CR>\}\<CR>\}\<esc>kk^f$l~k^l~ggVG=:w\<CR>jjjjjj^"
+        if L_s(current_buffer_file.name_without_extension).ends_with('UnitTest')
+            let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('UnitTest').str
+        elseif L_s(current_buffer_file.name_without_extension).ends_with('IntegrationTest')
+            let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('IntegrationTest').str
+        else
+            let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('Test').str
+        endif
+        let paste_php_template .= tested_class_name . " = new " . tested_class_name . "();\<CR>"
+        let paste_php_template .= "$this->assertSame(is_object($" . tested_class_name . "), true);\<CR>\}\<CR>\}\<esc>"
+        let paste_php_template .= "kk^f$l~k^l~ggVG=:w\<CR>jjjjjj^"
     else
         let paste_php_template .= "\<CR>{\<CR>\}\<esc>kk^we"
     endif
