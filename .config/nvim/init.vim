@@ -724,6 +724,7 @@ endfunction
 
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
+let g:dreamy_php_default_base_class = ''
 function! Dreamy_paste_php_template()
     let current_buffer = L_current_buffer()
     let paste_php_template = "i<?php\<CR>\<CR>"
@@ -751,16 +752,37 @@ function! Dreamy_paste_php_template()
         let paste_php_template .= "$this->assertSame(is_object($" . tested_class_name . "), true);\<CR>\}\<CR>\}\<esc>"
         let paste_php_template .= "kk^f$l~k^l~ggVG=:w\<CR>jjjjjj^"
     else
+        if g:dreamy_php_default_base_class !=# ''
+            let paste_php_template .= " extends ".g:dreamy_php_default_base_class
+        endif
         let paste_php_template .= "\<CR>{\<CR>\}\<esc>kk^we"
     endif
     execute "normal! " . paste_php_template
 endfunction
 
 function! Dreamy_paste_php_method()
-    execute "normal! o\<CR>public function ()\<CR>{\<CR>}\<esc>Vkk=f(\<esc>"
+    let current_line_s = L_s(L_current_cursor().line())
+    normal! j
+    let next_line_s = L_s(L_current_cursor().line())
+    normal! k
+    let next_line_is_closing_brace_or_blank = 0
+    if next_line_s.trim().str ==# '}'
+        let next_line_is_closing_brace_or_blank = 1
+    elseif next_line_s.trim().str ==# ''
+        let next_line_is_closing_brace_or_blank = 1
+    endif
+    let paste_normal_command = 'normal! o'
+    if current_line_s.trim().str !=# '{'
+        let paste_normal_command .= "\<CR>"
+    endif
+    let paste_normal_command .= "public function ()\<CR>{\<CR>}\<esc>Vkk=f(\<esc>"
+    execute paste_normal_command
     let current_buffer_file = L_current_buffer().file()
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
         execute "normal! itest\<esc>l"
+    endif
+    if next_line_is_closing_brace_or_blank == 0
+        execute "normal! jj\<esc>o\<esc>kkkf(\<esc>"
     endif
     startinsert
 endfunction
