@@ -725,17 +725,44 @@ function! s:term_gf()
 endfunction
 
 let g:dreamy_php_namespace = ''
-function! PastePhpTemplate()
-    let l:file_name = expand("%:t:r")
-    let l:paste_php_template = "i<?php\<CR>\<CR>"
-    if g:dreamy_php_namespace !=# ''
-        let l:paste_php_template .= 'namespace '.g:dreamy_php_namespace.";\<CR>\<CR>"
+let g:dreamy_php_namespace_directory_root = ''
+function! Dreamy_paste_php_template()
+    let current_buffer = L_current_buffer()
+    let paste_php_template = "i<?php\<CR>\<CR>"
+    let current_buffer_directory_s_path = L_s(current_buffer.dir().path)
+    let namespace = g:dreamy_php_namespace
+    if current_buffer_directory_s_path.contains(g:dreamy_php_namespace_directory_root)
+        let dir_after_root = L_dir(current_buffer_directory_s_path.after(g:dreamy_php_namespace_directory_root).str)
+        let namespace .= '\' . L_s(dir_after_root.path).remove_end().str
     endif
-    let l:paste_php_template .= "class ".l:file_name."\<CR>{\<CR>\}\<esc>kk^we"
-    execute "normal! ".l:paste_php_template
+    if g:dreamy_php_namespace !=# ''
+        let paste_php_template .= 'namespace '.namespace.";\<CR>\<CR>"
+    endif
+    let current_buffer_file = current_buffer.file()
+    let paste_php_template .= "class ".current_buffer_file.name_without_extension
+    if L_s(current_buffer_file.name_without_extension).ends_with('Test')
+        let paste_php_template .= " extends \\test\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
+        let paste_php_template .= current_buffer_file.name_without_extension . " = new "
+        let paste_php_template .= current_buffer_file.name_without_extension . "();\<CR>"
+        let paste_php_template .= "$this->assertSame(is_object($" . current_buffer_file.name_without_extension . "), "
+        let paste_php_template .= "true);\<CR>\}\<CR>\}\<esc>kk^f$l~k^l~ggVG=:w\<CR>jjjjjj^"
+    else
+        let paste_php_template .= "\<CR>{\<CR>\}\<esc>kk^we"
+    endif
+    execute "normal! " . paste_php_template
 endfunction
 
-function! PasteVimTemplate()
+function! Dreamy_paste_php_method()
+    execute "normal! o\<CR>public function ()\<CR>{\<CR>}\<esc>Vkk=f(\<esc>"
+    let current_buffer_file = L_current_buffer().file()
+    if L_s(current_buffer_file.name_without_extension).ends_with('Test')
+        execute "normal! itest\<esc>l"
+    endif
+    startinsert
+endfunction
+
+
+function! Dreamy_paste_vim_template()
     let l:file_name = expand("%:t:r")
     let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name."\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
     execute "normal! ".l:paste_vim_template
@@ -785,13 +812,13 @@ augroup all_other_autocmd_group
         "refactor to method
         autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
         "class template
-        autocmd FileType php                     nnoremap <buffer> <leader>pc :call PastePhpTemplate()<CR>
-        autocmd FileType vim                     nnoremap <buffer> <leader>pc :call PasteVimTemplate()<CR>
+        autocmd FileType php                     nnoremap <buffer> <leader>pc :call Dreamy_paste_php_template()<CR>
+        autocmd FileType vim                     nnoremap <buffer> <leader>pc :call Dreamy_paste_vim_template()<CR>
         "function template
         autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
         autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
         "method template
-        autocmd FileType php                     nnoremap <buffer> <leader>pm opublic function ()<CR>{<CR>}<esc>Vkk=f(i
+        autocmd FileType php                     nnoremap <buffer> <leader>pm :call Dreamy_paste_php_method()<CR>
         "constructor template
         autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
         "past debug::log();
