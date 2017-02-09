@@ -276,9 +276,11 @@ nnoremap <leader>gc :Gcommit<CR>i
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 
-"vimagit mapping
+" vimagit mapping
 nnoremap <leader>gv :Magit<CR>
 
+" mappings ---------
+nnoremap <leader>T :te<CR>
 " use to add a space
 nnoremap <leader>z i <esc>
 " move after the next dot character (this should be turned into a custom motion where instead of . you can type anything you want to move after. This would be the opposite of t
@@ -792,6 +794,11 @@ function! Dreamy_paste_php_property()
     startinsert
 endfunction
 
+function! Dreamy_paste_php_mock()
+    execute "normal! aPhake::mock('');\<esc>hh\<esc>"
+    startinsert
+endfunction
+
 function! Dreamy_paste_vim_template()
     let l:file_name = expand("%:t:r")
     let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name."\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
@@ -862,8 +869,7 @@ augroup all_other_autocmd_group
         "autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<CR><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
         "creates a new slot (import and export DSL) named after the word under the cursor
         autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-        "run the PHP short tests
-        autocmd FileType php                     nnoremap <buffer> <leader><leader>f :Putest<CR>
+        autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
     endif
 augroup END
 
