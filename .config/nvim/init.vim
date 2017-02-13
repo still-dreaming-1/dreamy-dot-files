@@ -38,10 +38,6 @@ Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
 
-function! UpdateRemotePluginsAlias(required_but_unused_arg)
-    UpdateRemotePlugins
-endfunction
-
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
 endif
@@ -312,48 +308,14 @@ vmap v <Plug>(expand_region_expand)
 " after pressing v to go into visual and pressing v again one or more times, press V (shift+v for capital v) to decrease the selected area. If you do
 " this enough times, you will exit visual mode. Alternatively pressing esc also exits visual mode.
 vmap V <Plug>(expand_region_shrink)
-
-function! ChangeDirectoryCustom(dir_path)
-    let before_dir = getcwd()
-    execute 'cd '.fnameescape(a:dir_path)
-    let after_dir = getcwd()
-    if before_dir !=# after_dir
-        " place custom current directory changed event handler code here
-        " make NERDTree root match new current directory
-        NERDTreeCWD
-        NERDTreeClose
-    endif
-    " Make vim-fugitive use the new current directory repository.
-    " This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
-    if exists('b:git_dir')
-        unlet b:git_dir
-    endif
-    call fugitive#detect(getcwd())
-endfunction
-
-function! MoveCursorToLastTerminalChar()
-    normal! G$
-    let l:cursor_char = L_current_cursor().char()
-    let l:numeric_code = char2nr(l:cursor_char)
-    while l:numeric_code == 0
-        normal! k$
-        let l:cursor_char = getline(".")[col(".")-1]
-        let l:numeric_code = char2nr(l:cursor_char)
-    endwhile
-    if l:numeric_code == 226
-        normal! h
-        let l:cursor_char = getline(".")[col(".")-1]
-        let l:numeric_code = char2nr(l:cursor_char)
-        while l:cursor_char == ' '
-            normal! h
-            let l:cursor_char = getline(".")[col(".")-1]
-        endwhile
-        let l:numeric_code = char2nr(l:cursor_char)
-        if l:numeric_code == 226
-            normal l
-        endif
-    endif
-endfunction
+" make current line match previous line indentation
+nnoremap <leader>= :Same<CR>
+" make current line indented one less than previous
+nnoremap <leader>< :Less<CR>
+" make current line indented one more than previous
+nnoremap <leader>> :More<CR>
+nnoremap <leader><leader><  :call MoveParamLeft()<CR>
+nnoremap <leader><leader>>  :call MoveParamRight()<CR>
 
 " make current window bottom window
 nnoremap <leader>mj :BOTTOM<CR>
@@ -802,19 +764,59 @@ function! Dreamy_paste_vim_template()
     execute "normal! ".l:paste_vim_template
 endfunction
 
-nnoremap <leader>= :Same<CR>
-nnoremap <leader>< :Less<CR>
-nnoremap <leader>> :More<CR>
-nnoremap <leader><leader><  :call MoveParamLeft()<CR>
-nnoremap <leader><leader>>  :call MoveParamRight()<CR>
-
 " ---------------------------------
 " helper functions (used by config)
 " ---------------------------------
+function! UpdateRemotePluginsAlias(required_but_unused_arg)
+    UpdateRemotePlugins
+endfunction
+
 function! JumpToNextJSFunction()
     let search_string = L_s('= function(').get_no_magic().str
     call search(search_string)
     let @/ = search_string
+endfunction
+
+function! ChangeDirectoryCustom(dir_path)
+    let before_dir = getcwd()
+    execute 'cd '.fnameescape(a:dir_path)
+    let after_dir = getcwd()
+    if before_dir !=# after_dir
+        " place custom current directory changed event handler code here
+        " make NERDTree root match new current directory
+        NERDTreeCWD
+        NERDTreeClose
+    endif
+    " Make vim-fugitive use the new current directory repository.
+    " This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
+    if exists('b:git_dir')
+        unlet b:git_dir
+    endif
+    call fugitive#detect(getcwd())
+endfunction
+
+function! MoveCursorToLastTerminalChar()
+    normal! G$
+    let l:cursor_char = L_current_cursor().char()
+    let l:numeric_code = char2nr(l:cursor_char)
+    while l:numeric_code == 0
+        normal! k$
+        let l:cursor_char = getline(".")[col(".")-1]
+        let l:numeric_code = char2nr(l:cursor_char)
+    endwhile
+    if l:numeric_code == 226
+        normal! h
+        let l:cursor_char = getline(".")[col(".")-1]
+        let l:numeric_code = char2nr(l:cursor_char)
+        while l:cursor_char == ' '
+            normal! h
+            let l:cursor_char = getline(".")[col(".")-1]
+        endwhile
+        let l:numeric_code = char2nr(l:cursor_char)
+        if l:numeric_code == 226
+            normal l
+        endif
+    endif
 endfunction
 
 " dump the current variable. Works whether or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
