@@ -664,14 +664,6 @@ augroup code_abbreviations
     endif
 augroup END
 
-" this is part of a workaround to fix the way gf works inside a terminal buffer
-function! s:term_gf()
-    let procid = matchstr(bufname(""), '\(://.*/\)\@<=\(\d\+\)')
-    let proc_cwd = resolve('/proc/'.procid.'/cwd')
-    exe 'lcd '.proc_cwd
-    exe 'e <cfile>'
-endfunction
-
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
 let g:dreamy_php_default_base_class = ''
