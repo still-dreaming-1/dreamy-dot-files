@@ -1041,10 +1041,6 @@ endfunction
 
 " end general purpose, reusable functions
 
-" highlight the part of lines that wrap past the edge of screen using a pre-set number of characters that fit your screen (change this to match your current screen)
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%>185v.\+/
-
 " when switching buffers preserve cursor postion after switching back
 if v:version >= 700
     au BufLeave * let b:winview = winsaveview()
