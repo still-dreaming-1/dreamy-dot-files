@@ -69,13 +69,6 @@ else
 endif
 call plug#end()
 
-" Shallow clones are no good for me because I develop my plugins off these clones
-let g:plug_shallow = 0
-
-" Codi settings
-let g:codi#log = '/home/jesse/logs/codi_log'
-let g:codi#width = 80
-
 " This is how you enable elhiv.vim, which is needed by my my plugins
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 
@@ -122,13 +115,17 @@ let g:netrw_liststyle = 3
 
 " plugin settings
 " ---------------
-
+" plug settings
+" Shallow clones are no good for me because I develop my plugins off these clones
+let g:plug_shallow = 0
+" Codi settings
+let g:codi#log = '/home/jesse/logs/codi_log'
+let g:codi#width = 80
 " vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
 let g:airline_powerline_fonts = 1
 " prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
-
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
 " neomake settings
