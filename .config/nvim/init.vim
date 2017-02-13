@@ -817,7 +817,7 @@ function! JumpToNextJSFunction()
     let @/ = search_string
 endfunction
 
-" dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
+" dump the current variable. Works whether or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
     let c = getline(".")[col(".")-1]
     if c == "$"
