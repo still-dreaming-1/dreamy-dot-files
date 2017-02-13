@@ -821,11 +821,6 @@ augroup all_other_autocmd_group
     if has("autocmd")
         " removes all autocmd in group
         autocmd!
-        if has('nvim')
-            " fixes the gf when run from a terminal buffer
-            autocmd TermOpen * nnoremap <buffer> gf :call <SID>term_gf()<CR>
-            " autocmd TermOpen * <buffer> command! BD :BD!
-        endif
         autocmd! BufWritePost * Neomake
         " enable zsh syntax for .aliashrc file
         autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
