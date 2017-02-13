@@ -221,6 +221,9 @@ command! PhpUnitAll :call Run_tests_with_command('phpunit --configuration phpuni
 command! PhpUnitAllCovered :call Run_tests_with_command('phpunit --configuration phpunit_all_with_code_coverage.xml')
 command! PhpUnitFile :call Run_PHPUnit_tests_in_file(L_current_buffer().file().name_without_extension)
 command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
+command! Same call Match_previous_indentation_command()
+command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
+command! More call Match_previous_indentation_command(4) " assumes 4 spaces for indentation
 " --------
 " mappings
 " --------
@@ -381,10 +384,6 @@ nnoremap <C-l> :Right<CR>
 
 nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
-
-command! Same call Match_previous_indentation_command()
-command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
-command! More call Match_previous_indentation_command(4) " assumes 4 spaces for indentation
 
 " better rainbow parentheses settings
 let g:rbpt_colorpairs = [
