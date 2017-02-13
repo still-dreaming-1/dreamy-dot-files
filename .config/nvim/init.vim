@@ -816,7 +816,6 @@ augroup all_other_autocmd_group
         autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
         "dump the current variable
         autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
-        "autocmd FileType php                     nnoremap <buffer> <leader>D viw<esc>vF$ly/;<CR><space>uo<esc>idump('<esc>pa',$<esc>pa);<esc>==
         "creates a new slot (import and export DSL) named after the word under the cursor
         autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
         autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
