@@ -78,27 +78,26 @@ source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 let mapleader = " "
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let maplocalleader = "\\"
-
 " use the clipboard
 set clipboard+=unnamedplus
-
 " I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
 set hidden
+" enables syntax highlighting. Actually the docs say that is what
+" :syntax enable is for. :syntax on is when you want to overrite your
+" settings. Using :syntax enable allows you to use :highlight before or after
+" enabling syntax. I should experiment with :syntax enable instead of this...
 syntax on
-
 " show title in console title bar
 set title
-" at the bottom of the screen show the number of visually selected characters, and other stuff... If the selection is more than one row, shows the row count instead.
+" at the bottom of the screen show the number of visually selected characters, and other stuff. If the selection is more than one row, shows the row count instead.
 set showcmd
-
 " indentation / tab settings
 set tabstop=4
 set shiftwidth=4
 set expandtab " use spaces instead of tabs
-
-set nofoldenable " disable folding
-
-" make searching easier:
+" disable folding
+set nofoldenable
+" make searching easier
 set ignorecase
 set smartcase
 set hlsearch
@@ -115,6 +114,16 @@ if exists('+relativenumber')
     set number
     set relativenumber
 endif
+" warning: next two settings make recovery impossible
+set nobackup
+set noswapfile
+
+set autoindent " copy the indentation from the previous line (supposedly, but does not always work).
+
+set backspace=indent,eol,start
+
+" 'disable' the mouse
+set mouse=c
 " ---------------
 " plugin settings
 " ---------------
@@ -176,16 +185,6 @@ function! ChangeDirectoryCustom(dir_path)
     call fugitive#detect(getcwd())
 endfunction
 
-" warning: next two settings make recovery impossible
-set nobackup
-set noswapfile
-
-set autoindent " copy the indentation from the previous line (supposedly, but does not always work).
-
-set backspace=indent,eol,start
-
-" 'disable' the mouse
-set mouse=c
 " arrow keys are the devil
 nnoremap <up> <nop>
 nnoremap <down> <nop>
