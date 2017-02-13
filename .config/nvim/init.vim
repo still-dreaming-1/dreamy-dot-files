@@ -77,6 +77,10 @@ source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
 let g:dreamy_php_default_base_class = ''
+let g:simpletest_all_test_suite_file_path = 0
+let g:simpletest_integration_test_suite_file_path = 0
+let g:simpletest_unit_test_suite_file_path = 0
+let g:simpletest_php_bootstrap_filepath = ''
 " ------------
 " Vim settings
 " ------------
@@ -158,12 +162,12 @@ let NERDTreeWinSize = 70
 let NERDTreeQuitOnOpen = 1
 " When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
 let NERDTreeAutoDeleteBuffer = 1
-" add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
-command! T NERDTreeToggle
 let NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
 " --------
 " commands
 " --------
+" add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
+command! T NERDTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
 command! Chome call ChangeDirectoryCustom("$HOME")
 command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
@@ -175,6 +179,48 @@ command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
 " send contents of file to mysql
 command! Sendb :!mysql < %:p
+" make current window bottom window
+command! BOTTOM normal <C-w>J
+" go down one window
+command! Bottom normal <C-w>j
+" make current window top window
+command! TOP normal <C-w>K
+" go up one window
+command! Top normal <C-w>k
+" make current window left window
+command! LEFT normal <C-w>H
+" go left one window
+command! Left normal <C-w>h
+" make current window right window
+command! RIGHT normal <C-w>L
+" go right one window
+command! Right normal <C-w>l
+" go to next window
+command! NextWindow normal <C-w>w
+" JavaScript commands
+command! Mocha :call RunMochaTests()
+command! Npm :call RunNpmTests()
+command! MochaD :call RunMochaTests(1)
+command! MochaFile :call RunMochaTests(0, L_current_buffer().file().path)
+command! MochaFileD :call RunMochaTests(1, L_current_buffer().file().path)
+command! MochaFilter :call RunMochaTests(0, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
+command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
+" SimpleTest commands
+command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
+command! Php :call Run_simpletest_unit_test_suite()
+command! PhpInt :call Run_simpletest_integration_test_suite()
+command! PhpAll :call Run_simpletest_all_test_suite()
+" Codeception commands
+command! Code :call Run_tests_with_command('codecept run --fail-fast')
+command! CodeFail :call Run_tests_with_command('codecept run -g failed')
+command! CodeFile :call Run_codeception_tests_in_current_file()
+" PHPUnit commands
+command! PhpUnit :call Run_tests_with_command('phpunit')
+command! PhpUnitCovered :call Run_tests_with_command('phpunit --configuration phpunit_with_code_coverage.xml')
+command! PhpUnitAll :call Run_tests_with_command('phpunit --configuration phpunit_all.xml')
+command! PhpUnitAllCovered :call Run_tests_with_command('phpunit --configuration phpunit_all_with_code_coverage.xml')
+command! PhpUnitFile :call Run_PHPUnit_tests_in_file(L_current_buffer().file().name_without_extension)
+command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
 " --------
 " mappings
 " --------
@@ -232,7 +278,7 @@ vnoremap . :norm.<CR>
 " make up and down not ignore wrapping lines
 nnoremap j gj
 nnoremap k gk
-" <leader>. will now repeat the last command. Similar to using . to repeate
+" <leader>. will now repeat the last command. Similar to using . to repeat
 nnoremap <leader>. @:
 " make backspace delete everything before the cursor until only white space
 nnoremap <bs> hv^d
@@ -311,7 +357,6 @@ nmap <leader>; <leader>bej
 
 " change key mappings for the vim-expand-region plugin. Setting both of these up as visual mappings makes sense so they don't override mappings for other
 " modes. Visual mode mappings are also the natural fit since you would only use these after entering visual mode (by pressing v).
-
 " after pressing v to go into visual mode, press v again to expand what is selected. You can press v repeatedly to keep expanding the selection
 vmap v <Plug>(expand_region_expand)
 " after pressing v to go into visual and pressing v again one or more times, press V (shift+v for capital v) to decrease the selected area. If you do
@@ -328,227 +373,27 @@ nnoremap <leader><leader>>  :call MoveParamRight()<CR>
 
 " make current window bottom window
 nnoremap <leader>mj :BOTTOM<CR>
-command! BOTTOM normal <C-w>J
 " go down one window
 nnoremap <C-j> :Bottom<CR>
-command! Bottom normal <C-w>j
 " make current window top window
 nnoremap <leader>mk :TOP<CR>
-command! TOP normal <C-w>K
 " go up one window
 nnoremap <C-k> :Top<CR>
-command! Top normal <C-w>k
 " make current window left window
 nnoremap <leader>mh :LEFT<CR>
-command! LEFT normal <C-w>H
 " go left one window
 nnoremap <C-h> :Left<CR>
-command! Left normal <C-w>h
 " make current window right window
 nnoremap <leader>ml :RIGHT<CR>
-command! RIGHT normal <C-w>L
 " go right one window
 nnoremap <C-l> :Right<CR>
-command! Right normal <C-w>l
-" go to next window
-command! NextWindow normal <C-w>w
-
-command! Mocha :call RunMochaTests()
-command! Npm :call RunNpmTests()
-command! MochaD :call RunMochaTests(1)
-command! MochaFile :call RunMochaTests(0, L_current_buffer().file().path)
-command! MochaFileD :call RunMochaTests(1, L_current_buffer().file().path)
-command! MochaFilter :call RunMochaTests(0, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
-command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
-
-function! RunMochaTests(...)
-    split
-    BOTTOM
-    enew
-    let command = 'mocha --recursive'
-    if a:0 > 0
-        let debug = a:1
-        if debug
-            let command = command.' debug'
-        endif
-        if a:0 > 1
-            let test_file_path = a:2
-            let command = command.' '.shellescape(test_file_path)
-            if a:0  > 2
-                let filtered_text = a:3
-                let command = command.' -f "'.filtered_text.'"'
-            endif
-        endif
-    endif
-    call l#log('command about to run from RunMochaTests(): '.command)
-    call termopen(command)
-    nnoremap <buffer><leader>q :q!<CR>
-endfunction
-
-function! RunNpmTests()
-    split
-    BOTTOM
-    enew
-    let command = 'npm test'
-    call termopen(command)
-    nnoremap <buffer><leader>q :q!<CR>
-endfunction
-
-function! GetMochaFilteredTextOfTestUnderCursor()
-    let line_text = L_s(getline('.'))
-    let filtered_text = line_text
-    while !filtered_text.starts_with("'")
-        let filtered_text = filtered_text.remove_start()
-        if filtered_text.len == 0
-            break
-        endif
-    endwhile
-    while !filtered_text.ends_with("'")
-        let filtered_text =  filtered_text.remove_end()
-        if filtered_text.len == 0
-            break
-        endif
-    endwhile
-    let filtered_text = filtered_text.remove_start()
-    let filtered_text = filtered_text.remove_end()
-    call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
-    return filtered_text.str
-endfunction
-
-" SimpleTest commands
-command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
-command! Php :call Run_simpletest_unit_test_suite()
-command! PhpInt :call Run_simpletest_integration_test_suite()
-command! PhpAll :call Run_simpletest_all_test_suite()
-" Codeception commands
-command! Code :call Run_tests_with_command('codecept run --fail-fast')
-command! CodeFail :call Run_tests_with_command('codecept run -g failed')
-command! CodeFile :call Run_codeception_tests_in_current_file()
-" PHPUnit commands
-command! PhpUnit :call Run_tests_with_command('phpunit')
-command! PhpUnitCovered :call Run_tests_with_command('phpunit --configuration phpunit_with_code_coverage.xml')
-command! PhpUnitAll :call Run_tests_with_command('phpunit --configuration phpunit_all.xml')
-command! PhpUnitAllCovered :call Run_tests_with_command('phpunit --configuration phpunit_all_with_code_coverage.xml')
-command! PhpUnitFile :call Run_PHPUnit_tests_in_file(L_current_buffer().file().name_without_extension)
-command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
-
-function! Run_tests_with_command(command)
-    split
-    BOTTOM
-    enew
-    call l#log('command about to run from Run_tests_with_command(): '.a:command)
-    call termopen(a:command)
-    nnoremap <buffer><leader>q :q!<CR>
-endfunction
-
-function! Run_codeception_tests_in_current_file()
-    call Run_tests_with_command('codecept run acceptance '.shellescape(L_current_buffer().file().name_without_extension))
-endfunction
-
-let g:simpletest_unit_test_suite_file_path = 0
-function! Run_simpletest_unit_test_suite()
-    let command = 'php '.g:simpletest_unit_test_suite_file_path
-    call Run_tests_with_command(command)
-endfunction
-let g:simpletest_integration_test_suite_file_path = 0
-function! Run_simpletest_integration_test_suite()
-    " let command = 'php '.g:simpletest_integration_test_suite_file_path
-    " call Run_tests_with_command(command)
-    call Run_simple_tests_in_file(g:simpletest_integration_test_suite_file_path)
-endfunction
-let g:simpletest_all_test_suite_file_path = 0
-function! Run_simpletest_all_test_suite()
-    let command = 'php '.g:simpletest_all_test_suite_file_path
-    call Run_tests_with_command(command)
-endfunction
-
-function! Run_single_phpunit_test_method(test_method_name, test_file_path)
-    let command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
-    call Run_tests_with_command(command)
-endfunction
-
-let g:simpletest_php_bootstrap_filepath = ''
-function! Run_simple_tests_in_file(path)
-    let command = 'php'
-    if g:simpletest_php_bootstrap_filepath !=# ''
-        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
-    endif
-    let command .= ' -f '.shellescape(a:path)
-    call Run_tests_with_command(command)
-endfunction
-
-function! Run_PHPUnit_tests_in_file(class)
-    call Run_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
-endfunction
-
-function! Get_php_method_name_from_cursor_line()
-    let line_text = L_s(getline('.'))
-    let function_name = line_text.trim()
-    while function_name.contains('(')
-        let function_name = function_name.remove_end()
-    endwhile
-    let function_name = function_name.after('function').trim()
-    call l#log('value returned from Get_php_method_name_from_cursor_line(): '.function_name.str)
-    return function_name.str
-endfunction
 
 nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
-function! Run_current_file_tests()
-    let current_file_extension = L_current_buffer().file().extension
-    if current_file_extension == 'php'
-        PhpFile
-    elseif current_file_extension == 'js'
-        Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
-    elseif current_file_extension == 'vim'
-        execute "normal! :UTRun %\<CR>"
-    endif
-endfunction
-
 command! Same call Match_previous_indentation_command()
 command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
 command! More call Match_previous_indentation_command(4) " assumes 4 spaces for indentation
-
-function! Match_previous_indentation_command(...)
-    if a:0 > 0
-        call Match_previous_indentation(a:1)
-    else
-        call Match_previous_indentation()
-    endif
-    normal! ^
-endfunction
-
-function! Match_previous_indentation(...) " assumes spaces for indentation
-    let alter_indentation_level_by = 0
-    if a:0 > 0
-        let alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
-    endif
-    let current_line_number = line('.')
-    let previous_line_number = current_line_number - 1
-    let original_previous_line_string = getline(previous_line_number)
-    let previous_line_s = L_s(original_previous_line_string)
-    let previous_line_indentation_level = 0
-    while previous_line_s.starts_with(" ") " count indentation of previous line
-        let previous_line_indentation_level = previous_line_indentation_level + 1
-        let previous_line_s = previous_line_s.skip(1)
-    endwhile
-    let current_line_s = L_s(getline(current_line_number))
-    while current_line_s.starts_with(" ") " remove indentation from current_line_s
-        let current_line_s = current_line_s.skip(1)
-    endwhile
-    let current_line_string = current_line_s.str
-    let current_line_indentation_level = 0
-    let desired_indentation_level = previous_line_indentation_level + alter_indentation_level_by
-    if desired_indentation_level < 0
-        let desired_indentation_level = 0
-    endif
-    while current_line_indentation_level != desired_indentation_level
-        let current_line_string = " ".current_line_string
-        let current_line_indentation_level = current_line_indentation_level + 1
-    endwhile
-    call setline(current_line_number, current_line_string)
-endfunction
 
 " better rainbow parentheses settings
 let g:rbpt_colorpairs = [
@@ -578,48 +423,6 @@ set laststatus=2
 
 " mapping to open a plugins home page in Vivaldi. The cursor must be on a line using vim-plug to include a plugin
 command! Hub call OpenVivaldiAtPluginPage()
-function! OpenVivaldiAtPluginPage()
-    let l:plugin_name = GetPluginPageFromCurrentLine()
-    call jobstart('vivaldi "https://www.github.com/'.l:plugin_name.'"')
-endfunction
-function! GetPluginPageFromCurrentLine()
-    normal! ^w
-    let l:start_plugin_name_pos = col(".")
-    normal! f'
-    let l:end_plugin_name_pos = col(".") - 2
-    let l:line = getline(".")
-    let l:plugin_name = l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
-    return l:plugin_name
-endfunction
-
-" user functions: (to be called manually while editing)
-
-" place some text after the first word on the current line
-function! AfterFirstWord(text)
-    normal! ^
-    let l:first_word = expand('<cword>')
-    let l:word_len = len(l:first_word)
-    if l:word_len == 0
-        normal! ^
-    elseif l:word_len == 1
-        normal! l
-    elseif l:word_len > 1
-        execute 'normal! '.l:word_len.'l\<esc>'
-    endif
-    execute 'normal! i'.a:text
-endfunction
-
-function! RunMacroUntilLastLine(macro)
-    while !CursorIsLastLine()
-        let l:current_line_num = GetCursorLineNum()
-        execute 'normal! @'.a:macro
-        let l:new_line_num = GetCursorLineNum()
-        if l:new_line_num <= l:current_line_num
-            return
-        endif
-    endwhile
-endfunction
-
 " --------------
 " autocmd groups
 " --------------
@@ -691,9 +494,213 @@ augroup preserve_cursor_position_when_change_buffers_group
         autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
     endif
 augroup END
+" -----------------------------------------------------
+" user functions: (to be called manually while editing)
+" -----------------------------------------------------
+" place some text after the first word on the current line
+function! AfterFirstWord(text)
+    normal! ^
+    let l:first_word = expand('<cword>')
+    let l:word_len = len(l:first_word)
+    if l:word_len == 0
+        normal! ^
+    elseif l:word_len == 1
+        normal! l
+    elseif l:word_len > 1
+        execute 'normal! '.l:word_len.'l\<esc>'
+    endif
+    execute 'normal! i'.a:text
+endfunction
+
+function! RunMacroUntilLastLine(macro)
+    while !CursorIsLastLine()
+        let l:current_line_num = GetCursorLineNum()
+        execute 'normal! @'.a:macro
+        let l:new_line_num = GetCursorLineNum()
+        if l:new_line_num <= l:current_line_num
+            return
+        endif
+    endwhile
+endfunction
 " ---------------------------------
 " helper functions (used by config)
 " ---------------------------------
+function! OpenVivaldiAtPluginPage()
+    let l:plugin_name = GetPluginPageFromCurrentLine()
+    call jobstart('vivaldi "https://www.github.com/'.l:plugin_name.'"')
+endfunction
+
+function! GetPluginPageFromCurrentLine()
+    normal! ^w
+    let l:start_plugin_name_pos = col(".")
+    normal! f'
+    let l:end_plugin_name_pos = col(".") - 2
+    let l:line = getline(".")
+    let l:plugin_name = l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
+    return l:plugin_name
+endfunction
+
+function! Match_previous_indentation_command(...)
+    if a:0 > 0
+        call Match_previous_indentation(a:1)
+    else
+        call Match_previous_indentation()
+    endif
+    normal! ^
+endfunction
+
+function! Match_previous_indentation(...) " assumes spaces for indentation
+    let alter_indentation_level_by = 0
+    if a:0 > 0
+        let alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
+    endif
+    let current_line_number = line('.')
+    let previous_line_number = current_line_number - 1
+    let original_previous_line_string = getline(previous_line_number)
+    let previous_line_s = L_s(original_previous_line_string)
+    let previous_line_indentation_level = 0
+    while previous_line_s.starts_with(" ") " count indentation of previous line
+        let previous_line_indentation_level = previous_line_indentation_level + 1
+        let previous_line_s = previous_line_s.skip(1)
+    endwhile
+    let current_line_s = L_s(getline(current_line_number))
+    while current_line_s.starts_with(" ") " remove indentation from current_line_s
+        let current_line_s = current_line_s.skip(1)
+    endwhile
+    let current_line_string = current_line_s.str
+    let current_line_indentation_level = 0
+    let desired_indentation_level = previous_line_indentation_level + alter_indentation_level_by
+    if desired_indentation_level < 0
+        let desired_indentation_level = 0
+    endif
+    while current_line_indentation_level != desired_indentation_level
+        let current_line_string = " ".current_line_string
+        let current_line_indentation_level = current_line_indentation_level + 1
+    endwhile
+    call setline(current_line_number, current_line_string)
+endfunction
+
+function! Run_current_file_tests()
+    let current_file_extension = L_current_buffer().file().extension
+    if current_file_extension == 'php'
+        PhpFile
+    elseif current_file_extension == 'js'
+        Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
+    elseif current_file_extension == 'vim'
+        execute "normal! :UTRun %\<CR>"
+    endif
+endfunction
+
+function! Run_tests_with_command(command)
+    split
+    BOTTOM
+    enew
+    call l#log('command about to run from Run_tests_with_command(): '.a:command)
+    call termopen(a:command)
+    nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
+function! Run_codeception_tests_in_current_file()
+    call Run_tests_with_command('codecept run acceptance '.shellescape(L_current_buffer().file().name_without_extension))
+endfunction
+
+function! Run_simpletest_unit_test_suite()
+    let command = 'php '.g:simpletest_unit_test_suite_file_path
+    call Run_tests_with_command(command)
+endfunction
+
+function! Run_simpletest_integration_test_suite()
+    call Run_simple_tests_in_file(g:simpletest_integration_test_suite_file_path)
+endfunction
+
+function! Run_simpletest_all_test_suite()
+    let command = 'php '.g:simpletest_all_test_suite_file_path
+    call Run_tests_with_command(command)
+endfunction
+
+function! Run_single_phpunit_test_method(test_method_name, test_file_path)
+    let command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
+    call Run_tests_with_command(command)
+endfunction
+
+function! Run_simple_tests_in_file(path)
+    let command = 'php'
+    if g:simpletest_php_bootstrap_filepath !=# ''
+        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
+    endif
+    let command .= ' -f '.shellescape(a:path)
+    call Run_tests_with_command(command)
+endfunction
+
+function! Run_PHPUnit_tests_in_file(class)
+    call Run_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
+endfunction
+
+function! Get_php_method_name_from_cursor_line()
+    let line_text = L_s(getline('.'))
+    let function_name = line_text.trim()
+    while function_name.contains('(')
+        let function_name = function_name.remove_end()
+    endwhile
+    let function_name = function_name.after('function').trim()
+    call l#log('value returned from Get_php_method_name_from_cursor_line(): '.function_name.str)
+    return function_name.str
+endfunction
+
+function! RunMochaTests(...)
+    split
+    BOTTOM
+    enew
+    let command = 'mocha --recursive'
+    if a:0 > 0
+        let debug = a:1
+        if debug
+            let command = command.' debug'
+        endif
+        if a:0 > 1
+            let test_file_path = a:2
+            let command = command.' '.shellescape(test_file_path)
+            if a:0  > 2
+                let filtered_text = a:3
+                let command = command.' -f "'.filtered_text.'"'
+            endif
+        endif
+    endif
+    call l#log('command about to run from RunMochaTests(): '.command)
+    call termopen(command)
+    nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
+function! RunNpmTests()
+    split
+    BOTTOM
+    enew
+    let command = 'npm test'
+    call termopen(command)
+    nnoremap <buffer><leader>q :q!<CR>
+endfunction
+
+function! GetMochaFilteredTextOfTestUnderCursor()
+    let line_text = L_s(getline('.'))
+    let filtered_text = line_text
+    while !filtered_text.starts_with("'")
+        let filtered_text = filtered_text.remove_start()
+        if filtered_text.len == 0
+            break
+        endif
+    endwhile
+    while !filtered_text.ends_with("'")
+        let filtered_text =  filtered_text.remove_end()
+        if filtered_text.len == 0
+            break
+        endif
+    endwhile
+    let filtered_text = filtered_text.remove_start()
+    let filtered_text = filtered_text.remove_end()
+    call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
+    return filtered_text.str
+endfunction
+
 function! Dreamy_paste_php_template()
     let current_buffer = L_current_buffer()
     let paste_php_template = "i<?php\<CR>\<CR>"
