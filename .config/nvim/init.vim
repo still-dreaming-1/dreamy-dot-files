@@ -224,15 +224,6 @@ command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_
 " --------
 " mappings
 " --------
-" arrow keys are the devil
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 " use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
 inoremap kk <esc><esc>
 if has('nvim')
