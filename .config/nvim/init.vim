@@ -68,6 +68,15 @@ call plug#end()
 " This is how you enable elhiv.vim, which is needed by my my plugins
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 
+" --------------------
+" Dreamy config values
+" --------------------
+"  These make this config more configurable. They are used throughout the rest
+"  of the config. Set them to something else inside .afterinit.vim if you want
+"  to use them.
+let g:dreamy_php_namespace = ''
+let g:dreamy_php_namespace_directory_root = ''
+let g:dreamy_php_default_base_class = ''
 " ------------
 " Vim settings
 " ------------
@@ -682,10 +691,9 @@ augroup preserve_cursor_position_when_change_buffers_group
         autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
     endif
 augroup END
-
-let g:dreamy_php_namespace = ''
-let g:dreamy_php_namespace_directory_root = ''
-let g:dreamy_php_default_base_class = ''
+" ---------------------------------
+" helper functions (used by config)
+" ---------------------------------
 function! Dreamy_paste_php_template()
     let current_buffer = L_current_buffer()
     let paste_php_template = "i<?php\<CR>\<CR>"
@@ -764,9 +772,6 @@ function! Dreamy_paste_vim_template()
     execute "normal! ".l:paste_vim_template
 endfunction
 
-" ---------------------------------
-" helper functions (used by config)
-" ---------------------------------
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
 endfunction
