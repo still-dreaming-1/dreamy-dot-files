@@ -71,9 +71,9 @@ source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 " --------------------
 " Dreamy config values
 " --------------------
-"  These make this config more configurable. They are used throughout the rest
-"  of the config. Set them to something else inside .afterinit.vim if you want
-"  to use them.
+" These make this config more configurable. They are used throughout the rest
+" of the config. Set them to something else inside .afterinit.vim if you want
+" to use them.
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
 let g:dreamy_php_default_base_class = ''
