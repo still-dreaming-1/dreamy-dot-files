@@ -125,6 +125,7 @@ set backspace=indent,eol,start
 " 'disable' the mouse
 set mouse=c
 set timeoutlen=18000
+set path+=**
 " ---------------
 " plugin settings
 " ---------------
@@ -648,6 +649,9 @@ function! RunMacroUntilLastLine(macro)
     endwhile
 endfunction
 
+" --------------
+" autocmd groups
+" --------------
 " putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
     " removes all autocmd in group
@@ -661,6 +665,55 @@ augroup code_abbreviations
         autocmd FileType php,c,cpp,cs   iabbrev <buffer> (s) (string)
         autocmd FileType php,c,cpp,cs   iabbrev <buffer> (i) (int)
         autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
+    endif
+augroup END
+augroup all_other_autocmd_group
+    if has("autocmd")
+        " removes all autocmd in group
+        autocmd!
+        autocmd! BufWritePost * Neomake
+        " enable zsh syntax for .aliashrc file
+        autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
+        " enable zsh syntax for .functionshrc file
+        autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
+        " enable vimshrc syntax for .aftervimshrc file
+        autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
+        " search for next php function
+        autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
+        autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
+        autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
+        " auto source the config after saving Vim's .vimrc config file (helps when using Vim)
+        autocmd bufwritepost .vimrc source $MYVIMRC
+        " auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
+        autocmd bufwritepost init.vim source $MYVIMRC
+        autocmd bufwritepost .beforeinit.vim source $MYVIMRC
+        autocmd bufwritepost .afterinit.vim source $MYVIMRC
+        autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
+        "refactor to function
+        autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
+        "refactor to method
+        autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
+        "class template
+        autocmd FileType php                     nnoremap <buffer> <leader>pc :call Dreamy_paste_php_template()<CR>
+        autocmd FileType vim                     nnoremap <buffer> <leader>pc :call Dreamy_paste_vim_template()<CR>
+        "function template
+        autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
+        autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
+        "method template
+        autocmd FileType php                     nnoremap <buffer> <leader>pm :call Dreamy_paste_php_method()<CR>
+        "property template
+        autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property()<CR>
+        "constructor template
+        autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
+        "paste debug::log();
+        autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
+        autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
+        autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
+        "dump the current variable
+        autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
+        "creates a new slot (import and export DSL) named after the word under the cursor
+        autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
+        autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
     endif
 augroup END
 
@@ -757,55 +810,6 @@ function! JumpToNextJSFunction()
     let @/ = search_string
 endfunction
 
-augroup all_other_autocmd_group
-    if has("autocmd")
-        " removes all autocmd in group
-        autocmd!
-        autocmd! BufWritePost * Neomake
-        " enable zsh syntax for .aliashrc file
-        autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
-        " enable zsh syntax for .functionshrc file
-        autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
-        " enable vimshrc syntax for .aftervimshrc file
-        autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
-        " search for next php function
-        autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
-        autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
-        autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
-        " auto source the config after saving Vim's .vimrc config file (helps when using Vim)
-        autocmd bufwritepost .vimrc source $MYVIMRC
-        " auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
-        autocmd bufwritepost init.vim source $MYVIMRC
-        autocmd bufwritepost .beforeinit.vim source $MYVIMRC
-        autocmd bufwritepost .afterinit.vim source $MYVIMRC
-        autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
-        "refactor to function
-        autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
-        "refactor to method
-        autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
-        "class template
-        autocmd FileType php                     nnoremap <buffer> <leader>pc :call Dreamy_paste_php_template()<CR>
-        autocmd FileType vim                     nnoremap <buffer> <leader>pc :call Dreamy_paste_vim_template()<CR>
-        "function template
-        autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
-        autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
-        "method template
-        autocmd FileType php                     nnoremap <buffer> <leader>pm :call Dreamy_paste_php_method()<CR>
-        "property template
-        autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property()<CR>
-        "constructor template
-        autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
-        "paste debug::log();
-        autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
-        autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
-        autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
-        "dump the current variable
-        autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
-        "creates a new slot (import and export DSL) named after the word under the cursor
-        autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-        autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
-    endif
-augroup END
 
 " dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
@@ -1023,15 +1027,11 @@ function! GetCursorColNum()
     return col(".")
 endfunction
 
-" end general purpose, reusable functions
-
 " when switching buffers preserve cursor postion after switching back
 if v:version >= 700
     au BufLeave * let b:winview = winsaveview()
     au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 endif
-
-set path+=**
 
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
 " if the file does not exist however the lack of its existence will not cause any problems.
