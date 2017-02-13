@@ -1039,7 +1039,7 @@ function! GetCursorColNum()
     return col(".")
 endfunction
 
-"end general purpose, reusable functions
+" end general purpose, reusable functions
 
 " highlight the part of lines that wrap past the edge of screen using a pre-set number of characters that fit your screen (change this to match your current screen)
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -1055,6 +1055,6 @@ set path+=**
 
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
 " if the file does not exist however the lack of its existence will not cause any problems.
-" If you want the error message to go away, but do not wan to use this file, just create it and
+" If you want the error message to go away, but do not want to use this file, just create it and
 " leave it blank.
 source ~/.config/nvim/.afterinit.vim
