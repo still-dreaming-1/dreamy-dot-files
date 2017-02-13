@@ -810,7 +810,7 @@ augroup all_other_autocmd_group
         autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property()<CR>
         "constructor template
         autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
-        "past debug::log();
+        "paste debug::log();
         autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
         autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
         autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
