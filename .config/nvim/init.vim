@@ -72,6 +72,9 @@ call plug#end()
 " This is how you enable elhiv.vim, which is needed by my my plugins
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 
+" ------------
+" Vim settings
+" ------------
 let mapleader = " "
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let maplocalleader = "\\"
@@ -93,9 +96,13 @@ set tabstop=4
 set shiftwidth=4
 set expandtab " use spaces instead of tabs
 
-"commentary mappings
-nmap <leader>/ gcc
-vmap <leader>/ gc
+set nofoldenable " disable folding
+
+" make searching easier:
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
 
 " best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
@@ -108,7 +115,7 @@ if exists('+relativenumber')
     set number
     set relativenumber
 endif
-
+" ---------------
 " plugin settings
 " ---------------
 " plug settings
@@ -126,15 +133,25 @@ set noshowmode
 let g:deoplete#enable_at_startup = 1
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR2'
-
-set nofoldenable " disable folding
-
-" make searching easier:
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-
+" commentary mappings
+nmap <leader>/ gcc
+vmap <leader>/ gc
+" NERDTree settings
+let NERDTreeShowHidden = 1
+let NERDTreeWinSize = 70
+let NERDTreeQuitOnOpen = 1
+" When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
+let NERDTreeAutoDeleteBuffer = 1
+" add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
+command! T NERDTreeToggle
+let NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
+" syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+" --------
+" commands
+" --------
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
 command! Chome call ChangeDirectoryCustom("$HOME")
 command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
@@ -344,20 +361,7 @@ vmap v <Plug>(expand_region_expand)
 " this enough times, you will exit visual mode. Alternatively pressing esc also exits visual mode.
 vmap V <Plug>(expand_region_shrink)
 
-" configure NERDTree plugin work the RIGHT way
-let NERDTreeShowHidden = 1
-let NERDTreeWinSize = 70
-let NERDTreeQuitOnOpen = 1
-" When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
-let NERDTreeAutoDeleteBuffer = 1
-" add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
-command! T NERDTreeToggle
-let NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
 
-" syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
 
 " send contents of file to mysql
 command! Sendb :!mysql < %:p
