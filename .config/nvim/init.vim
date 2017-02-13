@@ -655,66 +655,62 @@ endfunction
 " putting autocmds into groups allows to source .vimrc without creating extra autocmds
 augroup code_abbreviations
     " removes all autocmd in group
-    if has("autocmd")
-        autocmd!
-        autocmd FileType vim            iabbrev <buffer> iab iabbrev
-        autocmd FileType vim            iabbrev <buffer> nnor nnoremap
-        autocmd FileType vim            iabbrev <buffer> xnor xnoremap
-        autocmd FileType vim            iabbrev <buffer> inor inoremap
-        autocmd FileType php,javascript iabbrev <buffer> func function
-        autocmd FileType php,c,cpp,cs   iabbrev <buffer> (s) (string)
-        autocmd FileType php,c,cpp,cs   iabbrev <buffer> (i) (int)
-        autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
-    endif
+    autocmd!
+    autocmd FileType vim            iabbrev <buffer> iab iabbrev
+    autocmd FileType vim            iabbrev <buffer> nnor nnoremap
+    autocmd FileType vim            iabbrev <buffer> xnor xnoremap
+    autocmd FileType vim            iabbrev <buffer> inor inoremap
+    autocmd FileType php,javascript iabbrev <buffer> func function
+    autocmd FileType php,c,cpp,cs   iabbrev <buffer> (s) (string)
+    autocmd FileType php,c,cpp,cs   iabbrev <buffer> (i) (int)
+    autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
 augroup END
 augroup all_other_autocmd_group
-    if has("autocmd")
-        " removes all autocmd in group
-        autocmd!
-        autocmd! BufWritePost * Neomake
-        " enable zsh syntax for .aliashrc file
-        autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
-        " enable zsh syntax for .functionshrc file
-        autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
-        " enable vimshrc syntax for .aftervimshrc file
-        autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
-        " search for next php function
-        autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
-        autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
-        autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
-        " auto source the config after saving Vim's .vimrc config file (helps when using Vim)
-        autocmd bufwritepost .vimrc source $MYVIMRC
-        " auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
-        autocmd bufwritepost init.vim source $MYVIMRC
-        autocmd bufwritepost .beforeinit.vim source $MYVIMRC
-        autocmd bufwritepost .afterinit.vim source $MYVIMRC
-        autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
-        "refactor to function
-        autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
-        "refactor to method
-        autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
-        "class template
-        autocmd FileType php                     nnoremap <buffer> <leader>pc :call Dreamy_paste_php_template()<CR>
-        autocmd FileType vim                     nnoremap <buffer> <leader>pc :call Dreamy_paste_vim_template()<CR>
-        "function template
-        autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
-        autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
-        "method template
-        autocmd FileType php                     nnoremap <buffer> <leader>pm :call Dreamy_paste_php_method()<CR>
-        "property template
-        autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property()<CR>
-        "constructor template
-        autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
-        "paste debug::log();
-        autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
-        autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
-        autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
-        "dump the current variable
-        autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
-        "creates a new slot (import and export DSL) named after the word under the cursor
-        autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-        autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
-    endif
+    " removes all autocmd in group
+    autocmd!
+    autocmd! BufWritePost * Neomake
+    " enable zsh syntax for .aliashrc file
+    autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
+    " enable zsh syntax for .functionshrc file
+    autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
+    " enable vimshrc syntax for .aftervimshrc file
+    autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
+    " search for next php function
+    autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
+    autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
+    autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
+    " auto source the config after saving Vim's .vimrc config file (helps when using Vim)
+    autocmd bufwritepost .vimrc source $MYVIMRC
+    " auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
+    autocmd bufwritepost init.vim source $MYVIMRC
+    autocmd bufwritepost .beforeinit.vim source $MYVIMRC
+    autocmd bufwritepost .afterinit.vim source $MYVIMRC
+    autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
+    "refactor to function
+    autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
+    "refactor to method
+    autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
+    "class template
+    autocmd FileType php                     nnoremap <buffer> <leader>pc :call Dreamy_paste_php_template()<CR>
+    autocmd FileType vim                     nnoremap <buffer> <leader>pc :call Dreamy_paste_vim_template()<CR>
+    "function template
+    autocmd FileType php                     nnoremap <buffer> <leader>pf ofunction () {<CR>}<esc>%bi
+    autocmd FileType vim                     nnoremap <buffer> <leader>pf ofunction! ()<CR>endfunction<esc>k$hi
+    "method template
+    autocmd FileType php                     nnoremap <buffer> <leader>pm :call Dreamy_paste_php_method()<CR>
+    "property template
+    autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property()<CR>
+    "constructor template
+    autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
+    "paste debug::log();
+    autocmd FileType php                     nnoremap <buffer> <leader>pl olg("");<esc>==^f"a
+    autocmd FileType php                     nnoremap <buffer> <leader>ps ofunction setUp() {<CR>}<esc>
+    autocmd FileType php                     nnoremap <buffer> <leader>pS Ofunction setUp() {<CR>}<esc>
+    "dump the current variable
+    autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
+    "creates a new slot (import and export DSL) named after the word under the cursor
+    autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
+    autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
 augroup END
 augroup preserve_cursor_position_when_change_buffers_group
     if v:version >= 700
