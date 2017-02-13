@@ -124,6 +124,7 @@ set autoindent
 set backspace=indent,eol,start
 " 'disable' the mouse
 set mouse=c
+set timeoutlen=18000
 " ---------------
 " plugin settings
 " ---------------
@@ -166,25 +167,11 @@ command! Cnproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/nvim-proj
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
-
-function! ChangeDirectoryCustom(dir_path)
-    let before_dir = getcwd()
-    execute 'cd '.fnameescape(a:dir_path)
-    let after_dir = getcwd()
-    if before_dir !=# after_dir
-        " place custom current directory changed event handler code here
-        " make NERDTree root match new current directory
-        NERDTreeCWD
-        NERDTreeClose
-    endif
-    " Make vim-fugitive use the new current directory repository.
-    " This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
-    if exists('b:git_dir')
-        unlet b:git_dir
-    endif
-    call fugitive#detect(getcwd())
-endfunction
-
+" send contents of file to mysql
+command! Sendb :!mysql < %:p
+" --------
+" mappings
+" --------
 " arrow keys are the devil
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -201,41 +188,12 @@ if has('nvim')
     " entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
     tnoremap kk <C-\><C-n>:call MoveCursorToLastTerminalChar()<CR>
 endif
-
-function! MoveCursorToLastTerminalChar()
-    normal! G$
-    let l:cursor_char = L_current_cursor().char()
-    let l:numeric_code = char2nr(l:cursor_char)
-    while l:numeric_code == 0
-        normal! k$
-        let l:cursor_char = getline(".")[col(".")-1]
-        let l:numeric_code = char2nr(l:cursor_char)
-    endwhile
-    if l:numeric_code == 226
-        normal! h
-        let l:cursor_char = getline(".")[col(".")-1]
-        let l:numeric_code = char2nr(l:cursor_char)
-        while l:cursor_char == ' '
-            normal! h
-            let l:cursor_char = getline(".")[col(".")-1]
-        endwhile
-        let l:numeric_code = char2nr(l:cursor_char)
-        if l:numeric_code == 226
-            normal l
-        endif
-    endif
-endfunction
-
 " disable escape. This serves the purpose of training myself to use kk instead
 inoremap <esc> <nop>
 " pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
-
-set timeoutlen=18000
-
 " use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
-
 " vim-fugitive mappings for git
 nnoremap <leader>ga :Git add -A<CR>
 nnoremap <leader>gs :Gstatus<CR>/modified<CR>
@@ -243,11 +201,9 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gc :Gcommit<CR>i
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
-
 " vimagit mapping
 nnoremap <leader>gv :Magit<CR>
-
-" mappings ---------
+" open Neovim's terminal emulator
 nnoremap <leader>T :te<CR>
 " use to add a space
 nnoremap <leader>z i <esc>
@@ -356,10 +312,47 @@ vmap v <Plug>(expand_region_expand)
 " this enough times, you will exit visual mode. Alternatively pressing esc also exits visual mode.
 vmap V <Plug>(expand_region_shrink)
 
+function! ChangeDirectoryCustom(dir_path)
+    let before_dir = getcwd()
+    execute 'cd '.fnameescape(a:dir_path)
+    let after_dir = getcwd()
+    if before_dir !=# after_dir
+        " place custom current directory changed event handler code here
+        " make NERDTree root match new current directory
+        NERDTreeCWD
+        NERDTreeClose
+    endif
+    " Make vim-fugitive use the new current directory repository.
+    " This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
+    if exists('b:git_dir')
+        unlet b:git_dir
+    endif
+    call fugitive#detect(getcwd())
+endfunction
 
-
-" send contents of file to mysql
-command! Sendb :!mysql < %:p
+function! MoveCursorToLastTerminalChar()
+    normal! G$
+    let l:cursor_char = L_current_cursor().char()
+    let l:numeric_code = char2nr(l:cursor_char)
+    while l:numeric_code == 0
+        normal! k$
+        let l:cursor_char = getline(".")[col(".")-1]
+        let l:numeric_code = char2nr(l:cursor_char)
+    endwhile
+    if l:numeric_code == 226
+        normal! h
+        let l:cursor_char = getline(".")[col(".")-1]
+        let l:numeric_code = char2nr(l:cursor_char)
+        while l:cursor_char == ' '
+            normal! h
+            let l:cursor_char = getline(".")[col(".")-1]
+        endwhile
+        let l:numeric_code = char2nr(l:cursor_char)
+        if l:numeric_code == 226
+            normal l
+        endif
+    endif
+endfunction
 
 " make current window bottom window
 nnoremap <leader>mj :BOTTOM<CR>
