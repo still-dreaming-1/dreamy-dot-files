@@ -102,10 +102,9 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-
-" best color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
+" preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
-" highlight the current line and column:
+" highlight the current line and column for a crosshair effect:
 hi CursorLine cterm=NONE ctermbg=black
 set cursorline
 hi CursorColumn cterm=NONE ctermbg=black
@@ -117,11 +116,12 @@ endif
 " warning: next two settings make recovery impossible
 set nobackup
 set noswapfile
-
-set autoindent " copy the indentation from the previous line (supposedly, but does not always work).
-
+" copy the indentation from the previous line (supposedly, but does not always work).
+set autoindent 
+" While in insert mode, allows the backspace key, delete key, etc to delete
+" whatever you want. This stops Vim from preventing you from deleting past
+" certain things.
 set backspace=indent,eol,start
-
 " 'disable' the mouse
 set mouse=c
 " ---------------
