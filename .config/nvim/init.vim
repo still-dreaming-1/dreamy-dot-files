@@ -145,10 +145,6 @@ let NERDTreeAutoDeleteBuffer = 1
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
 let NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
-" syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
 " --------
 " commands
 " --------
