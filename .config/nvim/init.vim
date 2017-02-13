@@ -53,11 +53,11 @@ if dreamy_developer
 else
     Plug 'still-dreaming-1/vim-elhiv'
 endif
-if dreamy_developer
+" if dreamy_developer
     " Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
-else
+" else
     " Plug 'still-dreaming-1/vim-project-tags'
-endif
+" endif
 if dreamy_developer
     Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
 else
