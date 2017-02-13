@@ -994,8 +994,9 @@ function! MakePHPParam()
     call cursor(y,x)
 endfunction
 
-" general purpose, reusable functions.
-
+" -----------------------------------
+" general purpose, reusable functions
+" -----------------------------------
 function! CursorIsLastLine()
     let l:cursor_line_num = GetCursorLineNum()
     let l:last_line_num = GetLastLineNum()
