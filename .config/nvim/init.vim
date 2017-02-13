@@ -117,7 +117,7 @@ endif
 set nobackup
 set noswapfile
 " copy the indentation from the previous line (supposedly, but does not always work).
-set autoindent 
+set autoindent
 " While in insert mode, allows the backspace key, delete key, etc to delete
 " whatever you want. This stops Vim from preventing you from deleting past
 " certain things.
