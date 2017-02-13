@@ -808,12 +808,14 @@ nnoremap <leader>> :More<CR>
 nnoremap <leader><leader><  :call MoveParamLeft()<CR>
 nnoremap <leader><leader>>  :call MoveParamRight()<CR>
 
+" ---------------------------------
+" helper functions (used by config)
+" ---------------------------------
 function! JumpToNextJSFunction()
     let search_string = L_s('= function(').get_no_magic().str
     call search(search_string)
     let @/ = search_string
 endfunction
-
 
 " dump the current variable. Works wheter or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
@@ -990,7 +992,7 @@ function! MakePHPParam()
     call cursor(y,x)
 endfunction
 
-" general purpose, reusable functions
+" general purpose, reusable functions. These might be helpful to call manually as well
 
 function! CursorIsLastLine()
     let l:cursor_line_num = GetCursorLineNum()
