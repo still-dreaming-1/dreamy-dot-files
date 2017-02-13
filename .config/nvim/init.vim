@@ -716,6 +716,14 @@ augroup all_other_autocmd_group
         autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
     endif
 augroup END
+augroup preserve_cursor_position_when_change_buffers_group
+    if v:version >= 700
+        " removes all autocmd in group
+        autocmd!
+        autocmd BufLeave * let b:winview = winsaveview()
+        autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+    endif
+augroup END
 
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
@@ -1026,12 +1034,6 @@ endfunction
 function! GetCursorColNum()
     return col(".")
 endfunction
-
-" when switching buffers preserve cursor postion after switching back
-if v:version >= 700
-    au BufLeave * let b:winview = winsaveview()
-    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-endif
 
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
 " if the file does not exist however the lack of its existence will not cause any problems.
