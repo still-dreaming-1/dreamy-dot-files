@@ -992,7 +992,6 @@ function! MakePHPParam()
     normal m`
     call cursor(y,x)
 endfunction
-
 " -----------------------------------
 " general purpose, reusable functions
 " -----------------------------------
