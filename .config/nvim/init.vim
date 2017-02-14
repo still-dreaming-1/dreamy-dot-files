@@ -138,6 +138,7 @@ set backspace=indent,eol,start
 set mouse=c
 set timeoutlen=18000
 set path+=**
+set laststatus=2
 " ---------------
 " plugin settings
 " ---------------
@@ -227,6 +228,8 @@ command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_
 command! Same call Match_previous_indentation_command()
 command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
 command! More call Match_previous_indentation_command(4) " assumes 4 spaces for indentation
+" mapping to open a plugins home page in Vivaldi. The cursor must be on a line using vim-plug to include a plugin
+command! Hub call OpenVivaldiAtPluginPage()
 " --------
 " mappings
 " --------
@@ -412,10 +415,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-set laststatus=2
-
-" mapping to open a plugins home page in Vivaldi. The cursor must be on a line using vim-plug to include a plugin
-command! Hub call OpenVivaldiAtPluginPage()
 " --------------
 " autocmd groups
 " --------------
