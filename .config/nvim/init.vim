@@ -404,7 +404,6 @@ nnoremap <C-h> :Left<CR>
 nnoremap <leader>ml :RIGHT<CR>
 " go right one window
 nnoremap <C-l> :Right<CR>
-
 nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
