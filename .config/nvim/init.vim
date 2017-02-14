@@ -412,7 +412,7 @@ nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 " autocmd groups
 " --------------
 " putting autocmds into groups allows to source .vimrc without creating extra autocmds
-augroup code_abbreviations
+augroup code_abbreviations_group
     " removes all autocmd in group
     autocmd!
     autocmd FileType vim            iabbrev <buffer> iab iabbrev
