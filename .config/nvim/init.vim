@@ -406,7 +406,6 @@ nnoremap <leader>ml :RIGHT<CR>
 nnoremap <C-l> :Right<CR>
 nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
-
 " --------------
 " autocmd groups
 " --------------
