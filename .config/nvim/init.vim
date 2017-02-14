@@ -408,11 +408,6 @@ nnoremap <C-l> :Right<CR>
 nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :UTRun tests/**/*.vim<CR>
 
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
 " --------------
 " autocmd groups
 " --------------
@@ -428,6 +423,14 @@ augroup code_abbreviations
     autocmd FileType php,c,cpp,cs   iabbrev <buffer> (s) (string)
     autocmd FileType php,c,cpp,cs   iabbrev <buffer> (i) (int)
     autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
+augroup END
+augroup rainbow_parentheses_group
+    " removes all autocmd in group
+    autocmd!
+    autocmd VimEnter * RainbowParenthesesToggle
+    autocmd Syntax * RainbowParenthesesLoadRound
+    autocmd Syntax * RainbowParenthesesLoadSquare
+    autocmd Syntax * RainbowParenthesesLoadBraces
 augroup END
 augroup all_other_autocmd_group
     " removes all autocmd in group
