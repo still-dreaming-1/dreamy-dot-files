@@ -38,8 +38,11 @@ Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
 
+function! UpdateRemotePluginsAlias(required_but_unused_arg)
+    UpdateRemotePlugins
+endfunction
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') }
+    Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
 endif
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
@@ -767,10 +770,6 @@ function! Dreamy_paste_vim_template()
     let l:file_name = expand("%:t:r")
     let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name."\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
     execute "normal! ".l:paste_vim_template
-endfunction
-
-function! UpdateRemotePluginsAlias(required_but_unused_arg)
-    UpdateRemotePlugins
 endfunction
 
 function! JumpToNextJSFunction()
