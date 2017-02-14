@@ -240,8 +240,6 @@ if has('nvim')
     " entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
     tnoremap kk <C-\><C-n>:call MoveCursorToLastTerminalChar()<CR>
 endif
-" disable escape. This serves the purpose of training myself to use kk instead
-inoremap <esc> <nop>
 " pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
 " use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
