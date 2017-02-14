@@ -430,6 +430,14 @@ augroup rainbow_parentheses_group
     autocmd Syntax * RainbowParenthesesLoadSquare
     autocmd Syntax * RainbowParenthesesLoadBraces
 augroup END
+augroup preserve_cursor_position_when_change_buffers_group
+    if v:version >= 700
+        " removes all autocmd in group
+        autocmd!
+        autocmd BufLeave * let b:winview = winsaveview()
+        autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+    endif
+augroup END
 augroup all_other_autocmd_group
     " removes all autocmd in group
     autocmd!
@@ -476,14 +484,6 @@ augroup all_other_autocmd_group
     "creates a new slot (import and export DSL) named after the word under the cursor
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
     autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
-augroup END
-augroup preserve_cursor_position_when_change_buffers_group
-    if v:version >= 700
-        " removes all autocmd in group
-        autocmd!
-        autocmd BufLeave * let b:winview = winsaveview()
-        autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-    endif
 augroup END
 " -----------------------------------------------------
 " user functions: (to be called manually while editing)
