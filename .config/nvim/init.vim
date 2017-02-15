@@ -230,6 +230,7 @@ command! MochaFilter :call RunMochaTests(0, L_current_buffer().file().path, GetM
 command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
 " SimpleTest commands
 command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
+command! PhpCoveredFile :call Run_simple_tests_in_file_with_coverage(L_current_buffer().file().path)
 command! Php :call Run_simpletest_unit_test_suite()
 command! PhpInt :call Run_simpletest_integration_test_suite()
 command! PhpAll :call Run_simpletest_all_test_suite()
@@ -618,6 +619,15 @@ function! Run_simple_tests_in_file(path)
     let command = 'php'
     if g:simpletest_php_bootstrap_filepath !=# ''
         let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
+    endif
+    let command .= ' -f '.shellescape(a:path)
+    call Run_tests_with_command(command)
+endfunction
+
+function! Run_simple_tests_in_file_with_coverage(path)
+    let command = 'php'
+    if g:simpletest_with_code_coverage_php_bootstrap_filepath !=# ''
+        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_with_code_coverage_php_bootstrap_filepath)
     endif
     let command .= ' -f '.shellescape(a:path)
     call Run_tests_with_command(command)
