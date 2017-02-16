@@ -148,7 +148,7 @@ set noshowmode
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow = 0
 " Codi settings
-let g:codi#log = '/home/jesse/logs/codi_log'
+" let g:codi#log = '/home/jesse/logs/codi_log'
 let g:codi#width = 80
 " vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
