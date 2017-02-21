@@ -351,8 +351,6 @@ nnoremap <leader>t :T<CR>
 nnoremap <leader>ev :e $HOME/.vimshrc<CR>
 " edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
-" edit .zshrc
-nnoremap <leader>ez :e~/.zshrc<CR>
 " edit .bashrc
 nnoremap <leader>eb :e~/.bashrc<CR>
 " edit .aliashrc
