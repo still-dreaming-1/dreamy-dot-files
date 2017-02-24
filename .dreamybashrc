@@ -10,9 +10,10 @@ source ~/.functionshrc
 # this allows the current git branch to be retrieved
 source ~/.git-prompt.sh
 # customized my prompt to show the current git branch and space things differently
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[00m\]$(__git_ps1) \$ '
+# PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[00m\]$(__git_ps1) \$ '
+PS1='\[\033[38;5;081m\]\u\[\033[38;5;245m\]@\[\033[38;5;206m\]\H \[\033[38;5;245m\]\w\[\033[00m\]$(__git_ps1) \[\033[38;5;081m\]$ \[\e[0m\]'
 
-export TERM='xterm-256color'
+# export TERM='xterm-256color'
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
