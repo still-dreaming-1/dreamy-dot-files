@@ -8,7 +8,7 @@ function OpenWithNemoOrDefault()
 	let l:path= g:NERDTreeFileNode.GetSelected().path
 	let l:path_str= '"'.l:path.str().'"'
 	if l:path.isDirectory
-		call system('nemo '.l:path_str)
+		call system('nohup nautilus '.l:path_str . '&disown')
 	else
 		call system('xdg-open '.l:path_str)
 	endif
