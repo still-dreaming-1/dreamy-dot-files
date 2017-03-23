@@ -486,7 +486,7 @@ augroup all_other_autocmd_group
     autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
     "hack to share clipboard across ssh sessions and local machine
     if has('nvim') && g:send_yanked_text_to_port != -1
-        autocmd TextYankPost * call Dreamy_send_to_port(g:send_yanked_text_to_port)
+        autocmd TextYankPost * call Dreamy_send_to_port(v:event['regcontents'][0], g:send_yanked_text_to_port)
     endif
 augroup END
 " -----------------------------------------------------
@@ -1006,10 +1006,11 @@ function! MakePHPParam()
     call cursor(y,x)
 endfunction
 
-function! Dreamy_send_to_port(port)
+function! Dreamy_send_to_port(textToSend, port)
     let shell = L_shell()
-    let command = 'nc localhost' . shellescape(a:port)
+    let command = 'printf ' . shellescape(a:textToSend) . ' | nc localhost ' . shellescape(a:port)
     call shell.run(command)
+    echo command
 endfunction
 " -----------------------------------
 " general purpose, reusable functions
