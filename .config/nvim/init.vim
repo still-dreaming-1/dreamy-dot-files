@@ -3,6 +3,7 @@
 set nocompatible
 
 let g:dreamy_developer = 0 " helps me use my development versions of projects
+let g:send_yanked_text_to_port = -1
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
@@ -483,6 +484,10 @@ augroup all_other_autocmd_group
     "creates a new slot (import and export DSL) named after the word under the cursor
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
     autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
+    "hack to share clipboard across ssh sessions and local machine
+    if g:send_yanked_text_to_port != -1
+        autocmd TextYankPost * call Dreamy_send_to_port(g:send_yanked_text_to_port)
+    endif
 augroup END
 " -----------------------------------------------------
 " user functions: (to be called manually while editing)
@@ -999,6 +1004,12 @@ function! MakePHPParam()
     endif
     normal m`
     call cursor(y,x)
+endfunction
+
+function! Dreamy_send_to_port(port)
+    let shell = L_shell()
+    let command = 'nc localhost' . shellescape(a:port)
+    call shell.run(command)
 endfunction
 " -----------------------------------
 " general purpose, reusable functions
