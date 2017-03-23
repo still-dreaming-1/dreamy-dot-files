@@ -485,7 +485,7 @@ augroup all_other_autocmd_group
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
     autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
     "hack to share clipboard across ssh sessions and local machine
-    if g:send_yanked_text_to_port != -1
+    if has('nvim') && g:send_yanked_text_to_port != -1
         autocmd TextYankPost * call Dreamy_send_to_port(g:send_yanked_text_to_port)
     endif
 augroup END
