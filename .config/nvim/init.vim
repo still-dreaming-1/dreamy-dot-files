@@ -351,8 +351,6 @@ nnoremap <leader>s :w<CR>
 nnoremap <leader>f :FZF<CR>
 " load NERDTree
 nnoremap <leader>t :T<CR>
-" edit .vimrc
-nnoremap <leader>ev :e $HOME/.vimshrc<CR>
 " edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
 " edit .bashrc
@@ -449,8 +447,6 @@ augroup all_other_autocmd_group
     autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
     " enable zsh syntax for .functionshrc file
     autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
-    " enable vimshrc syntax for .aftervimshrc file
-    autocmd BufRead,BufNewFile .aftervimshrc set filetype=vimshrc
     " search for next php function
     autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
     autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
