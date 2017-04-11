@@ -358,7 +358,7 @@ nnoremap <leader>eb :e~/.bashrc<CR>
 nnoremap <leader>ea :e~/.aliashrc<CR>
 " edit .functionshrc
 nnoremap <leader>ef :e~/.functionshrc<CR>
-" edit .captain slog
+" edit captains log
 nnoremap <leader>ec :e ~/captains\ log<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :BD<CR>
