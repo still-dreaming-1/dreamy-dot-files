@@ -4,6 +4,7 @@ set nocompatible
 
 let g:dreamy_developer = 0 " helps me use my development versions of projects
 let g:send_yanked_text_to_port = -1
+let g:dreamy_log = 0
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
@@ -71,6 +72,9 @@ call plug#end()
 
 " This is how you enable elhiv.vim, which is needed by my my plugins
 source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
+if type(g:dreamy_log) == l_type#string()
+    let g:l_log = L_file(g:dreamy_log)
+endif
 
 " --------------------
 " Dreamy config values
@@ -149,7 +153,6 @@ set noshowmode
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow = 0
 " Codi settings
-" let g:codi#log = '/home/jesse/logs/codi_log'
 let g:codi#width = 80
 " vim-airline settings
 " allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
