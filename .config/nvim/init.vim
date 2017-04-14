@@ -361,6 +361,7 @@ nnoremap <leader>ea :e~/.aliashrc<CR>
 nnoremap <leader>ef :e~/.functionshrc<CR>
 " edit captains log
 nnoremap <leader>ec :e ~/captains\ log<CR>
+nnoremap <leader>ev :call L_global_log().edit()<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :BD<CR>
 " jump previous movement
