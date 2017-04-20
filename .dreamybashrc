@@ -17,3 +17,4 @@ PS1='\[\033[38;5;081m\]\u\[\033[38;5;245m\]@\[\033[38;5;206m\]\H \[\033[38;5;245
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+PATH=$HOME/bin:$PATH
