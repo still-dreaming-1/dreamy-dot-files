@@ -323,8 +323,6 @@ nnoremap ^ <nop>
 nnoremap <leader>h ^
 " go to start of line
 nnoremap <leader>H 0
-" disable 0
-nnoremap 0 <nop>
 " go to end of line
 nnoremap <leader>l $
 xnoremap <leader>l $
