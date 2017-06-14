@@ -146,6 +146,7 @@ set path+=**
 set laststatus=2
 " prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
+set scrollback=10000
 " ---------------
 " plugin settings
 " ---------------
