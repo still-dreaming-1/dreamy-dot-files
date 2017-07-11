@@ -722,7 +722,7 @@ function! Dreamy_paste_php_template()
         let paste_php_template .= 'namespace '.namespace.";\<CR>\<CR>"
     endif
     let current_buffer_file = current_buffer.file()
-    let paste_php_template .= "class ".current_buffer_file.name_without_extension
+    let paste_php_template .= "final class ".current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
         let paste_php_template .= " extends \\test\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
         if L_s(current_buffer_file.name_without_extension).ends_with('UnitTest')
