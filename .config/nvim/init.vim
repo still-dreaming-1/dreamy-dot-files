@@ -86,6 +86,7 @@ endif
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
 let g:dreamy_php_default_base_class = ''
+let g:dreamy_php_test_class = ''
 let g:simpletest_all_test_suite_file_path = 0
 let g:simpletest_integration_test_suite_file_path = 0
 let g:simpletest_unit_test_suite_file_path = 0
@@ -724,7 +725,7 @@ function! Dreamy_paste_php_template()
     let current_buffer_file = current_buffer.file()
     let paste_php_template .= "final class ".current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
-        let paste_php_template .= " extends \\test\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
+        let paste_php_template .= " extends ".g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
         if L_s(current_buffer_file.name_without_extension).ends_with('UnitTest')
             let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('UnitTest').str
         elseif L_s(current_buffer_file.name_without_extension).ends_with('IntegrationTest')
