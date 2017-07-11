@@ -711,12 +711,12 @@ endfunction
 
 function! Dreamy_paste_php_template()
     let current_buffer = L_current_buffer()
-    let paste_php_template = "i<?php\<CR>\<CR>"
+    let paste_php_template = "i<?php\<CR>declare(strict_types=1);\<CR>"
     let current_buffer_directory_s_path = L_s(current_buffer.dir().path)
     let namespace = g:dreamy_php_namespace
     if current_buffer_directory_s_path.contains(g:dreamy_php_namespace_directory_root)
         let dir_after_root = L_dir(current_buffer_directory_s_path.after(g:dreamy_php_namespace_directory_root).str)
-        let namespace .= '\' . L_s(dir_after_root.path).str
+        let namespace .= '\' . L_s(dir_after_root.path).replace('/', '\').str
     endif
     if g:dreamy_php_namespace !=# ''
         let paste_php_template .= 'namespace '.namespace.";\<CR>\<CR>"
