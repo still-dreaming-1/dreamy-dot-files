@@ -1058,6 +1058,14 @@ function! GetCursorColNum()
     return col(".")
 endfunction
 
+function! DreamyChangeWordUnderCursorToPascalCase()
+    let current_word = L_current_cursor().word()
+    let current_word_s = L_s(current_word)
+    let pascal_word_s = current_word_s.to_pascal_case()
+    normal vvckk
+    execute 'normal! a'.pascal_word_s.str
+endfunction
+
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
 " if the file does not exist however the lack of its existence will not cause any problems.
 " If you want the error message to go away, but do not want to use this file, just create it and
