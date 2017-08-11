@@ -129,10 +129,6 @@ hi CursorLine cterm=NONE ctermbg=black
 set cursorline
 hi CursorColumn cterm=NONE ctermbg=black
 set cursorcolumn
-if exists('+relativenumber')
-    set number
-    set relativenumber
-endif
 " warning: next two settings make recovery impossible
 set nobackup
 set noswapfile
@@ -1082,6 +1078,23 @@ function! DreamyChangeWordUnderCursorToCamelCase()
     endwhile
     normal! ~
 endfunction
+
+function! DreamyTurnLineNumbersCompletelyOff()
+    set nonumber
+    if exists('+relativenumber')
+        set norelativenumber
+    endif
+endfunction
+
+function! DreamyEnableMyPreferredLineNumberSettings()
+    set number
+    if exists('+relativenumber')
+        set relativenumber
+    endif
+endfunction
+
+" cannot call this function any sooner since it was not defined yet
+call DreamyEnableMyPreferredLineNumberSettings()
 
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
 " if the file does not exist however the lack of its existence will not cause any problems.
