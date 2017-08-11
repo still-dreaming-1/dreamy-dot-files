@@ -39,6 +39,7 @@ Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
+Plug 'noahfrederick/vim-noctu'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
@@ -89,7 +90,7 @@ let g:dreamy_php_default_base_class = ''
 let g:dreamy_php_test_class = ''
 let g:simpletest_all_test_suite_file_path = 0
 let g:simpletest_integration_test_suite_file_path = 0
-let g:simpletest_unit_test_suite_file_path = 0
+let g:simpletest_test_suite_file_path = 0
 let g:simpletest_php_bootstrap_filepath = ''
 " ------------
 " Vim settings
@@ -122,7 +123,7 @@ set smartcase
 set hlsearch
 set incsearch
 " preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
-color kolor
+color noctu
 " highlight the current line and column for a crosshair effect:
 hi CursorLine cterm=NONE ctermbg=black
 set cursorline
@@ -168,6 +169,7 @@ let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources.php = ['omni']
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR2'
+let g:neomake_phpstan_level = 7
 " commentary mappings
 nmap <leader>/ gcc
 vmap <leader>/ gc
@@ -242,7 +244,7 @@ command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, Get
 " SimpleTest commands
 command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
 command! PhpCoveredFile :call Run_simple_tests_in_file_with_coverage(L_current_buffer().file().path)
-command! Php :call Run_simpletest_unit_test_suite()
+command! Php :call Run_simpletest_test_suite()
 command! PhpInt :call Run_simpletest_integration_test_suite()
 command! PhpAll :call Run_simpletest_all_test_suite()
 " Codeception commands
@@ -604,8 +606,12 @@ function! Run_codeception_tests_in_current_file()
     call Run_tests_with_command('codecept run acceptance '.shellescape(L_current_buffer().file().name_without_extension))
 endfunction
 
-function! Run_simpletest_unit_test_suite()
-    let command = 'php '.g:simpletest_unit_test_suite_file_path
+" Experimenting with the idea that there should only be one test suite instead of separating unit and integration
+" tests. Higher level tests should be written in favor of very low level ones when the low level would be overkill and
+" that same code could be tested by a higher level test. This concept also requires all these tests to run very fast, so
+" an additional difference from what you might be used to is that even your 'integration' tests should run fast.
+function! Run_simpletest_test_suite()
+    let command = 'php '.g:simpletest_test_suite_file_path
     call Run_tests_with_command(command)
 endfunction
 
@@ -1064,6 +1070,17 @@ function! DreamyChangeWordUnderCursorToPascalCase()
     let pascal_word_s = current_word_s.to_pascal_case()
     normal vvckk
     execute 'normal! a'.pascal_word_s.str
+    return pascal_word_s
+endfunction
+
+function! DreamyChangeWordUnderCursorToCamelCase()
+    let pascal_word_s = DreamyChangeWordUnderCursorToPascalCase()
+    let positionOnWord = pascal_word_s.len
+    while positionOnWord > 1
+        normal! h
+        let positionOnWord = positionOnWord - 1
+    endwhile
+    normal! ~
 endfunction
 
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
