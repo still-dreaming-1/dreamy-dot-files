@@ -87,6 +87,7 @@ endif
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
 let g:dreamy_php_default_base_class = ''
+let g:dreamy_php_base_trait = ''
 let g:dreamy_php_test_class = ''
 let g:simpletest_all_test_suite_file_path = 0
 let g:simpletest_integration_test_suite_file_path = 0
@@ -123,7 +124,7 @@ set smartcase
 set hlsearch
 set incsearch
 " preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
-color noctu
+color kolor
 " highlight the current line and column for a crosshair effect:
 hi CursorLine cterm=NONE ctermbg=black
 set cursorline
@@ -742,7 +743,11 @@ function! Dreamy_paste_php_template()
         if g:dreamy_php_default_base_class !=# ''
             let paste_php_template .= " extends ".g:dreamy_php_default_base_class
         endif
-        let paste_php_template .= "\<CR>{\<CR>\}\<esc>kk^we"
+        let paste_php_template .= "\<CR>{\<CR>"
+        if g:dreamy_php_base_trait !=# ''
+            let paste_php_template .= 'use '.g:dreamy_php_base_trait.";\<CR>"
+        endif
+        let paste_php_template .= "\}\<esc>kk^we"
     endif
     execute "normal! " . paste_php_template
 endfunction
