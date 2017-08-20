@@ -47,7 +47,6 @@ endfunction
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
 endif
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
 if dreamy_developer
@@ -162,8 +161,6 @@ let g:codi#width = 80
 let g:airline_powerline_fonts = 1
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['omni']
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR2'
 let g:neomake_phpstan_level = 7
