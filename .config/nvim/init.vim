@@ -408,7 +408,7 @@ nnoremap <leader>ml :RIGHT<CR>
 " go right one window
 nnoremap <C-l> :Right<CR>
 nnoremap <leader>v :call Run_current_file_tests()<CR>
-nnoremap <leader>V :UTRun tests/**/*.vim<CR>
+nnoremap <leader>V :call Run_all_tests()<CR>
 " --------------
 " autocmd groups
 " --------------
@@ -584,6 +584,15 @@ function! Run_current_file_tests()
         Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
     elseif current_file_extension == 'vim'
         execute "normal! :UTRun %\<CR>"
+    endif
+endfunction
+
+function! Run_all_tests()
+    let current_file_extension = L_current_buffer().file().extension
+    if current_file_extension == 'php'
+        call Run_tests_with_command('composer test') " need to add a test command to your composer.json
+    elseif current_file_extension == 'vim'
+        execute "normal! :UTRun tests/**/*.vim<CR>"
     endif
 endfunction
 
