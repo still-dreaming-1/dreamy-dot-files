@@ -39,7 +39,6 @@ Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
-Plug 'noahfrederick/vim-noctu'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
