@@ -6,6 +6,7 @@ source ~/.afteraliashrc
 source ~/.functionshrc
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+HISTSIZE= 
 
 # this allows the current git branch to be retrieved
 source ~/.git-prompt.sh
