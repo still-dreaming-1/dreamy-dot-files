@@ -39,6 +39,8 @@ Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/vim-UT'
 Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
@@ -151,6 +153,9 @@ set scrollback=-1
 " plug settings
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow = 0
+" LanguageClient settings
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 " Codi settings
 let g:codi#width = 80
 " vim-airline settings
@@ -442,6 +447,7 @@ augroup all_other_autocmd_group
     " removes all autocmd in group
     autocmd!
     autocmd! BufWritePost * Neomake
+    autocmd FileType php LanguageClientStart
     " enable zsh syntax for .aliashrc file
     autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
     " enable zsh syntax for .functionshrc file
