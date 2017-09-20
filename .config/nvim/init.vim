@@ -41,12 +41,13 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+Plug 'roxma/nvim-completion-manager'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
 endfunction
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
+    " Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
 endif
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
