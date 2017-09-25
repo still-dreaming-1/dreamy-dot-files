@@ -245,8 +245,8 @@ command! Php :call Run_simpletest_test_suite()
 command! PhpInt :call Run_simpletest_integration_test_suite()
 command! PhpAll :call Run_simpletest_all_test_suite()
 " Codeception commands
-command! Code :call Run_tests_with_command('codecept run --fail-fast')
-command! CodeFail :call Run_tests_with_command('codecept run -g failed')
+command! Code :call Run_tests_with_command('composer code')
+command! CodeFail :call Run_tests_with_command('composer code-fail')
 command! CodeFile :call Run_codeception_tests_in_current_file()
 " PHPUnit commands
 command! PhpUnit :call Run_tests_with_command('phpunit')
@@ -610,7 +610,7 @@ function! Run_tests_with_command(command)
 endfunction
 
 function! Run_codeception_tests_in_current_file()
-    call Run_tests_with_command('codecept run acceptance '.shellescape(L_current_buffer().file().name_without_extension))
+    call Run_tests_with_command('composer code-file -- '.shellescape(L_current_buffer().file().name_without_extension))
 endfunction
 
 " Experimenting with the idea that there should only be one test suite instead of separating unit and integration
