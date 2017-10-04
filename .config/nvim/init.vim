@@ -289,6 +289,8 @@ nnoremap <leader>T :te<CR>
 nnoremap <leader>z i <esc>
 " surround with spaces
 nnoremap <leader><leader>z i <esc>la <esc>hh
+" replays the last played macro 3 times
+nnoremap <leader>@ 3@@
 " move after the next dot character (this should be turned into a custom motion where instead of . you can type anything you want to move after. This would be the opposite of t
 nnoremap <leader>a. f.l<esc>
 " put from mouse clipboard
