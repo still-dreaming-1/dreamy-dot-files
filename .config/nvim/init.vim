@@ -287,6 +287,8 @@ nnoremap <leader>gv :Magit<CR>
 nnoremap <leader>T :te<CR>
 " use to add a space
 nnoremap <leader>z i <esc>
+" surround with spaces
+nnoremap <leader><leader>z i <esc>la <esc>hh
 " move after the next dot character (this should be turned into a custom motion where instead of . you can type anything you want to move after. This would be the opposite of t
 nnoremap <leader>a. f.l<esc>
 " put from mouse clipboard
