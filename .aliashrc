@@ -31,6 +31,8 @@ alias check='git checkout'
 alias s='git status'
 alias clone='git clone'
 
+alias p='composer'
+
 alias c='cd'
 alias c.='cd ..'
 alias c~='cd ~'
