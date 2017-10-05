@@ -41,14 +41,12 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
-Plug 'roxma/nvim-completion-manager'
+Plug 'tpope/vim-repeat'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
 endfunction
-if has('nvim')
-    " Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
 if dreamy_developer
@@ -288,7 +286,24 @@ nnoremap <leader>T :te<CR>
 " use to add a space
 nnoremap <leader>z i <esc>
 " surround with spaces
-nnoremap <leader><leader>z i <esc>la <esc>hh
+nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_spaces()<CR>
+    \:call repeat#set("\<Plug>DreamySurroundWithSpaces")<CR>
+nmap <leader><leader>z <Plug>DreamySurroundWithSpaces
+
+function! Dreamy_surround_cursor_char_with_spaces()
+    let cursor = L_current_cursor()
+    let cursor_char = cursor.char()
+    let current_line = cursor.line()
+    let cursor_index = col('.') - 1
+    let text_before_cursor = ''
+    if cursor_index > 0
+        let text_before_cursor = current_line[:cursor_index-1]
+    endif
+    let text_after_cursor = current_line[cursor_index+1:]
+    let line_with_spaces_added = text_before_cursor.' '.cursor_char.' '.text_after_cursor
+    call setline('.', line_with_spaces_added)
+    return line_with_spaces_added
+endfunction
 " replays the last played macro 3 times
 nnoremap <leader>@ 3@@
 " move after the next dot character (this should be turned into a custom motion where instead of . you can type anything you want to move after. This would be the opposite of t
