@@ -1,7 +1,3 @@
-" look into this as an alternative to tags: :help include-search
-" because vim is better than vi
-set nocompatible
-
 let g:dreamy_developer = 0 " helps me use my development versions of projects
 let g:send_yanked_text_to_port = -1
 let g:dreamy_log = 0
