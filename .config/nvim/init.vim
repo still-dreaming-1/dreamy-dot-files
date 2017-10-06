@@ -1,3 +1,11 @@
+" ascii art font is Slant: http://patorjk.com/software/taag/#p=display&f=Slant
+"   ________               __     _____ __              __ 
+"  / ____/ /_  ___  ____ _/ /_   / ___// /_  ___  ___  / /_
+" / /   / __ \/ _ \/ __ `/ __/   \__ \/ __ \/ _ \/ _ \/ __/
+"/ /___/ / / /  __/ /_/ / /_    ___/ / / / /  __/  __/ /_  
+"\____/_/ /_/\___/\__,_/\__/   /____/_/ /_/\___/\___/\__/  
+" :so % "source current file
+                                                  
 let g:dreamy_developer = 0 " helps me use my development versions of projects
 let g:send_yanked_text_to_port = -1
 let g:dreamy_log = 0
@@ -12,6 +20,12 @@ source ~/.config/nvim/.beforeinit.vim
 " PlugInstall [name ...] - install plugins
 " PlugUpgrade Upgrade vim-plug itself
 " PlugStatus Check status of plugins
+"    ____  __            _           
+"   / __ \/ /_  ______ _(_)___  _____
+"  / /_/ / / / / / __ `/ / __ \/ ___/
+" / ____/ / /_/ / /_/ / / / / (__  ) 
+"/_/   /_/\__,_/\__, /_/_/ /_/____/  
+"              /____/                
 call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kien/rainbow_parentheses.vim'
@@ -72,10 +86,12 @@ source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
-
-" --------------------
-" Dreamy config values
-" --------------------
+"    ____                                                      _____                      __               
+"   / __ \________  ____ _____ ___  __  __   _________  ____  / __(_)___ _   _   ______ _/ /_  _____  _____
+"  / / / / ___/ _ \/ __ `/ __ `__ \/ / / /  / ___/ __ \/ __ \/ /_/ / __ `/  | | / / __ `/ / / / / _ \/ ___/
+" / /_/ / /  /  __/ /_/ / / / / / / /_/ /  / /__/ /_/ / / / / __/ / /_/ /   | |/ / /_/ / / /_/ /  __(__  ) 
+"/_____/_/   \___/\__,_/_/ /_/ /_/\__, /   \___/\____/_/ /_/_/ /_/\__, /    |___/\__,_/_/\__,_/\___/____/  
+"                                /____/                          /____/                                    
 " These make this config more configurable. They are used throughout the rest
 " of the config. Set them to something else inside .afterinit.vim if you want
 " to use them.
@@ -88,9 +104,12 @@ let g:simpletest_all_test_suite_file_path = 0
 let g:simpletest_integration_test_suite_file_path = 0
 let g:simpletest_test_suite_file_path = 0
 let g:simpletest_php_bootstrap_filepath = ''
-" ------------
-" Vim settings
-" ------------
+" _    ___                        __  __  _                 
+"| |  / (_)___ ___     ________  / /_/ /_(_)___  ____ ______
+"| | / / / __ `__ \   / ___/ _ \/ __/ __/ / __ \/ __ `/ ___/
+"| |/ / / / / / / /  (__  )  __/ /_/ /_/ / / / / /_/ (__  ) 
+"|___/_/_/ /_/ /_/  /____/\___/\__/\__/_/_/ /_/\__, /____/  
+"                                             /____/        
 let mapleader = " "
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let maplocalleader = "\\"
@@ -142,10 +161,12 @@ set laststatus=2
 " prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
 set scrollback=-1
-" ---------------
-" plugin settings
-" ---------------
-" plug settings
+"    ____  __            _          _____      __  __  _                 
+"   / __ \/ /_  ______ _(_)___     / ___/___  / /_/ /_(_)___  ____ ______
+"  / /_/ / / / / / __ `/ / __ \    \__ \/ _ \/ __/ __/ / __ \/ __ `/ ___/
+" / ____/ / /_/ / /_/ / / / / /   ___/ /  __/ /_/ /_/ / / / / /_/ (__  ) 
+"/_/   /_/\__,_/\__, /_/_/ /_/   /____/\___/\__/\__/_/_/ /_/\__, /____/  
+"              /____/                                      /____/        
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow = 0
 " LanguageClient settings
