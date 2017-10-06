@@ -15,4 +15,4 @@
 !.config/nvim/
 !.config/nvim/**
 !.gemrc
-.config/nvim/one_off.one_off_functions.vim
+.config/nvim/.one_off_functions.vim
