@@ -376,6 +376,8 @@ nnoremap <leader>f :FZF<CR>
 nnoremap <leader>t :T<CR>
 " edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
+" edit one off Vim functions
+nnoremap <leader>eo :e $HOME/.config/nvim/.one_off_functions.vim<CR>
 " edit .bashrc
 nnoremap <leader>eb :e~/.bashrc<CR>
 " edit .aliashrc
