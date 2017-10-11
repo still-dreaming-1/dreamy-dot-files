@@ -86,6 +86,7 @@ source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
 if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
+" dreamy config values
 "    ____                                                      _____                      __               
 "   / __ \________  ____ _____ ___  __  __   _________  ____  / __(_)___ _   _   ______ _/ /_  _____  _____
 "  / / / / ___/ _ \/ __ `/ __ `__ \/ / / /  / ___/ __ \/ __ \/ /_/ / __ `/  | | / / __ `/ / / / / _ \/ ___/
@@ -104,6 +105,7 @@ let g:simpletest_all_test_suite_file_path = 0
 let g:simpletest_integration_test_suite_file_path = 0
 let g:simpletest_test_suite_file_path = 0
 let g:simpletest_php_bootstrap_filepath = ''
+" vim settings
 " _    ___                        __  __  _                 
 "| |  / (_)___ ___     ________  / /_/ /_(_)___  ____ ______
 "| | / / / __ `__ \   / ___/ _ \/ __/ __/ / __ \/ __ `/ ___/
@@ -113,6 +115,10 @@ let g:simpletest_php_bootstrap_filepath = ''
 let mapleader = " "
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let maplocalleader = "\\"
+" directory specific extra nvim config files
+set exrc
+" more secure exrc (see above) mode
+set secure
 " use the clipboard
 set clipboard+=unnamedplus
 " I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
@@ -215,8 +221,10 @@ let g:rbpt_colorpairs = [
 " commands
 " --------
 " Runs the composer command/script 'stan'. 'stan' is an abbreviated custom command that my composer projects normally
-" have
+" have.
 command! Stan te composer stan
+" Runs the composer command/script 'sniff'. 'sniff' is a custom command that my composer projects normally have.
+command! Sniff te composer sniff
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
