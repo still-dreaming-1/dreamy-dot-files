@@ -225,6 +225,7 @@ let g:rbpt_colorpairs = [
 command! Stan te composer stan
 " Runs the composer command/script 'sniff'. 'sniff' is a custom command that my composer projects normally have.
 command! Sniff te composer sniff
+command! Phlint te ./vendor/bin/phlint
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
