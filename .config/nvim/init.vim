@@ -29,12 +29,7 @@ source ~/.config/nvim/.beforeinit.vim
 call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kien/rainbow_parentheses.vim'
-if version < 704
-    Plug 'crookedneighbor/bufexplorer'
-endif
-if version > 703
-    Plug 'jlanzarotta/bufexplorer'
-endif
+Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
