@@ -20,6 +20,7 @@ source ~/.config/nvim/.beforeinit.vim
 " PlugInstall [name ...] - install plugins
 " PlugUpgrade Upgrade vim-plug itself
 " PlugStatus Check status of plugins
+"
 "    ____  __            _           
 "   / __ \/ /_  ______ _(_)___  _____
 "  / /_/ / / / / / __ `/ / __ \/ ___/
@@ -162,6 +163,7 @@ set laststatus=2
 " prevent showing INSERT at bottom of screen below the airline status in insert mode
 set noshowmode
 set scrollback=-1
+" plugin settings
 "    ____  __            _          _____      __  __  _                 
 "   / __ \/ /_  ______ _(_)___     / ___/___  / /_/ /_(_)___  ____ ______
 "  / /_/ / / / / / __ `/ / __ \    \__ \/ _ \/ __/ __/ / __ \/ __ `/ ___/
