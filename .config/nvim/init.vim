@@ -1139,11 +1139,12 @@ function! DreamyChangeWordUnderCursorToCamelCase()
     normal! ~
 endfunction
 
-function! DreamyTurnLineNumbersCompletelyOff()
+function! DreamyDisableLeftColumn()
     set nonumber
     if exists('+relativenumber')
         set norelativenumber
     endif
+    set nomodeline
 endfunction
 
 function! DreamyEnableMyPreferredLineNumberSettings()
@@ -1151,6 +1152,11 @@ function! DreamyEnableMyPreferredLineNumberSettings()
     if exists('+relativenumber')
         set relativenumber
     endif
+endfunction
+
+function! DreamyEnableLeftColumn()
+    set DreamyEnableMyPreferredLineNumberSettings()
+    set modeline
 endfunction
 
 " cannot call this function any sooner since it was not defined yet
