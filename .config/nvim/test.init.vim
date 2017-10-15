@@ -1,6 +1,3 @@
-" look into this as an alternative to tags: :help include-search
-" because vim is better than vi
-set nocompatible
 " vim-plug plugin manager:
 " commands:
 " PlugUpdate [name ...] - install or update plugins
@@ -22,3 +19,13 @@ set nobackup
 set noswapfile
 
 set laststatus=2
+
+" neomake settings
+let g:neomake_php_phpcs_args_standard = 'PSR2'
+let g:neomake_phpstan_level = 7
+
+augroup all_autocmd_group
+    " removes all autocmd in group
+    autocmd!
+    autocmd! BufWritePost * Neomake
+augroup END
