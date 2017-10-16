@@ -1,0 +1,7 @@
+cmdargs:
+    env:
+        neovim: true
+policies:
+    # Disable a violation
+    ProhibitImplicitScopeVariable:
+        enabled: false

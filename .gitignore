@@ -11,6 +11,7 @@
 !.vimshrc
 !.aliashrc
 !.functionshrc
+!.vintrc.yaml
 !.config/
 !.config/nvim/
 !.config/nvim/**
