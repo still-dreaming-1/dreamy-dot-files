@@ -55,22 +55,22 @@ endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
-if dreamy_developer
+if g:dreamy_developer
     Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
 else
     Plug 'still-dreaming-1/vim-elhiv'
 endif
-" if dreamy_developer
+" if g:dreamy_developer
     " Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
 " else
     " Plug 'still-dreaming-1/vim-project-tags'
 " endif
-if dreamy_developer
+if g:dreamy_developer
     Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
 else
     Plug 'still-dreaming-1/vim-generator'
 endif
-if dreamy_developer
+if g:dreamy_developer
     Plug 'git@github.com:still-dreaming-1/vim-project-search.git', { 'branch' : 'develop' }
 else
     Plug 'still-dreaming-1/vim-project-search'
@@ -108,9 +108,9 @@ let g:simpletest_php_bootstrap_filepath = ''
 "| |/ / / / / / / /  (__  )  __/ /_/ /_/ / / / / /_/ (__  ) 
 "|___/_/_/ /_/ /_/  /____/\___/\__/\__/_/_/ /_/\__, /____/  
 "                                             /____/        
-let mapleader = " "
+let g:mapleader = ' '
 " use backslash for localleader (2 backslashes since the first one is the escape char)
-let maplocalleader = "\\"
+let g:maplocalleader = "\\"
 " directory specific extra nvim config files
 set exrc
 " more secure exrc (see above) mode
@@ -189,12 +189,12 @@ let g:neomake_phpstan_level = 7
 nmap <leader>/ gcc
 vmap <leader>/ gc
 " NERDTree settings
-let NERDTreeShowHidden = 1
-let NERDTreeWinSize = 70
-let NERDTreeQuitOnOpen = 1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeWinSize = 70
+let g:NERDTreeQuitOnOpen = 1
 " When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
 " better rainbow parentheses colors
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
@@ -317,18 +317,18 @@ nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_s
 nmap <leader><leader>z <Plug>DreamySurroundWithSpaces
 
 function! Dreamy_surround_cursor_char_with_spaces()
-    let cursor = L_current_cursor()
-    let cursor_char = cursor.char()
-    let current_line = cursor.line()
-    let cursor_index = col('.') - 1
-    let text_before_cursor = ''
-    if cursor_index > 0
-        let text_before_cursor = current_line[:cursor_index-1]
+    let l:cursor = L_current_cursor()
+    let l:cursor_char = l:cursor.char()
+    let l:current_line = l:cursor.line()
+    let l:cursor_index = col('.') - 1
+    let l:text_before_cursor = ''
+    if l:cursor_index > 0
+        let l:text_before_cursor = l:current_line[:l:cursor_index-1]
     endif
-    let text_after_cursor = current_line[cursor_index+1:]
-    let line_with_spaces_added = text_before_cursor.' '.cursor_char.' '.text_after_cursor
-    call setline('.', line_with_spaces_added)
-    return line_with_spaces_added
+    let l:text_after_cursor = l:current_line[l:cursor_index+1:]
+    let l:line_with_spaces_added = l:text_before_cursor.' '.l:cursor_char.' '.l:text_after_cursor
+    call setline('.', l:line_with_spaces_added)
+    return l:line_with_spaces_added
 endfunction
 " replays the last played macro 3 times
 nnoremap <leader>@ 3@@
@@ -573,9 +573,9 @@ endfunction
 " helper functions (used by config)
 " ---------------------------------
 function! Dreamy_go_to_definition()
-    let buffer = L_current_buffer()
-    let file = buffer.file()
-    if file.extension ==# 'php'
+    let l:buffer = L_current_buffer()
+    let l:file = l:buffer.file()
+    if l:file.extension ==# 'php'
         call LanguageClient_textDocument_definition()
     else
         execute "normal! \<C-]>"
@@ -589,10 +589,10 @@ endfunction
 
 function! GetPluginPageFromCurrentLine()
     normal! ^w
-    let l:start_plugin_name_pos = col(".")
+    let l:start_plugin_name_pos = col('.')
     normal! f'
-    let l:end_plugin_name_pos = col(".") - 2
-    let l:line = getline(".")
+    let l:end_plugin_name_pos = col('.') - 2
+    let l:line = getline('.')
     let l:plugin_name = l:line[l:start_plugin_name_pos : l:end_plugin_name_pos]
     return l:plugin_name
 endfunction
@@ -607,53 +607,53 @@ function! Match_previous_indentation_command(...)
 endfunction
 
 function! Match_previous_indentation(...) " assumes spaces for indentation
-    let alter_indentation_level_by = 0
+    let l:alter_indentation_level_by = 0
     if a:0 > 0
-        let alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
+        let l:alter_indentation_level_by = a:1 " Desire a different indentation level from the previous indentation level by this amount. Can be a positive or negative number
     endif
-    let current_line_number = line('.')
-    let previous_line_number = current_line_number - 1
-    let original_previous_line_string = getline(previous_line_number)
-    let previous_line_s = L_s(original_previous_line_string)
-    let previous_line_indentation_level = 0
-    while previous_line_s.starts_with(" ") " count indentation of previous line
-        let previous_line_indentation_level = previous_line_indentation_level + 1
-        let previous_line_s = previous_line_s.skip(1)
+    let l:current_line_number = line('.')
+    let l:previous_line_number = l:current_line_number - 1
+    let l:original_previous_line_string = getline(l:previous_line_number)
+    let l:previous_line_s = L_s(l:original_previous_line_string)
+    let l:previous_line_indentation_level = 0
+    while l:previous_line_s.starts_with(' ') " count indentation of previous line
+        let l:previous_line_indentation_level = l:previous_line_indentation_level + 1
+        let l:previous_line_s = l:previous_line_s.skip(1)
     endwhile
-    let current_line_s = L_s(getline(current_line_number))
-    while current_line_s.starts_with(" ") " remove indentation from current_line_s
-        let current_line_s = current_line_s.skip(1)
+    let l:current_line_s = L_s(getline(l:current_line_number))
+    while l:current_line_s.starts_with(' ') " remove indentation from current_line_s
+        let l:current_line_s = l:current_line_s.skip(1)
     endwhile
-    let current_line_string = current_line_s.str
-    let current_line_indentation_level = 0
-    let desired_indentation_level = previous_line_indentation_level + alter_indentation_level_by
-    if desired_indentation_level < 0
-        let desired_indentation_level = 0
+    let l:current_line_string = l:current_line_s.str
+    let l:current_line_indentation_level = 0
+    let l:desired_indentation_level = l:previous_line_indentation_level + l:alter_indentation_level_by
+    if l:desired_indentation_level < 0
+        let l:desired_indentation_level = 0
     endif
-    while current_line_indentation_level != desired_indentation_level
-        let current_line_string = " ".current_line_string
-        let current_line_indentation_level = current_line_indentation_level + 1
+    while l:current_line_indentation_level != l:desired_indentation_level
+        let l:current_line_string = ' '.l:current_line_string
+        let l:current_line_indentation_level = l:current_line_indentation_level + 1
     endwhile
-    call setline(current_line_number, current_line_string)
+    call setline(l:current_line_number, l:current_line_string)
 endfunction
 
 function! Run_current_file_tests()
-    let current_file_extension = L_current_buffer().file().extension
-    if current_file_extension == 'php'
+    let l:current_file_extension = L_current_buffer().file().extension
+    if l:current_file_extension ==# 'php'
         PhpFile
-    elseif current_file_extension == 'js'
-        Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
-    elseif current_file_extension == 'vim'
+    elseif l:current_file_extension ==# 'js'
+        " Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
+    elseif l:current_file_extension ==# 'vim'
         execute "normal! :UTRun %\<CR>"
     endif
 endfunction
 
 function! Run_all_tests()
-    let current_file_extension = L_current_buffer().file().extension
-    if current_file_extension == 'php'
+    let l:current_file_extension = L_current_buffer().file().extension
+    if l:current_file_extension ==# 'php'
         call Run_tests_with_command('composer test') " need to add a test command to your composer.json
-    elseif current_file_extension == 'vim'
-        execute "normal! :UTRun tests/**/*.vim<CR>"
+    elseif l:current_file_extension ==# 'vim'
+        execute "normal! :UTRun tests/**/*.vim\<CR>"
     endif
 endfunction
 
