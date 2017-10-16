@@ -906,7 +906,7 @@ function! MoveCursorToLastTerminalChar()
         endwhile
         let l:numeric_code = char2nr(l:cursor_char)
         if l:numeric_code == 226
-            normal l
+            normal! l
         endif
     endif
 endfunction
@@ -915,7 +915,7 @@ endfunction
 function! DumpVarUnderCursor()
     let l:c = getline('.')[col('.')-1]
     if l:c ==# '$'
-        normal l
+        normal! l
     endif
     execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idebug::dump('\<esc>pa', $\<esc>pa);\<esc>=="
 endfunction
@@ -926,7 +926,7 @@ function! MovePHPParamLeft()
         if l:c ==# '$'
             call UnsafeMovePHPParamLeft()
         else
-            normal h
+            normal! h
             call MovePHPParamLeft()
         endif
     endif
@@ -936,7 +936,7 @@ function! UnsafeMovePHPParamLeft()
     let l:x = col('.')
     let l:y = line('.')
     normal! f,
-    if getline('.')[col('.')-1] == ','
+    if getline('.')[col('.')-1] ==# ','
         call cursor(l:y,l:x)
         normal! df,F$P
         return
