@@ -1057,39 +1057,39 @@ function! MoveParamRight()
 endfunction
 
 function! MakePHPParam()
-    let x = col(".")
-    let y = line(".")
-    normal viwy
-    if getline(".")[col(".")-1] == "$"
-        normal vliwy
+    let l:x = col('.')
+    let l:y = line('.')
+    normal! viwy
+    if getline('.')[col('.')-1] ==# '$'
+        !normal vliwy
     else
-        let currentX = col(".")
-        normal h
-        let newX = col(".")
-        if newX < currentX
-            if getline(".")[col(".")-1] == "$"
-                normal vliwy
+        let l:currentX = col('.')
+        normal! h
+        let l:newX = col('.')
+        if l:newX < l:currentX
+            if getline('.')[col('.')-1] ==# '$'
+                normal! vliwy
             endif
         endif
     endif
-    call search('function','bW')
-    normal f(
-    let currentX = col(".")
-    normal %
-    let newX = col(".")
-    if newX > currentX + 1
-        normal i,kkp
+    call search('function', 'bW')
+    normal! f(
+    let l:currentX = col('.')
+    normal! %
+    let l:newX = col('.')
+    if l:newX > l:currentX + 1
+        execute "normal! i,\<esc>p"
     else
-        normal P
+        normal! P
     endif
-    normal m`
-    call cursor(y,x)
+    normal! m`
+    call cursor(l:y,l:x)
 endfunction
 
 function! Dreamy_send_to_port(textToSend, port)
-    let shell = L_shell()
-    let command = 'printf ' . shellescape(a:textToSend) . ' | nc localhost ' . shellescape(a:port)
-    call shell.run(command)
+    let l:shell = L_shell()
+    let l:command = 'printf ' . shellescape(a:textToSend) . ' | nc localhost ' . shellescape(a:port)
+    call l:shell.run(l:command)
 endfunction
 " -----------------------------------
 " general purpose, reusable functions
@@ -1122,32 +1122,32 @@ function! EchoCursorPos(pos, ...)
     else
         let l:name = ''
     endif
-    if l:name != ''
-        echo 'cursor '.name.' :'
+    if l:name !=# ''
+        echo 'cursor '.l:name.' :'
     endif
     echo 'line: '.a:pos['line']
     echo 'col: '.a:pos['col']
 endfunction
 
 function! GetCursorColNum()
-    return col(".")
+    return col('.')
 endfunction
 
 function! DreamyChangeWordUnderCursorToPascalCase()
-    let current_word = L_current_cursor().word()
-    let current_word_s = L_s(current_word)
-    let pascal_word_s = current_word_s.to_pascal_case()
+    let l:current_word = L_current_cursor().word()
+    let l:current_word_s = L_s(l:current_word)
+    let l:pascal_word_s = l:current_word_s.to_pascal_case()
     normal vvckk
-    execute 'normal! a'.pascal_word_s.str
-    return pascal_word_s
+    execute 'normal! a'.l:pascal_word_s.str
+    return l:pascal_word_s
 endfunction
 
 function! DreamyChangeWordUnderCursorToCamelCase()
-    let pascal_word_s = DreamyChangeWordUnderCursorToPascalCase()
-    let positionOnWord = pascal_word_s.len
-    while positionOnWord > 1
+    let l:pascal_word_s = DreamyChangeWordUnderCursorToPascalCase()
+    let l:positionOnWord = l:pascal_word_s.len
+    while l:positionOnWord > 1
         normal! h
-        let positionOnWord = positionOnWord - 1
+        let l:positionOnWord = l:positionOnWord - 1
     endwhile
     normal! ~
 endfunction
