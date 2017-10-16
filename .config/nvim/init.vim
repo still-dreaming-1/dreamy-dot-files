@@ -642,17 +642,17 @@ function! Run_current_file_tests()
     if l:current_file_extension ==# 'php'
         PhpFile
     elseif l:current_file_extension ==# 'js'
-        Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
+        " Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
     elseif l:current_file_extension ==# 'vim'
         execute "normal! :UTRun %\<CR>"
     endif
 endfunction
 
 function! Run_all_tests()
-    let l:current_file_extension = L_current_buffer().file().extension
-    if l:current_file_extension ==# 'php'
+    let current_file_extension = L_current_buffer().file().extension
+    if current_file_extension ==# 'php'
         call Run_tests_with_command('composer test') " need to add a test command to your composer.json
-    elseif l:current_file_extension ==# 'vim'
+    elseif current_file_extension ==# 'vim'
         execute "normal! :UTRun tests/**/*.vim\<CR>"
     endif
 endfunction
