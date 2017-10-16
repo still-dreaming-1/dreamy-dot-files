@@ -174,7 +174,7 @@ set scrollback=-1
 let g:plug_shallow = 0
 " LanguageClient settings
 let g:LanguageClient_autoStart = 1
-nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
 " Codi settings
 let g:codi#width = 80
 " vim-airline settings
@@ -572,6 +572,16 @@ endfunction
 " ---------------------------------
 " helper functions (used by config)
 " ---------------------------------
+function! Dreamy_go_to_definition()
+    let buffer = L_current_buffer()
+    let file = buffer.file()
+    if file.extension ==# 'php'
+        call LanguageClient_textDocument_definition()
+    else
+        execute "normal! \<C-]>"
+    endif
+endfunction
+
 function! OpenVivaldiAtPluginPage()
     let l:plugin_name = GetPluginPageFromCurrentLine()
     call jobstart('vivaldi "https://www.github.com/'.l:plugin_name.'"')
