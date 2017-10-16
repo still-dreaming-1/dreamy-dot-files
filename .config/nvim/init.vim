@@ -694,21 +694,21 @@ function! Run_single_phpunit_test_method(test_method_name, test_file_path)
 endfunction
 
 function! Run_simple_tests_in_file(path)
-    let command = 'php'
+    let l:command = 'php'
     if g:simpletest_php_bootstrap_filepath !=# ''
-        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
+        let l:command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
     endif
-    let command .= ' -f '.shellescape(a:path)
-    call Run_tests_with_command(command)
+    let l:command .= ' -f '.shellescape(a:path)
+    call Run_tests_with_command(l:command)
 endfunction
 
 function! Run_simple_tests_in_file_with_coverage(path)
-    let command = 'php'
+    let l:command = 'php'
     if g:simpletest_with_code_coverage_php_bootstrap_filepath !=# ''
-        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_with_code_coverage_php_bootstrap_filepath)
+        let l:command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_with_code_coverage_php_bootstrap_filepath)
     endif
-    let command .= ' -f '.shellescape(a:path)
-    call Run_tests_with_command(command)
+    let l:command .= ' -f '.shellescape(a:path)
+    call Run_tests_with_command(l:command)
 endfunction
 
 function! Run_PHPUnit_tests_in_file(class)
@@ -716,37 +716,37 @@ function! Run_PHPUnit_tests_in_file(class)
 endfunction
 
 function! Get_php_method_name_from_cursor_line()
-    let line_text = L_s(getline('.'))
-    let function_name = line_text.trim()
-    while function_name.contains('(')
-        let function_name = function_name.remove_end()
+    let l:line_text = L_s(getline('.'))
+    let l:function_name = l:line_text.trim()
+    while l:function_name.contains('(')
+        let l:function_name = l:function_name.remove_end()
     endwhile
-    let function_name = function_name.after('function').trim()
-    call l#log('value returned from Get_php_method_name_from_cursor_line(): '.function_name.str)
-    return function_name.str
+    let l:function_name = l:function_name.after('function').trim()
+    call l#log('value returned from Get_php_method_name_from_cursor_line(): '.l:function_name.str)
+    return l:function_name.str
 endfunction
 
 function! RunMochaTests(...)
     split
     BOTTOM
     enew
-    let command = 'mocha --recursive'
+    let l:command = 'mocha --recursive'
     if a:0 > 0
-        let debug = a:1
-        if debug
-            let command = command.' debug'
+        let l:debug = a:1
+        if l:debug
+            let l:command = l:command.' debug'
         endif
         if a:0 > 1
-            let test_file_path = a:2
-            let command = command.' '.shellescape(test_file_path)
+            let l:test_file_path = a:2
+            let l:command = l:command.' '.shellescape(l:test_file_path)
             if a:0  > 2
-                let filtered_text = a:3
-                let command = command.' -f "'.filtered_text.'"'
+                let l:filtered_text = a:3
+                let l:command = l:command.' -f "'.l:filtered_text.'"'
             endif
         endif
     endif
-    call l#log('command about to run from RunMochaTests(): '.command)
-    call termopen(command)
+    call l#log('command about to run from RunMochaTests(): '.l:command)
+    call termopen(l:command)
     nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
@@ -754,100 +754,100 @@ function! RunNpmTests()
     split
     BOTTOM
     enew
-    let command = 'npm test'
-    call termopen(command)
+    let l:command = 'npm test'
+    call termopen(l:command)
     nnoremap <buffer><leader>q :q!<CR>
 endfunction
 
 function! GetMochaFilteredTextOfTestUnderCursor()
-    let line_text = L_s(getline('.'))
-    let filtered_text = line_text
-    while !filtered_text.starts_with("'")
-        let filtered_text = filtered_text.remove_start()
-        if filtered_text.len == 0
+    let l:line_text = L_s(getline('.'))
+    let l:filtered_text = l:line_text
+    while !l:filtered_text.starts_with("'")
+        let l:filtered_text = l:filtered_text.remove_start()
+        if l:filtered_text.len == 0
             break
         endif
     endwhile
-    while !filtered_text.ends_with("'")
-        let filtered_text =  filtered_text.remove_end()
-        if filtered_text.len == 0
+    while !l:filtered_text.ends_with("'")
+        let l:filtered_text =  l:filtered_text.remove_end()
+        if l:filtered_text.len == 0
             break
         endif
     endwhile
-    let filtered_text = filtered_text.remove_start()
-    let filtered_text = filtered_text.remove_end()
-    call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
-    return filtered_text.str
+    let l:filtered_text = l:filtered_text.remove_start()
+    let l:filtered_text = l:filtered_text.remove_end()
+    call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.l:filtered_text.str)
+    return l:filtered_text.str
 endfunction
 
 function! Dreamy_paste_php_template()
-    let current_buffer = L_current_buffer()
-    let paste_php_template = "i<?php\<CR>declare(strict_types=1);\<CR>\<CR>"
-    let current_buffer_directory_s_path = L_s(current_buffer.dir().path)
-    let namespace = g:dreamy_php_namespace
-    if current_buffer_directory_s_path.contains(g:dreamy_php_namespace_directory_root)
-        let dir_after_root = L_dir(current_buffer_directory_s_path.after(g:dreamy_php_namespace_directory_root).str)
-        let namespace .= '\' . L_s(dir_after_root.path).replace('/', '\').str
+    let l:current_buffer = L_current_buffer()
+    let l:paste_php_template = "i<?php\<CR>declare(strict_types=1);\<CR>\<CR>"
+    let l:current_buffer_directory_s_path = L_s(l:current_buffer.dir().path)
+    let l:namespace = g:dreamy_php_namespace
+    if l:current_buffer_directory_s_path.contains(g:dreamy_php_namespace_directory_root)
+        let l:dir_after_root = L_dir(l:current_buffer_directory_s_path.after(g:dreamy_php_namespace_directory_root).str)
+        let l:namespace .= '\' . L_s(l:dir_after_root.path).replace('/', '\').str
     endif
     if g:dreamy_php_namespace !=# ''
-        let paste_php_template .= 'namespace '.namespace.";\<CR>\<CR>"
+        let l:paste_php_template .= 'namespace '.l:namespace.";\<CR>\<CR>"
     endif
-    let current_buffer_file = current_buffer.file()
-    let paste_php_template .= "final class ".current_buffer_file.name_without_extension
-    if L_s(current_buffer_file.name_without_extension).ends_with('Test')
-        let paste_php_template .= " extends ".g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
-        if L_s(current_buffer_file.name_without_extension).ends_with('UnitTest')
-            let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('UnitTest').str
-        elseif L_s(current_buffer_file.name_without_extension).ends_with('IntegrationTest')
-            let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('IntegrationTest').str
+    let l:current_buffer_file = l:current_buffer.file()
+    let l:paste_php_template .= 'final class '.l:current_buffer_file.name_without_extension
+    if L_s(l:current_buffer_file.name_without_extension).ends_with('Test')
+        let l:paste_php_template .= ' extends '.g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
+        if L_s(l:current_buffer_file.name_without_extension).ends_with('UnitTest')
+            let l:tested_class_name = L_s(l:current_buffer_file.name_without_extension).before_last('UnitTest').str
+        elseif L_s(l:current_buffer_file.name_without_extension).ends_with('IntegrationTest')
+            let l:tested_class_name = L_s(l:current_buffer_file.name_without_extension).before_last('IntegrationTest').str
         else
-            let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('Test').str
+            let l:tested_class_name = L_s(l:current_buffer_file.name_without_extension).before_last('Test').str
         endif
-        let paste_php_template .= tested_class_name . " = new " . tested_class_name . "();\<CR>"
-        let paste_php_template .= "$this->assertSame(is_object($" . tested_class_name . "), true);\<CR>\}\<CR>\}\<esc>"
-        let paste_php_template .= "kk^f$l~k^l~ggVG=:w\<CR>jjjjjj^"
+        let l:paste_php_template .= l:tested_class_name . ' = new ' . l:tested_class_name . "();\<CR>"
+        let l:paste_php_template .= '$this->assertSame(is_object($' . l:tested_class_name
+        let l:paste_php_template .= "), true);\<CR>\}\<CR>\}\<esc>kk^f$l~k^l~ggVG=:w\<CR>jjjjjj^"
     else
         if g:dreamy_php_default_base_class !=# ''
-            let paste_php_template .= " extends ".g:dreamy_php_default_base_class
+            let l:paste_php_template .= ' extends '.g:dreamy_php_default_base_class
         endif
-        let paste_php_template .= "\<CR>{\<CR>"
+        let l:paste_php_template .= "\<CR>{\<CR>"
         if g:dreamy_php_base_trait !=# ''
-            let paste_php_template .= 'use '.g:dreamy_php_base_trait.";\<CR>"
+            let l:paste_php_template .= 'use '.g:dreamy_php_base_trait.";\<CR>"
         endif
-        let paste_php_template .= "\}\<esc>kk^we"
+        let l:paste_php_template .= "\}\<esc>kk^we"
     endif
-    execute "normal! " . paste_php_template
+    execute 'normal! ' . l:paste_php_template
 endfunction
 
 function! Dreamy_paste_php_method()
-    let current_line_s = L_s(L_current_cursor().line())
+    let l:current_line_s = L_s(L_current_cursor().line())
     normal! j
-    let next_line_s = L_s(L_current_cursor().line())
+    let l:next_line_s = L_s(L_current_cursor().line())
     normal! k
-    let next_line_is_closing_brace_or_blank = 0
-    if next_line_s.trim().str ==# '}'
-        let next_line_is_closing_brace_or_blank = 1
-    elseif next_line_s.trim().str ==# ''
-        let next_line_is_closing_brace_or_blank = 1
+    let l:next_line_is_closing_brace_or_blank = 0
+    if l:next_line_s.trim().str ==# '}'
+        let l:next_line_is_closing_brace_or_blank = 1
+    elseif l:next_line_s.trim().str ==# ''
+        let l:next_line_is_closing_brace_or_blank = 1
     endif
-    let paste_normal_command = 'normal! o'
-    if current_line_s.trim().str !=# '{'
-        let paste_normal_command .= "\<CR>"
+    let l:paste_normal_command = 'normal! o'
+    if l:current_line_s.trim().str !=# '{'
+        let l:paste_normal_command .= "\<CR>"
     endif
-    let paste_normal_command .= "public function ()\<CR>{\<CR>}\<esc>Vkk=f(\<esc>"
-    execute paste_normal_command
-    let current_buffer_file = L_current_buffer().file()
-    if L_s(current_buffer_file.name_without_extension).ends_with('Test')
+    let l:paste_normal_command .= "public function ()\<CR>{\<CR>}\<esc>Vkk=f(\<esc>"
+    execute l:paste_normal_command
+    let l:current_buffer_file = L_current_buffer().file()
+    if L_s(l:current_buffer_file.name_without_extension).ends_with('Test')
         execute "normal! itest\<esc>l"
     endif
-    if next_line_is_closing_brace_or_blank == 0
+    if l:next_line_is_closing_brace_or_blank == 0
         execute "normal! jj\<esc>o\<esc>kkkf(\<esc>"
     endif
     startinsert
 endfunction
 
 function! Dreamy_paste_php_property()
-    execute "normal! opublic $;"
+    execute 'normal! opublic $;'
     startinsert
 endfunction
 
@@ -857,22 +857,23 @@ function! Dreamy_paste_php_mock()
 endfunction
 
 function! Dreamy_paste_vim_template()
-    let l:file_name = expand("%:t:r")
-    let l:paste_vim_template = "ifunction! ".l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name."\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
-    execute "normal! ".l:paste_vim_template
+    let l:file_name = expand('%:t:r')
+    let l:paste_vim_template = 'ifunction! '.l:file_name."()\<CR>endfunction\<esc>Olet ".l:file_name
+    let l:paste_vim_template .= "\<esc>^w~A= {}\<CR>return ".l:file_name."\<esc>^w~$"
+    execute 'normal! '.l:paste_vim_template
 endfunction
 
 function! JumpToNextJSFunction()
-    let search_string = L_s('= function(').get_no_magic().str
-    call search(search_string)
-    let @/ = search_string
+    let l:search_string = L_s('= function(').get_no_magic().str
+    call search(l:search_string)
+    let @/ = l:search_string
 endfunction
 
 function! ChangeDirectoryCustom(dir_path)
-    let before_dir = getcwd()
+    let l:before_dir = getcwd()
     execute 'cd '.fnameescape(a:dir_path)
-    let after_dir = getcwd()
-    if before_dir !=# after_dir
+    let l:after_dir = getcwd()
+    if l:before_dir !=# l:after_dir
         " place custom current directory changed event handler code here
         " make NERDTree root match new current directory
         NERDTreeCWD
@@ -892,16 +893,16 @@ function! MoveCursorToLastTerminalChar()
     let l:numeric_code = char2nr(l:cursor_char)
     while l:numeric_code == 0
         normal! k$
-        let l:cursor_char = getline(".")[col(".")-1]
+        let l:cursor_char = getline('.')[col('.')-1]
         let l:numeric_code = char2nr(l:cursor_char)
     endwhile
     if l:numeric_code == 226
         normal! h
-        let l:cursor_char = getline(".")[col(".")-1]
+        let l:cursor_char = getline('.')[col('.')-1]
         let l:numeric_code = char2nr(l:cursor_char)
-        while l:cursor_char == ' '
+        while l:cursor_char ==# ' '
             normal! h
-            let l:cursor_char = getline(".")[col(".")-1]
+            let l:cursor_char = getline('.')[col('.')-1]
         endwhile
         let l:numeric_code = char2nr(l:cursor_char)
         if l:numeric_code == 226
@@ -912,17 +913,17 @@ endfunction
 
 " dump the current variable. Works whether or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
-    let c = getline(".")[col(".")-1]
-    if c == "$"
+    let l:c = getline('.')[col('.')-1]
+    if l:c ==# '$'
         normal l
     endif
     execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idebug::dump('\<esc>pa', $\<esc>pa);\<esc>=="
 endfunction
 
 function! MovePHPParamLeft()
-    if col(".") > 1
-        let c = getline(".")[col(".")-1]
-        if c == "$"
+    if col('.') > 1
+        let l:c = getline('.')[col('.')-1]
+        if l:c ==# '$'
             call UnsafeMovePHPParamLeft()
         else
             normal h
@@ -932,68 +933,68 @@ function! MovePHPParamLeft()
 endfunction
 
 function! UnsafeMovePHPParamLeft()
-    let x = col(".")
-    let y = line(".")
-    normal f,
-    if getline(".")[col(".")-1] == ","
-        call cursor(y,x)
-        normal df,F$P
+    let l:x = col('.')
+    let l:y = line('.')
+    normal! f,
+    if getline('.')[col('.')-1] == ','
+        call cursor(l:y,l:x)
+        normal! df,F$P
         return
     endif
-    call cursor(y,x)
-    normal f)
-    if getline(".")[col(".")-1] == ")"
-        call cursor(y,x)
-        normal F,
-        if col(".") >= x
-            call cursor(y,x)
+    call cursor(l:y,l:x)
+    normal! f)
+    if getline('.')[col('.')-1] ==# ')'
+        call cursor(l:y,l:x)
+        normal! F,
+        if col('.') >= l:x
+            call cursor(l:y,l:x)
             return
         endif
-        normal xf$
-        normal vf)hdF$Pa,
+        normal! xf$
+        normal! vf)hdF$Pa,
         return
     endif
-    call cursor(y,x)
+    call cursor(l:y,l:x)
 endfunction
 
 function! MovePHPParamRight()
-    if col(".") > 1
-        let c = getline(".")[col(".")-1]
-        if c == "$"
+    if col('.') > 1
+        let l:c = getline('.')[col('.')-1]
+        if l:c ==# '$'
             call UnsafeMovePHPParamRight()
         else
-            normal h
+            normal! h
             call MovePHPParamRight()
         endif
     endif
 endfunction
 
 function! UnsafeMovePHPParamRight()
-    let x = col(".")
-    let y = line(".")
-    normal f,
-    if getline(".")[col(".")-1] == ","
-        call cursor(y,x)
-        normal df,
-        let currentX = col(".")
-        normal f,
-        if col(".") > currentX
-            normal p
+    let l:x = col('.')
+    let l:y = line('.')
+    normal! f,
+    if getline('.')[col('.')-1] ==# ','
+        call cursor(l:y,l:x)
+        normal! df,
+        let l:currentX = col('.')
+        normal! f,
+        if col('.') > l:currentX
+            normal! p
             return
         endif
-        call cursor(y,currentX)
-        normal f)
-        if col(".") > currentX
-            normal i,kkpx
+        call cursor(l:y,l:currentX)
+        normal! f)
+        if col('.') > l:currentX
+            execute "normal! i,\<esc>px"
         endif
         return
     endif
-    call cursor(y,x)
+    call cursor(l:y,l:x)
 endfunction
 
 function! MoveParamLeft()
-    let current_file_extension = L_current_buffer().file().extension
-    if current_file_extension == 'php'
+    let l:current_file_extension = L_current_buffer().file().extension
+    if l:current_file_extension ==# 'php'
         call MovePHPParamLeft()
     else
         call GenericMoveParamLeft()
@@ -1004,42 +1005,42 @@ function! GenericMoveParamLeft()
     " move to beginning of current word
     normal! wb
     " capture the x and y at the beginning of the param
-    let x = col(".")
-    let y = line(".")
+    let l:x = col('.')
+    let l:y = line('.')
     "find the comma separating current param from the next
     normal! f,
     " if there actually was a comma, meaning there is another param after this one
-    let current_cursor = L_current_cursor()
-    if current_cursor().char() == ","
-        call cursor(y,x)
+    let l:current_cursor = L_current_cursor()
+    if l:current_cursor.char() ==# ','
+        call cursor(l:y,l:x)
         " Delete the current param and the comma, copying it at the same time. Put copied param before the previous one
         normal! df,
         " if the current character is a space, which it probably is
-        if current_cursor().char() == " "
+        if l:current_cursor.char() ==# ' '
             " delete the space without yanking it
             normal! v"_d
         endif
         normal! bbP
-        execute "normal! a "
+        execute 'normal! a '
         normal! bb
         return
     endif
     " there was not a comma, so this is the last param
     " move cursor back to the
-    call cursor(y,x)
-    normal f)
-    if getline(".")[col(".")-1] == ")"
-        call cursor(y,x)
-        normal F,
-        if col(".") >= x
-            call cursor(y,x)
+    call cursor(l:y,l:x)
+    normal! f)
+    if getline('.')[col('.')-1] ==# ')'
+        call cursor(l:y,l:x)
+        normal! F,
+        if col('.') >= l:x
+            call cursor(l:y,l:x)
             return
         endif
-        normal xf$
-        normal vf)hdF$Pa,
+        normal! xf$
+        normal! vf)hdF$Pa,
         return
     endif
-    call cursor(y,x)
+    call cursor(l:y,l:x)
 endfunction
 
 function! GenericMoveParamRight()
@@ -1047,8 +1048,8 @@ function! GenericMoveParamRight()
 endfunction
 
 function! MoveParamRight()
-    let current_file_extension = L_current_buffer().file().extension
-    if current_file_extension == 'php'
+    let l:current_file_extension = L_current_buffer().file().extension
+    if l:current_file_extension ==# 'php'
         call MovePHPParamRight()
     else
         call GenericMoveParamRight()
