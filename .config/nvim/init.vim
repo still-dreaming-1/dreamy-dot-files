@@ -1167,7 +1167,7 @@ function! DreamyEnableMyPreferredLineNumberSettings()
 endfunction
 
 function! DreamyEnableLeftColumn()
-    set DreamyEnableMyPreferredLineNumberSettings()
+    call DreamyEnableMyPreferredLineNumberSettings()
     set modeline
 endfunction
 
