@@ -675,8 +675,8 @@ endfunction
 " that same code could be tested by a higher level test. This concept also requires all these tests to run very fast, so
 " an additional difference from what you might be used to is that even your 'integration' tests should run fast.
 function! Run_simpletest_test_suite()
-    let command = 'php '.g:simpletest_test_suite_file_path
-    call Run_tests_with_command(command)
+    let l:command = 'php '.g:simpletest_test_suite_file_path
+    call Run_tests_with_command(l:command)
 endfunction
 
 function! Run_simpletest_integration_test_suite()
@@ -684,13 +684,13 @@ function! Run_simpletest_integration_test_suite()
 endfunction
 
 function! Run_simpletest_all_test_suite()
-    let command = 'php '.g:simpletest_all_test_suite_file_path
-    call Run_tests_with_command(command)
+    let l:command = 'php '.g:simpletest_all_test_suite_file_path
+    call Run_tests_with_command(l:command)
 endfunction
 
 function! Run_single_phpunit_test_method(test_method_name, test_file_path)
-    let command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(test_method_name).' '.shellescape(test_file_path)
-    call Run_tests_with_command(command)
+    let l:command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(a:test_method_name).' '.shellescape(a:test_file_path)
+    call Run_tests_with_command(l:command)
 endfunction
 
 function! Run_simple_tests_in_file(path)
