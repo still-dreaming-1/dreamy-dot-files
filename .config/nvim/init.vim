@@ -642,7 +642,7 @@ function! Run_current_file_tests()
     if current_file_extension ==# 'php'
         PhpFile
     elseif current_file_extension ==# 'js'
-        " Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
+        Codi!! " toggles Codi on or off. This can be used either to test with just Codi, or to test with Codi in conjunction with living-tests
     elseif current_file_extension ==# 'vim'
         execute "normal! :UTRun %\<CR>"
     endif
