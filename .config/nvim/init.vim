@@ -31,18 +31,14 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
 Plug 'neomake/neomake'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 Plug 'tpope/vim-commentary'
-" vim-UT depends on this
-Plug 'LucHermitte/lh-vim-lib'
-" unit testing
-Plug 'LucHermitte/vim-UT'
+Plug 'LucHermitte/lh-vim-lib' " vim-UT depends on this
+Plug 'LucHermitte/vim-UT' " unit testing
 Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
@@ -54,17 +50,13 @@ function! UpdateRemotePluginsAlias(required_but_unused_arg)
 endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
 
-" These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but you probably want to stick to the default master branch
+" These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
+" you probably want to stick to the default master branch
 if g:dreamy_developer
     Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
 else
     Plug 'still-dreaming-1/vim-elhiv'
 endif
-" if g:dreamy_developer
-    " Plug 'git@github.com:still-dreaming-1/vim-project-tags.git', { 'branch' : 'develop' }
-" else
-    " Plug 'still-dreaming-1/vim-project-tags'
-" endif
 if g:dreamy_developer
     Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
 else
@@ -119,14 +111,8 @@ set secure
 set clipboard+=unnamedplus
 " I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
 set hidden
-" enables syntax highlighting. Actually the docs say that is what
-" :syntax enable is for. :syntax on is when you want to overrite your
-" settings. Using :syntax enable allows you to use :highlight before or after
-" enabling syntax. I should experiment with :syntax enable instead of this...
-syntax on
-" show title in console title bar
-set title
-" at the bottom of the screen show the number of visually selected characters, and other stuff. If the selection is more than one row, shows the row count instead.
+" at the bottom of the screen show the number of visually selected characters, and other stuff. If the selection is
+" more than one row, shows the row count instead.
 set showcmd
 " indentation / tab settings
 set tabstop=4
@@ -146,22 +132,12 @@ hi CursorLine cterm=NONE ctermbg=black
 set cursorline
 hi CursorColumn cterm=NONE ctermbg=black
 set cursorcolumn
-" warning: next two settings make recovery impossible
-set nobackup
-set noswapfile
 " copy the indentation from the previous line (supposedly, but does not always work).
 set autoindent
-" While in insert mode, allows the backspace key, delete key, etc to delete
-" whatever you want. This stops Vim from preventing you from deleting past
-" certain things.
-set backspace=indent,eol,start
 " 'disable' the mouse
 set mouse=c
 set timeoutlen=18000
 set path+=**
-set laststatus=2
-" prevent showing INSERT at bottom of screen below the airline status in insert mode
-set noshowmode
 set scrollback=-1
 " plugin settings
 "    ____  __            _          _____      __  __  _                 
@@ -173,18 +149,17 @@ set scrollback=-1
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow = 0
 " LanguageClient settings
+let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_autoStart = 1
 nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
 " Codi settings
 let g:codi#width = 80
-" vim-airline settings
-" allows special characters to display correctly like the branch icon next to the branch name that you see at the bottom
-let g:airline_powerline_fonts = 1
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR2'
 let g:neomake_phpstan_level = 7
+" let g:neomake_logfile = '~/neomake.log'
 " commentary mappings
 nmap <leader>/ gcc
 vmap <leader>/ gc
@@ -222,6 +197,7 @@ let g:rbpt_colorpairs = [
 command! Stan te composer stan
 " Runs the composer command/script 'sniff'. 'sniff' is a custom command that my composer projects normally have.
 command! Sniff te composer sniff
+command! Lint te composer lint
 command! Phlint te ./vendor/bin/phlint
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
@@ -495,7 +471,7 @@ augroup all_other_autocmd_group
     " removes all autocmd in group
     autocmd!
     autocmd! BufWritePost * Neomake
-    autocmd FileType php LanguageClientStart
+    " autocmd FileType php LanguageClientStart
     " enable zsh syntax for .aliashrc file
     autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
     " enable zsh syntax for .functionshrc file
