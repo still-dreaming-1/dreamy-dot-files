@@ -472,7 +472,6 @@ augroup all_other_autocmd_group
     " removes all autocmd in group
     autocmd!
     autocmd! BufWritePost * Neomake
-    " autocmd FileType php LanguageClientStart
     " enable zsh syntax for .aliashrc file
     autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
     " enable zsh syntax for .functionshrc file
