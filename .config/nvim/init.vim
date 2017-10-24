@@ -103,6 +103,7 @@ let g:simpletest_php_bootstrap_filepath = ''
 let g:mapleader = ' '
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let g:maplocalleader = "\\"
+set noswapfile
 " directory specific extra nvim config files
 set exrc
 " more secure exrc (see above) mode
