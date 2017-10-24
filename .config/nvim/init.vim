@@ -511,7 +511,6 @@ augroup all_other_autocmd_group
     autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
     "creates a new slot (import and export DSL) named after the word under the cursor
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-    autocmd FileType php command! Pmock call Dreamy_paste_php_mock()
     "hack to share clipboard across ssh sessions and local machine
     if has('nvim') && g:send_yanked_text_to_port != -1
         autocmd TextYankPost * call Dreamy_send_to_port(v:event['regcontents'][0], g:send_yanked_text_to_port)
@@ -824,11 +823,6 @@ endfunction
 
 function! Dreamy_paste_php_property()
     execute 'normal! opublic $;'
-    startinsert
-endfunction
-
-function! Dreamy_paste_php_mock()
-    execute "normal! aPhake::mock('');\<esc>hh\<esc>"
     startinsert
 endfunction
 
