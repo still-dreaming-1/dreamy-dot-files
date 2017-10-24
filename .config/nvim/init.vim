@@ -500,7 +500,8 @@ augroup all_other_autocmd_group
     "method template
     autocmd FileType php                     nnoremap <buffer> <leader>pm :call Dreamy_paste_php_method()<CR>
     "property template
-    autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property()<CR>
+    autocmd FileType php                     nnoremap <buffer> <leader>pp :call Dreamy_paste_php_property_after()<CR>
+    autocmd FileType php                     nnoremap <buffer> <leader>Pp :call Dreamy_paste_php_property_before()<CR>
     "constructor template
     autocmd FileType php                     nnoremap <buffer> <leader>po opublic function __construct()<CR>{<CR>}<esc>Vk=
     "paste debug::log();
@@ -821,8 +822,13 @@ function! Dreamy_paste_php_method()
     startinsert
 endfunction
 
-function! Dreamy_paste_php_property()
+function! Dreamy_paste_php_property_after()
     execute 'normal! opublic $;'
+    startinsert
+endfunction
+
+function! Dreamy_paste_php_property_before()
+    execute 'normal! Opublic $;'
     startinsert
 endfunction
 
