@@ -44,6 +44,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 Plug 'tpope/vim-repeat'
+Plug 'ron89/thesaurus_query.vim'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
@@ -823,12 +824,12 @@ function! Dreamy_paste_php_method()
 endfunction
 
 function! Dreamy_paste_php_property_after()
-    execute 'normal! opublic $;'
+    execute 'normal! o/** @var mixed */ public $;'
     startinsert
 endfunction
 
 function! Dreamy_paste_php_property_before()
-    execute 'normal! Opublic $;'
+    execute 'normal! O/** @var mixed */ public $;'
     startinsert
 endfunction
 
