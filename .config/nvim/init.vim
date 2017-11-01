@@ -553,6 +553,9 @@ function! Dreamy_go_to_definition()
     let buffer = L_current_buffer()
     let file = buffer.file()
     if file.extension ==# 'php'
+        " adds the current position to the jump list so you can jump back to
+        " where you were after looking up the definition of something
+        normal! m'
         call LanguageClient_textDocument_definition()
     else
         execute "normal! \<C-]>"
