@@ -105,6 +105,7 @@ let g:mapleader = ' '
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let g:maplocalleader = "\\"
 set noswapfile
+" set shada = "NONE"
 " directory specific extra nvim config files
 set exrc
 " more secure exrc (see above) mode
@@ -897,7 +898,7 @@ function! DumpVarUnderCursor()
     if c ==# '$'
         normal! l
     endif
-    execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>idebug::dump('\<esc>pa', $\<esc>pa);\<esc>=="
+    execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>i\\Acs\\Csst\\DebugOutputter::dumpVariable(\['\<esc>pa' => $\<esc>pa]);\<esc>=="
 endfunction
 
 function! MovePHPParamLeft()
