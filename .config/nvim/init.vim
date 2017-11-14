@@ -159,6 +159,8 @@ nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
 let g:codi#width = 80
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources._ = ['LanguageClient']
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR2'
 let g:neomake_phpstan_level = 7
