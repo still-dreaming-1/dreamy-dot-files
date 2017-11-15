@@ -41,8 +41,6 @@ Plug 'LucHermitte/lh-vim-lib' " vim-UT depends on this
 Plug 'LucHermitte/vim-UT' " unit testing
 Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 Plug 'tpope/vim-repeat'
 Plug 'ron89/thesaurus_query.vim'
 
@@ -151,16 +149,11 @@ set scrollback=-1
 "              /____/                                      /____/        
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow = 0
-" LanguageClient settings
-let g:LanguageClient_diagnosticsEnable = 0
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
+" nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
 " Codi settings
 let g:codi#width = 80
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#ignore_sources = {}
-let g:deoplete#ignore_sources._ = ['LanguageClient']
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR2'
 let g:neomake_phpstan_level = 7
@@ -548,21 +541,6 @@ function! RunMacroUntilLastLine(macro)
             return
         endif
     endwhile
-endfunction
-" ---------------------------------
-" helper functions (used by config)
-" ---------------------------------
-function! Dreamy_go_to_definition()
-    let buffer = L_current_buffer()
-    let file = buffer.file()
-    if file.extension ==# 'php'
-        " adds the current position to the jump list so you can jump back to
-        " where you were after looking up the definition of something
-        normal! m'
-        call LanguageClient_textDocument_definition()
-    else
-        execute "normal! \<C-]>"
-    endif
 endfunction
 
 function! OpenVivaldiAtPluginPage()
