@@ -203,7 +203,6 @@ command! T NERDTreeToggle
 command! Chome call ChangeDirectoryCustom("$HOME")
 command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
 command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
-command! Cproj call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-tags")
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
