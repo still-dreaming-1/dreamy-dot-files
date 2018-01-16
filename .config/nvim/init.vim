@@ -92,6 +92,8 @@ let g:simpletest_all_test_suite_file_path = 0
 let g:simpletest_integration_test_suite_file_path = 0
 let g:simpletest_test_suite_file_path = 0
 let g:simpletest_php_bootstrap_filepath = ''
+
+source ~/.config/nvim/init.core.vim
 " vim settings
 " _    ___                        __  __  _                 
 "| |  / (_)___ ___     ________  / /_/ /_(_)___  ____ ______
@@ -99,7 +101,6 @@ let g:simpletest_php_bootstrap_filepath = ''
 "| |/ / / / / / / /  (__  )  __/ /_/ /_/ / / / / /_/ (__  ) 
 "|___/_/_/ /_/ /_/  /____/\___/\__/\__/_/_/ /_/\__, /____/  
 "                                             /____/        
-let g:mapleader = ' '
 " use backslash for localleader (2 backslashes since the first one is the escape char)
 let g:maplocalleader = "\\"
 set noswapfile
@@ -342,14 +343,8 @@ nnoremap - m`o<esc>``
 nnoremap _ m`O<esc>``
 " disable ^
 nnoremap ^ <nop>
-" go to smart start of line
-nnoremap <leader>h ^
 " go to start of line
 nnoremap <leader>H 0
-" go to end of line
-nnoremap <leader>l $
-xnoremap <leader>l $
-onoremap <leader>l $
 " disable $
 nnoremap $ <nop>
 xnoremap $ <nop>
