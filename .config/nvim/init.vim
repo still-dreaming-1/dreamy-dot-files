@@ -386,8 +386,6 @@ nnoremap <leader>d :BD<CR>
 nnoremap <leader>o <C-o>
 " search for previous function
 nnoremap <leader>N ?function <CR>
-" quit
-nnoremap <leader>q :q<CR>
 nnoremap <leader><leader>q :q!<CR>
 " use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
 nmap <leader>; <leader>bej

@@ -12,3 +12,5 @@ nnoremap <leader>h ^
 nnoremap <leader>l $
 xnoremap <leader>l $
 onoremap <leader>l $
+" quit
+nnoremap <leader>q :q<CR>
