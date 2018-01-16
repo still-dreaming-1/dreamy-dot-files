@@ -361,8 +361,6 @@ xnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 xnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 " surround visual selection with backticks
 xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
-" save
-nnoremap <leader>s :w<CR>
 " use leader f to run FZF command (fuzzy file finder)
 nnoremap <leader>f :FZF<CR>
 " load NERDTree

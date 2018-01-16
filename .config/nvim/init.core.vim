@@ -6,6 +6,8 @@
 let g:mapleader = ' '
 " mappings
 " ========
+" save
+nnoremap <leader>s :w<CR>
 " go to smart start of line
 nnoremap <leader>h ^
 " go to end of line
