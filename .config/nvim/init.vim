@@ -142,7 +142,9 @@ set autoindent
 set mouse=c
 set timeoutlen=18000
 set path+=**
-set scrollback=-1
+if has('nvim')
+    set scrollback=-1
+endif
 " plugin settings
 "    ____  __            _          _____      __  __  _                 
 "   / __ \/ /_  ______ _(_)___     / ___/___  / /_/ /_(_)___  ____ ______
