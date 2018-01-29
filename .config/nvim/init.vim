@@ -47,7 +47,9 @@ Plug 'ron89/thesaurus_query.vim'
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
 endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
+endif
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
 " you probably want to stick to the default master branch
