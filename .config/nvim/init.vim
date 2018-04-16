@@ -43,6 +43,8 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'metakirby5/codi.vim'
 Plug 'tpope/vim-repeat'
 Plug 'ron89/thesaurus_query.vim'
+Plug 'udalov/kotlin-vim'
+Plug 'leafgarland/typescript-vim'
 
 function! UpdateRemotePluginsAlias(required_but_unused_arg)
     UpdateRemotePlugins
