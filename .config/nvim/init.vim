@@ -871,7 +871,7 @@ function! DumpVarUnderCursor()
     if c ==# '$'
         normal! l
     endif
-    execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>i\\Acs\\Csst\\DebugOutputter::dumpVariable(\['\<esc>pa' => $\<esc>pa]);\<esc>=="
+    execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>i\\Acs\\Csst\\Library\\DebugOutputter::dumpVariable(\['\<esc>pa' => $\<esc>pa]);\<esc>=="
 endfunction
 
 function! MovePHPParamLeft()
