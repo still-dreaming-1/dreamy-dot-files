@@ -106,8 +106,6 @@ source ~/.config/nvim/init.core.vim
 "| |/ / / / / / / /  (__  )  __/ /_/ /_/ / / / / /_/ (__  ) 
 "|___/_/_/ /_/ /_/  /____/\___/\__/\__/_/_/ /_/\__, /____/  
 "                                             /____/        
-" use backslash for localleader (2 backslashes since the first one is the escape char)
-let g:maplocalleader = "\\"
 set noswapfile
 " set shada = "NONE"
 " directory specific extra nvim config files
@@ -290,8 +288,6 @@ nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 nnoremap <leader>gv :Magit<CR>
 " open Neovim's terminal emulator
 nnoremap <leader>T :te<CR>
-" use to add a space
-nnoremap <leader>z i <esc>
 " surround with spaces
 nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_spaces()<CR>
     \:call repeat#set("\<Plug>DreamySurroundWithSpaces")<CR>

@@ -3,7 +3,9 @@
 
 " Vim settings
 "============
-let g:mapleader = ' '
+let mapleader = ' '
+" use backslash for localleader (2 backslashes since the first one is the escape char)
+let maplocalleader = "\\"
 " mappings
 " ========
 " save
@@ -16,3 +18,6 @@ xnoremap <leader>l $
 onoremap <leader>l $
 " quit
 nnoremap <leader>q :q<CR>
+
+" use to add a space
+nnoremap <leader>z i <esc>

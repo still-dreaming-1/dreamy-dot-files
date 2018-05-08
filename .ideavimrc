@@ -1,0 +1,5 @@
+set number
+set relativenumber
+source ~/.config/nvim/init.core.vim
+" use backslash for localleader (2 backslashes since the first one is the escape char)
+let g:maplocalleader = "\\"
