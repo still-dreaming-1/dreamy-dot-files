@@ -7,4 +7,3 @@ nmap <leader>] :action GotoDeclaration<CR>
 " nnoremap <leader>; :action Switcher<CR>
 nnoremap <leader>; :action Macro.SwitchToMruTab<CR>
 nnoremap <leader>* :action FindUsages<CR>
-" use backslash for localleader (2 backslashes since the first one is the escape char)
