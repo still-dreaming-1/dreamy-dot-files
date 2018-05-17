@@ -1,5 +1,10 @@
 set number
 set relativenumber
+" disable annoying bell sounds
+set vb t_vb=
 source ~/.config/nvim/init.core.vim
+nmap <leader>] :action GotoDeclaration<CR>
+" nnoremap <leader>; :action Switcher<CR>
+nnoremap <leader>; :action Macro.SwitchToMruTab<CR>
+nnoremap <leader>* :action FindUsages<CR>
 " use backslash for localleader (2 backslashes since the first one is the escape char)
-let g:maplocalleader = "\\"

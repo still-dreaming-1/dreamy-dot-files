@@ -125,11 +125,6 @@ set shiftwidth=4
 set expandtab " use spaces instead of tabs
 " disable folding
 set nofoldenable
-" make searching easier
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
 " preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
 " highlight the current line and column for a crosshair effect:
@@ -266,8 +261,6 @@ command! Hub call OpenVivaldiAtPluginPage()
 " --------
 " mappings
 " --------
-" use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
-inoremap kk <esc><esc>
 if has('nvim')
     " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
     " entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
@@ -341,10 +334,6 @@ nnoremap ) ddp
 " and move it above its' previous function. Will have to make into function to
 " fix this, but it is still useful as is.)
 nnoremap <leader>( ?function<CR>V$%d?function<CR>P
-" use - to create new line below current line without leaving normal mode or moving cursor
-nnoremap - m`o<esc>``
-" use _ to create new line above current line without leaving normal mode or moving cursor
-nnoremap _ m`O<esc>``
 " disable ^
 nnoremap ^ <nop>
 " go to start of line
