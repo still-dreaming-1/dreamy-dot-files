@@ -206,6 +206,9 @@ command! Sniff te composer sniff
 command! Lint te composer lint
 command! Clutter te composer clutter
 command! Psalm te composer psalm
+command! Light te composer verify-light
+command! Fast te composer verify-fast
+command! Verify te composer verify
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
