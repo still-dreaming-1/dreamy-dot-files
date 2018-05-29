@@ -106,8 +106,6 @@ source ~/.config/nvim/init.core.vim
 "| |/ / / / / / / /  (__  )  __/ /_/ /_/ / / / / /_/ (__  ) 
 "|___/_/_/ /_/ /_/  /____/\___/\__/\__/_/_/ /_/\__, /____/  
 "                                             /____/        
-" use backslash for localleader (2 backslashes since the first one is the escape char)
-let g:maplocalleader = "\\"
 set noswapfile
 " set shada = "NONE"
 " directory specific extra nvim config files
@@ -127,11 +125,6 @@ set shiftwidth=4
 set expandtab " use spaces instead of tabs
 " disable folding
 set nofoldenable
-" make searching easier
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
 " preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 color kolor
 " highlight the current line and column for a crosshair effect:
@@ -271,8 +264,6 @@ command! Hub call OpenVivaldiAtPluginPage()
 " --------
 " mappings
 " --------
-" use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
-inoremap kk <esc><esc>
 if has('nvim')
     " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
     " entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
@@ -293,8 +284,6 @@ nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 nnoremap <leader>gv :Magit<CR>
 " open Neovim's terminal emulator
 nnoremap <leader>T :te<CR>
-" use to add a space
-nnoremap <leader>z i <esc>
 " surround with spaces
 nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_spaces()<CR>
     \:call repeat#set("\<Plug>DreamySurroundWithSpaces")<CR>
@@ -348,10 +337,6 @@ nnoremap ) ddp
 " and move it above its' previous function. Will have to make into function to
 " fix this, but it is still useful as is.)
 nnoremap <leader>( ?function<CR>V$%d?function<CR>P
-" use - to create new line below current line without leaving normal mode or moving cursor
-nnoremap - m`o<esc>``
-" use _ to create new line above current line without leaving normal mode or moving cursor
-nnoremap _ m`O<esc>``
 " disable ^
 nnoremap ^ <nop>
 " go to start of line
