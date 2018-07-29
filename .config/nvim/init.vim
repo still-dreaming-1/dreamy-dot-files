@@ -112,8 +112,10 @@ set noswapfile
 set exrc
 " more secure exrc (see above) mode
 set secure
-" use the clipboard
-set clipboard+=unnamedplus
+if has('nvim') " hack because this setting messes up regular Vim in Cygwin
+    " use the clipboard
+    set clipboard+=unnamedplus
+endif
 " I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
 set hidden
 " at the bottom of the screen show the number of visually selected characters, and other stuff. If the selection is
