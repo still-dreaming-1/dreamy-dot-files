@@ -18,7 +18,7 @@ alias vimdebug='vim -u ~/.config/nvim/debug.init.vim'
 ###
 alias g='git'
 # alias for gitting latest versions in version sorted order
-alias gtag='git tag -n1 | sort -V'
+alias gtag='git for-each-ref --format="%(refname:short) %(taggerdate) %(subject) %(body)" refs/tags | sort -V'
 alias gb='git branch'
 alias ga='git add -A'
 alias gd='git difftool'
