@@ -233,6 +233,8 @@ command! RIGHT normal <C-w>L
 command! Right normal <C-w>l
 " go to next window
 command! NextWindow normal <C-w>w
+" beautify current file, making the assumption that it is JSON
+command! FormatAsJSON %!python -m json.tool
 " JavaScript commands
 command! Mocha :call RunMochaTests()
 command! Npm :call RunNpmTests()
