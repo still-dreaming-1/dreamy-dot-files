@@ -28,6 +28,7 @@ alias gpull='git pull'
 alias gl='git log --decorate --stat --graph'
 alias gdev='git checkout develop'
 alias gmaster='git checkout master'
+alias gsquash='git merge --squash'
 alias gchop='git reset HEAD~' # off with your head!
 alias check='git checkout'
 # see changes between commits inclusive: git diff older_commit_id^...newer_commit_id
