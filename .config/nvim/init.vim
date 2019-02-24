@@ -91,6 +91,7 @@ endif
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
 let g:dreamy_php_default_base_class = ''
+let g:dreamy_php_template_use_list = []
 let g:dreamy_php_base_trait = ''
 let g:dreamy_php_test_class = ''
 let g:simpletest_all_test_suite_file_path = 0
@@ -743,6 +744,9 @@ function! Dreamy_paste_php_template()
         let paste_php_template .= 'namespace '.namespace.";\<CR>\<CR>"
     endif
     let current_buffer_file = current_buffer.file()
+    for use_template in g:dreamy_php_template_use_list 
+        let paste_php_template .= 'use '.use_template.";\<CR>\<CR>"
+    endfor
     let paste_php_template .= 'final class '.current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
         let paste_php_template .= ' extends '.g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
