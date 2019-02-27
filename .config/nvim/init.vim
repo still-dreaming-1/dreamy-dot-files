@@ -745,9 +745,9 @@ function! Dreamy_paste_php_template()
     endif
     let current_buffer_file = current_buffer.file()
     for use_template in g:dreamy_php_template_use_list 
-        let paste_php_template .= 'use '.use_template.";\<CR>\<CR>"
+        let paste_php_template .= 'use '.use_template.";\<CR>"
     endfor
-    let paste_php_template .= 'final class '.current_buffer_file.name_without_extension
+    let paste_php_template .= "\<CR>final class ".current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
         let paste_php_template .= ' extends '.g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
         if L_s(current_buffer_file.name_without_extension).ends_with('UnitTest')
