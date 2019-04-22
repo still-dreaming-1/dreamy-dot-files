@@ -29,7 +29,6 @@ source ~/.config/nvim/.beforeinit.vim
 "              /____/                
 call plug#begin()
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdtree'
@@ -46,13 +45,6 @@ Plug 'ron89/thesaurus_query.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'elmcast/elm-vim'
-
-function! UpdateRemotePluginsAlias(required_but_unused_arg)
-    UpdateRemotePlugins
-endfunction
-if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': function('UpdateRemotePluginsAlias') } " function must be defined prior to this
-endif
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
 " you probably want to stick to the default master branch
@@ -156,11 +148,12 @@ let g:plug_shallow = 0
 " nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
 " Codi settings
 let g:codi#width = 80
-" deoplete settings
-let g:deoplete#enable_at_startup = 1
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR2'
 let g:neomake_phpstan_level = 7
+let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs', 'psalm']
+" ale settings
+" let g:ale_linters = { 'php': ['psalm'] }
 " let g:neomake_logfile = '~/neomake.log'
 " commentary mappings
 nmap <leader>/ gcc
@@ -172,25 +165,6 @@ let g:NERDTreeQuitOnOpen = 1
 " When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
-" better rainbow parentheses colors
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkgray',    'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
 " --------
 " commands
 " --------
@@ -205,6 +179,7 @@ command! Psalm te composer psalm
 command! Lrapid te composer lint-rapid
 command! Lmerge te composer lint-merge
 command! Lrelease te composer lint-release
+command! -nargs=1 Psalmpress call DreamyPsalmpress(<f-args>)
 " add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
 command! T NERDTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
@@ -438,14 +413,6 @@ augroup code_abbreviations_group
     autocmd FileType php,c,cpp,cs   iabbrev <buffer> (s) (string)
     autocmd FileType php,c,cpp,cs   iabbrev <buffer> (i) (int)
     autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
-augroup END
-augroup rainbow_parentheses_group
-    " removes all autocmd in group
-    autocmd!
-    autocmd VimEnter * RainbowParenthesesToggle
-    autocmd Syntax * RainbowParenthesesLoadRound
-    autocmd Syntax * RainbowParenthesesLoadSquare
-    autocmd Syntax * RainbowParenthesesLoadBraces
 augroup END
 augroup preserve_cursor_position_when_change_buffers_group
     if v:version >= 700
@@ -733,7 +700,7 @@ endfunction
 
 function! Dreamy_paste_php_template()
     let current_buffer = L_current_buffer()
-    let paste_php_template = "i<?php\<CR>declare(strict_types=1);\<CR>\<CR>"
+    let paste_php_template = "i<?php\<CR>\<CR>"
     let current_buffer_directory_s_path = L_s(current_buffer.dir().path)
     let namespace = g:dreamy_php_namespace
     if current_buffer_directory_s_path.contains(g:dreamy_php_namespace_directory_root)
@@ -747,6 +714,9 @@ function! Dreamy_paste_php_template()
     for use_template in g:dreamy_php_template_use_list 
         let paste_php_template .= 'use '.use_template.";\<CR>"
     endfor
+    if L_s(current_buffer_file.name_without_extension).ends_with('Test')
+        let paste_php_template .= "\<CR>/**\<CR>@psalm-suppress UnusedClass\<CR>/"
+    endif
     let paste_php_template .= "\<CR>final class ".current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
         let paste_php_template .= ' extends '.g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
@@ -1124,6 +1094,11 @@ endfunction
 function! DreamyEnableLeftColumn()
     call DreamyEnableMyPreferredLineNumberSettings()
     set modeline
+endfunction
+
+function! DreamyPsalmpress(issue)
+    execute "normal! O/**\<CR>@psalm-suppress\<CR>/\<esc>k<<I\<SPACE>\<esc>A\<SPACE>" . a:issue
+    normal! b
 endfunction
 
 " cannot call this function any sooner since it was not defined yet
