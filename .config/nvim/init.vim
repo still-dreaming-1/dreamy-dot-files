@@ -54,11 +54,6 @@ else
     Plug 'still-dreaming-1/vim-elhiv'
 endif
 if g:dreamy_developer
-    Plug 'git@github.com:still-dreaming-1/vim-generator.git', { 'branch' : 'develop' }
-else
-    Plug 'still-dreaming-1/vim-generator'
-endif
-if g:dreamy_developer
     Plug 'git@github.com:still-dreaming-1/vim-project-search.git', { 'branch' : 'develop' }
 else
     Plug 'still-dreaming-1/vim-project-search'
