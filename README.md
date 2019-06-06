@@ -1,7 +1,7 @@
 # dreamy-dot-files
 My personal dot files
 
-Some people were interested in seeing my dot files. It will also be useful for me to be able to clone these to other machines or fresh OS installs. I am more interested in keeping this useful for me than being general settings that would be good lots of people.
+Some people were interested in seeing my dot files. It will also be useful for me to be able to clone these to other machines or fresh OS installs. I am more interested in keeping this useful for me than being general settings that would be good for lots of people.
 
 <b>Installation instructions</b>
 
