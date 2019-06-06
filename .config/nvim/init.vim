@@ -7,8 +7,9 @@
 " :so % "source current file
                                                   
 let g:dreamy_developer = 0 " helps me use my development versions of projects
-let g:send_yanked_text_to_port = -1
 let g:dreamy_log = 0
+let g:dreamy_psysh_buffer_id = -1
+" let g:dreamy_psysh_window_id = -1
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
@@ -45,6 +46,7 @@ Plug 'ron89/thesaurus_query.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'elmcast/elm-vim'
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
 " you probably want to stick to the default master branch
@@ -130,6 +132,9 @@ set timeoutlen=18000
 set path+=**
 if has('nvim')
     set scrollback=-1
+    " tries to highlught the terminal cursor position (different from Vim cursor), but it's kind of buggy or something
+    hi! TermCursor ctermfg=15 ctermbg=14
+    hi! TermCursorNC ctermfg=15 ctermbg=14
 endif
 " plugin settings
 "    ____  __            _          _____      __  __  _                 
@@ -184,6 +189,7 @@ command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
+command! Psy call DreamyPsysh()
 " send contents of file to mysql
 command! Sendb :!mysql < %:p
 " make current window bottom window
@@ -241,8 +247,11 @@ command! Hub call OpenVivaldiAtPluginPage()
 " --------
 if has('nvim')
     " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
-    " entering normal mode. It achieves this by searching for my username which is displayed in my prompt.
-    tnoremap kk <C-\><C-n>:call MoveCursorToLastTerminalChar()<CR>
+    " entering normal mode.
+    tnoremap kk <C-\><C-n>
+    " augroup below maps escape for entering normal mode, so this is how you would send the escape key to the terminal
+    " instead of returning to normal mode:
+    tnoremap <leader><esc> <esc>
 endif
 " pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
@@ -379,20 +388,33 @@ nnoremap <leader><leader>>  :call MoveParamRight()<CR>
 nnoremap <leader>mj :BOTTOM<CR>
 " go down one window
 nnoremap <C-j> :Bottom<CR>
+inoremap <C-j> <esc>:Bottom<CR>
+tnoremap <C-j> <C-\><C-n>:Bottom<CR>
 " make current window top window
 nnoremap <leader>mk :TOP<CR>
 " go up one window
 nnoremap <C-k> :Top<CR>
+inoremap <C-k> <esc>:Top<CR>
+tnoremap <C-k> <C-\><C-n>:Top<CR>
 " make current window left window
 nnoremap <leader>mh :LEFT<CR>
 " go left one window
 nnoremap <C-h> :Left<CR>
+inoremap <C-h> <esc>:Left<CR>
+tnoremap <C-h> <C-\><C-n>:Left<CR>
 " make current window right window
 nnoremap <leader>ml :RIGHT<CR>
 " go right one window
 nnoremap <C-l> :Right<CR>
+inoremap <C-l> <esc>:Right<CR>
+tnoremap <C-l> <C-\><C-n>:Right<CR>
+
 nnoremap <leader>v :call Run_current_file_tests()<CR>
 nnoremap <leader>V :call Run_all_tests()<CR>
+nnoremap <leader><leader>s :Psy<CR>
+" Replay all history (in PsySH terminal)
+nnoremap <leader>pr GAhist --replay --show 1..
+nnoremap <leader>pc GAhist --clear
 " --------------
 " autocmd groups
 " --------------
@@ -422,24 +444,21 @@ augroup all_other_autocmd_group
     autocmd!
     autocmd! BufWritePost * Neomake
     " enable zsh syntax for .aliashrc file
-    autocmd BufRead,BufNewFile .aliashrc set filetype=zsh
+    autocmd BufRead,BufNewFile .aliashrc     set filetype=zsh
     " enable zsh syntax for .functionshrc file
     autocmd BufRead,BufNewFile .functionshrc set filetype=zsh
     " search for next php function
-    autocmd BufRead,BufNewFile *.js nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
-    autocmd BufRead,BufNewFile *.php nnoremap <buffer> <leader>n /function <CR>
-    autocmd BufRead,BufNewFile *.vim nnoremap <buffer> <leader>n /function! <CR>
+    autocmd BufRead,BufNewFile *.js          nnoremap <buffer> <leader>n :call JumpToNextJSFunction()<CR>
+    autocmd BufRead,BufNewFile *.vim         nnoremap <buffer> <leader>n /function! <CR>
     " auto source the config after saving Vim's .vimrc config file (helps when using Vim)
-    autocmd bufwritepost .vimrc source $MYVIMRC
+    autocmd bufwritepost .vimrc              source $MYVIMRC
     " auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
-    autocmd bufwritepost init.vim source $MYVIMRC
-    autocmd bufwritepost .beforeinit.vim source $MYVIMRC
+    autocmd bufwritepost init.vim            source $MYVIMRC
+    autocmd bufwritepost .beforeinit.vim     source $MYVIMRC
     autocmd bufwritepost .afterinit.vim source $MYVIMRC
     autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
     "refactor to function
-    autocmd FileType php xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
-    "refactor to method
-    autocmd FileType php xnoremap <buffer> <leader>rm <esc>'<Opublic function func_name() {<esc>'>o}<esc>kV'<><esc>
+    autocmd FileType php                     xnoremap <buffer> <leader>rf <esc>'<Ofunction func_name() {<esc>'>o}<esc><<kV'<><esc>
     "class template
     autocmd FileType php                     nnoremap <buffer> <leader>pc :call Dreamy_paste_php_template()<CR>
     autocmd FileType vim                     nnoremap <buffer> <leader>pc :call Dreamy_paste_vim_template()<CR>
@@ -461,9 +480,21 @@ augroup all_other_autocmd_group
     autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
     "creates a new slot (import and export DSL) named after the word under the cursor
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-    "hack to share clipboard across ssh sessions and local machine
-    if has('nvim') && g:send_yanked_text_to_port != -1
-        autocmd TextYankPost * call Dreamy_send_to_port(v:event['regcontents'][0], g:send_yanked_text_to_port)
+    autocmd FileType php                     nnoremap <buffer> <C-]> :call phpactor#GotoDefinition()<CR>
+    autocmd FileType php                     setlocal omnifunc=phpactor#Complete
+    "use omni comption instead of regular completion for php files
+    autocmd FileType php                     inoremap <buffer> <C-n> <C-x><C-o>
+    "but here is how you use regular completion if you really need it, but for some reason this breaks C-n C-p
+    "navigation through list. You can use the mouse wheel though...
+    autocmd FileType php                     inoremap <buffer> <leader><C-n> <C-n>
+    "refactor menu (other stuff in the menu too...)
+    autocmd FileType php                     nnoremap <buffer> <leader>rm :call phpactor#ContextMenu()<CR>
+    autocmd FileType php                     vnoremap <buffer><silent><Leader>rem :<C-U>call phpactor#ExtractMethod()<CR>
+    autocmd FileType php                     nnoremap <buffer> <leader>n :call phpactor#ChangeVisibility()<CR>
+    if has('nvim')
+        autocmd TermOpen *                   setlocal nocursorcolumn
+        autocmd TermOpen *                   tnoremap <buffer> <esc> <C-\><C-n>
+        autocmd FileType fzf                 tunmap <buffer> <esc>
     endif
 augroup END
 " -----------------------------------------------------
@@ -806,30 +837,6 @@ function! ChangeDirectoryCustom(dir_path)
     call fugitive#detect(getcwd())
 endfunction
 
-function! MoveCursorToLastTerminalChar()
-    normal! G$
-    let cursor_char = L_current_cursor().char()
-    let numeric_code = char2nr(cursor_char)
-    while numeric_code == 0
-        normal! k$
-        let cursor_char = getline('.')[col('.')-1]
-        let numeric_code = char2nr(cursor_char)
-    endwhile
-    if numeric_code == 226
-        normal! h
-        let cursor_char = getline('.')[col('.')-1]
-        let numeric_code = char2nr(cursor_char)
-        while cursor_char ==# ' '
-            normal! h
-            let cursor_char = getline('.')[col('.')-1]
-        endwhile
-        let numeric_code = char2nr(cursor_char)
-        if numeric_code == 226
-            normal! l
-        endif
-    endif
-endfunction
-
 " dump the current variable. Works whether or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
     let c = getline('.')[col('.')-1]
@@ -1094,6 +1101,48 @@ endfunction
 function! DreamyPsalmpress(issue)
     execute "normal! O/**\<CR>@psalm-suppress\<CR>/\<esc>k<<I\<SPACE>\<esc>A\<SPACE>" . a:issue
     normal! b
+endfunction
+
+function! DreamyPsysh() abort
+    if g:dreamy_psysh_buffer_id != -1
+        call l#log('dreamy nvim config#DreamyPsysh(): psysh buffer id IS set. Attempting to reuse the buffer')
+        let window_id_list = win_findbuf(g:dreamy_psysh_buffer_id)
+        let foundWindow = !empty(window_id_list)
+        if foundWindow
+            call l#log('dreamy nvim config#DreamyPsysh(): successfully found window ID containing PsySH buffer')
+            let foundWindow = win_gotoid(window_id_list[0])
+            if foundWindow
+                call l#log('dreamy nvim config#DreamyPsysh(): successfully went to window containing PsySH buffer')
+            else
+                call l#log('dreamy nvim config#DreamyPsysh(): failed to go to window containing PsySH buffer')
+            endif
+        else
+            call l#log('dreamy nvim config#DreamyPsysh(): failed to find window containing PsySH buffer')
+        endif
+        if !foundWindow
+            call l#log('dreamy nvim config#DreamyPsysh(): despite PsySH buffer ID being set, need to open a new window'
+                \ . ' to host the previously existing PsySH buffer')
+            below new
+            try
+                execute 'buffer ' . g:dreamy_psysh_buffer_id
+            catch
+                call l#log('dreamy nvim config#DreamyPsysh(): failed to go to the previously existing PsySH buffer. Creating a new one')
+                let g:dreamy_psysh_buffer_id = -1
+                call DreamyCreateNewPsyshBuffer()
+            endtry
+        endif
+    else
+        call l#log('dreamy nvim config#DreamyPsysh(): psysh buffer id NOT set. Creating a new PsySH buffer')
+        below new
+        call DreamyCreateNewPsyshBuffer()
+    endif
+endfunction
+
+function! DreamyCreateNewPsyshBuffer() abort
+    call termopen('psysh')
+    set modifiable
+    let g:dreamy_psysh_buffer_id = bufnr('%')
+    " execute "normal! G$A\<C-\>\<C-n>"
 endfunction
 
 " cannot call this function any sooner since it was not defined yet
