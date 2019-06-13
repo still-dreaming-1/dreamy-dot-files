@@ -60,6 +60,11 @@ if g:dreamy_developer
 else
     Plug 'still-dreaming-1/vim-project-search'
 endif
+if g:dreamy_developer
+    Plug 'git@github.com:still-dreaming-1/nvim-dreamy-terminal.git', { 'branch' : 'develop' }
+else
+    Plug 'still-dreaming-1/nvim-dreamy-terminal'
+endif
 call plug#end()
 
 " This is how you enable elhiv.vim, which is needed by my my plugins
