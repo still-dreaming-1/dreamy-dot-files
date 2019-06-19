@@ -193,6 +193,7 @@ command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
 command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
+command! Cterm call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/nvim-dreamy-terminal")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
 command! Psy call DreamyPsysh()
 " send contents of file to mysql
