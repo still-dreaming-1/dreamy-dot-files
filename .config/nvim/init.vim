@@ -420,12 +420,6 @@ nnoremap <leader><leader>s :Psy<CR>
 nnoremap <leader>pr GAhist --replay --show 1..
 nnoremap <leader>pc GAhist --clear
 
-" move tail part of visual selection by a movement:
-xnoremap <C-h> <Cmd>call DreamyMoveVisualTail('h')<CR>
-xnoremap <C-l> <Cmd>call DreamyMoveVisualTail('l')<CR>
-xnoremap <C-b> <Cmd>call DreamyMoveVisualTail('b')<CR>
-xnoremap <C-w> <Cmd>call DreamyMoveVisualTail('w')<CR>
-xnoremap <C-e> <Cmd>call DreamyMoveVisualTail('e')<CR>
 " --------------
 " autocmd groups
 " --------------
@@ -1154,27 +1148,6 @@ function! DreamyCreateNewPsyshBuffer() abort
     set modifiable
     let g:dreamy_psysh_buffer_id = bufnr('%')
     " execute "normal! G$A\<C-\>\<C-n>"
-endfunction
-
-" precondition: must call from visual mode; aka <Cmd> is your friend
-function! DreamyMoveVisualTail(movement) abort
-    let tail_pos = getpos('v')
-    let tail_line_num = tail_pos[1]
-    let tail_column_num = tail_pos[2]
-    execute "normal! \<esc>"
-    let start_pos = getpos("'<")
-    let end_pos = getpos("'>")
-    let end_line_num = end_pos[1]
-    let end_column_num = end_pos[2]
-    if tail_line_num != end_line_num || tail_column_num != end_column_num
-        let head_pos = end_pos
-    else
-        let head_pos = start_pos
-    endif
-    call setpos('.', tail_pos)
-    execute 'normal ' . a:movement
-    normal! v
-    call setpos('.', head_pos)
 endfunction
 
 " cannot call this function any sooner since it was not defined yet
