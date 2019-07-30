@@ -60,6 +60,11 @@ if g:dreamy_developer
 else
     Plug 'still-dreaming-1/vim-project-search'
 endif
+if g:dreamy_developer
+    Plug 'git@github.com:still-dreaming-1/nvim-dreamy-terminal.git', { 'branch' : 'develop' }
+else
+    Plug 'still-dreaming-1/nvim-dreamy-terminal'
+endif
 call plug#end()
 
 " This is how you enable elhiv.vim, which is needed by my my plugins
@@ -193,6 +198,7 @@ command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
 command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
 command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
+command! Cterm call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/nvim-dreamy-terminal")
 command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
 command! Psy call DreamyPsysh()
 " send contents of file to mysql
@@ -352,8 +358,6 @@ nnoremap <leader>f :FZF<CR>
 nnoremap <leader>t :T<CR>
 " edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
-" edit one off Vim functions
-nnoremap <leader>eo :e $HOME/.config/nvim/.one_off_functions.vim<CR>
 " edit .bashrc
 nnoremap <leader>eb :e~/.bashrc<CR>
 " edit .aliashrc
@@ -420,6 +424,7 @@ nnoremap <leader><leader>s :Psy<CR>
 " Replay all history (in PsySH terminal)
 nnoremap <leader>pr GAhist --replay --show 1..
 nnoremap <leader>pc GAhist --clear
+
 " --------------
 " autocmd groups
 " --------------
