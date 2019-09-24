@@ -178,6 +178,8 @@ let g:NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's 
 " --------
 " commands
 " --------
+command! EnableMouse set mouse=nv
+command! DisableMouse set mouse=""
 " Runs the composer command/script 'stan'. 'stan' is an abbreviated custom command that my composer projects normally
 " have.
 command! Stan te composer stan
