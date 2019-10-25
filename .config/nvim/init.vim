@@ -131,13 +131,9 @@ hi CursorColumn cterm=NONE ctermbg=black
 set cursorcolumn
 " copy the indentation from the previous line (supposedly, but does not always work).
 set autoindent
-" 'enable' the mouse for some modes
-" not enabling for insert or command-line mode because we may want the
-" terminal happ to have control of the mouse for those modes so it can be
-" right clicked and so you can select paste from the menu
-set mouse=nv
-" 'disable' the mouse
-" set mouse=""
+" This disables Vim's hijacking of the mouse so that the terminal can use it
+" You can easily enable the mouse via the EnableMouse command below
+set mouse=""
 set timeoutlen=18000
 set path+=**
 if has('nvim')
