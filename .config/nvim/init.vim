@@ -373,7 +373,7 @@ nnoremap <leader>d :BD<CR>
 " jump previous movement
 nnoremap <leader>o <C-o>
 " search for next function
-nnoremap <leader>n ?function <CR>
+nnoremap <leader>n /function <CR>
 " search for previous function
 nnoremap <leader>N ?function <CR>
 nnoremap <leader><leader>q :q!<CR>
