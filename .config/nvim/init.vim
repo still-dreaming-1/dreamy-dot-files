@@ -277,6 +277,7 @@ nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 nnoremap <leader>gv :Magit<CR>
 " open Neovim's terminal emulator
 nnoremap <leader>T :te<CR>
+nnoremap <leader>c <C-v>
 " surround with spaces
 nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_spaces()<CR>
     \:call repeat#set("\<Plug>DreamySurroundWithSpaces")<CR>
@@ -371,6 +372,8 @@ nnoremap <leader>ev :call L_global_log().edit()<CR>
 nnoremap <leader>d :BD<CR>
 " jump previous movement
 nnoremap <leader>o <C-o>
+" search for next function
+nnoremap <leader>n ?function <CR>
 " search for previous function
 nnoremap <leader>N ?function <CR>
 nnoremap <leader><leader>q :q!<CR>
@@ -500,7 +503,6 @@ augroup all_other_autocmd_group
     "refactor menu (other stuff in the menu too...)
     autocmd FileType php                     nnoremap <buffer> <leader>rm :call phpactor#ContextMenu()<CR>
     autocmd FileType php                     vnoremap <buffer><silent><Leader>rem :<C-U>call phpactor#ExtractMethod()<CR>
-    autocmd FileType php                     nnoremap <buffer> <leader>n :call phpactor#ChangeVisibility()<CR>
     if has('nvim')
         autocmd TermOpen *                   setlocal nocursorcolumn
         autocmd TermOpen *                   tnoremap <buffer> <esc> <C-\><C-n>
