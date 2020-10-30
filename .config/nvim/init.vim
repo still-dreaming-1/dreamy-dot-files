@@ -809,7 +809,15 @@ function! Dreamy_paste_php_method()
 endfunction
 
 function! Dreamy_paste_php_property_after()
-    execute "normal! o/**\<CR>\<bs>\<bs>* @psalm-readonly\<CR>/\<CR>public string $;"
+    execute 'normal! o'
+    call setline('.', '    /**')
+    execute 'normal! o'
+    call setline('.', '     * @psalm-readonly')
+    execute 'normal! o'
+    call setline('.', '     */')
+    execute 'normal! o'
+    call setline('.', '    public string $;')
+    execute 'normal! A'
     startinsert
 endfunction
 
