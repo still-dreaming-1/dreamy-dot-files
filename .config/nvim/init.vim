@@ -809,7 +809,7 @@ function! Dreamy_paste_php_method()
 endfunction
 
 function! Dreamy_paste_php_property_after()
-    execute 'normal! opublic string $;'
+    execute "normal! o/**\<CR>\<bs>\<bs>* @psalm-readonly\<CR>/\<CR>public string $;"
     startinsert
 endfunction
 
