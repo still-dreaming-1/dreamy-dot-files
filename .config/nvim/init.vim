@@ -809,7 +809,7 @@ function! Dreamy_paste_php_method()
 endfunction
 
 function! Dreamy_paste_php_property_after()
-    execute "normal! o/**\<CR>\<bs>\<bs>\<bs> * @var mixed\<CR>\<bs>/\<CR>public $;"
+    execute 'normal! opublic string $;'
     startinsert
 endfunction
 
