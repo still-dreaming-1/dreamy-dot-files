@@ -45,7 +45,6 @@ Plug 'tpope/vim-repeat'
 Plug 'ron89/thesaurus_query.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'elmcast/elm-vim'
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
