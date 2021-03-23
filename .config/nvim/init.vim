@@ -45,7 +45,7 @@ Plug 'tpope/vim-repeat'
 Plug 'ron89/thesaurus_query.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
 " you probably want to stick to the default master branch
