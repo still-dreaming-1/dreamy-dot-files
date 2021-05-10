@@ -46,6 +46,14 @@ Plug 'ron89/thesaurus_query.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 " These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
 " you probably want to stick to the default master branch
@@ -154,7 +162,7 @@ let g:plug_shallow = 0
 " Codi settings
 let g:codi#width = 80
 " neomake settings
-let g:neomake_php_phpcs_args_standard = 'PSR2'
+let g:neomake_php_phpcs_args_standard = 'PSR12'
 let g:neomake_phpstan_level = 7
 let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs', 'psalm']
 " ale settings
