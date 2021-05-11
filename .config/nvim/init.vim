@@ -745,7 +745,7 @@ endfunction
 
 function! Dreamy_paste_php_template()
     let current_buffer = L_current_buffer()
-    let paste_php_template = "i<?php\<CR>\<CR>"
+    let paste_php_template = "i<?php\<CR>\<CR>declare(strict_types=1);\<CR>\<CR>"
     let current_buffer_directory_s_path = L_s(current_buffer.dir().path)
     let namespace = g:dreamy_php_namespace
     if current_buffer_directory_s_path.contains(g:dreamy_php_namespace_directory_root)
@@ -761,6 +761,8 @@ function! Dreamy_paste_php_template()
     endfor
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
         let paste_php_template .= "\<CR>/**\<CR>@psalm-suppress UnusedClass\<CR>/"
+    else
+        let paste_php_template .= "\<CR>/**\<CR>@psalm-immutable\<CR>/"
     endif
     let paste_php_template .= "\<CR>final class ".current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
