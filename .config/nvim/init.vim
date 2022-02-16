@@ -275,9 +275,9 @@ xnoremap p pgvygv<esc>
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
 " vim-fugitive mappings for git
 nnoremap <leader>ga :Git add -A<CR>
-nnoremap <leader>gs :Gstatus<CR>/modified<CR>
+nnoremap <leader>gs :Git<CR>/modified<CR>
 nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gc :Gcommit<CR>i
+nnoremap <leader>gc :call DreamyGitCommit()<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 " vimagit mapping
@@ -1172,6 +1172,11 @@ function! DreamyCreateNewPsyshBuffer() abort
     set modifiable
     let g:dreamy_psysh_buffer_id = bufnr('%')
     " execute "normal! G$A\<C-\>\<C-n>"
+endfunction
+
+function! DreamyGitCommit() abort
+    Git commit
+    startinsert
 endfunction
 
 " cannot call this function any sooner since it was not defined yet
