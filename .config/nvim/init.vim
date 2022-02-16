@@ -278,7 +278,7 @@ nnoremap <leader>ga :Git add -A<CR>
 nnoremap <leader>gs :Git<CR>/modified<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gc :call DreamyGitCommit()<CR>
-nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gp :Git push<CR>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 " vimagit mapping
 nnoremap <leader>gv :Magit<CR>
