@@ -275,6 +275,7 @@ xnoremap p pgvygv<esc>
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
 " vim-fugitive mappings for git
 nnoremap <leader>ga :Git add -A<CR>
+" git status
 nnoremap <leader>gs :Git<CR>/modified<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gc :call DreamyGitCommit()<CR>
