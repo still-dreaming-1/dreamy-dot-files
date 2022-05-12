@@ -303,6 +303,7 @@ function! Dreamy_surround_cursor_char_with_spaces()
     let text_after_cursor = current_line[cursor_index+1:]
     let line_with_spaces_added = text_before_cursor.' '.cursor_char.' '.text_after_cursor
     call setline('.', line_with_spaces_added)
+    normal! l
     return line_with_spaces_added
 endfunction
 " replays the last played macro 3 times
