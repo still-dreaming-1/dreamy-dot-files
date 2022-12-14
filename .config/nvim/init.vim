@@ -95,10 +95,8 @@ let g:dreamy_php_default_base_class = ''
 let g:dreamy_php_template_use_list = []
 let g:dreamy_php_base_trait = ''
 let g:dreamy_php_test_class = ''
-let g:simpletest_all_test_suite_file_path = 0
-let g:simpletest_integration_test_suite_file_path = 0
-let g:simpletest_test_suite_file_path = 0
-let g:simpletest_php_bootstrap_filepath = ''
+let g:php_test_suite_filepath = 0
+let g:php_testing_tool_filepath = ''
 
 source ~/.config/nvim/init.core.vim
 " vim settings
@@ -236,12 +234,9 @@ command! MochaFile :call RunMochaTests(0, L_current_buffer().file().path)
 command! MochaFileD :call RunMochaTests(1, L_current_buffer().file().path)
 command! MochaFilter :call RunMochaTests(0, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
 command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
-" SimpleTest commands
-command! PhpFile :call Run_simple_tests_in_file(L_current_buffer().file().path)
-command! PhpCoveredFile :call Run_simple_tests_in_file_with_coverage(L_current_buffer().file().path)
-command! Php :call Run_simpletest_test_suite()
-command! PhpInt :call Run_simpletest_integration_test_suite()
-command! PhpAll :call Run_simpletest_all_test_suite()
+" PHP test commands
+command! PhpFile :call Run_php_tests_in_file(L_current_buffer().file().path)
+command! Php :call Run_php_test_suite()
 " Codeception commands
 command! Code :call Run_tests_with_command('composer code')
 command! CodeFail :call Run_tests_with_command('composer code-fail')
@@ -635,22 +630,8 @@ function! Run_codeception_tests_in_current_file()
     call Run_tests_with_command('composer code-file -- '.shellescape(L_current_buffer().file().name_without_extension))
 endfunction
 
-" Experimenting with the idea that there should only be one test suite instead of separating unit and integration
-" tests. Higher level tests should be written in favor of very low level ones when the low level would be overkill and
-" that same code could be tested by a higher level test. This concept also requires all these tests to run very fast, so
-" an additional difference from what you might be used to is that even your 'integration' tests should run fast.
-function! Run_simpletest_test_suite()
-    let command = 'php '.g:simpletest_test_suite_file_path
-    call Run_tests_with_command(command)
-endfunction
-
-function! Run_simpletest_integration_test_suite()
-    call Run_simple_tests_in_file(g:simpletest_integration_test_suite_file_path)
-endfunction
-
-function! Run_simpletest_all_test_suite()
-    let command = 'php '.g:simpletest_all_test_suite_file_path
-    call Run_tests_with_command(command)
+function! Run_php_test_suite()
+    call Run_php_tests_in_file(g:php_test_suite_filepath)
 endfunction
 
 function! Run_single_phpunit_test_method(test_method_name, test_file_path)
@@ -658,21 +639,11 @@ function! Run_single_phpunit_test_method(test_method_name, test_file_path)
     call Run_tests_with_command(command)
 endfunction
 
-function! Run_simple_tests_in_file(path)
-    let command = 'php'
-    if g:simpletest_php_bootstrap_filepath !=# ''
-        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_php_bootstrap_filepath)
+function! Run_php_tests_in_file(path)
+    if g:php_testing_tool_filepath ==# ''
+        throw 'g:php_testing_tool_filepath is not set'
     endif
-    let command .= ' -f '.shellescape(a:path)
-    call Run_tests_with_command(command)
-endfunction
-
-function! Run_simple_tests_in_file_with_coverage(path)
-    let command = 'php'
-    if g:simpletest_with_code_coverage_php_bootstrap_filepath !=# ''
-        let command .= ' -d display_errors=1 -d auto_prepend_file='.shellescape(g:simpletest_with_code_coverage_php_bootstrap_filepath)
-    endif
-    let command .= ' -f '.shellescape(a:path)
+    let command = 'php -d display_errors=1 -f '.shellescape(g:php_testing_tool_filepath).' '.shellescape(a:path)
     call Run_tests_with_command(command)
 endfunction
 
@@ -768,7 +739,7 @@ function! Dreamy_paste_php_template()
     endif
     let paste_php_template .= "\<CR>final class ".current_buffer_file.name_without_extension
     if L_s(current_buffer_file.name_without_extension).ends_with('Test')
-        let paste_php_template .= ' extends '.g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor()\<CR>{\<CR>$"
+        let paste_php_template .= ' extends '.g:dreamy_php_test_class."\<CR>{\<CR>public function testConstructor(): void\<CR>{\<CR>$"
         if L_s(current_buffer_file.name_without_extension).ends_with('UnitTest')
             let tested_class_name = L_s(current_buffer_file.name_without_extension).before_last('UnitTest').str
         elseif L_s(current_buffer_file.name_without_extension).ends_with('IntegrationTest')
