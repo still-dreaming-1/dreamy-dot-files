@@ -285,6 +285,7 @@ nnoremap <leader>c <C-v>
 nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_spaces()<CR>
     \:call repeat#set("\<Plug>DreamySurroundWithSpaces")<CR>
 nmap <leader><leader>z <Plug>DreamySurroundWithSpaces
+nnoremap <leader><leader>t :call PsalmTraceVarUnderCursor()<CR>
 
 function! Dreamy_surround_cursor_char_with_spaces()
     let cursor = L_current_cursor()
@@ -842,10 +843,24 @@ endfunction
 " dump the current variable. Works whether or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
 function! DumpVarUnderCursor()
     let c = getline('.')[col('.')-1]
+    if c ==# ';'
+        normal! h
+    endif
     if c ==# '$'
         normal! l
     endif
     execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>i\\Acs\\Csst\\Library\\DebugOutputter::dumpVariable(\['\<esc>pa' => $\<esc>pa]);\<esc>=="
+endfunction
+
+function! PsalmTraceVarUnderCursor()
+    let c = getline('.')[col('.')-1]
+    if c ==# ';'
+        normal! h
+    endif
+    if c ==# '$'
+        normal! l
+    endif
+    execute "normal! viw\<esc>vF$ly/;\<CR>o\<esc>i/** @psalm-trace $\<esc>pa */\<esc>=="
 endfunction
 
 function! MovePHPParamLeft()
