@@ -189,6 +189,7 @@ command! Sniff te composer sniff
 command! Lint te composer lint
 command! Clutter te composer clutter
 command! Psalm te composer psalm
+command! Base te composer update-baseline
 command! Lrapid te composer lint-rapid
 command! Lmerge te composer lint-merge
 command! Lrelease te composer lint-release
