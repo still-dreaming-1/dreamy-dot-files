@@ -1096,6 +1096,15 @@ function! DreamyChangeWordUnderCursorToCamelCase()
     normal! ~
 endfunction
 
+function! DreamyChangeWordUnderCursorToScreamingSnakeCase()
+    let current_word = L_current_cursor().word()
+    let current_word_s = L_s(current_word)
+    let screaming_snake_s = current_word_s.to_screaming_snake_case()
+    normal vvckk
+    execute 'normal! a'.screaming_snake_s.str
+    return screaming_snake_s
+endfunction
+
 function! DreamyDisableLeftColumn()
     set nonumber
     if exists('+relativenumber')
