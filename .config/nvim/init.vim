@@ -1077,6 +1077,15 @@ function! GetCursorColNum()
     return col('.')
 endfunction
 
+function! DreamyChangeWordUnderCursorToCamelCase()
+    let current_word = L_current_cursor().word()
+    let current_word_s = L_s(current_word)
+    let camel_word_s = current_word_s.to_camel_case()
+    normal vvckk
+    execute 'normal! a'.camel_word_s.str
+    return camel_word_s
+endfunction
+
 function! DreamyChangeWordUnderCursorToPascalCase()
     let current_word = L_current_cursor().word()
     let current_word_s = L_s(current_word)
@@ -1086,14 +1095,13 @@ function! DreamyChangeWordUnderCursorToPascalCase()
     return pascal_word_s
 endfunction
 
-function! DreamyChangeWordUnderCursorToCamelCase()
-    let pascal_word_s = DreamyChangeWordUnderCursorToPascalCase()
-    let positionOnWord = pascal_word_s.len
-    while positionOnWord > 1
-        normal! h
-        let positionOnWord = positionOnWord - 1
-    endwhile
-    normal! ~
+function! DreamySmartChangeWordUnderCursorToCamelOrPascalCase()
+    let current_word = L_current_cursor().word()
+    let current_word_s = L_s(current_word)
+    let updated_word_s = current_word_s.smart_to_camel_or_pascal_case()
+    normal vvckk
+    execute 'normal! a'.updated_word_s.str
+    return updated_word_s
 endfunction
 
 function! DreamyChangeWordUnderCursorToScreamingSnakeCase()
