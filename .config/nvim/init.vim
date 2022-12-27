@@ -254,6 +254,7 @@ command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for
 command! More call Match_previous_indentation_command(4) " assumes 4 spaces for indentation
 " mapping to open a plugins home page in Vivaldi. The cursor must be on a line using vim-plug to include a plugin
 command! Hub call OpenVivaldiAtPluginPage()
+command! Fixname call DreamySmartChangeWordUnderCursorToCamelOrPascalCase()
 " --------
 " mappings
 " --------
