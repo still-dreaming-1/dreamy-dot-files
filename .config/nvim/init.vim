@@ -45,7 +45,6 @@ Plug 'tpope/vim-repeat'
 Plug 'ron89/thesaurus_query.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
