@@ -14,70 +14,26 @@ let g:dreamy_psysh_buffer_id = -1
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
 source ~/.config/nvim/.beforeinit.vim
-
-" vim-plug plugin manager:
-" commands:
-" PlugUpdate [name ...] - install or update plugins
-" PlugInstall [name ...] - install plugins
-" PlugUpgrade Upgrade vim-plug itself
-" PlugStatus Check status of plugins
-"
+source ~/.config/nvim/init.core.vim
+lua require('basic')
 "    ____  __            _           
 "   / __ \/ /_  ______ _(_)___  _____
 "  / /_/ / / / / / __ `/ / __ \/ ___/
 " / ____/ / /_/ / /_/ / / / / (__  )  plugins
 "/_/   /_/\__,_/\__, /_/_/ /_/____/  
 "              /____/                
-call plug#begin()
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'jlanzarotta/bufexplorer'
-Plug 'terryma/vim-expand-region'
-Plug 'scrooloose/nerdtree'
-Plug 'neomake/neomake'
-Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
-Plug 'tpope/vim-commentary'
-Plug 'LucHermitte/lh-vim-lib' " vim-UT depends on this
-Plug 'LucHermitte/vim-UT' " unit testing
-Plug 'qpkorr/vim-bufkill'
-Plug 'metakirby5/codi.vim'
-Plug 'tpope/vim-repeat'
-Plug 'ron89/thesaurus_query.vim'
-Plug 'udalov/kotlin-vim'
-Plug 'leafgarland/typescript-vim'
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" packer commands:
+" :PackerSync - Perform `PackerUpdate` (clean, update, and install plugins) and then `PackerCompile`
+" :PackerClean - removed disabled or unused plugins
+lua require('plugins')
 let g:deoplete#enable_at_startup = 1
 
-" These next plugins are ones I developed. They are set to use the develop branch because that is where I develop, but
-" you probably want to stick to the default master branch
-if g:dreamy_developer
-    Plug 'git@github.com:still-dreaming-1/vim-elhiv.git', { 'branch' : 'develop' }
-else
-    Plug 'still-dreaming-1/vim-elhiv'
-endif
-if g:dreamy_developer
-    Plug 'git@github.com:still-dreaming-1/vim-project-search.git', { 'branch' : 'develop' }
-else
-    Plug 'still-dreaming-1/vim-project-search'
-endif
-if g:dreamy_developer
-    Plug 'git@github.com:still-dreaming-1/nvim-dreamy-terminal.git', { 'branch' : 'develop' }
-else
-    Plug 'still-dreaming-1/nvim-dreamy-terminal'
-endif
-call plug#end()
-
 " This is how you enable elhiv.vim, which is needed by my my plugins
-source $HOME/.config/nvim/plugged/vim-elhiv/elhiv.vim
+source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git/elhiv.vim
 if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
+lua require('afterPlugins')
 " dreamy config values
 "    ____                                                      _____                      __               
 "   / __ \________  ____ _____ ___  __  __   _________  ____  / __(_)___ _   _   ______ _/ /_  _____  _____
@@ -97,7 +53,6 @@ let g:dreamy_php_test_class = ''
 let g:php_test_suite_filepath = 0
 let g:php_testing_tool_filepath = ''
 
-source ~/.config/nvim/init.core.vim
 " vim settings
 " _    ___                        __  __  _                 
 "| |  / (_)___ ___     ________  / /_/ /_(_)___  ____ ______
@@ -126,8 +81,9 @@ set shiftwidth=4
 set expandtab " use spaces instead of tabs
 " disable folding
 set nofoldenable
+set termguicolors
 " preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
-color kolor
+" color kolor
 " highlight the current line and column for a crosshair effect:
 hi CursorLine cterm=NONE ctermbg=black
 set cursorline
@@ -197,12 +153,11 @@ command! -nargs=1 Psalmpress call DreamyPsalmpress(<f-args>)
 command! T NERDTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
 command! Chome call ChangeDirectoryCustom("$HOME")
-command! Cplug call ChangeDirectoryCustom("$HOME/.config/nvim/plugged")
-command! Chiv call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-elhiv")
-command! Cgen call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-generator")
+command! Cpack call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start")
+command! Chiv call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
-command! Cterm call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/nvim-dreamy-terminal")
-command! Csearch call ChangeDirectoryCustom("$HOME/.config/nvim/plugged/vim-project-search")
+command! Cterm call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/nvim-dreamy-terminal.git")
+command! Csearch call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
 command! Psy call DreamyPsysh()
 " send contents of file to mysql
 command! Sendb :!mysql < %:p
@@ -359,8 +314,6 @@ xnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 " surround visual selection with curly braces
 xnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
-" use leader f to run FZF command (fuzzy file finder)
-nnoremap <leader>f :FZF<CR>
 " load NERDTree
 nnoremap <leader>t :T<CR>
 " edit Neovim's init.vim config
@@ -499,7 +452,8 @@ augroup all_other_autocmd_group
     autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
     "creates a new slot (import and export DSL) named after the word under the cursor
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-    autocmd FileType php                     nnoremap <buffer> <C-]> :call phpactor#GotoDefinition()<CR>
+    " autocmd FileType php                     nnoremap <buffer> <C-]> :call phpactor#GotoDefinition()<CR>
+    autocmd FileType php                     nnoremap <buffer><silent> <C-]> <Plug>(coc-definition)
     autocmd FileType php                     setlocal omnifunc=phpactor#Complete
     "use omni comption instead of regular completion for php files
     autocmd FileType php                     inoremap <buffer> <C-n> <C-x><C-o>
