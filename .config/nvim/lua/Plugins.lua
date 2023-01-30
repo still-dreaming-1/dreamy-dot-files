@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
-    use { 'neoclide/coc.nvim', branch = 'release' }
     use { 'folke/tokyonight.nvim', branch = 'main' }
     use 'rcarriga/nvim-notify'
     use {

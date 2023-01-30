@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/bufexplorer",
     url = "https://github.com/jlanzarotta/bufexplorer"
   },
-  ["coc.nvim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/coc.nvim",
-    url = "https://github.com/neoclide/coc.nvim"
-  },
   ["codi.vim"] = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/codi.vim",
