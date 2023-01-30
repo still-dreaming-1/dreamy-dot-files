@@ -141,7 +141,6 @@ command! Lrapid te composer lint-rapid
 command! Lmerge te composer lint-merge
 command! Lrelease te composer lint-release
 command! -nargs=1 Psalmpress call DreamyPsalmpress(<f-args>)
-command! T NvimTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
 command! Chome call ChangeDirectoryCustom("$HOME")
 command! Cpack call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start")
@@ -306,7 +305,7 @@ xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 " surround visual selection with curly braces
 xnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
 " toggle nvim-tree
-nnoremap <leader>t :T<CR>
+nnoremap <leader>t :NvimTreeFindFileToggle<CR>
 " edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
 " edit .bashrc
