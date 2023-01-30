@@ -1,6 +1,6 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "help", "php", "html", "javascript", "css" },
+  ensure_installed = { 'c', 'lua', 'vim', 'help', 'php', 'html', 'javascript', 'css' },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -42,17 +42,20 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn", -- set to `false` to disable one of the mappings
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      init_selection = 'gnn', -- set to `false` to disable one of the mappings
+      node_incremental = 'grn',
+      scope_incremental = 'grc',
+      node_decremental = 'grm',
     },
   },
 }
 
-vim.cmd[[colorscheme tokyonight-night]]
--- vim.cmd[[colorscheme tokyonight-moon]]
+-- vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd[[colorscheme tokyonight-moon]]
 
+require('fzf-lua').setup({
+  file_icon_padding = ' ',
+})
 -- use leader f to run :FzfLua files command
 vim.api.nvim_set_keymap(
     'n',
@@ -60,15 +63,12 @@ vim.api.nvim_set_keymap(
     '<cmd>lua require("fzf-lua").files()<CR>',
     { noremap = true }
 )
--- vim.api.nvim_set_keymap(
---   'n',
---   '<Leader>f',
---   '<Cmd>lua require("fzf-lua").files()<CR>',
---   { noremap = true }
--- )
--- vim.api.nvim_set_keymap(
---     'n',
---     '<leader>f',
---     [[lua require('fzf-lua').files()<CR>]],
---     { noremap = true }
--- )
+
+-- settings related to nvim-tree
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+-- empty setup using defaults
+require('nvim-tree').setup()

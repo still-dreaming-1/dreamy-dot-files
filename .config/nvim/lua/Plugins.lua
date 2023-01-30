@@ -2,7 +2,6 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'jlanzarotta/bufexplorer'
     use 'terryma/vim-expand-region'
-    use 'scrooloose/nerdtree'
     use 'neomake/neomake'
     use 'tpope/vim-fugitive'
     use 'jreybert/vimagit'
@@ -32,6 +31,13 @@ return require('packer').startup(function(use)
     use { 'neoclide/coc.nvim', branch = 'release' }
     use { 'folke/tokyonight.nvim', branch = 'main' }
     use 'rcarriga/nvim-notify'
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        },
+        tag = 'nightly' -- nightly means stable...
+    }
     if vim.g.dreamy_developer then
         use { 'git@github.com:still-dreaming-1/vim-elhiv.git', branch = 'develop' }
     else

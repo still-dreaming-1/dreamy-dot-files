@@ -15,7 +15,6 @@ let g:dreamy_psysh_buffer_id = -1
 " just create it and leave it blank.
 source ~/.config/nvim/.beforeinit.vim
 source ~/.config/nvim/init.core.vim
-lua require('basic')
 "    ____  __            _           
 "   / __ \/ /_  ______ _(_)___  _____
 "  / /_/ / / / / / __ `/ / __ \/ ___/
@@ -25,7 +24,7 @@ lua require('basic')
 " packer commands:
 " :PackerSync - Perform `PackerUpdate` (clean, update, and install plugins) and then `PackerCompile`
 " :PackerClean - removed disabled or unused plugins
-lua require('plugins')
+lua require('Plugins')
 let g:deoplete#enable_at_startup = 1
 
 " This is how you enable elhiv.vim, which is needed by my my plugins
@@ -33,7 +32,7 @@ source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git/elhiv.vim
 if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
-lua require('afterPlugins')
+lua require('AfterPlugins')
 " dreamy config values
 "    ____                                                      _____                      __               
 "   / __ \________  ____ _____ ___  __  __   _________  ____  / __(_)___ _   _   ______ _/ /_  _____  _____
@@ -85,9 +84,9 @@ set termguicolors
 " preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
 " color kolor
 " highlight the current line and column for a crosshair effect:
-hi CursorLine cterm=NONE ctermbg=black
+hi CursorLine ctermbg=black
 set cursorline
-hi CursorColumn cterm=NONE ctermbg=black
+hi CursorColumn ctermbg=black
 set cursorcolumn
 " copy the indentation from the previous line (supposedly, but does not always work).
 set autoindent
@@ -124,13 +123,6 @@ let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs', 'psalm']
 " commentary mappings
 nmap <leader>/ gcc
 vmap <leader>/ gc
-" NERDTree settings
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeWinSize = 70
-let g:NERDTreeQuitOnOpen = 1
-" When using a context menu to delete or rename a file auto delete the buffer which is no longer valid instead of asking you.
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeChDirMode = 2 " whenever NERDTree root changes, also change Vim's current working directory to match the tree
 " --------
 " commands
 " --------
@@ -149,8 +141,7 @@ command! Lrapid te composer lint-rapid
 command! Lmerge te composer lint-merge
 command! Lrelease te composer lint-release
 command! -nargs=1 Psalmpress call DreamyPsalmpress(<f-args>)
-" add T as a command to activate NERDTree using the NERDTreeToggle command which keeps previously expanded directories still expanded
-command! T NERDTreeToggle
+command! T NvimTreeToggle
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
 command! Chome call ChangeDirectoryCustom("$HOME")
 command! Cpack call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start")
@@ -314,7 +305,7 @@ xnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 " surround visual selection with curly braces
 xnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
-" load NERDTree
+" toggle nvim-tree
 nnoremap <leader>t :T<CR>
 " edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
@@ -783,16 +774,7 @@ function! ChangeDirectoryCustom(dir_path)
     let after_dir = getcwd()
     if before_dir !=# after_dir
         " place custom current directory changed event handler code here
-        " make NERDTree root match new current directory
-        NERDTreeCWD
-        NERDTreeClose
     endif
-    " Make vim-fugitive use the new current directory repository.
-    " This code runs regardless of the new current directory being different from the previous because Fugitive could be working with a different repository either way.
-    if exists('b:git_dir')
-        unlet b:git_dir
-    endif
-    call fugitive#detect(getcwd())
 endfunction
 
 " dump the current variable. Works whether or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
