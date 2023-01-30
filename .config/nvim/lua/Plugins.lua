@@ -21,10 +21,6 @@ return require('packer').startup(function(use)
         requires = 'nvim-tree/nvim-web-devicons'
     }
     use {
-        'Shougo/deoplete.nvim',
-        run = ':UpdateRemotePlugins'
-    }
-    use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }

@@ -89,11 +89,6 @@ _G.packer_plugins = {
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/codi.vim",
     url = "https://github.com/metakirby5/codi.vim"
   },
-  ["deoplete.nvim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/deoplete.nvim",
-    url = "https://github.com/Shougo/deoplete.nvim"
-  },
   ["fzf-lua"] = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/fzf-lua",
@@ -113,16 +108,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/neomake",
     url = "https://github.com/neomake/neomake"
-  },
-  nerdtree = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/nerdtree",
-    url = "https://github.com/scrooloose/nerdtree"
-  },
-  ["nvim-dreamy-terminal.git"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/nvim-dreamy-terminal.git",
-    url = "git@github.com:still-dreaming-1/nvim-dreamy-terminal"
   },
   ["nvim-notify"] = {
     loaded = true,
