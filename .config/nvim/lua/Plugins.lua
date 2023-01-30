@@ -48,9 +48,4 @@ return require('packer').startup(function(use)
     else
         use 'still-dreaming-1/vim-project-search'
     end
-    if vim.g.dreamy_developer then
-        use { 'git@github.com:still-dreaming-1/nvim-dreamy-terminal.git', branch = 'develop' }
-    else
-        use 'still-dreaming-1/nvim-dreamy-terminal'
-    end
 end)
