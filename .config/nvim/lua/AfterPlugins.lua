@@ -39,6 +39,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  indent = {
+    enable = true
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -82,3 +85,12 @@ require('nvim-tree').setup({
         ignore = false,
     },
 })
+
+-- LSP stuff:
+-- Learn the keybindings, see :help lsp-zero-keybindings
+-- Learn to configure LSP servers, see :help lsp-zero-api-showcase
+local lsp = require('lsp-zero')
+lsp.preset('recommended')
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
+lsp.setup()

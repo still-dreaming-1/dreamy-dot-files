@@ -443,16 +443,16 @@ augroup all_other_autocmd_group
     "creates a new slot (import and export DSL) named after the word under the cursor
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
     " autocmd FileType php                     nnoremap <buffer> <C-]> :call phpactor#GotoDefinition()<CR>
-    autocmd FileType php                     nnoremap <buffer><silent> <C-]> <Plug>(coc-definition)
-    autocmd FileType php                     setlocal omnifunc=phpactor#Complete
+    " autocmd FileType php                     nnoremap <buffer><silent> <C-]> <Plug>(coc-definition)
+    " autocmd FileType php                     setlocal omnifunc=phpactor#Complete
     "use omni comption instead of regular completion for php files
     autocmd FileType php                     inoremap <buffer> <C-n> <C-x><C-o>
     "but here is how you use regular completion if you really need it, but for some reason this breaks C-n C-p
     "navigation through list. You can use the mouse wheel though...
     autocmd FileType php                     inoremap <buffer> <leader><C-n> <C-n>
     "refactor menu (other stuff in the menu too...)
-    autocmd FileType php                     nnoremap <buffer> <leader>rm :call phpactor#ContextMenu()<CR>
-    autocmd FileType php                     vnoremap <buffer><silent><Leader>rem :<C-U>call phpactor#ExtractMethod()<CR>
+    " autocmd FileType php                     nnoremap <buffer> <leader>rm :call phpactor#ContextMenu()<CR>
+    " autocmd FileType php                     vnoremap <buffer><silent><Leader>rem :<C-U>call phpactor#ExtractMethod()<CR>
     if has('nvim')
         autocmd TermOpen *                   setlocal nocursorcolumn
         autocmd TermOpen *                   tnoremap <buffer> <esc> <C-\><C-n>
