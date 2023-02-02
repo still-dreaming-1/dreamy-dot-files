@@ -6,7 +6,7 @@ alias ll='ls -la'
 # convert old mac style line endings to linux (not sure where else to save this...)
 # cat mac.txt | tr "\r" "\n" > unix.txt
 
-alias v='nvim' # can be overridden in .afteraliashrc on computers without neovim
+alias v='nvim.appimage' # can be overridden in .afteraliashrc on computers without neovim
 alias vmin='nvim -u ~/.config/nvim/test.init.vim' # helpful when I want to run neovim with only a small config file
 alias vnothing='nvim -u ~/.config/nvim/nothing.init.vim' # helpful when I want to run neovim with an empty config file
 # helpful when I want to reproduce an issue in someone's plugin with the least config possible. debug.init.vim is not tracked by git so you it can be changed as needed.
