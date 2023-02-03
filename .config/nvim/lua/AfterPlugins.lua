@@ -30,26 +30,3 @@ require 'nvim-tree'.setup({
         ignore = false,
     },
 })
-
--- LSP stuff:
--- Learn the keybindings, see :help lsp-zero-keybindings
--- Learn to configure LSP servers, see :help lsp-zero-api-showcase
-local lsp = require 'lsp-zero'
-lsp.preset('recommended')
-lsp.set_preferences({
-    set_lsp_keymaps = {
-        omit = {
-            '<C-k>',
-        }
-    },
-})
-lsp.on_attach(function(client, bufnr)
-    local opts = {buffer = bufnr}
-    local bind = vim.keymap.set
-
-    -- Displays signature information about the symbol under the cursor in a floating window
-    bind('n', '<leader><leader>k', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-end)
--- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
-lsp.setup()
