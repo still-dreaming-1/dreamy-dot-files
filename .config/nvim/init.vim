@@ -166,7 +166,6 @@ endif
 "                             \_/__/                                                          \_/__/
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR12'
-let g:neomake_phpstan_level = 7
 let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs', 'psalm']
 " commentary mappings
 nmap <leader>/ gcc
