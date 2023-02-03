@@ -1,5 +1,4 @@
-" ascii art font is Slant:
-" http://patorjk.com/software/taag/#p=display&f=Larry%203D
+" ascii art font is Larry 3D: http://patorjk.com/software/taag/#p=display&f=Larry%203D
 " ____     __                       __        ____    __                     __      
 "/\  _`\  /\ \                     /\ \__    /\  _`\ /\ \                   /\ \__   
 "\ \ \/\_\\ \ \___      __     __  \ \ ,_\   \ \,\L\_\ \ \___      __     __\ \ ,_\  
