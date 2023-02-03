@@ -43,6 +43,7 @@ alias poser='composer'
 alias c='cd'
 alias c.='cd ..'
 alias cvim="cd ~/.config/nvim"
+alias clua="cd ~/.config/nvim/lua"
 alias cpack="cd ~/.local/share/nvim/site/pack/packer/start"
 alias cproj="cd ~/.config/nvim/plugged/vim-project-tags"
 alias chiv="cd ~/.config/nvim/plugged/vim-elhiv"
