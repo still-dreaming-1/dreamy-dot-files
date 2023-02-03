@@ -164,18 +164,10 @@ endif
 "    \/_/   \/____/ \/___/  \/___L\ \/_/\/_/\/_/    \/___/  \/____/ \/__/ \/__/ \/_/\/_/\/_/\/___L\ \/___/ 
 "                             /\____/                                                         /\____/      
 "                             \_/__/                                                          \_/__/
-" Shallow clones are no good for me because I develop my plugins off these clones
-let g:plug_shallow = 0
-" nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
-" Codi settings
-let g:codi#width = 80
 " neomake settings
 let g:neomake_php_phpcs_args_standard = 'PSR12'
 let g:neomake_phpstan_level = 7
 let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs', 'psalm']
-" ale settings
-" let g:ale_linters = { 'php': ['psalm'] }
-" let g:neomake_logfile = '~/neomake.log'
 " commentary mappings
 nmap <leader>/ gcc
 vmap <leader>/ gc
@@ -551,10 +543,10 @@ function! OpenVivaldiAtPluginPage()
 endfunction
 
 function! GetPluginPageFromCurrentLine()
-    normal! ^w
+    normal! ^f'<CR>l
     let start_plugin_name_pos = col('.')
-    normal! f'
-    let end_plugin_name_pos = col('.') - 2
+    normal! t'
+    let end_plugin_name_pos = col('.')
     let line = getline('.')
     let plugin_name = line[start_plugin_name_pos : end_plugin_name_pos]
     return plugin_name
