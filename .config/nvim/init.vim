@@ -1,9 +1,12 @@
-" ascii art font is Slant: http://patorjk.com/software/taag/#p=display&f=Slant
-"   ________               __     _____ __              __ 
-"  / ____/ /_  ___  ____ _/ /_   / ___// /_  ___  ___  / /_
-" / /   / __ \/ _ \/ __ `/ __/   \__ \/ __ \/ _ \/ _ \/ __/
-"/ /___/ / / /  __/ /_/ / /_    ___/ / / / /  __/  __/ /_  
-"\____/_/ /_/\___/\__,_/\__/   /____/_/ /_/\___/\___/\__/  
+" ascii art font is Slant:
+" http://patorjk.com/software/taag/#p=display&f=Larry%203D
+" ____     __                       __        ____    __                     __      
+"/\  _`\  /\ \                     /\ \__    /\  _`\ /\ \                   /\ \__   
+"\ \ \/\_\\ \ \___      __     __  \ \ ,_\   \ \,\L\_\ \ \___      __     __\ \ ,_\  
+" \ \ \/_/_\ \  _ `\  /'__`\ /'__`\ \ \ \/    \/_\__ \\ \  _ `\  /'__`\ /'__`\ \ \/  
+"  \ \ \L\ \\ \ \ \ \/\  __//\ \L\.\_\ \ \_     /\ \L\ \ \ \ \ \/\  __//\  __/\ \ \_ 
+"   \ \____/ \ \_\ \_\ \____\ \__/.\_\\ \__\    \ `\____\ \_\ \_\ \____\ \____\\ \__\
+"    \/___/   \/_/\/_/\/____/\/__/\/_/ \/__/     \/_____/\/_/\/_/\/____/\/____/ \/__/
 " :so % "source current file
                                                   
 let g:dreamy_developer = 0 " helps me use my development versions of projects
@@ -14,13 +17,58 @@ let g:dreamy_psysh_buffer_id = -1
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
 source ~/.config/nvim/.beforeinit.vim
-source ~/.config/nvim/init.core.vim
-"    ____  __            _           
-"   / __ \/ /_  ______ _(_)___  _____
-"  / /_/ / / / / / __ `/ / __ \/ ___/
-" / ____/ / /_/ / /_/ / / / / (__  )  plugins
-"/_/   /_/\__,_/\__, /_/_/ /_/____/  
-"              /____/                
+
+" _____
+"/\  _ `\                         
+"\ \ \/\_\    ___   _ __    __   
+" \ \ \/_/_  / __`\/\`'__\/'__`\ 
+"  \ \ \L\ \/\ \L\ \ \ \//\  __/ 
+"   \ \____/\ \____/\ \_\\ \____\
+"    \/___/  \/___/  \/_/ \/____/
+"
+" shared settings between Neovim (preffereed), Vim (used on Windows via
+" cygwin), and IdeaVim (used in PhpStorm) (used to be in init.core.vim)
+" Vim settings
+"============
+let mapleader = ' '
+" use backslash for localleader (2 backslashes since the first one is the escape char)
+let maplocalleader = "\\"
+" make searching easier
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+" mappings
+" ========
+" save
+nnoremap <leader>s :w<CR>
+" go to smart start of line
+nnoremap <leader>h ^
+" go to end of line
+nnoremap <leader>l $
+xnoremap <leader>l $
+onoremap <leader>l $
+" quit
+nnoremap <leader>q :q<CR>
+" use to add a space
+nnoremap <leader>z i <esc>
+" use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
+inoremap kk <esc><esc>
+" use - to create new line below current line without leaving normal mode or moving cursor
+nnoremap - m```o<esc><C-o>
+" use _ to create new line above current line without leaving normal mode or moving cursor
+nnoremap _ m`O<esc>``
+
+" Plugins
+" ____    ___                                          
+"/\  _`\ /\_ \                    __                   
+"\ \ \L\ \//\ \    __  __     __ /\_\    ___     ____  
+" \ \ ,__/ \ \ \  /\ \/\ \  /'_ `\/\ \ /' _ `\  /',__\ 
+"  \ \ \/   \_\ \_\ \ \_\ \/\ \L\ \ \ \/\ \/\ \/\__, `\
+"   \ \_\   /\____\\ \____/\ \____ \ \_\ \_\ \_\/\____/
+"    \/_/   \/____/ \/___/  \/___L\ \/_/\/_/\/_/\/___/ 
+"                             /\____/                  
+"                             \_/__/
 " packer commands:
 " :PackerSync - Perform `PackerUpdate` (clean, update, and install plugins) and then `PackerCompile`
 " :PackerClean - removed disabled or unused plugins
@@ -33,13 +81,16 @@ if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
 lua require('AfterPlugins')
-" dreamy config values
-"    ____                                                      _____                      __               
-"   / __ \________  ____ _____ ___  __  __   _________  ____  / __(_)___ _   _   ______ _/ /_  _____  _____
-"  / / / / ___/ _ \/ __ `/ __ `__ \/ / / /  / ___/ __ \/ __ \/ /_/ / __ `/  | | / / __ `/ / / / / _ \/ ___/
-" / /_/ / /  /  __/ /_/ / / / / / / /_/ /  / /__/ /_/ / / / / __/ / /_/ /   | |/ / /_/ / / /_/ /  __(__  ) 
-"/_____/_/   \___/\__,_/_/ /_/ /_/\__, /   \___/\____/_/ /_/_/ /_/\__, /    |___/\__,_/_/\__,_/\___/____/  
-"                                /____/                          /____/                                    
+" Dreamy config values
+" ____                                                                           ___                                   ___                             
+"/\  _`\                                                                       /'___\ __                              /\_ \                            
+"\ \ \/\ \  _ __    __     __      ___ ___   __  __        ___    ___     ___ /\ \__//\_\     __       __  __     __  \//\ \    __  __     __    ____  
+" \ \ \ \ \/\`'__\/'__`\ /'__`\  /' __` __`\/\ \/\ \      /'___\ / __`\ /' _ `\ \ ,__\/\ \  /'_ `\    /\ \/\ \  /'__`\  \ \ \  /\ \/\ \  /'__`\ /',__\ 
+"  \ \ \_\ \ \ \//\  __//\ \L\.\_/\ \/\ \/\ \ \ \_\ \    /\ \__//\ \L\ \/\ \/\ \ \ \_/\ \ \/\ \L\ \   \ \ \_/ |/\ \L\.\_ \_\ \_\ \ \_\ \/\  __//\__, `\
+"   \ \____/\ \_\\ \____\ \__/.\_\ \_\ \_\ \_\/`____ \   \ \____\ \____/\ \_\ \_\ \_\  \ \_\ \____ \   \ \___/ \ \__/.\_\/\____\\ \____/\ \____\/\____/
+"    \/___/  \/_/ \/____/\/__/\/_/\/_/\/_/\/_/`/___/> \   \/____/\/___/  \/_/\/_/\/_/   \/_/\/___L\ \   \/__/   \/__/\/_/\/____/ \/___/  \/____/\/___/ 
+"                                                /\___/                                       /\____/                                                  
+"                                                \/__/                                        \_/__/
 " These make this config more configurable. They are used throughout the rest
 " of the config. Set them to something else inside .afterinit.vim if you want
 " to use them.
@@ -52,13 +103,16 @@ let g:dreamy_php_test_class = ''
 let g:php_test_suite_filepath = 0
 let g:php_testing_tool_filepath = ''
 
-" vim settings
-" _    ___                        __  __  _                 
-"| |  / (_)___ ___     ________  / /_/ /_(_)___  ____ ______
-"| | / / / __ `__ \   / ___/ _ \/ __/ __/ / __ \/ __ `/ ___/
-"| |/ / / / / / / /  (__  )  __/ /_/ /_/ / / / / /_/ (__  ) 
-"|___/_/_/ /_/ /_/  /____/\___/\__/\__/_/_/ /_/\__, /____/  
-"                                             /____/        
+" Vim settings
+" __  __                                      __    __                                  
+"/\ \/\ \  __                                /\ \__/\ \__  __                           
+"\ \ \ \ \/\_\    ___ ___         ____     __\ \ ,_\ \ ,_\/\_\    ___      __     ____  
+" \ \ \ \ \/\ \ /' __` __`\      /',__\  /'__`\ \ \/\ \ \/\/\ \ /' _ `\  /'_ `\  /',__\ 
+"  \ \ \_/ \ \ \/\ \/\ \/\ \    /\__, `\/\  __/\ \ \_\ \ \_\ \ \/\ \/\ \/\ \L\ \/\__, `\
+"   \ `\___/\ \_\ \_\ \_\ \_\   \/\____/\ \____\\ \__\\ \__\\ \_\ \_\ \_\ \____ \/\____/
+"    `\/__/  \/_/\/_/\/_/\/_/    \/___/  \/____/ \/__/ \/__/ \/_/\/_/\/_/\/___L\ \/___/ 
+"                                                                          /\____/      
+"                                                                          \_/__/
 set noswapfile
 " set shada = "NONE"
 " directory specific extra nvim config files
@@ -101,13 +155,16 @@ if has('nvim')
     hi! TermCursor ctermfg=15 ctermbg=14
     hi! TermCursorNC ctermfg=15 ctermbg=14
 endif
-" plugin settings
-"    ____  __            _          _____      __  __  _                 
-"   / __ \/ /_  ______ _(_)___     / ___/___  / /_/ /_(_)___  ____ ______
-"  / /_/ / / / / / __ `/ / __ \    \__ \/ _ \/ __/ __/ / __ \/ __ `/ ___/
-" / ____/ / /_/ / /_/ / / / / /   ___/ /  __/ /_/ /_/ / / / / /_/ (__  ) 
-"/_/   /_/\__,_/\__, /_/_/ /_/   /____/\___/\__/\__/_/_/ /_/\__, /____/  
-"              /____/                                      /____/        
+" Plugin settings
+" ____    ___                                                    __    __                                  
+"/\  _`\ /\_ \                    __                            /\ \__/\ \__  __                           
+"\ \ \L\ \//\ \    __  __     __ /\_\    ___         ____     __\ \ ,_\ \ ,_\/\_\    ___      __     ____  
+" \ \ ,__/ \ \ \  /\ \/\ \  /'_ `\/\ \ /' _ `\      /',__\  /'__`\ \ \/\ \ \/\/\ \ /' _ `\  /'_ `\  /',__\ 
+"  \ \ \/   \_\ \_\ \ \_\ \/\ \L\ \ \ \/\ \/\ \    /\__, `\/\  __/\ \ \_\ \ \_\ \ \/\ \/\ \/\ \L\ \/\__, `\
+"   \ \_\   /\____\\ \____/\ \____ \ \_\ \_\ \_\   \/\____/\ \____\\ \__\\ \__\\ \_\ \_\ \_\ \____ \/\____/
+"    \/_/   \/____/ \/___/  \/___L\ \/_/\/_/\/_/    \/___/  \/____/ \/__/ \/__/ \/_/\/_/\/_/\/___L\ \/___/ 
+"                             /\____/                                                         /\____/      
+"                             \_/__/                                                          \_/__/
 " Shallow clones are no good for me because I develop my plugins off these clones
 let g:plug_shallow = 0
 " nnoremap <silent> <C-]> :call Dreamy_go_to_definition()<CR>
@@ -146,6 +203,7 @@ command! Chome call ChangeDirectoryCustom("$HOME")
 command! Cpack call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start")
 command! Chiv call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
 command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
+command! Clua call ChangeDirectoryCustom("$HOME/.config/nvim/lua")
 command! Cterm call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/nvim-dreamy-terminal.git")
 command! Csearch call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
 command! Psy call DreamyPsysh()

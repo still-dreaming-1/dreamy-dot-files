@@ -1,4 +1,4 @@
-return require('packer').startup(function(use)
+return require 'packer'.startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'jlanzarotta/bufexplorer'
     use 'terryma/vim-expand-region'

@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
   ensure_installed = { 'c', 'lua', 'vim', 'help', 'php', 'html', 'javascript', 'css' },
 
@@ -56,7 +56,7 @@ require'nvim-treesitter.configs'.setup {
 -- vim.cmd[[colorscheme tokyonight-night]]
 vim.cmd[[colorscheme tokyonight-moon]]
 
-require('fzf-lua').setup({
+require 'fzf-lua'.setup({
   file_icon_padding = ' ',
 })
 -- use leader f to run :FzfLua files command
@@ -74,7 +74,7 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 -- empty setup using defaults
-require('nvim-tree').setup({
+require 'nvim-tree'.setup({
     sync_root_with_cwd = true,
     actions = {
         open_file = {
@@ -89,8 +89,15 @@ require('nvim-tree').setup({
 -- LSP stuff:
 -- Learn the keybindings, see :help lsp-zero-keybindings
 -- Learn to configure LSP servers, see :help lsp-zero-api-showcase
-local lsp = require('lsp-zero')
+local lsp = require 'lsp-zero'
 lsp.preset('recommended')
+lsp.set_preferences({
+    set_lsp_keymaps = {
+        omit = {
+            '<C-k>',
+        }
+    },
+})
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
 lsp.setup()
