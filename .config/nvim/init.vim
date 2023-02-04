@@ -442,12 +442,10 @@ augroup code_abbreviations_group
     autocmd FileType php,c,cpp,cs   iabbrev <buffer> (b) (bool)
 augroup END
 augroup preserve_cursor_position_when_change_buffers_group
-    if v:version >= 700
-        " removes all autocmd in group
-        autocmd!
-        autocmd BufLeave * let b:winview = winsaveview()
-        autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-    endif
+    " removes all autocmd in group
+    autocmd!
+    autocmd BufLeave * let b:winview = winsaveview()
+    autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 augroup END
 augroup all_other_autocmd_group
     " removes all autocmd in group
