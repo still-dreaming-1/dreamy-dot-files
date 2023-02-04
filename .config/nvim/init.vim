@@ -189,13 +189,12 @@ command! Lmerge te composer lint-merge
 command! Lrelease te composer lint-release
 command! -nargs=1 Psalmpress call DreamyPsalmpress(<f-args>)
 " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
-command! Chome call ChangeDirectoryCustom("$HOME")
-command! Cpack call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start")
-command! Chiv call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
-command! Cvim call ChangeDirectoryCustom("$HOME/.config/nvim")
-command! Clua call ChangeDirectoryCustom("$HOME/.config/nvim/lua")
-command! Cterm call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/nvim-dreamy-terminal.git")
-command! Csearch call ChangeDirectoryCustom("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
+command! Chome call DreamyChangeDirectory("$HOME")
+command! Cpack call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start")
+command! Chiv call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
+command! Cvim call DreamyChangeDirectory("$HOME/.config/nvim")
+command! Clua call DreamyChangeDirectory("$HOME/.config/nvim/lua")
+command! Csearch call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
 command! Psy call DreamyPsysh()
 " send contents of file to mysql
 command! Sendb :!mysql < %:p
@@ -447,6 +446,7 @@ augroup preserve_cursor_position_when_change_buffers_group
     autocmd BufLeave * let b:winview = winsaveview()
     autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 augroup END
+let dreamy_counter = 0
 augroup all_other_autocmd_group
     " removes all autocmd in group
     autocmd!
@@ -502,6 +502,7 @@ augroup all_other_autocmd_group
     autocmd TermOpen *                       setlocal nocursorcolumn
     autocmd TermOpen *                       tnoremap <buffer> <esc> <C-\><C-n>
     autocmd FileType fzf                     tunmap <buffer> <esc>
+    autocmd DirChanged *                     call DreamyDirChangedHandler(v:event.cwd)
 augroup END
 " -----------------------------------------------------
 " user functions: (to be called manually while editing)
@@ -811,14 +812,17 @@ function! JumpToNextJSFunction()
     let @/ = search_string
 endfunction
 
-function! ChangeDirectoryCustom(dir_path)
-    let before_dir = getcwd()
+function! DreamyDirChangedHandler(cwd)
+    " This can be helpful because vim-fugitive is extremely buffer based. It
+    " associates each buffer with its own git directory. So this can help if
+    " you want fugitive to work with the directory you just changed to,
+    " without doing something crazy like forcing it to associate the buffer you
+    " already had open with the changed directory.
+    enew
+endfunction
+
+function! DreamyChangeDirectory(dir_path)
     execute 'cd ' . fnameescape(a:dir_path)
-    let after_dir = getcwd()
-    if before_dir !=# after_dir
-        " place custom current directory changed event handler code here
-        execute 'e ' . fnameescape(a:dir_path)
-    endif
 endfunction
 
 " dump the current variable. Works whether or not the cursor pointed at the dollar sign. Does not affect search history. Can dump either an object or a property
