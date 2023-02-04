@@ -817,10 +817,11 @@ endfunction
 
 function! ChangeDirectoryCustom(dir_path)
     let before_dir = getcwd()
-    execute 'cd '.fnameescape(a:dir_path)
+    execute 'cd ' . fnameescape(a:dir_path)
     let after_dir = getcwd()
     if before_dir !=# after_dir
         " place custom current directory changed event handler code here
+        execute 'e ' . fnameescape(a:dir_path)
     endif
 endfunction
 
