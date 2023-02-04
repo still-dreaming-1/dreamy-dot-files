@@ -141,9 +141,7 @@ hi CursorColumn ctermbg=black
 set cursorcolumn
 " copy the indentation from the previous line (supposedly, but does not always work).
 set autoindent
-" This disables Vim's hijacking of the mouse so that the terminal can use it
-" You can easily enable the mouse via the EnableMouse command below
-set mouse=""
+set mouse=a
 set timeoutlen=18000
 set path+=**
 if has('nvim')
@@ -171,7 +169,7 @@ vmap <leader>/ gc
 " --------
 " commands
 " --------
-command! EnableMouse set mouse=nv
+command! EnableMouse set mouse=a
 command! DisableMouse set mouse=""
 " Runs the composer command/script 'stan'. 'stan' is an abbreviated custom command that my composer projects normally
 " have.
