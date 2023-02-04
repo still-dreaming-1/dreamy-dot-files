@@ -501,11 +501,9 @@ augroup all_other_autocmd_group
     "refactor menu (other stuff in the menu too...)
     " autocmd FileType php                     nnoremap <buffer> <leader>rm :call phpactor#ContextMenu()<CR>
     " autocmd FileType php                     vnoremap <buffer><silent><Leader>rem :<C-U>call phpactor#ExtractMethod()<CR>
-    if has('nvim')
-        autocmd TermOpen *                   setlocal nocursorcolumn
-        autocmd TermOpen *                   tnoremap <buffer> <esc> <C-\><C-n>
-        autocmd FileType fzf                 tunmap <buffer> <esc>
-    endif
+    autocmd TermOpen *                   setlocal nocursorcolumn
+    autocmd TermOpen *                   tnoremap <buffer> <esc> <C-\><C-n>
+    autocmd FileType fzf                 tunmap <buffer> <esc>
 augroup END
 " -----------------------------------------------------
 " user functions: (to be called manually while editing)
