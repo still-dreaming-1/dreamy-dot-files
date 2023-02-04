@@ -134,8 +134,6 @@ set expandtab " use spaces instead of tabs
 " disable folding
 set nofoldenable
 set termguicolors
-" preferred color scheme so far for php editing over terminal emulator with terminal settings set to have dark background and light forground
-" color kolor
 " highlight the current line and column for a crosshair effect:
 hi CursorLine ctermbg=black
 set cursorline
