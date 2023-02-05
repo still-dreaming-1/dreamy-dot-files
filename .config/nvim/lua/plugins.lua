@@ -17,22 +17,24 @@ return require 'packer'.startup(function(use)
     use 'udalov/kotlin-vim'
     use 'leafgarland/typescript-vim'
     use {
+        'nvim-tree/nvim-tree.lua',
+        requires = 'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        tag = 'nightly', -- nightly = stable...
+    }
+    use {
         'ibhagwan/fzf-lua',
-        requires = 'nvim-tree/nvim-web-devicons'
+        requires = 'nvim-tree/nvim-web-devicons',
+        tag = 'nightly', -- nightly = stable...
     }
     use {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
+        run = ':TSUpdate',
     }
-    use { 'folke/tokyonight.nvim', branch = 'main' }
-    use 'rcarriga/nvim-notify'
     use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- optional, for file icons
-        },
-        tag = 'nightly' -- nightly means stable...
+        'folke/tokyonight.nvim',
+        branch = 'main',
     }
+    use 'rcarriga/nvim-notify'
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
@@ -56,12 +58,18 @@ return require 'packer'.startup(function(use)
         }
     }
     if vim.g.dreamy_developer then
-        use { 'git@github.com:still-dreaming-1/vim-elhiv.git', branch = 'develop' }
+        use {
+            'git@github.com:still-dreaming-1/vim-elhiv.git',
+            branch = 'develop',
+        }
     else
         use 'still-dreaming-1/vim-elhiv'
     end
     if vim.g.dreamy_developer then
-        use { 'git@github.com:still-dreaming-1/vim-project-search.git', branch = 'develop' }
+        use {
+            'git@github.com:still-dreaming-1/vim-project-search.git',
+            branch = 'develop',
+        }
     else
         use 'still-dreaming-1/vim-project-search'
     end

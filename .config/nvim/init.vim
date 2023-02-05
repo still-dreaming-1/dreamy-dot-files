@@ -6,11 +6,16 @@
 "  \ \ \L\ \\ \ \ \ \/\  __//\ \L\.\_\ \ \_     /\ \L\ \ \ \ \ \/\  __//\  __/\ \ \_ 
 "   \ \____/ \ \_\ \_\ \____\ \__/.\_\\ \__\    \ `\____\ \_\ \_\ \____\ \____\\ \__\
 "    \/___/   \/_/\/_/\/____/\/__/\/_/ \/__/     \/_____/\/_/\/_/\/____/\/____/ \/__/
-" :so % "source current file
+" :so "source current file
                                                   
 let g:dreamy_developer = 0 " helps me use my development versions of projects
 let g:dreamy_log = 0
 let g:dreamy_psysh_buffer_id = -1
+
+" nvim-tree recommends disabling netrw as early as possible in your config
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
 " let g:dreamy_psysh_window_id = -1
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
@@ -25,8 +30,9 @@ source ~/.config/nvim/.beforeinit.vim
 "   \ \____/\ \____/\ \_\\ \____\
 "    \/___/  \/___/  \/_/ \/____/
 "
-" shared settings between Neovim (preffereed), Vim (used on Windows via
-" cygwin), and IdeaVim (used in PhpStorm) (used to be in init.core.vim)
+" settings so basic they could potentially be shared across different versions
+" of vim (IdeaVim, Vim, Noevim, etc). Used to in a separate file, but I'm not
+" surrently actually sharing these and am only using Neovim.
 " Vim settings
 "============
 let mapleader = ' '
@@ -71,7 +77,7 @@ nnoremap _ m`O<esc>``
 " packer commands:
 " :PackerSync - Perform `PackerUpdate` (clean, update, and install plugins) and then `PackerCompile`
 " :PackerClean - removed disabled or unused plugins
-lua require('Plugins')
+lua require('plugins')
 let g:deoplete#enable_at_startup = 1
 
 " This is how you enable elhiv.vim, which is needed by my my plugins
@@ -79,7 +85,7 @@ source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git/elhiv.vim
 if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
-lua require('AfterPlugins')
+lua require('afterPlugins')
 " Dreamy config values
 " ____                                                                           ___                                   ___                             
 "/\  _`\                                                                       /'___\ __                              /\_ \                            
