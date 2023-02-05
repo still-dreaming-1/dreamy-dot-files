@@ -24,7 +24,6 @@ return require 'packer'.startup(function(use)
     use {
         'ibhagwan/fzf-lua',
         requires = 'nvim-tree/nvim-web-devicons',
-        tag = 'nightly', -- nightly = stable...
     }
     use {
         'nvim-treesitter/nvim-treesitter',
