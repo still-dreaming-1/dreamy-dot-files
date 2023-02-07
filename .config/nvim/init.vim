@@ -8,6 +8,7 @@
 "    \/___/   \/_/\/_/\/____/\/__/\/_/ \/__/     \/_____/\/_/\/_/\/____/\/____/ \/__/
 " :so "source current file
                                                   
+redir! > $HOME/.vimout
 let g:dreamy_developer = 0 " helps me use my development versions of projects
 let g:dreamy_log = 0
 let g:dreamy_psysh_buffer_id = -1
@@ -85,6 +86,7 @@ source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git/elhiv.vim
 if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
+
 lua require('afterPlugins')
 " Dreamy config values
 " ____                                                                           ___                                   ___                             
@@ -175,6 +177,7 @@ vmap <leader>/ gc
 " --------
 " commands
 " --------
+lua require('commands')
 command! EnableMouse set mouse=a
 command! DisableMouse set mouse=""
 " Runs the composer command/script 'stan'. 'stan' is an abbreviated custom command that my composer projects normally
@@ -251,6 +254,7 @@ command! Fixname call DreamySmartChangeWordUnderCursorToCamelOrPascalCase()
 " --------
 " mappings
 " --------
+lua require('maps')
 if has('nvim')
     " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
     " entering normal mode.
@@ -366,6 +370,7 @@ nnoremap <leader>ef :e~/.functionshrc<CR>
 " edit captains log
 nnoremap <leader>ec :e ~/captains\ log<CR>
 nnoremap <leader>ev :call L_global_log().edit()<CR>
+nnoremap <leader>eo :e ~/.vimout<CR>
 " unload currend buffer and remove it from the buffer list. Use this when you want to 'close' the current file without closing the vim 'window'
 nnoremap <leader>d :BD<CR>
 " jump previous movement
