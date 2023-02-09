@@ -216,14 +216,6 @@ command! Right normal <C-w>l
 command! NextWindow normal <C-w>w
 " beautify current file, making the assumption that it is JSON
 command! FormatAsJSON %!python -m json.tool
-" JavaScript commands
-command! Mocha :call RunMochaTests()
-command! Npm :call RunNpmTests()
-command! MochaD :call RunMochaTests(1)
-command! MochaFile :call RunMochaTests(0, L_current_buffer().file().path)
-command! MochaFileD :call RunMochaTests(1, L_current_buffer().file().path)
-command! MochaFilter :call RunMochaTests(0, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
-command! MochaFilterD :call RunMochaTests(1, L_current_buffer().file().path, GetMochaFilteredTextOfTestUnderCursor())
 " PHP test commands
 command! PhpFile :call Run_php_tests_in_file(L_current_buffer().file().path)
 command! Php :call Run_php_test_suite()
@@ -649,60 +641,6 @@ function! Get_php_method_name_from_cursor_line()
     let function_name = function_name.after('function').trim()
     call l#log('value returned from Get_php_method_name_from_cursor_line(): '.function_name.str)
     return function_name.str
-endfunction
-
-function! RunMochaTests(...)
-    split
-    BOTTOM
-    enew
-    let command = 'mocha --recursive'
-    if a:0 > 0
-        let debug = a:1
-        if debug
-            let command = command.' debug'
-        endif
-        if a:0 > 1
-            let test_file_path = a:2
-            let command = command.' '.shellescape(test_file_path)
-            if a:0  > 2
-                let filtered_text = a:3
-                let command = command.' -f "'.filtered_text.'"'
-            endif
-        endif
-    endif
-    call l#log('command about to run from RunMochaTests(): '.command)
-    call termopen(command)
-    nnoremap <buffer><leader>q :q!<CR>
-endfunction
-
-function! RunNpmTests()
-    split
-    BOTTOM
-    enew
-    let command = 'npm test'
-    call termopen(command)
-    nnoremap <buffer><leader>q :q!<CR>
-endfunction
-
-function! GetMochaFilteredTextOfTestUnderCursor()
-    let line_text = L_s(getline('.'))
-    let filtered_text = line_text
-    while !filtered_text.starts_with("'")
-        let filtered_text = filtered_text.remove_start()
-        if filtered_text.len == 0
-            break
-        endif
-    endwhile
-    while !filtered_text.ends_with("'")
-        let filtered_text =  filtered_text.remove_end()
-        if filtered_text.len == 0
-            break
-        endif
-    endwhile
-    let filtered_text = filtered_text.remove_start()
-    let filtered_text = filtered_text.remove_end()
-    call l#log('value returned from GetMochaFilteredTextOfTestUnderCursor(): '.filtered_text.str)
-    return filtered_text.str
 endfunction
 
 function! Dreamy_paste_php_template()
