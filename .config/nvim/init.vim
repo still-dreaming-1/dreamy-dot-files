@@ -126,10 +126,8 @@ set noswapfile
 set exrc
 " more secure exrc (see above) mode
 set secure
-if has('nvim') " hack because this setting messes up regular Vim in Cygwin
-    " use the clipboard
-    set clipboard+=unnamedplus
-endif
+" use the clipboard
+set clipboard+=unnamedplus
 " I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
 set hidden
 " at the bottom of the screen show the number of visually selected characters, and other stuff. If the selection is
@@ -250,14 +248,12 @@ command! Fixname call DreamySmartChangeWordUnderCursorToCamelOrPascalCase()
 " mappings
 " --------
 lua require('maps')
-if has('nvim')
-    " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
-    " entering normal mode.
-    tnoremap kk <C-\><C-n>
-    " augroup below maps escape for entering normal mode, so this is how you would send the escape key to the terminal
-    " instead of returning to normal mode:
-    tnoremap <leader><esc> <esc>
-endif
+" use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
+" entering normal mode.
+tnoremap kk <C-\><C-n>
+" augroup below maps escape for entering normal mode, so this is how you would send the escape key to the terminal
+" instead of returning to normal mode:
+tnoremap <leader><esc> <esc>
 " pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
 " use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
