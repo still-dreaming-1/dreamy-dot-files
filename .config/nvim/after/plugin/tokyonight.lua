@@ -1,15 +1,17 @@
-vim.cmd 'colorscheme tokyonight-moon'
+if not vim.g.vscode then
+    vim.cmd 'colorscheme tokyonight-moon'
 
-local dreamyIsMoon = true
+    local dreamyIsMoon = true
 
-function dreamyToggleColor()
-    if dreamyIsMoon then
-        vim.cmd 'colorscheme tokyonight-night'
-        dreamyIsMoon = false
-    else
-        vim.cmd 'colorscheme tokyonight-moon'
-        dreamyIsMoon = true
+    function dreamyToggleColor()
+        if dreamyIsMoon then
+            vim.cmd 'colorscheme tokyonight-night'
+            dreamyIsMoon = false
+        else
+            vim.cmd 'colorscheme tokyonight-moon'
+            dreamyIsMoon = true
+        end
     end
-end
 
-vim.cmd 'command! Color lua dreamyToggleColor()'
+    vim.cmd 'command! Color lua dreamyToggleColor()'
+end

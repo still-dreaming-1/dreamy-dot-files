@@ -152,12 +152,10 @@ set autoindent
 set mouse=a
 set timeoutlen=18000
 set path+=**
-if has('nvim')
-    set scrollback=-1
-    " tries to highlught the terminal cursor position (different from Vim cursor), but it's kind of buggy or something
-    hi! TermCursor ctermfg=15 ctermbg=14
-    hi! TermCursorNC ctermfg=15 ctermbg=14
-endif
+set scrollback=-1
+" tries to highlight the terminal cursor position (different from Vim cursor), but it's kind of buggy or something
+hi! TermCursor ctermfg=15 ctermbg=14
+hi! TermCursorNC ctermfg=15 ctermbg=14
 " Plugin settings
 " ____    ___                                                    __    __                                  
 "/\  _`\ /\_ \                    __                            /\ \__/\ \__  __                           
