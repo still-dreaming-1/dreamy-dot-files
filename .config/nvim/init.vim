@@ -178,9 +178,6 @@ vmap <leader>/ gc
 lua require('commands')
 command! EnableMouse set mouse=a
 command! DisableMouse set mouse=""
-" Runs the composer command/script 'stan'. 'stan' is an abbreviated custom command that my composer projects normally
-" have.
-command! Stan te composer stan
 " Runs the composer command/script 'sniff'. 'sniff' is a custom command that my composer projects normally have.
 command! Sniff te composer sniff
 command! Lint te composer lint
