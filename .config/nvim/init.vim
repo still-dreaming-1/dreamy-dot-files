@@ -79,7 +79,6 @@ nnoremap _ m`O<esc>``
 " :PackerSync - Perform `PackerUpdate` (clean, update, and install plugins) and then `PackerCompile`
 " :PackerClean - removed disabled or unused plugins
 lua require('plugins')
-let g:deoplete#enable_at_startup = 1
 
 " This is how you enable elhiv.vim, which is needed by my my plugins
 source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git/elhiv.vim
