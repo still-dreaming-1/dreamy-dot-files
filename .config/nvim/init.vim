@@ -223,13 +223,7 @@ command! Php :call Run_php_test_suite()
 command! Code :call Run_tests_with_command('composer code')
 command! CodeFail :call Run_tests_with_command('composer code-fail')
 command! CodeFile :call Run_codeception_tests_in_current_file()
-" PHPUnit commands
-command! PhpUnit :call Run_tests_with_command('phpunit')
-command! PhpUnitCovered :call Run_tests_with_command('phpunit --configuration phpunit_with_code_coverage.xml')
-command! PhpUnitAll :call Run_tests_with_command('phpunit --configuration phpunit_all.xml')
-command! PhpUnitAllCovered :call Run_tests_with_command('phpunit --configuration phpunit_all_with_code_coverage.xml')
-command! PhpUnitFile :call Run_PHPUnit_tests_in_file(L_current_buffer().file().name_without_extension)
-command! PhpUnitMethod :call Run_single_phpunit_test_method(Get_php_method_name_from_cursor_line(), L_current_buffer().file().path)
+
 command! Same call Match_previous_indentation_command()
 command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
 command! More call Match_previous_indentation_command(4) " assumes 4 spaces for indentation
@@ -615,21 +609,12 @@ function! Run_php_test_suite()
     call Run_php_tests_in_file(g:php_test_suite_filepath)
 endfunction
 
-function! Run_single_phpunit_test_method(test_method_name, test_file_path)
-    let command = 'phpunit --configuration phpunit_all.xml --filter '.shellescape(a:test_method_name).' '.shellescape(a:test_file_path)
-    call Run_tests_with_command(command)
-endfunction
-
 function! Run_php_tests_in_file(path)
     if g:php_testing_tool_filepath ==# ''
         throw 'g:php_testing_tool_filepath is not set'
     endif
     let command = 'php -d display_errors=1 -f '.shellescape(g:php_testing_tool_filepath).' '.shellescape(a:path)
     call Run_tests_with_command(command)
-endfunction
-
-function! Run_PHPUnit_tests_in_file(class)
-    call Run_tests_with_command('phpunit --configuration phpunit_all.xml --filter '.shellescape(a:class))
 endfunction
 
 function! Get_php_method_name_from_cursor_line()
