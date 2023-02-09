@@ -219,10 +219,6 @@ command! FormatAsJSON %!python -m json.tool
 " PHP test commands
 command! PhpFile :call Run_php_tests_in_file(L_current_buffer().file().path)
 command! Php :call Run_php_test_suite()
-" Codeception commands
-command! Code :call Run_tests_with_command('composer code')
-command! CodeFail :call Run_tests_with_command('composer code-fail')
-command! CodeFile :call Run_codeception_tests_in_current_file()
 
 command! Same call Match_previous_indentation_command()
 command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
@@ -599,10 +595,6 @@ function! Run_tests_with_command(command)
     call l#log('command about to run from Run_tests_with_command(): '.a:command)
     call termopen(a:command)
     nnoremap <buffer><leader>q :q!<CR>
-endfunction
-
-function! Run_codeception_tests_in_current_file()
-    call Run_tests_with_command('composer code-file -- '.shellescape(L_current_buffer().file().name_without_extension))
 endfunction
 
 function! Run_php_test_suite()
