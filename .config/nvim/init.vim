@@ -147,6 +147,10 @@ if !exists('g:vscode')
     set cursorline
     hi CursorColumn ctermbg=black
     set cursorcolumn
+    " tries to highlight the terminal cursor position (different from Vim cursor), but it's kind of buggy or something
+    " (terminal doesn't work in VS Code)
+    hi! TermCursor ctermfg=15 ctermbg=14
+    hi! TermCursorNC ctermfg=15 ctermbg=14
 endif
 " copy the indentation from the previous line (supposedly, but does not always work).
 set autoindent
@@ -154,9 +158,6 @@ set mouse=a
 set timeoutlen=18000
 set path+=**
 set scrollback=-1
-" tries to highlight the terminal cursor position (different from Vim cursor), but it's kind of buggy or something
-hi! TermCursor ctermfg=15 ctermbg=14
-hi! TermCursorNC ctermfg=15 ctermbg=14
 " Plugin settings
 " ____    ___                                                    __    __                                  
 "/\  _`\ /\_ \                    __                            /\ \__/\ \__  __                           
@@ -233,12 +234,14 @@ command! Fixname call DreamySmartChangeWordUnderCursorToCamelOrPascalCase()
 " mappings
 " --------
 lua require('maps')
-" use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
-" entering normal mode.
-tnoremap kk <C-\><C-n>
-" augroup below maps escape for entering normal mode, so this is how you would send the escape key to the terminal
-" instead of returning to normal mode:
-tnoremap <leader><esc> <esc>
+if !exists('g:vscode') "terminal doesn't work in VS Code
+    " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
+    " entering normal mode.
+    tnoremap kk <C-\><C-n>
+    " augroup below maps escape for entering normal mode, so this is how you would send the escape key to the terminal
+    " instead of returning to normal mode:
+    tnoremap <leader><esc> <esc>
+endif
 " pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
 xnoremap p pgvygv<esc>
 " use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
@@ -471,17 +474,11 @@ augroup all_other_autocmd_group
     autocmd FileType php                     nnoremap <buffer> <leader>D :call DumpVarUnderCursor()<CR>
     "creates a new slot (import and export DSL) named after the word under the cursor
     autocmd FileType php                     nnoremap <buffer> <leader>pt veyO$slot('');<esc>hhP==
-    " autocmd FileType php                     nnoremap <buffer> <C-]> :call phpactor#GotoDefinition()<CR>
-    " autocmd FileType php                     nnoremap <buffer><silent> <C-]> <Plug>(coc-definition)
-    " autocmd FileType php                     setlocal omnifunc=phpactor#Complete
     "use omni comption instead of regular completion for php files
     autocmd FileType php                     inoremap <buffer> <C-n> <C-x><C-o>
     "but here is how you use regular completion if you really need it, but for some reason this breaks C-n C-p
     "navigation through list. You can use the mouse wheel though...
     autocmd FileType php                     inoremap <buffer> <leader><C-n> <C-n>
-    "refactor menu (other stuff in the menu too...)
-    " autocmd FileType php                     nnoremap <buffer> <leader>rm :call phpactor#ContextMenu()<CR>
-    " autocmd FileType php                     vnoremap <buffer><silent><Leader>rem :<C-U>call phpactor#ExtractMethod()<CR>
     autocmd TermOpen *                       setlocal nocursorcolumn
     autocmd TermOpen *                       tnoremap <buffer> <esc> <C-\><C-n>
     autocmd FileType fzf                     tunmap <buffer> <esc>
