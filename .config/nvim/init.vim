@@ -420,7 +420,6 @@ augroup preserve_cursor_position_when_change_buffers_group
     autocmd BufLeave * let b:winview = winsaveview()
     autocmd BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
 augroup END
-let dreamy_counter = 0
 augroup all_other_autocmd_group
     " removes all autocmd in group
     autocmd!
