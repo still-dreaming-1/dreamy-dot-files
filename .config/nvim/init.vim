@@ -244,15 +244,15 @@ endif
 xnoremap p pgvygv<esc>
 " use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
 nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
-" vim-fugitive mappings for git
-nnoremap <leader>ga :Git add -A<CR>
-" git status
-nnoremap <leader>gs :Git<CR>/modified<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gc :call DreamyGitCommit()<CR>
-nnoremap <leader>gp :Git push<CR>
-nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 if !exists('g:vscode')
+    " vim-fugitive mappings for git
+    nnoremap <leader>ga :Git add -A<CR>
+    " git status
+    nnoremap <leader>gs :Git<CR>/modified<CR>
+    nnoremap <leader>gd :Gdiff<CR>
+    nnoremap <leader>gc :call DreamyGitCommit()<CR>
+    nnoremap <leader>gp :Git push<CR>
+    nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
     " vimagit mapping
     nnoremap <leader>gv :Magit<CR>
     " open Neovim's terminal emulator
@@ -435,7 +435,6 @@ augroup all_other_autocmd_group
     autocmd bufwritepost .vimrc              source $MYVIMRC
     " auto source the config after saving Neovim's init.vim config file (helps when using Neovim)
     autocmd bufwritepost init.vim            source $MYVIMRC
-    autocmd bufwritepost .beforeinit.vim     source $MYVIMRC
     autocmd bufwritepost .afterinit.vim source $MYVIMRC
     autocmd FileType php                     nnoremap <buffer> <leader>rp :call MakePHPParam()<CR>
     "refactor to function
