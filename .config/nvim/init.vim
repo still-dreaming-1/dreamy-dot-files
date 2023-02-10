@@ -152,7 +152,7 @@ if !exists('g:vscode')
 endif
 " copy the indentation from the previous line (supposedly, but does not always work).
 " set autoindent
-set mouse=a
+set mouse=""
 set timeoutlen=18000
 set path+=**
 set scrollback=-1
