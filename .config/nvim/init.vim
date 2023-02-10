@@ -166,9 +166,11 @@ set scrollback=-1
 "    \/_/   \/____/ \/___/  \/___L\ \/_/\/_/\/_/    \/___/  \/____/ \/__/ \/__/ \/_/\/_/\/_/\/___L\ \/___/ 
 "                             /\____/                                                         /\____/      
 "                             \_/__/                                                          \_/__/
-" neomake settings
-let g:neomake_php_phpcs_args_standard = 'PSR12'
-let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs', 'psalm']
+if !exists('g:vscode')
+    " neomake settings
+    let g:neomake_php_phpcs_args_standard = 'PSR12'
+    let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs', 'psalm']
+endif
 " commentary mappings
 nmap <leader>/ gcc
 vmap <leader>/ gc
@@ -423,7 +425,6 @@ augroup END
 augroup all_other_autocmd_group
     " removes all autocmd in group
     autocmd!
-    autocmd! BufWritePost * Neomake
     " enable zsh syntax for .aliashrc file
     autocmd BufRead,BufNewFile .aliashrc     set filetype=zsh
     " enable zsh syntax for .functionshrc file
@@ -466,6 +467,7 @@ augroup all_other_autocmd_group
     "navigation through list. You can use the mouse wheel though...
     autocmd FileType php                     inoremap <buffer> <leader><C-n> <C-n>
     if !exists('g:vscode')
+        autocmd! BufWritePost * Neomake
         autocmd TermOpen *                       setlocal nocursorcolumn
         autocmd TermOpen *                       tnoremap <buffer> <esc> <C-\><C-n>
         autocmd FileType fzf                     tunmap <buffer> <esc>
