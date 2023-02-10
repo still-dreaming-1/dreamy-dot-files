@@ -139,11 +139,14 @@ set expandtab " use spaces instead of tabs
 " disable folding
 set nofoldenable
 set termguicolors
-" highlight the current line and column for a crosshair effect:
-hi CursorLine ctermbg=black
-set cursorline
-hi CursorColumn ctermbg=black
-set cursorcolumn
+if !exists('g:vscode')
+    " highlight the current line and column for a crosshair effect (looks bad
+    " in VS Code and is unncessary because of blinking cursor):
+    hi CursorLine ctermbg=black
+    set cursorline
+    hi CursorColumn ctermbg=black
+    set cursorcolumn
+endif
 " copy the indentation from the previous line (supposedly, but does not always work).
 set autoindent
 set mouse=a
