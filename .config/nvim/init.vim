@@ -917,11 +917,6 @@ function! MakePHPParam()
     call cursor(y,x)
 endfunction
 
-function! Dreamy_send_to_port(textToSend, port)
-    let shell = L_shell()
-    let command = 'printf ' . shellescape(a:textToSend) . ' | nc localhost ' . shellescape(a:port)
-    call shell.run(command)
-endfunction
 " -----------------------------------
 " general purpose, reusable functions
 " -----------------------------------
