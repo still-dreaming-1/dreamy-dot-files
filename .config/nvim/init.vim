@@ -256,8 +256,10 @@ nnoremap <leader>gp :Git push<CR>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
 " vimagit mapping
 nnoremap <leader>gv :Magit<CR>
-" open Neovim's terminal emulator
-nnoremap <leader>T :te<CR>
+if !exists('g:vscode') "terminal doesn't work in VS Code
+    " open Neovim's terminal emulator
+    nnoremap <leader>T :te<CR>
+endif
 nnoremap <leader>c <C-v>
 " surround with spaces
 nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_spaces()<CR>
