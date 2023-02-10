@@ -477,7 +477,6 @@ augroup all_other_autocmd_group
         autocmd TermOpen *                       setlocal nocursorcolumn
         autocmd TermOpen *                       tnoremap <buffer> <esc> <C-\><C-n>
         autocmd FileType fzf                     tunmap <buffer> <esc>
-        autocmd DirChanged *                     call DreamyDirChangedHandler(v:event.cwd)
     endif
 augroup END
 " -----------------------------------------------------
@@ -719,15 +718,6 @@ function! JumpToNextJSFunction()
     let search_string = L_s('= function(').get_no_magic().str
     call search(search_string)
     let @/ = search_string
-endfunction
-
-function! DreamyDirChangedHandler(cwd)
-    " This can be helpful because vim-fugitive is extremely buffer based. It
-    " associates each buffer with its own git directory. So this can help if
-    " you want fugitive to work with the directory you just changed to,
-    " without doing something crazy like forcing it to associate the buffer you
-    " already had open with the changed directory.
-    enew
 endfunction
 
 function! DreamyChangeDirectory(dir_path)
