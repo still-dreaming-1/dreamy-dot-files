@@ -126,8 +126,6 @@ set noswapfile
 set exrc
 " more secure exrc (see above) mode
 set secure
-" use the clipboard
-set clipboard+=unnamedplus
 " I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
 set hidden
 " at the bottom of the screen show the number of visually selected characters, and other stuff. If the selection is
@@ -286,18 +284,6 @@ endfunction
 nnoremap <leader>@ 3@@
 " move after the next dot character (this should be turned into a custom motion where instead of . you can type anything you want to move after. This would be the opposite of t
 nnoremap <leader>a. f.l<esc>
-" put from mouse clipboard
-nnoremap <leader><leader>pm "*p
-" put from clipboard
-nnoremap <leader><leader>pc "+p
-" yank to mouse clipboard from normal mode
-nnoremap <leader>ym "*y
-" yank to mouse clipboard from visual mode
-vnoremap <leader>ym "*y
-" yank to clipboard from normal mode
-nnoremap <leader>yc "+y
-" yank to clipboard from visual mode
-vnoremap <leader>yc "+y
 " make . work with visually selected lines
 vnoremap . :norm.<CR>
 " make up and down not ignore wrapping lines
