@@ -252,9 +252,9 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gc :call DreamyGitCommit()<CR>
 nnoremap <leader>gp :Git push<CR>
 nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
-" vimagit mapping
-nnoremap <leader>gv :Magit<CR>
-if !exists('g:vscode') "terminal doesn't work in VS Code
+if !exists('g:vscode')
+    " vimagit mapping
+    nnoremap <leader>gv :Magit<CR>
     " open Neovim's terminal emulator
     nnoremap <leader>T :te<CR>
 endif
