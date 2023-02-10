@@ -151,7 +151,7 @@ if !exists('g:vscode')
     hi! TermCursorNC ctermfg=15 ctermbg=14
 endif
 " copy the indentation from the previous line (supposedly, but does not always work).
-set autoindent
+" set autoindent
 set mouse=a
 set timeoutlen=18000
 set path+=**
