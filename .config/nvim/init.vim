@@ -467,10 +467,12 @@ augroup all_other_autocmd_group
     "but here is how you use regular completion if you really need it, but for some reason this breaks C-n C-p
     "navigation through list. You can use the mouse wheel though...
     autocmd FileType php                     inoremap <buffer> <leader><C-n> <C-n>
-    autocmd TermOpen *                       setlocal nocursorcolumn
-    autocmd TermOpen *                       tnoremap <buffer> <esc> <C-\><C-n>
-    autocmd FileType fzf                     tunmap <buffer> <esc>
-    autocmd DirChanged *                     call DreamyDirChangedHandler(v:event.cwd)
+    if !exists('g:vscode')
+        autocmd TermOpen *                       setlocal nocursorcolumn
+        autocmd TermOpen *                       tnoremap <buffer> <esc> <C-\><C-n>
+        autocmd FileType fzf                     tunmap <buffer> <esc>
+        autocmd DirChanged *                     call DreamyDirChangedHandler(v:event.cwd)
+    endif
 augroup END
 " -----------------------------------------------------
 " user functions: (to be called manually while editing)
