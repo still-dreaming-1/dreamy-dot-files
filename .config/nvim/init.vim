@@ -98,8 +98,9 @@ lua require('afterPlugins')
 "                                                /\___/                                       /\____/                                                  
 "                                                \/__/                                        \_/__/
 " These make this config more configurable. They are used throughout the rest
-" of the config. Set them to something else inside .afterinit.vim if you want
-" to use them.
+" of the config. If you want to use them, set them to something else inside
+" .afterinit.vim or on a per project basis in a .nvimrc file within that
+" project.
 let g:dreamy_php_namespace = ''
 let g:dreamy_php_namespace_directory_root = ''
 let g:dreamy_php_default_base_class = ''
