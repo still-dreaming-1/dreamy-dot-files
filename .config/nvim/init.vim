@@ -180,24 +180,28 @@ vmap <leader>/ gc
 lua require('commands')
 command! EnableMouse set mouse=a
 command! DisableMouse set mouse=""
-" Runs the composer command/script 'sniff'. 'sniff' is a custom command that my composer projects normally have.
-command! Sniff te composer sniff
-command! Lint te composer lint
-command! Clutter te composer clutter
-command! Psalm te composer psalm
-command! Base te composer update-baseline
-command! Lrapid te composer lint-rapid
-command! Lmerge te composer lint-merge
-command! Lrelease te composer lint-release
+if !exists('g:vscode')
+    " Runs the composer command/script 'sniff'. 'sniff' is a custom command that my composer projects normally have.
+    command! Sniff te composer sniff
+    command! Lint te composer lint
+    command! Clutter te composer clutter
+    command! Psalm te composer psalm
+    command! Base te composer update-baseline
+    command! Lrapid te composer lint-rapid
+    command! Lmerge te composer lint-merge
+    command! Lrelease te composer lint-release
+endif
 command! -nargs=1 Psalmpress call DreamyPsalmpress(<f-args>)
-" alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
-command! Chome call DreamyChangeDirectory("$HOME")
-command! Cpack call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start")
-command! Chiv call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
-command! Cvim call DreamyChangeDirectory("$HOME/.config/nvim")
-command! Clua call DreamyChangeDirectory("$HOME/.config/nvim/lua")
-command! Csearch call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
-command! Psy call DreamyPsysh()
+if !exists('g:vscode')
+    " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
+    command! Chome call DreamyChangeDirectory("$HOME")
+    command! Cpack call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start")
+    command! Chiv call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
+    command! Cvim call DreamyChangeDirectory("$HOME/.config/nvim")
+    command! Clua call DreamyChangeDirectory("$HOME/.config/nvim/lua")
+    command! Csearch call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
+    command! Psy call DreamyPsysh()
+endif
 " send contents of file to mysql
 command! Sendb :!mysql < %:p
 " make current window bottom window
@@ -220,9 +224,11 @@ command! Right normal <C-w>l
 command! NextWindow normal <C-w>w
 " beautify current file, making the assumption that it is JSON
 command! FormatAsJSON %!python -m json.tool
-" PHP test commands
-command! PhpFile :call Run_php_tests_in_file(L_current_buffer().file().path)
-command! Php :call Run_php_test_suite()
+if !exists('g:vscode')
+    " PHP test commands
+    command! PhpFile :call Run_php_tests_in_file(L_current_buffer().file().path)
+    command! Php :call Run_php_test_suite()
+endif
 
 command! Same call Match_previous_indentation_command()
 command! Less call Match_previous_indentation_command(-4) " assumes 4 spaces for indentation
@@ -1067,8 +1073,10 @@ function! DreamyGitCommit() abort
     startinsert
 endfunction
 
-" cannot call this function any sooner since it was not defined yet
-call DreamyEnableMyPreferredLineNumberSettings()
+if !exists('g:vscode')
+    " cannot call this function any sooner since it was not defined yet
+    call DreamyEnableMyPreferredLineNumberSettings()
+endif
 
 " this file should contain vimrc stuff that you do not want tracked by git. Vim will complain
 " if the file does not exist however the lack of its existence will not cause any problems.
