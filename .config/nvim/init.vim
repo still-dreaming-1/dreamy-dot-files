@@ -9,8 +9,12 @@
 " :so "source current file
                                                   
 redir! > $HOME/.vimout
-let g:dreamy_developer = v:false " helps me use my development versions of projects
-let g:dreamy_log = 0
+if !exists('g:dreamy_developer')
+    let g:dreamy_developer = v:false " helps me use my development versions of projects
+endif
+if !exists('g:dreamy_log')
+    let g:dreamy_log = 0
+endif
 let g:dreamy_psysh_buffer_id = -1
 
 " nvim-tree recommends disabling netrw as early as possible in your config
