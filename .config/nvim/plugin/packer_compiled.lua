@@ -74,100 +74,25 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  LuaSnip = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/LuaSnip",
-    url = "https://github.com/L3MON4D3/LuaSnip"
-  },
   bufexplorer = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/bufexplorer",
     url = "https://github.com/jlanzarotta/bufexplorer"
-  },
-  ["cmp-buffer"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/cmp-buffer",
-    url = "https://github.com/hrsh7th/cmp-buffer"
-  },
-  ["cmp-nvim-lsp"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
-    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
-  },
-  ["cmp-nvim-lua"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
-    url = "https://github.com/hrsh7th/cmp-nvim-lua"
-  },
-  ["cmp-path"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/cmp-path",
-    url = "https://github.com/hrsh7th/cmp-path"
-  },
-  cmp_luasnip = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
-    url = "https://github.com/saadparwaiz1/cmp_luasnip"
-  },
-  ["codi.vim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/codi.vim",
-    url = "https://github.com/metakirby5/codi.vim"
-  },
-  ["friendly-snippets"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/friendly-snippets",
-    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["fzf-lua"] = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/fzf-lua",
     url = "https://github.com/ibhagwan/fzf-lua"
   },
-  ["kotlin-vim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/kotlin-vim",
-    url = "https://github.com/udalov/kotlin-vim"
-  },
   ["lh-vim-lib"] = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/lh-vim-lib",
     url = "https://github.com/LucHermitte/lh-vim-lib"
   },
-  ["lsp-zero.nvim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
-    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
-  },
-  ["mason-lspconfig.nvim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
-  },
-  ["mason.nvim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
-  },
   neomake = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/neomake",
     url = "https://github.com/neomake/neomake"
-  },
-  ["nvim-cmp"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/nvim-cmp",
-    url = "https://github.com/hrsh7th/nvim-cmp"
-  },
-  ["nvim-lspconfig"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
-    url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-notify"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/nvim-notify",
-    url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -189,20 +114,10 @@ _G.packer_plugins = {
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["thesaurus_query.vim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/thesaurus_query.vim",
-    url = "https://github.com/ron89/thesaurus_query.vim"
-  },
   ["tokyonight.nvim"] = {
     loaded = true,
     path = "/home/jesse/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
-  },
-  ["typescript-vim"] = {
-    loaded = true,
-    path = "/home/jesse/.local/share/nvim/site/pack/packer/start/typescript-vim",
-    url = "https://github.com/leafgarland/typescript-vim"
   },
   ["vim-UT"] = {
     loaded = true,

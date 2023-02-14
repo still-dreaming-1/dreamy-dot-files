@@ -141,10 +141,10 @@ set termguicolors
 if !exists('g:vscode')
     " highlight the current line and column for a crosshair effect (looks bad
     " in VS Code and is unncessary because of blinking cursor):
-    hi CursorLine ctermbg=black
-    set cursorline
-    hi CursorColumn ctermbg=black
-    set cursorcolumn
+    " hi CursorLine ctermbg=black
+    " set cursorline
+    " hi CursorColumn ctermbg=black
+    " set cursorcolumn
     " tries to highlight the terminal cursor position (different from Vim cursor), but it's kind of buggy or something
     " (terminal doesn't work in VS Code)
     hi! TermCursor ctermfg=15 ctermbg=14
