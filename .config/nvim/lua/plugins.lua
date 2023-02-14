@@ -5,6 +5,17 @@ return require 'packer'.startup(function(use)
     use 'qpkorr/vim-bufkill'
     use 'tpope/vim-repeat'
     use 'tpope/vim-commentary'
+    if vim.g.dreamy_developer == 1 then
+        use {
+            'git@github.com:still-dreaming-1/vim-elhiv.git',
+            branch = 'develop',
+        }
+    else
+        use {
+            'still-dreaming-1/vim-elhiv',
+            branch = 'develop',
+        }
+    end
     if not vim.g.vscode then
         use 'neomake/neomake'
         use 'tpope/vim-fugitive'
@@ -30,35 +41,24 @@ return require 'packer'.startup(function(use)
             'folke/tokyonight.nvim',
             branch = 'main',
         }
-    end
-    if vim.g.dreamy_developer == 1 then
-        use {
-            'git@github.com:still-dreaming-1/vim-elhiv.git',
-            branch = 'develop',
-        }
-    else
-        use {
-            'still-dreaming-1/vim-elhiv',
-            branch = 'develop',
-        }
-    end
-    if vim.g.dreamy_developer == 1 then
-        use {
-            'git@github.com:still-dreaming-1/vim-project-search.git',
-            branch = 'develop',
-            requires = {{
-                'git@github.com:still-dreaming-1/vim-elhiv.git',
+        if vim.g.dreamy_developer == 1 then
+            use {
+                'git@github.com:still-dreaming-1/vim-project-search.git',
                 branch = 'develop',
-            }}
-        }
-    else
-        use {
-            'still-dreaming-1/vim-project-search',
-            branch = 'develop',
-            requires = {{
-                'still-dreaming-1/vim-elhiv',
+                requires = {{
+                    'git@github.com:still-dreaming-1/vim-elhiv.git',
+                    branch = 'develop',
+                }}
+            }
+        else
+            use {
+                'still-dreaming-1/vim-project-search',
                 branch = 'develop',
-            }}
-        }
+                requires = {{
+                    'still-dreaming-1/vim-elhiv',
+                    branch = 'develop',
+                }}
+            }
+        end
     end
 end)
