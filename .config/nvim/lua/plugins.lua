@@ -5,7 +5,7 @@ return require 'packer'.startup(function(use)
     use 'qpkorr/vim-bufkill'
     use 'tpope/vim-repeat'
     use 'tpope/vim-commentary'
-    if vim.g.dreamy_developer == 1 then
+    if vim.g.dreamy_developer then
         use {
             'git@github.com:still-dreaming-1/vim-elhiv.git',
             branch = 'develop',
@@ -41,7 +41,7 @@ return require 'packer'.startup(function(use)
             'folke/tokyonight.nvim',
             branch = 'main',
         }
-        if vim.g.dreamy_developer == 1 then
+        if vim.g.dreamy_developer then
             use {
                 'git@github.com:still-dreaming-1/vim-project-search.git',
                 branch = 'develop',

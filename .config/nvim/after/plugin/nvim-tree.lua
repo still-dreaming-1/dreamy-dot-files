@@ -16,5 +16,8 @@ if not vim.g.vscode then
         git = {
             ignore = false,
         },
+        view = {
+            width = 60,
+        },
     })
 end

@@ -9,7 +9,7 @@
 " :so "source current file
                                                   
 redir! > $HOME/.vimout
-let g:dreamy_developer = 0 " helps me use my development versions of projects
+let g:dreamy_developer = v:false " helps me use my development versions of projects
 let g:dreamy_log = 0
 let g:dreamy_psysh_buffer_id = -1
 
@@ -21,7 +21,7 @@ let g:loaded_netrwPlugin = 1
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
-lua require('customBeforeInit')
+source ~/.config/nvim/lua/.beforeinit.lua
 
 " _____
 "/\  _ `\                         
