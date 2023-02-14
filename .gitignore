@@ -20,3 +20,4 @@
 # but actually still ignore these:
 .config/nvim/.one_off_functions.vim
 .config/nvim/plugin/packer_compiled.lua
+.config/nvim/lua/beforeInit.lua
