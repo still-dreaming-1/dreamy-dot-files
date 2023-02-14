@@ -25,7 +25,7 @@ let g:loaded_netrwPlugin = 1
 " the following line refers to a file that should contain vimrc stuff that you do not want tracked by git. Vim will complain if the file does not
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
-source ~/.config/nvim/lua/beforeInit.lua
+lua require('beforeInit')
 
 " _____
 "/\  _ `\                         
