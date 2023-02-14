@@ -81,7 +81,11 @@ nnoremap _ m`O<esc>``
 lua require('plugins')
 
 " This is how you enable elhiv.vim, which is needed by my plugins
-source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git/elhiv.vim
+if g:dreamy_developer
+    source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git/elhiv.vim
+else
+    source $HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv/elhiv.vim
+endif
 if type(g:dreamy_log) == l_type#string()
     let g:l_log = L_file(g:dreamy_log)
 endif
