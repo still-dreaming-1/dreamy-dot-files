@@ -31,20 +31,34 @@ return require 'packer'.startup(function(use)
             branch = 'main',
         }
     end
-    if vim.g.dreamy_developer then
+    if vim.g.dreamy_developer == 1 then
         use {
             'git@github.com:still-dreaming-1/vim-elhiv.git',
             branch = 'develop',
         }
     else
-        use 'still-dreaming-1/vim-elhiv'
+        use {
+            'still-dreaming-1/vim-elhiv',
+            branch = 'develop',
+        }
     end
-    if vim.g.dreamy_developer then
+    if vim.g.dreamy_developer == 1 then
         use {
             'git@github.com:still-dreaming-1/vim-project-search.git',
             branch = 'develop',
+            requires = {{
+                'git@github.com:still-dreaming-1/vim-elhiv.git',
+                branch = 'develop',
+            }}
         }
     else
-        use 'still-dreaming-1/vim-project-search'
+        use {
+            'still-dreaming-1/vim-project-search',
+            branch = 'develop',
+            requires = {{
+                'still-dreaming-1/vim-elhiv',
+                branch = 'develop',
+            }}
+        }
     end
 end)
