@@ -1,13 +1,3 @@
-" ascii art font is Larry 3D: http://patorjk.com/software/taag/#p=display&f=Larry%203D
-" ____     __                       __        ____    __                     __      
-"/\  _`\  /\ \                     /\ \__    /\  _`\ /\ \                   /\ \__   
-"\ \ \/\_\\ \ \___      __     __  \ \ ,_\   \ \,\L\_\ \ \___      __     __\ \ ,_\  
-" \ \ \/_/_\ \  _ `\  /'__`\ /'__`\ \ \ \/    \/_\__ \\ \  _ `\  /'__`\ /'__`\ \ \/  
-"  \ \ \L\ \\ \ \ \ \/\  __//\ \L\.\_\ \ \_     /\ \L\ \ \ \ \ \/\  __//\  __/\ \ \_ 
-"   \ \____/ \ \_\ \_\ \____\ \__/.\_\\ \__\    \ `\____\ \_\ \_\ \____\ \____\\ \__\
-"    \/___/   \/_/\/_/\/____/\/__/\/_/ \/__/     \/_____/\/_/\/_/\/____/\/____/ \/__/
-" :so "source current file
-                                                  
 redir! > $HOME/.vimout
 if !exists('g:dreamy_developer')
     let g:dreamy_developer = v:false " helps me use my development versions of projects
@@ -26,62 +16,7 @@ let g:loaded_netrwPlugin = 1
 " exist however the lack of its existence will not cause any problems. If you want the error message to go away, but do not want to use this file,
 " just create it and leave it blank.
 lua require('beforeInit')
-
-" _____
-"/\  _ `\                         
-"\ \ \/\_\    ___   _ __    __   
-" \ \ \/_/_  / __`\/\`'__\/'__`\ 
-"  \ \ \L\ \/\ \L\ \ \ \//\  __/ 
-"   \ \____/\ \____/\ \_\\ \____\
-"    \/___/  \/___/  \/_/ \/____/
-"
-" settings so basic they could potentially be shared across different versions
-" of vim (IdeaVim, Vim, Noevim, etc). Used to in a separate file, but I'm not
-" surrently actually sharing these and am only using Neovim.
-" Vim settings
-"============
-let mapleader = ' '
-" use backslash for localleader (2 backslashes since the first one is the escape char)
-let maplocalleader = "\\"
-" make searching easier
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-" mappings
-" ========
-" save
-nnoremap <leader>s :w<CR>
-" go to smart start of line
-nnoremap <leader>h ^
-" go to end of line
-nnoremap <leader>l $
-xnoremap <leader>l $
-onoremap <leader>l $
-" quit
-nnoremap <leader>q :q<CR>
-" use to add a space
-nnoremap <leader>z i <esc>
-" use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
-inoremap kk <esc><esc>
-" use - to create new line below current line without leaving normal mode or moving cursor
-nnoremap - m```o<esc><C-o>
-" use _ to create new line above current line without leaving normal mode or moving cursor
-nnoremap _ m`O<esc>``
-
-" Plugins
-" ____    ___                                          
-"/\  _`\ /\_ \                    __                   
-"\ \ \L\ \//\ \    __  __     __ /\_\    ___     ____  
-" \ \ ,__/ \ \ \  /\ \/\ \  /'_ `\/\ \ /' _ `\  /',__\ 
-"  \ \ \/   \_\ \_\ \ \_\ \/\ \L\ \ \ \/\ \/\ \/\__, `\
-"   \ \_\   /\____\\ \____/\ \____ \ \_\ \_\ \_\/\____/
-"    \/_/   \/____/ \/___/  \/___L\ \/_/\/_/\/_/\/___/ 
-"                             /\____/                  
-"                             \_/__/
-" packer commands:
-" :PackerSync - Perform `PackerUpdate` (clean, update, and install plugins) and then `PackerCompile`
-" :PackerClean - removed disabled or unused plugins
+lua require('core')
 lua require('plugins')
 
 " This is how you enable elhiv.vim, which is needed by my plugins

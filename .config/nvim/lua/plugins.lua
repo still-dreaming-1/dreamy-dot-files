@@ -1,3 +1,6 @@
+-- packer commands:
+-- :PackerSync - Perform `PackerUpdate` (clean, update, and install plugins) and then `PackerCompile`
+-- :PackerClean - removed disabled or unused plugins
 return require 'packer'.startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'jlanzarotta/bufexplorer'
