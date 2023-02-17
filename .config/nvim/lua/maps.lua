@@ -151,7 +151,6 @@ vim.keymap.set(
     '<leader><leader>t',
     ':call PsalmTraceVarUnderCursor()<CR>'
 )
-
 if vim.g.vscode then
     vim.keymap.set(
         'n',
