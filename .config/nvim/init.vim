@@ -49,6 +49,7 @@ let g:dreamy_php_test_class = ''
 let g:php_test_suite_filepath = 0
 let g:php_testing_tool_filepath = ''
 
+lua require('options')
 " Vim settings
 " __  __                                      __    __                                  
 "/\ \/\ \  __                                /\ \__/\ \__  __                           
@@ -59,24 +60,6 @@ let g:php_testing_tool_filepath = ''
 "    `\/__/  \/_/\/_/\/_/\/_/    \/___/  \/____/ \/__/ \/__/ \/_/\/_/\/_/\/___L\ \/___/ 
 "                                                                          /\____/      
 "                                                                          \_/__/
-set noswapfile
-" set shada = "NONE"
-" directory specific extra nvim config files
-set exrc
-" more secure exrc (see above) mode
-set secure
-" I don't completely understand what this does, but it prevents Neovim's terminal buffers from disappearing at random
-set hidden
-" at the bottom of the screen show the number of visually selected characters, and other stuff. If the selection is
-" more than one row, shows the row count instead.
-set showcmd
-" indentation / tab settings
-set tabstop=4
-set shiftwidth=4
-set expandtab " use spaces instead of tabs
-" disable folding
-set nofoldenable
-set termguicolors
 if !exists('g:vscode')
     " highlight the current line and column for a crosshair effect (looks bad
     " in VS Code and is unncessary because of blinking cursor):
