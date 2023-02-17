@@ -2,7 +2,7 @@
 vim.keymap.set(
     'n',
     '<leader>s',
-    ':w<CR>'
+    '<Cmd>w<CR>'
 )
 -- go to smart start of line
 vim.keymap.set(
@@ -20,7 +20,7 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>q',
-    ':q<CR>'
+    '<Cmd>q<CR>'
 )
 -- use to add a space
 vim.keymap.set(
@@ -79,7 +79,7 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>u',
-    ':noh<Bar>:echo<CR>',
+    '<Cmd>noh<Bar>:echo<CR>',
     {
         silent = true,
     }
@@ -89,45 +89,45 @@ if not vim.g.vscode then
     vim.keymap.set(
         'n',
         '<leader>ga',
-        ':Git add -A<CR>'
+        '<Cmd>Git add -A<CR>'
     )
     -- git status
     vim.keymap.set(
         'n',
         '<leader>gs',
-        ':Git<CR>/modified<CR>'
+        '<Cmd>Git<CR>/modified<CR>'
     )
     vim.keymap.set(
         'n',
         '<leader>gd',
-        ':Gdiff<CR>'
+        '<Cmd>Gdiff<CR>'
     )
     vim.keymap.set(
         'n',
         '<leader>gc',
-        ':call DreamyGitCommit()<CR>'
+        '<Cmd>call DreamyGitCommit()<CR>'
     )
     vim.keymap.set(
         'n',
         '<leader>gp',
-        ':Git push<CR>'
+        '<Cmd>Git push<CR>'
     )
     vim.keymap.set(
         'n',
         '<leader>gl',
-        ':Git! log' --decorate --stat --graph<CR>
+        '<Cmd>Git! log' --decorate --stat --graph<CR>
     )
     -- vimagit mapping
     vim.keymap.set(
         'n',
         '<leader>gv',
-        ':Magit<CR>'
+        '<Cmd>Magit<CR>'
     )
     -- open Neovim's terminal emulator
     vim.keymap.set(
         'n',
         '<leader>T',
-        ':te<CR>'
+        '<Cmd>te<CR>'
     )
 end
 vim.keymap.set(
@@ -151,3 +151,18 @@ vim.keymap.set(
     '<leader><leader>t',
     ':call PsalmTraceVarUnderCursor()<CR>'
 )
+
+if vim.g.vscode then
+    vim.keymap.set(
+        'n',
+        '<leader>t',
+        [[<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>]]
+    )
+else
+    -- toggle nvim-tree
+    vim.keymap.set(
+        'n',
+        '<leader>t',
+        '<Cmd>NvimTreeFindFileToggle<CR>'
+    )
+end

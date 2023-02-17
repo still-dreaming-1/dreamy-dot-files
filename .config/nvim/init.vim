@@ -222,8 +222,6 @@ xnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 xnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
 " surround visual selection with curly braces
 xnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
-" toggle nvim-tree
-nnoremap <leader>t :NvimTreeFindFileToggle<CR>
 " edit Neovim's init.vim config
 nnoremap <leader>ei :e $HOME/.config/nvim/init.vim<CR>
 " edit .bashrc
