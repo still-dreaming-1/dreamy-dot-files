@@ -4,10 +4,9 @@ if not vim.g.vscode then
     })
 
     -- use leader f to run :FzfLua files command
-    vim.api.nvim_set_keymap(
+    vim.keymap.set(
         'n',
         '<leader>f',
-        '<cmd>lua require("fzf-lua").files()<CR>',
-        { noremap = true }
+        function() require("fzf-lua").files() end
     )
 end

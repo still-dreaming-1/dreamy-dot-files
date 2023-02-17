@@ -162,38 +162,6 @@ command! Fixname call DreamySmartChangeWordUnderCursorToCamelOrPascalCase()
 " mappings
 " --------
 lua require('maps')
-if !exists('g:vscode') "terminal doesn't work in VS Code
-    " use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
-    " entering normal mode.
-    tnoremap kk <C-\><C-n>
-    " augroup below maps escape for entering normal mode, so this is how you would send the escape key to the terminal
-    " instead of returning to normal mode:
-    tnoremap <leader><esc> <esc>
-endif
-" pasting in visual mode will yank what you just pasted so it does overwritten by what was pasted over(breaks specifying register, but I don't use them)
-xnoremap p pgvygv<esc>
-" use to unhighlight/unsearch the last search term. You can hit n to re-search/highlight the search term
-nnoremap <silent> <leader>u :noh<Bar>:echo<CR>
-if !exists('g:vscode')
-    " vim-fugitive mappings for git
-    nnoremap <leader>ga :Git add -A<CR>
-    " git status
-    nnoremap <leader>gs :Git<CR>/modified<CR>
-    nnoremap <leader>gd :Gdiff<CR>
-    nnoremap <leader>gc :call DreamyGitCommit()<CR>
-    nnoremap <leader>gp :Git push<CR>
-    nnoremap <leader>gl :Git! log --decorate --stat --graph<CR>
-    " vimagit mapping
-    nnoremap <leader>gv :Magit<CR>
-    " open Neovim's terminal emulator
-    nnoremap <leader>T :te<CR>
-endif
-nnoremap <leader>c <C-v>
-" surround with spaces
-nnoremap <Plug>DreamySurroundWithSpaces :call Dreamy_surround_cursor_char_with_spaces()<CR>
-    \:call repeat#set("\<Plug>DreamySurroundWithSpaces")<CR>
-nmap <leader><leader>z <Plug>DreamySurroundWithSpaces
-nnoremap <leader><leader>t :call PsalmTraceVarUnderCursor()<CR>
 
 function! Dreamy_surround_cursor_char_with_spaces()
     let cursor = L_current_cursor()
