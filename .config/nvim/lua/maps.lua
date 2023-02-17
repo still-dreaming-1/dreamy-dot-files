@@ -157,11 +157,21 @@ if vim.g.vscode then
         '<leader>t',
         [[<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>]]
     )
+    vim.keymap.set(
+        'n',
+        '<leader>q',
+        [[<Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>]]
+    )
 else
     -- toggle nvim-tree
     vim.keymap.set(
         'n',
         '<leader>t',
         '<Cmd>NvimTreeFindFileToggle<CR>'
+    )
+    vim.keymap.set(
+        'n',
+        '<leader>q',
+        '<Cmd>q!<CR>'
     )
 end
