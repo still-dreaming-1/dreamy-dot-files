@@ -1,64 +1,55 @@
--- save
-vim.keymap.set(
+vim.keymap.set( -- save
     'n',
     '<leader>s',
     '<Cmd>w<CR>'
 )
--- go to smart start of line
-vim.keymap.set(
+vim.keymap.set( -- go to smart start of line
     'n',
     '<leader>h',
     '^'
 )
--- go to end of line
-vim.keymap.set(
+vim.keymap.set( -- go to end of line
     {'n', 'o'},
     '<leader>l',
     '$'
 )
-vim.keymap.set(
+vim.keymap.set( -- go to end of line
     'x',
     '<leader>l',
     '$h' -- the "h" prevents it from selecting the newline character
 )
--- quit
-vim.keymap.set(
+vim.keymap.set( -- quit
     'n',
     '<leader>q',
     '<Cmd>q<CR>'
 )
--- use to add a space
-vim.keymap.set(
+vim.keymap.set( -- add a space
     'n',
     '<leader>z',
     'i <esc>'
 )
--- use to leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
-vim.keymap.set(
+vim.keymap.set( -- leave insert mode (also the second esc does stuff and therefore forces the screen to redraw)
     'i',
     'kk',
     '<esc><esc>'
 )
--- use - to create new line below current line without leaving normal mode or moving cursor
-vim.keymap.set(
+vim.keymap.set( -- create new line below current line without leaving normal mode or moving cursor
     'n',
     '-',
     'm```o<esc><C-o>'
 )
--- use _ to create new line above current line without leaving normal mode or moving cursor
-vim.keymap.set(
+vim.keymap.set( -- create new line above current line without leaving normal mode or moving cursor
     'n',
     '_',
     'm`O<esc>``'
 )
--- lua alternative to :
-vim.keymap.set(
+vim.keymap.set( -- lua alternative to ":" (enter lua code instead of vimscript)
     'n',
     '<leader>i',
     ':lua '
 )
 
-if not vim.g.vscode then -- terminal doesn't work in VS Code
+if not vim.g.vscode then -- terminal doesn't work right in VS Code
     -- use kk to return to normal mode from terminal buffer. This also fixes an issue where the cursor would jump to the bottom of the screen after
     -- entering normal mode.
     vim.keymap.set(
@@ -90,14 +81,12 @@ vim.keymap.set(
     }
 )
 if not vim.g.vscode then
-    -- vim-fugitive mappings for git
-    vim.keymap.set(
+    vim.keymap.set( -- vim-fugitive mappings for git
         'n',
         '<leader>ga',
         '<Cmd>Git add -A<CR>'
     )
-    -- git status
-    vim.keymap.set(
+    vim.keymap.set( -- git status
         'n',
         '<leader>gs',
         '<Cmd>Git<CR>/modified<CR>'
@@ -122,14 +111,12 @@ if not vim.g.vscode then
         '<leader>gl',
         '<Cmd>Git! log' --decorate --stat --graph<CR>
     )
-    -- vimagit mapping
-    vim.keymap.set(
+    vim.keymap.set( -- vimagit
         'n',
         '<leader>gv',
         '<Cmd>Magit<CR>'
     )
-    -- open Neovim's terminal emulator
-    vim.keymap.set(
+    vim.keymap.set( -- open Neovim's terminal emulator
         'n',
         '<leader>T',
         '<Cmd>te<CR>'
@@ -173,8 +160,7 @@ if vim.g.vscode then
         [[<Cmd>call VSCodeNotify('workbench.view.scm')<CR>]]
     )
 else
-    -- toggle nvim-tree
-    vim.keymap.set(
+    vim.keymap.set( -- toggle nvim-tree
         'n',
         '<leader>t',
         '<Cmd>NvimTreeFindFileToggle<CR>'
