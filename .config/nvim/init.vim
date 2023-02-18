@@ -225,8 +225,6 @@ nnoremap <leader>o <C-o>
 nnoremap <leader>n /function <CR>
 " search for previous function
 nnoremap <leader>N ?function <CR>
-" use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
-nmap <leader>; <leader>bej
 
 " change key mappings for the vim-expand-region plugin. Setting both of these up as visual mappings makes sense so they don't override mappings for other
 " modes. Visual mode mappings are also the natural fit since you would only use these after entering visual mode (by pressing v).

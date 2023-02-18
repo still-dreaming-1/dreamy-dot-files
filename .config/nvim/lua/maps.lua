@@ -225,3 +225,17 @@ vim.keymap.set( -- use ) to move line down
     ')',
     'ddp'
 )
+if vim.g.vscode then
+    vim.keymap.set( -- use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
+        'n',
+        '<leader>;',
+        [[<Cmd>call VSCodeNotify('workbench.action.showAllEditorsByMostRecentlyUsed')<CR>]]
+    )
+else
+    vim.keymap.set( -- use Cntrol+Tab to activate the bufexplorer plugin view of the open buffers and move down to the previously opened buffer
+        'n',
+        '<leader>;',
+        '<leader>bej',
+        { remap = true }
+    )
+end
