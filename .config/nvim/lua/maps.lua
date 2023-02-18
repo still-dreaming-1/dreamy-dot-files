@@ -12,9 +12,14 @@ vim.keymap.set(
 )
 -- go to end of line
 vim.keymap.set(
-    {'n', 'x', 'o'},
+    {'n', 'o'},
     '<leader>l',
     '$'
+)
+vim.keymap.set(
+    'x',
+    '<leader>l',
+    '$h'
 )
 -- quit
 vim.keymap.set(
