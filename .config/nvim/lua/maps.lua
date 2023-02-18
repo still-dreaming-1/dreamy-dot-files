@@ -19,7 +19,7 @@ vim.keymap.set(
 vim.keymap.set(
     'x',
     '<leader>l',
-    '$h'
+    '$h' -- the "h" prevents it from selecting the newline character
 )
 -- quit
 vim.keymap.set(
