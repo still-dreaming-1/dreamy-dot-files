@@ -18,11 +18,6 @@ vim.keymap.set( -- go to end of line
     '<leader>l',
     '$h' -- the "h" prevents it from selecting the newline character
 )
-vim.keymap.set( -- quit
-    'n',
-    '<leader>q',
-    '<Cmd>q<CR>'
-)
 vim.keymap.set( -- add a space
     'n',
     '<leader>z',
@@ -80,7 +75,13 @@ vim.keymap.set(
         silent = true,
     }
 )
-if not vim.g.vscode then
+if vim.g.vscode then
+    vim.keymap.set( -- show/focus source control/git view
+        'n',
+        '<leader>g',
+        [[<Cmd>call VSCodeNotify('workbench.view.scm')<CR>]]
+    )
+else
     vim.keymap.set( -- vim-fugitive mappings for git
         'n',
         '<leader>ga',
@@ -116,7 +117,15 @@ if not vim.g.vscode then
         '<leader>gv',
         '<Cmd>Magit<CR>'
     )
-    vim.keymap.set( -- open Neovim's terminal emulator
+end
+if vim.g.vscode then
+    vim.keymap.set( -- show/focus terminal
+        'n',
+        '<leader>T',
+        [[<Cmd>call VSCodeNotify('terminal.focus')<CR>]]
+    )
+else
+    vim.keymap.set( -- open a terminal emulator
         'n',
         '<leader>T',
         '<Cmd>te<CR>'
@@ -144,20 +153,10 @@ vim.keymap.set(
     ':call PsalmTraceVarUnderCursor()<CR>'
 )
 if vim.g.vscode then
-    vim.keymap.set(
+    vim.keymap.set( -- show/focus the file explorer side panel
         'n',
         '<leader>t',
         [[<Cmd>call VSCodeNotify('workbench.view.explorer')<CR>]]
-    )
-    vim.keymap.set(
-        'n',
-        '<leader>q',
-        [[<Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>]]
-    )
-    vim.keymap.set(
-        'n',
-        '<leader>g',
-        [[<Cmd>call VSCodeNotify('workbench.view.scm')<CR>]]
     )
 else
     vim.keymap.set( -- toggle nvim-tree
@@ -165,7 +164,15 @@ else
         '<leader>t',
         '<Cmd>NvimTreeFindFileToggle<CR>'
     )
-    vim.keymap.set(
+end
+if vim.g.vscode then
+    vim.keymap.set( -- close current editor file
+        'n',
+        '<leader>q',
+        [[<Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>]]
+    )
+else
+    vim.keymap.set( -- quit
         'n',
         '<leader>q',
         '<Cmd>q!<CR>'
