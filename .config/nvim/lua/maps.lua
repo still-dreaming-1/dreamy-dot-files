@@ -162,6 +162,11 @@ if vim.g.vscode then
         '<leader>q',
         [[<Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>]]
     )
+    vim.keymap.set(
+        'n',
+        '<leader>g',
+        [[<Cmd>call VSCodeNotify('workbench.view.scm')<CR>]]
+    )
 else
     -- toggle nvim-tree
     vim.keymap.set(
