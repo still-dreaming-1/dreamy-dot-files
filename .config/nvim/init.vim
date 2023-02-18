@@ -178,23 +178,6 @@ function! Dreamy_surround_cursor_char_with_spaces()
     normal! l
     return line_with_spaces_added
 endfunction
-" replays the last played macro 3 times
-nnoremap <leader>@ 3@@
-" move after the next dot character (this should be turned into a custom motion where instead of . you can type anything you want to move after. This would be the opposite of t
-nnoremap <leader>a. f.l<esc>
-" make . work with visually selected lines
-vnoremap . :norm.<CR>
-" make up and down not ignore wrapping lines
-nnoremap j gj
-nnoremap k gk
-" <leader>. will now repeat the last command. Similar to using . to repeat
-nnoremap <leader>. @:
-" make backspace delete everything before the cursor until only white space
-nnoremap <bs> hv^d
-" use ( to move line up
-nnoremap ( ddkP
-" use ) to move line down
-nnoremap ) ddp
 " use <leader>( to move function above previous function (One bug is
 " if the cursor is on the 'f' in function, it will find the previous function
 " and move it above its' previous function. Will have to make into function to

@@ -178,3 +178,50 @@ else
         '<Cmd>q!<CR>'
     )
 end
+vim.keymap.set( -- replays the last played macro 3 times
+    'n',
+    '<leader>@',
+    '3@@'
+)
+-- move after the next dot character (this should be turned into a custom motion where instead of . you can type
+-- anything you want to move after. This would be the opposite of t
+vim.keymap.set(
+    'n',
+    '<leader>a.',
+    'f.l<esc>'
+)
+vim.keymap.set( -- make . work with visually selected lines
+    'v',
+    '.',
+    ':norm.<CR>'
+)
+vim.keymap.set( -- make up and down not ignore wrapping lines
+    'n',
+    'j',
+    'gj'
+)
+vim.keymap.set(
+    'n',
+    'k',
+    'gk'
+)
+vim.keymap.set( -- <leader>. will now repeat the last command. Similar to using . to repeat
+    'n',
+    '<leader>.',
+    '@:'
+)
+vim.keymap.set( -- make backspace delete everything before the cursor until only white space
+    'n',
+    '<bs>',
+    'hv^d'
+)
+vim.keymap.set( -- use ( to move line up
+    'n',
+    '(',
+    'ddkP'
+)
+vim.keymap.set( -- use ) to move line down
+    'n',
+    ')',
+    'ddp'
+)
