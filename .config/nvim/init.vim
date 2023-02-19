@@ -118,10 +118,18 @@ if !exists('g:vscode')
     " alias commands. These change the current working directory. They are analogous to .aliases in the .alishrc file
     command! Chome call DreamyChangeDirectory("$HOME")
     command! Cpack call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start")
-    command! Chiv call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
+    if g:dreamy_developer
+        command! Chiv call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv.git")
+    else
+        command! Chiv call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-elhiv")
+    endif
     command! Cvim call DreamyChangeDirectory("$HOME/.config/nvim")
     command! Clua call DreamyChangeDirectory("$HOME/.config/nvim/lua")
-    command! Csearch call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
+    if g:dreamy_developer
+        command! Csearch call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search.git")
+    else
+        command! Csearch call DreamyChangeDirectory("$HOME/.local/share/nvim/site/pack/packer/start/vim-project-search")
+    endif
     command! Psy call DreamyPsysh()
 endif
 " send contents of file to mysql
