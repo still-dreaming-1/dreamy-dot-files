@@ -239,3 +239,10 @@ else
         { remap = true }
     )
 end
+if vim.g.vscode then
+    vim.keymap.set( -- user VS Code search and replace feature with word under cursor
+        'n',
+        '<leader>*',
+        [[<Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')}))<CR>]]
+    )
+end
